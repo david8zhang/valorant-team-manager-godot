@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cui8rqxwjorad"]
+
+[ext_resource type="Script" uid="uid://ctv4akl0kybty" path="res://scripts/GameRound.gd" id="1_dq0hy"]
+
+[node name="GameRound" type="Node2D"]
+script = ExtResource("1_dq0hy")

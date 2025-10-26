@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cnc2q0emcuf3l"]
+
+[node name="AgentSelect" type="Node2D"]
