@@ -1,0 +1,2 @@
+class_name Agent
+extends Node2D

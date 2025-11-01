@@ -11,5 +11,16 @@ config_version=5
 [application]
 
 config/name="valorant-team-manager"
+run/main_scene="uid://cui8rqxwjorad"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1200
+window/size/viewport_height=900
+window/dpi/allow_hidpi=false
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
