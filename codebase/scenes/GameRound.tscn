@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cui8rqxwjorad"]
+[gd_scene load_steps=6 format=3 uid="uid://cui8rqxwjorad"]
 
 [ext_resource type="Script" uid="uid://ctv4akl0kybty" path="res://scripts/GameRound.gd" id="1_dq0hy"]
 [ext_resource type="PackedScene" uid="uid://dle3ma7ge5t1o" path="res://prefabs/Map.tscn" id="2_74q1x"]
 [ext_resource type="PackedScene" uid="uid://dgma3qa7i4xrv" path="res://prefabs/Agent.tscn" id="3_74q1x"]
+[ext_resource type="Script" uid="uid://dl0x03lnvo0xy" path="res://scripts/Camera.gd" id="3_ljav5"]
 [ext_resource type="PackedScene" uid="uid://kcdgbmwfjvyx" path="res://prefabs/HighlightOverlay.tscn" id="4_cw3wy"]
 
 [node name="GameRound" type="Node2D"]
@@ -10,6 +11,9 @@ script = ExtResource("1_dq0hy")
 agent_scene = ExtResource("3_74q1x")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+script = ExtResource("3_ljav5")
+min_zoom = 1.0
 
 [node name="Map" parent="." instance=ExtResource("2_74q1x")]
 
