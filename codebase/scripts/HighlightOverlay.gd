@@ -3,7 +3,7 @@ extends Node2D
 
 @export var map: Map
 @onready var game_round = get_node("/root/GameRound") as GameRound
-var hovered_tile_pos
+var hovered_tile_pos: Vector2
 
 func _process(_delta: float) -> void:
 	if map != null and game_round != null:
