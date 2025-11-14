@@ -8,3 +8,4 @@ script = ExtResource("1_2tte8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_o1fgx")
+offset = Vector2(0, -5)
