@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cui8rqxwjorad"]
+[gd_scene load_steps=9 format=3 uid="uid://cui8rqxwjorad"]
 
 [ext_resource type="Script" uid="uid://ctv4akl0kybty" path="res://scripts/GameRound.gd" id="1_dq0hy"]
 [ext_resource type="PackedScene" uid="uid://dle3ma7ge5t1o" path="res://prefabs/Map.tscn" id="2_74q1x"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://kcdgbmwfjvyx" path="res://prefabs/HighlightOverlay.tscn" id="4_cw3wy"]
 [ext_resource type="Script" uid="uid://ch0h06pbcapnb" path="res://scripts/Team.gd" id="5_dbxdc"]
 [ext_resource type="Script" uid="uid://c50pgvjn1f6c2" path="res://scripts/AgentController.gd" id="7_ryo32"]
+[ext_resource type="Script" uid="uid://sgc1ljm2q1sl" path="res://scripts/CPUAgentController.gd" id="8_twj6c"]
 
 [node name="GameRound" type="Node2D"]
 script = ExtResource("1_dq0hy")
@@ -29,11 +30,9 @@ map = NodePath("../Map")
 start_x = 5
 start_y = 5
 
-[node name="AgentController" type="Node2D" parent="PlayerTeam" node_paths=PackedStringArray("map", "highlight_overlay", "team")]
+[node name="AgentController" type="Node2D" parent="PlayerTeam" node_paths=PackedStringArray("highlight_overlay")]
 script = ExtResource("7_ryo32")
-map = NodePath("../../Map")
 highlight_overlay = NodePath("../../HighlightOverlay")
-team = NodePath("..")
 
 [node name="CPUTeam" type="Node2D" parent="." node_paths=PackedStringArray("map")]
 script = ExtResource("5_dbxdc")
@@ -41,3 +40,6 @@ agent_scene = ExtResource("3_74q1x")
 map = NodePath("../Map")
 start_x = 5
 start_y = 20
+
+[node name="CPUAgentController" type="Node2D" parent="CPUTeam"]
+script = ExtResource("8_twj6c")

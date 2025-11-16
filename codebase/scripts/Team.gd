@@ -8,7 +8,6 @@ extends Node2D
 @export var start_y = 0
 
 var agents = []
-var selected_agent: Agent
 
 func _ready() -> void:
 	var x_pos = start_x
@@ -19,4 +18,3 @@ func _ready() -> void:
 		agents.append(new_agent)
 		map.move_node_to_pos(new_agent, x_pos, y_pos)
 		x_pos += 2
-	selected_agent = agents[0]
