@@ -19,11 +19,12 @@ func _ready():
 	cpu_agent_controller.on_complete_turn.connect(on_complete_turn)
 
 func on_complete_turn():
-	if curr_turn_side == Side.PLAYER:
-		curr_turn_side = Side.CPU
-		cpu_agent_controller.move_agent()
-	else:
-		curr_turn_side = Side.PLAYER
+	pass
+	# if curr_turn_side == Side.PLAYER:
+	# 	curr_turn_side = Side.CPU
+	# 	cpu_agent_controller.move_agent()
+	# else:
+	# 	curr_turn_side = Side.PLAYER
 
 func is_position_occupied(tile_pos: Vector2):
 	var all_agents = cpu_team.agents + player_team.agents

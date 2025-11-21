@@ -2,6 +2,8 @@ class_name Map
 extends Node2D
 
 @onready var ground_layer = $GroundLayer as TileMapLayer
+@onready var walls_layer = $WallsLayer as TileMapLayer
+@onready var vision_layer = $VisionLayer as TileMapLayer
 
 func _ready() -> void:
 	is_tile_pos_in_bounds(Vector2(-1, -1))
