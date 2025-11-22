@@ -11,6 +11,7 @@ enum Side {
 @onready var player_team = $PlayerTeam as Team
 @onready var cpu_team = $CPUTeam as Team
 @onready var map = $Map as Map
+@onready var camera := $Camera2D as Camera2D
 
 var curr_turn_side = Side.PLAYER
 

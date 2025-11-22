@@ -13,11 +13,13 @@
 script = ExtResource("1_dq0hy")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
 zoom = Vector2(2, 2)
 script = ExtResource("3_ljav5")
 
 [node name="Map" parent="." instance=ExtResource("2_74q1x")]
+
+[node name="WallsLayer" parent="Map" index="1"]
+tile_map_data = PackedByteArray()
 
 [node name="HighlightOverlay" parent="." node_paths=PackedStringArray("map") instance=ExtResource("4_cw3wy")]
 map = NodePath("../Map")
@@ -35,7 +37,6 @@ script = ExtResource("7_ryo32")
 highlight_overlay = NodePath("../../HighlightOverlay")
 
 [node name="CPUTeam" type="Node2D" parent="." node_paths=PackedStringArray("map")]
-visible = false
 script = ExtResource("5_dbxdc")
 agent_scene = ExtResource("3_74q1x")
 map = NodePath("../Map")
@@ -44,3 +45,5 @@ start_y = 20
 
 [node name="CPUAgentController" type="Node2D" parent="CPUTeam"]
 script = ExtResource("8_twj6c")
+
+[editable path="Map"]
