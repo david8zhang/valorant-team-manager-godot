@@ -2,13 +2,23 @@ class_name Agent
 extends Node2D
 
 @onready var game_round = get_node("/root/GameRound") as GameRound
-@export var vision_distance := 50
+@onready var sprite = $AnimatedSprite2D as AnimatedSprite2D
+@onready var button = $Button as Button
+@export var vision_distance := 35
 @export var vision_angle_degrees := 60
 
 var map: Map
 var vision_direction: Vector2 = Vector2.UP
 var visible_tiles := []
 var is_showing_visible_tiles := false
+
+signal on_agent_click
+
+func _ready() -> void:
+	button.pressed.connect(agent_click)
+
+func agent_click():
+	on_agent_click.emit()
 
 func move_to_position(new_pos: Vector2, callback: Callable):
 	var tween = create_tween()

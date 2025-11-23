@@ -14,6 +14,9 @@ func move_agent():
 	var rand_pos = game_round.map.get_world_pos_from_tile_pos(pos_to_move_to.pick_random())
 	selected_agent.move_to_position(rand_pos, complete_turn)
 
+func start_turn():
+	move_agent()
+
 func complete_turn():
 	on_complete_turn.emit()
 

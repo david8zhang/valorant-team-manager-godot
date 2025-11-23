@@ -1,0 +1,324 @@
+[gd_scene load_steps=15 format=3 uid="uid://8f0kh0fhafed"]
+
+[ext_resource type="Texture2D" uid="uid://d3w1j5xmidi17" path="res://assets/placeholder/eye-solid-full.svg" id="1_yth5k"]
+[ext_resource type="Texture2D" uid="uid://7pdwea6dt72o" path="res://assets/placeholder/bomb-solid-full.svg" id="2_05y7h"]
+[ext_resource type="Texture2D" uid="uid://cyqkara66lajl" path="res://assets/placeholder/person-running-solid-full.svg" id="3_g67y3"]
+[ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="4_lbbqo"]
+[ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="5_3omt0"]
+[ext_resource type="Texture2D" uid="uid://7x7bah3df7vw" path="res://assets/placeholder/vandal.png" id="6_3omt0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knvme"]
+bg_color = Color(0.392157, 0.392157, 0.392157, 0.196078)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yth5k"]
+bg_color = Color(0.588235, 0.588235, 0.588235, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g67y3"]
+bg_color = Color(0.976471, 0.796078, 0.611765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbbqo"]
+bg_color = Color(0.623529, 0.772549, 0.972549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3omt0"]
+bg_color = Color(0.475924, 0.0723759, 0.0674149, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0corr"]
+bg_color = Color(0.760784, 0.760784, 0.760784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0g1e"]
+bg_color = Color(0.762404, 0.762404, 0.762403, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bft1"]
+bg_color = Color(0.2798, 0.640408, 0.439183, 1)
+
+[node name="ActionMenu" type="PanelContainer"]
+custom_minimum_size = Vector2(600, 150)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_knvme")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="NonCombatAndStats" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="NonCombatActions" type="HBoxContainer" parent="VBoxContainer/NonCombatAndStats"]
+layout_mode = 2
+
+[node name="Watch" type="Button" parent="VBoxContainer/NonCombatAndStats/NonCombatActions"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_yth5k")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/NonCombatAndStats/NonCombatActions/Watch"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.5
+offset_top = -12.5
+offset_right = 12.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_yth5k")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Bomb" type="Button" parent="VBoxContainer/NonCombatAndStats/NonCombatActions"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_yth5k")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/NonCombatAndStats/NonCombatActions/Bomb"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.5
+offset_top = -12.5
+offset_right = 12.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_05y7h")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Move" type="Button" parent="VBoxContainer/NonCombatAndStats/NonCombatActions"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_yth5k")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/NonCombatAndStats/NonCombatActions/Move"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.5
+offset_top = -12.5
+offset_right = 12.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_g67y3")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/NonCombatAndStats"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/NonCombatAndStats/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ActionPoint" type="Panel" parent="VBoxContainer/NonCombatAndStats/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_g67y3")
+
+[node name="ActionPoint2" type="Panel" parent="VBoxContainer/NonCombatAndStats/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_g67y3")
+
+[node name="ActionPoint3" type="Panel" parent="VBoxContainer/NonCombatAndStats/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_g67y3")
+
+[node name="ActionPoint4" type="Panel" parent="VBoxContainer/NonCombatAndStats/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_g67y3")
+
+[node name="ActionPoint5" type="Panel" parent="VBoxContainer/NonCombatAndStats/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_g67y3")
+
+[node name="Shields" type="ProgressBar" parent="VBoxContainer/NonCombatAndStats/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/background = ExtResource("4_lbbqo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lbbqo")
+value = 100.0
+show_percentage = false
+
+[node name="Health" type="ProgressBar" parent="VBoxContainer/NonCombatAndStats/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_styles/background = ExtResource("4_lbbqo")
+theme_override_styles/fill = ExtResource("5_3omt0")
+value = 100.0
+show_percentage = false
+
+[node name="Button" type="Button" parent="VBoxContainer/NonCombatAndStats"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3omt0")
+text = "End Turn"
+
+[node name="CombatAbilities" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PrimaryWeapon" type="Button" parent="VBoxContainer/CombatAbilities"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_0corr")
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/CombatAbilities/PrimaryWeapon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_y0g1e")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bft1")
+value = 50.0
+show_percentage = false
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CombatAbilities/PrimaryWeapon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_3omt0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SideArm" type="Button" parent="VBoxContainer/CombatAbilities"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_0corr")
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/CombatAbilities/SideArm"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_y0g1e")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bft1")
+value = 50.0
+show_percentage = false
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CombatAbilities/SideArm"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_3omt0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ability1" type="Button" parent="VBoxContainer/CombatAbilities"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_0corr")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CombatAbilities/Ability1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CombatAbilities/Ability1/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CombatAbilities/Ability1/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CombatAbilities/Ability1/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/CombatAbilities/Ability1/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="VBoxContainer/CombatAbilities/Ability1/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+
+[node name="Ability2" type="Button" parent="VBoxContainer/CombatAbilities"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_0corr")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CombatAbilities/Ability2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CombatAbilities/Ability2/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CombatAbilities/Ability2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CombatAbilities/Ability2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/CombatAbilities/Ability2/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="VBoxContainer/CombatAbilities/Ability2/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2

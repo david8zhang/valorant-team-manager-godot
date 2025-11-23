@@ -1,4 +1,4 @@
-class_name Camera
+class_name GameCamera
 extends Camera2D
 
 @export var min_zoom: float = 0.5     # Closest zoom (smaller = closer)
@@ -6,7 +6,7 @@ extends Camera2D
 @export var zoom_speed: float = 0.1   # How much to zoom per scroll
 @export var zoom_lerp_speed: float = 8.0  # How quickly to smooth the zoom
 
-@export var pan_button := MOUSE_BUTTON_LEFT
+@export var pan_button := MOUSE_BUTTON_MIDDLE
 @export var smooth_speed := 12.0  # higher = snappier
 
 var _dragging := false
@@ -14,6 +14,8 @@ var _drag_origin := Vector2.ZERO
 var _camera_start := Vector2.ZERO
 var target_position := Vector2.ZERO
 var target_zoom: Vector2 = Vector2.ONE
+
+signal on_zoom(zoom)
 
 func _ready():
 	target_zoom = zoom
@@ -52,3 +54,6 @@ func change_zoom(direction: int):
 	new_zoom.x = clamp(new_zoom.x, min_zoom, max_zoom)
 	new_zoom.y = clamp(new_zoom.y, min_zoom, max_zoom)
 	target_zoom = new_zoom
+	
+	# Emit a zoom event to scale up the agents
+	on_zoom.emit(target_zoom)

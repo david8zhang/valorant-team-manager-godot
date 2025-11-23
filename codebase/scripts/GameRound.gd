@@ -11,29 +11,38 @@ enum Side {
 @onready var player_team = $PlayerTeam as Team
 @onready var cpu_team = $CPUTeam as Team
 @onready var map = $Map as Map
-@onready var camera := $Camera2D as Camera2D
+@onready var game_camera := $GameCamera as GameCamera
 
 var curr_turn_side = Side.PLAYER
 
 func _ready():
 	agent_controller.on_complete_turn.connect(on_complete_turn)
 	cpu_agent_controller.on_complete_turn.connect(on_complete_turn)
+	agent_controller.start_turn()
+	game_camera.on_zoom.connect(scale_from_zoom)
+
+func scale_from_zoom(curr_zoom):
+	scale_agents(player_team.agents, curr_zoom)
+	scale_agents(cpu_team.agents, curr_zoom)
+
+func scale_agents(agents, curr_zoom):
+	for a in agents:
+		var agent = a as Agent
+		var scale_x = max(1, 1.0 / curr_zoom.x)
+		var scale_y = max(1, 1.0 / curr_zoom.y)
+		agent.sprite.scale = Vector2(scale_x, scale_y)
 
 func on_complete_turn():
 	if curr_turn_side == Side.PLAYER:
 		curr_turn_side = Side.CPU
-		cpu_agent_controller.move_agent()
+		cpu_agent_controller.start_turn()
 	else:
 		curr_turn_side = Side.PLAYER
+		agent_controller.start_turn()
 
-func update_vision_for_side():
-	var team_to_hide = cpu_team if curr_turn_side == Side.PLAYER else player_team
-	var curr_team = player_team if curr_turn_side == Side.PLAYER else cpu_team
-	update_visible_enemies(curr_team, team_to_hide)
-
-func update_visible_enemies(curr_team: Team, team_to_hide: Team):
-	var visible_tiles = curr_team.get_all_visible_tiles() as Array
-	var enemy_agents = team_to_hide.agents as Array[Agent]
+func update_visible_enemies():
+	var visible_tiles = player_team.get_all_visible_tiles() as Array
+	var enemy_agents = cpu_team.agents as Array[Agent]
 	for agent in enemy_agents:
 		var tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
 		if visible_tiles.has(tile_pos):

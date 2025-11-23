@@ -7,7 +7,7 @@ extends Node2D
 @export var start_x = 0
 @export var start_y = 0
 
-var agents = []
+var agents := []
 
 func _ready() -> void:
 	var x_pos = start_x

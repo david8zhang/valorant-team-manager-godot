@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cui8rqxwjorad"]
+[gd_scene load_steps=10 format=3 uid="uid://cui8rqxwjorad"]
 
 [ext_resource type="Script" uid="uid://ctv4akl0kybty" path="res://scripts/GameRound.gd" id="1_dq0hy"]
+[ext_resource type="PackedScene" uid="uid://8f0kh0fhafed" path="res://prefabs/ActionMenu.tscn" id="2_1ryu6"]
 [ext_resource type="PackedScene" uid="uid://dle3ma7ge5t1o" path="res://prefabs/Map.tscn" id="2_74q1x"]
+[ext_resource type="Script" uid="uid://dl0x03lnvo0xy" path="res://scripts/GameCamera.gd" id="2_twj6c"]
 [ext_resource type="PackedScene" uid="uid://dgma3qa7i4xrv" path="res://prefabs/Agent.tscn" id="3_74q1x"]
-[ext_resource type="Script" uid="uid://dl0x03lnvo0xy" path="res://scripts/Camera.gd" id="3_ljav5"]
 [ext_resource type="PackedScene" uid="uid://kcdgbmwfjvyx" path="res://prefabs/HighlightOverlay.tscn" id="4_cw3wy"]
 [ext_resource type="Script" uid="uid://ch0h06pbcapnb" path="res://scripts/Team.gd" id="5_dbxdc"]
 [ext_resource type="Script" uid="uid://c50pgvjn1f6c2" path="res://scripts/AgentController.gd" id="7_ryo32"]
@@ -12,9 +13,26 @@
 [node name="GameRound" type="Node2D"]
 script = ExtResource("1_dq0hy")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-script = ExtResource("3_ljav5")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ActionMenu" parent="CanvasLayer/Control" instance=ExtResource("2_1ryu6")]
+layout_mode = 1
+offset_left = -300.0
+offset_top = -150.0
+offset_right = 300.0
+
+[node name="GameCamera" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+script = ExtResource("2_twj6c")
 
 [node name="Map" parent="." instance=ExtResource("2_74q1x")]
 
@@ -24,7 +42,6 @@ map = NodePath("../Map")
 [node name="PlayerTeam" type="Node2D" parent="." node_paths=PackedStringArray("map")]
 script = ExtResource("5_dbxdc")
 agent_scene = ExtResource("3_74q1x")
-num_agents = 1
 map = NodePath("../Map")
 start_x = 50
 start_y = 75
@@ -39,7 +56,7 @@ script = ExtResource("5_dbxdc")
 agent_scene = ExtResource("3_74q1x")
 map = NodePath("../Map")
 start_x = 50
-start_y = 25
+start_y = 40
 
 [node name="CPUAgentController" type="Node2D" parent="CPUTeam"]
 script = ExtResource("8_twj6c")

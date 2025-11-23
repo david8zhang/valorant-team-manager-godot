@@ -1,0 +1,126 @@
+[gd_scene load_steps=7 format=3 uid="uid://c0xqijdur3pcu"]
+
+[ext_resource type="Texture2D" uid="uid://b66703nom17l2" path="res://assets/vandal.png" id="1_8j32h"]
+[ext_resource type="Texture2D" uid="uid://bmq71w50g0ccu" path="res://assets/placeholder/sample-agent.png" id="1_jnyxx"]
+[ext_resource type="StyleBox" uid="uid://cnieekm2v0r8a" path="res://prefabs/Container.tres" id="1_x5g1f"]
+[ext_resource type="Texture2D" uid="uid://cg8ekko2m3ljw" path="res://assets/pistol.png" id="2_wjedh"]
+[ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="3_54uy7"]
+[ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="4_vf6mc"]
+
+[node name="BattlePreview" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_x5g1f")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="NameLabels" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AttackerName" type="Label" parent="MarginContainer/VBoxContainer/NameLabels"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Player 1"
+uppercase = true
+
+[node name="DefenderName" type="Label" parent="MarginContainer/VBoxContainer/NameLabels"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Player 2"
+horizontal_alignment = 2
+uppercase = true
+
+[node name="HeroPreview" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Attacker" type="TextureRect" parent="MarginContainer/VBoxContainer/HeroPreview"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("1_jnyxx")
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HeroPreview"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Defender" type="TextureRect" parent="MarginContainer/VBoxContainer/HeroPreview"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("1_jnyxx")
+stretch_mode = 5
+flip_h = true
+
+[node name="Padding2" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="HealthPreview" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AttackerHealth" type="ProgressBar" parent="MarginContainer/VBoxContainer/HealthPreview"]
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 2
+theme_override_styles/background = ExtResource("3_54uy7")
+theme_override_styles/fill = ExtResource("4_vf6mc")
+value = 100.0
+show_percentage = false
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HealthPreview"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DefenderHealth" type="ProgressBar" parent="MarginContainer/VBoxContainer/HealthPreview"]
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 2
+theme_override_styles/background = ExtResource("3_54uy7")
+theme_override_styles/fill = ExtResource("4_vf6mc")
+value = 100.0
+show_percentage = false
+
+[node name="WeaponPreview" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AttackerWeapon" type="TextureRect" parent="MarginContainer/VBoxContainer/WeaponPreview"]
+custom_minimum_size = Vector2(75, 50)
+layout_mode = 2
+texture = ExtResource("1_8j32h")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/WeaponPreview"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DefenderWeapon" type="TextureRect" parent="MarginContainer/VBoxContainer/WeaponPreview"]
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_wjedh")
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="Fire" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "FIRE"
