@@ -33,12 +33,23 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0corr"]
 bg_color = Color(0.760784, 0.760784, 0.760784, 1)
+border_color = Color(1, 1, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0g1e"]
 bg_color = Color(0.762404, 0.762404, 0.762403, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bft1"]
 bg_color = Color(0.2798, 0.640408, 0.439183, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8, 0.8, 0.8, 0)
 
 [node name="ActionMenu" type="PanelContainer"]
 custom_minimum_size = Vector2(600, 150)
@@ -50,6 +61,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
+mouse_filter = 1
+mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_knvme")
 script = ExtResource("1_0corr")
 
@@ -65,6 +78,7 @@ layout_mode = 2
 [node name="Watch" type="Button" parent="VBoxContainer/NonCombatAndStats/NonCombatActions"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_yth5k")
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/NonCombatAndStats/NonCombatActions/Watch"]
@@ -88,6 +102,7 @@ stretch_mode = 4
 [node name="Bomb" type="Button" parent="VBoxContainer/NonCombatAndStats/NonCombatActions"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_yth5k")
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/NonCombatAndStats/NonCombatActions/Bomb"]
@@ -111,6 +126,7 @@ stretch_mode = 4
 [node name="Move" type="Button" parent="VBoxContainer/NonCombatAndStats/NonCombatActions"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_yth5k")
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/NonCombatAndStats/NonCombatActions/Move"]
@@ -185,6 +201,7 @@ show_percentage = false
 [node name="EndTurn" type="Button" parent="VBoxContainer/NonCombatAndStats"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_3omt0")
 text = "End Turn"
 
@@ -196,6 +213,9 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/hover = SubResource("StyleBoxFlat_0corr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0corr")
 theme_override_styles/normal = SubResource("StyleBoxFlat_0corr")
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/CombatAbilities/PrimaryWeapon"]
@@ -224,6 +244,8 @@ stretch_mode = 5
 [node name="SideArm" type="Button" parent="VBoxContainer/CombatAbilities"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/hover = SubResource("StyleBoxFlat_0corr")
 theme_override_styles/normal = SubResource("StyleBoxFlat_0corr")
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/CombatAbilities/SideArm"]
@@ -252,6 +274,7 @@ stretch_mode = 5
 [node name="Ability1" type="Button" parent="VBoxContainer/CombatAbilities"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_0corr")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CombatAbilities/Ability1"]
@@ -290,6 +313,7 @@ layout_mode = 2
 [node name="Ability2" type="Button" parent="VBoxContainer/CombatAbilities"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_0corr")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CombatAbilities/Ability2"]

@@ -25,10 +25,11 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="ActionMenu" parent="CanvasLayer/Control" instance=ExtResource("2_1ryu6")]
+custom_minimum_size = Vector2(450, 110)
 layout_mode = 1
-offset_left = -300.0
-offset_top = -150.0
-offset_right = 300.0
+offset_left = -294.5
+offset_top = -141.0
+offset_right = 294.5
 
 [node name="GameCamera" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
