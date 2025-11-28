@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cui8rqxwjorad"]
+[gd_scene load_steps=11 format=3 uid="uid://cui8rqxwjorad"]
 
 [ext_resource type="Script" uid="uid://ctv4akl0kybty" path="res://scripts/GameRound.gd" id="1_dq0hy"]
 [ext_resource type="PackedScene" uid="uid://8f0kh0fhafed" path="res://prefabs/ActionMenu.tscn" id="2_1ryu6"]
 [ext_resource type="PackedScene" uid="uid://dle3ma7ge5t1o" path="res://prefabs/Map.tscn" id="2_74q1x"]
+[ext_resource type="PackedScene" uid="uid://y4eeluvjf47n" path="res://prefabs/TeamStatus.tscn" id="2_ngxvu"]
 [ext_resource type="Script" uid="uid://dl0x03lnvo0xy" path="res://scripts/GameCamera.gd" id="2_twj6c"]
 [ext_resource type="PackedScene" uid="uid://dgma3qa7i4xrv" path="res://prefabs/Agent.tscn" id="3_74q1x"]
 [ext_resource type="PackedScene" uid="uid://kcdgbmwfjvyx" path="res://prefabs/HighlightOverlay.tscn" id="4_cw3wy"]
@@ -23,6 +24,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="TeamStatus" parent="CanvasLayer/Control" instance=ExtResource("2_ngxvu")]
+layout_mode = 1
+anchors_preset = 9
+anchor_left = 0.0
+anchor_right = 0.0
+grow_horizontal = 1
+
+[node name="TeamStatus2" parent="CanvasLayer/Control" instance=ExtResource("2_ngxvu")]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
 
 [node name="ActionMenu" parent="CanvasLayer/Control" instance=ExtResource("2_1ryu6")]
 custom_minimum_size = Vector2(450, 110)
