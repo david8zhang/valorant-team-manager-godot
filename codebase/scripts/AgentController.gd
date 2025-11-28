@@ -5,14 +5,35 @@ extends Node2D
 @export var highlight_overlay: HighlightOverlay
 @export var team: Team
 
+enum ActionState {
+	NONE,
+	WATCH,
+	DEFUSE,
+	PLANT,
+	MOVE,
+	PRIMARY_ATTACK,
+	SECONDARY_ATTACK,
+	ABILITY_ONE,
+	ABILITY_TWO
+}
+
 signal on_complete_turn
 
 var selected_agent: Agent
+var curr_action_state: ActionState = ActionState.NONE
+
+func _ready() -> void:
+	await game_round.ready
+	game_round.action_menu.on_action.connect(set_action_state_move)
+
+func set_action_state_move(new_action_state: ActionState):
+	curr_action_state = new_action_state
 
 func _process(_delta):
-	if game_round.curr_turn_side == GameRound.Side.PLAYER and Input.is_action_just_pressed("mouse_left"):
-		var pos_to_move_to = game_round.map.ground_layer.map_to_local(highlight_overlay.hovered_tile_pos)
-		selected_agent.move_to_position(pos_to_move_to, complete_move)
+	if game_round.curr_turn_side == GameRound.Side.PLAYER:
+		if Input.is_action_just_pressed("mouse_left") and curr_action_state == ActionState.MOVE:
+			var pos_to_move_to = game_round.map.ground_layer.map_to_local(highlight_overlay.hovered_tile_pos)
+			selected_agent.move_to_position(pos_to_move_to, complete_move)
 
 func start_turn():
 	select_agent(team.agents[0])

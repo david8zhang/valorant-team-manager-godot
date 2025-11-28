@@ -12,6 +12,7 @@ enum Side {
 @onready var cpu_team = $CPUTeam as Team
 @onready var map = $Map as Map
 @onready var game_camera := $GameCamera as GameCamera
+@onready var action_menu := $CanvasLayer/Control/ActionMenu as ActionMenu
 
 var curr_turn_side = Side.PLAYER
 
