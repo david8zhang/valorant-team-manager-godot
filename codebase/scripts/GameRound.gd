@@ -13,6 +13,7 @@ enum Side {
 @onready var map = $Map as Map
 @onready var game_camera := $GameCamera as GameCamera
 @onready var action_menu := $CanvasLayer/Control/ActionMenu as ActionMenu
+@onready var battle_preview_menu := $CanvasLayer/Control/BattlePreview as BattlePreview
 
 var curr_turn_side = Side.PLAYER
 
@@ -29,8 +30,8 @@ func scale_from_zoom(curr_zoom):
 func scale_agents(agents, curr_zoom):
 	for a in agents:
 		var agent = a as Agent
-		var scale_x = max(1, 1.0 / curr_zoom.x)
-		var scale_y = max(1, 1.0 / curr_zoom.y)
+		var scale_x = max(Agent.DEFAULT_SCALE, Agent.DEFAULT_SCALE / curr_zoom.x)
+		var scale_y = max(Agent.DEFAULT_SCALE, Agent.DEFAULT_SCALE / curr_zoom.y)
 		agent.sprite.scale = Vector2(scale_x, scale_y)
 
 func on_complete_turn():

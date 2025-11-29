@@ -6,6 +6,7 @@ extends Node2D
 @export var map: Map
 @export var start_x = 0
 @export var start_y = 0
+@export var space_btwn_agents = 2
 
 var agents := []
 
@@ -18,7 +19,7 @@ func _ready() -> void:
 		add_child(new_agent)
 		agents.append(new_agent)
 		map.move_node_to_pos(new_agent, x_pos, y_pos)
-		x_pos += 2
+		x_pos += space_btwn_agents
 
 func get_all_visible_tiles():
 	var all_visible_tiles := []

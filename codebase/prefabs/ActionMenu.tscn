@@ -78,6 +78,7 @@ layout_mode = 2
 [node name="Watch" type="Button" parent="VBoxContainer/NonCombatAndStats/NonCombatActions"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+focus_mode = 0
 mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_yth5k")
 
@@ -102,6 +103,7 @@ stretch_mode = 4
 [node name="Bomb" type="Button" parent="VBoxContainer/NonCombatAndStats/NonCombatActions"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+focus_mode = 0
 mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_yth5k")
 
@@ -126,6 +128,7 @@ stretch_mode = 4
 [node name="Move" type="Button" parent="VBoxContainer/NonCombatAndStats/NonCombatActions"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+focus_mode = 0
 mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_yth5k")
 
@@ -213,6 +216,7 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 mouse_filter = 1
 theme_override_styles/hover = SubResource("StyleBoxFlat_0corr")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0corr")
@@ -244,6 +248,7 @@ stretch_mode = 5
 [node name="SideArm" type="Button" parent="VBoxContainer/CombatAbilities"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 mouse_filter = 1
 theme_override_styles/hover = SubResource("StyleBoxFlat_0corr")
 theme_override_styles/normal = SubResource("StyleBoxFlat_0corr")
@@ -274,6 +279,7 @@ stretch_mode = 5
 [node name="Ability1" type="Button" parent="VBoxContainer/CombatAbilities"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_0corr")
 
@@ -295,6 +301,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/CombatAbilities/Ability1/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("2_05y7h")
 expand_mode = 1
 stretch_mode = 5
 
@@ -313,6 +320,7 @@ layout_mode = 2
 [node name="Ability2" type="Button" parent="VBoxContainer/CombatAbilities"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_0corr")
 
@@ -334,6 +342,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/CombatAbilities/Ability2/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("2_05y7h")
 expand_mode = 1
 stretch_mode = 5
 

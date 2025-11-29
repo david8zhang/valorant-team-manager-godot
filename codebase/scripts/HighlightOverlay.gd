@@ -5,8 +5,10 @@ extends Node2D
 @onready var game_round = get_node("/root/GameRound") as GameRound
 var hovered_tile_pos: Vector2
 
+var should_update_pos := true
+
 func _process(_delta: float) -> void:
-	if map != null and game_round != null:
+	if map != null and game_round != null and should_update_pos:
 		var mouse_world_pos = get_global_mouse_position()
 		hovered_tile_pos = map.ground_layer.local_to_map(game_round.to_local(mouse_world_pos))
 		queue_redraw()

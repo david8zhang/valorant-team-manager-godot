@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cui8rqxwjorad"]
+[gd_scene load_steps=12 format=3 uid="uid://cui8rqxwjorad"]
 
 [ext_resource type="Script" uid="uid://ctv4akl0kybty" path="res://scripts/GameRound.gd" id="1_dq0hy"]
 [ext_resource type="PackedScene" uid="uid://8f0kh0fhafed" path="res://prefabs/ActionMenu.tscn" id="2_1ryu6"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://ch0h06pbcapnb" path="res://scripts/Team.gd" id="5_dbxdc"]
 [ext_resource type="Script" uid="uid://c50pgvjn1f6c2" path="res://scripts/AgentController.gd" id="7_ryo32"]
 [ext_resource type="Script" uid="uid://sgc1ljm2q1sl" path="res://scripts/CPUAgentController.gd" id="8_twj6c"]
+[ext_resource type="PackedScene" uid="uid://c0xqijdur3pcu" path="res://prefabs/BattlePreview.tscn" id="9_1ryu6"]
 
 [node name="GameRound" type="Node2D"]
 script = ExtResource("1_dq0hy")
@@ -46,13 +47,21 @@ offset_left = -294.5
 offset_top = -141.0
 offset_right = 294.5
 
+[node name="BattlePreview" parent="CanvasLayer/Control" instance=ExtResource("9_1ryu6")]
+visible = false
+layout_mode = 1
+offset_left = -325.0
+offset_top = -106.5
+offset_right = -87.0
+offset_bottom = 106.5
+
 [node name="GameCamera" type="Camera2D" parent="."]
-zoom = Vector2(1.5, 1.5)
 script = ExtResource("2_twj6c")
 
 [node name="Map" parent="." instance=ExtResource("2_74q1x")]
 
 [node name="HighlightOverlay" parent="." node_paths=PackedStringArray("map") instance=ExtResource("4_cw3wy")]
+visible = false
 map = NodePath("../Map")
 
 [node name="PlayerTeam" type="Node2D" parent="." node_paths=PackedStringArray("map")]
@@ -61,6 +70,7 @@ agent_scene = ExtResource("3_74q1x")
 map = NodePath("../Map")
 start_x = 50
 start_y = 75
+space_btwn_agents = 5
 
 [node name="AgentController" type="Node2D" parent="PlayerTeam" node_paths=PackedStringArray("highlight_overlay", "team")]
 script = ExtResource("7_ryo32")
@@ -73,6 +83,7 @@ agent_scene = ExtResource("3_74q1x")
 map = NodePath("../Map")
 start_x = 50
 start_y = 40
+space_btwn_agents = 5
 
 [node name="CPUAgentController" type="Node2D" parent="CPUTeam"]
 script = ExtResource("8_twj6c")

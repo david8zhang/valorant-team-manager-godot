@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0xqijdur3pcu"]
+[gd_scene load_steps=8 format=3 uid="uid://c0xqijdur3pcu"]
 
 [ext_resource type="Texture2D" uid="uid://b66703nom17l2" path="res://assets/vandal.png" id="1_8j32h"]
 [ext_resource type="Texture2D" uid="uid://bmq71w50g0ccu" path="res://assets/placeholder/sample-agent.png" id="1_jnyxx"]
 [ext_resource type="StyleBox" uid="uid://cnieekm2v0r8a" path="res://prefabs/Container.tres" id="1_x5g1f"]
+[ext_resource type="Script" uid="uid://ckegoqif7x5k5" path="res://scripts/BattlePreview.gd" id="2_vf6mc"]
 [ext_resource type="Texture2D" uid="uid://cg8ekko2m3ljw" path="res://assets/pistol.png" id="2_wjedh"]
 [ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="3_54uy7"]
 [ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="4_vf6mc"]
@@ -16,8 +17,9 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 1
 theme_override_styles/panel = ExtResource("1_x5g1f")
+script = ExtResource("2_vf6mc")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
