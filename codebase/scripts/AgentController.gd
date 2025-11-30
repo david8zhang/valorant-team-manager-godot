@@ -22,12 +22,14 @@ signal on_complete_turn
 var selected_agent: Agent
 var curr_action_state: ActionState = ActionState.NONE
 var is_hovering_action_menu := false
+var enemy_to_attack: Agent
 
 func _ready() -> void:
 	await game_round.ready
 	game_round.action_menu.on_action.connect(handle_new_action_state)
 	game_round.action_menu.mouse_entered.connect(enter_hover_action_menu)
 	game_round.action_menu.mouse_exited.connect(exit_hover_action_menu)
+	game_round.battle_preview_menu.on_fire_clicked.connect(start_battle)
 
 	for a in game_round.cpu_team.agents:
 		var agent = a as Agent
@@ -39,6 +41,7 @@ func handle_enemy_agent_click(agent):
 		game_round.game_camera.target_position = midpoint_pos
 		var battle_preview_menu = game_round.battle_preview_menu
 		battle_preview_menu.show()
+		enemy_to_attack = agent
 
 func exit_hover_action_menu():
 	is_hovering_action_menu = false
@@ -48,6 +51,8 @@ func enter_hover_action_menu():
 
 func handle_new_action_state(new_action_state):
 	highlight_overlay.hide()
+	game_round.battle_preview_menu.hide()
+	enemy_to_attack = null
 	match new_action_state:
 		ActionState.MOVE:
 			highlight_overlay.show()
@@ -86,3 +91,12 @@ func center_camera_on_agent(agent: Agent):
 
 func center_camera_on_position(new_pos: Vector2):
 	game_round.game_camera.target_position = new_pos
+
+func start_battle():
+	if enemy_to_attack != null:
+		game_round.battle_preview_menu.hide()
+		selected_agent.attack_enemy_agent(enemy_to_attack, true, on_battle_complete)
+
+func on_battle_complete():
+	print("battle complete!")
+	pass

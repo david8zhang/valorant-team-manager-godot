@@ -5,8 +5,10 @@ extends Node2D
 @onready var sprite = $AnimatedSprite2D as AnimatedSprite2D
 @onready var button = $Button as Button
 @onready var health_bar = $HealthBar as ProgressBar
+@onready var weapon = $Weapon as Sprite2D
 
-@export var vision_distance := 20
+@export var projectile_scene: PackedScene
+@export var vision_distance := 25
 @export var vision_angle_degrees := 60
 
 static var DEFAULT_SCALE = 1.25
@@ -106,13 +108,57 @@ func bresenham_line(x0, y0, x1, y1) -> Array[Vector2i]:
 			y += sy
 	return line
 
-
-# -----------------------------------------------------------
-# DEBUG: highlight tiles (optional)
-# -----------------------------------------------------------
 func show_visible_tiles(tiles: Array) -> void:
 	map.vision_layer.clear()
 	for t in tiles:
 		var source_id = map.ground_layer.get_cell_source_id(t)
 		var atlas_coords = map.ground_layer.get_cell_atlas_coords(t)
 		map.vision_layer.set_cell(t, source_id, atlas_coords)
+
+func attack_enemy_agent(enemy_to_attack: Agent, should_retaliate: bool, on_complete: Callable):
+	var game_camera = game_round.game_camera
+	game_camera.target_zoom = Vector2(1.5, 1.5)
+	var enemy_to_attack_pos = enemy_to_attack.global_position
+	var selected_agent_pos = self.global_position
+	var angle = rad_to_deg((enemy_to_attack_pos - selected_agent_pos).angle())
+	weapon.show()
+	weapon.rotation_degrees = angle
+	weapon.flip_v = weapon.rotation_degrees <= -90 and weapon.rotation_degrees >= -270 or \
+									weapon.rotation_degrees >= 90 and weapon.rotation_degrees <= 270
+
+	# Add a 1-second delay
+	var t = wait_delay(0.5)
+	await t.timeout
+
+	# Shoot bullet from gun
+	var projectile = projectile_scene.instantiate() as Node2D
+	weapon.add_child(projectile)
+	projectile.position = Vector2(weapon.position.x + 20, weapon.position.y + 5)
+	var tween = create_tween()
+	tween.tween_property(projectile, "global_position", enemy_to_attack_pos, 0.5)
+	tween.finished.connect(func (): on_attack_finished(projectile, enemy_to_attack, should_retaliate, on_complete))
+
+func on_attack_finished(projectile: Node2D, enemy_to_attack: Agent, should_retaliate: bool, on_complete: Callable):
+	var rand_damage = randi_range(50, 75)
+	enemy_to_attack.take_damage(rand_damage)
+	projectile.queue_free()
+	if should_retaliate:
+		enemy_to_attack.attack_enemy_agent(self, false, on_complete)
+	else:
+		var t = wait_delay(0.5)
+		await t.timeout
+		enemy_to_attack.weapon.hide()
+		weapon.hide()
+		game_round.game_camera.target_zoom = Vector2.ONE
+		on_complete.call()
+
+func take_damage(damage):
+	health_bar.value -= damage
+
+func wait_delay(delay: float):
+	var timer = Timer.new()
+	timer.autostart = true
+	timer.one_shot = true
+	timer.wait_time = delay
+	add_child(timer)
+	return timer
