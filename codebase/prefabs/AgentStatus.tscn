@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://wxeqn8voogow"]
 
-[ext_resource type="Texture2D" uid="uid://bmq71w50g0ccu" path="res://assets/placeholder/sample-agent.png" id="1_qsf7e"]
+[ext_resource type="Texture2D" uid="uid://beu1d2qdbfmxn" path="res://assets/agents/brimstone.png" id="1_d1d8l"]
 [ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="2_wjiy0"]
 [ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="3_knam2"]
 [ext_resource type="Texture2D" uid="uid://7x7bah3df7vw" path="res://assets/placeholder/vandal.png" id="4_knam2"]
@@ -32,7 +32,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("1_qsf7e")
+texture = ExtResource("1_d1d8l")
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2

@@ -8,6 +8,12 @@ extends PanelContainer
 @onready var secondary_weapon = $VBoxContainer/CombatAbilities/SideArm as Button
 @onready var primary_weapon_ammo_meter = $VBoxContainer/CombatAbilities/PrimaryWeapon/ProgressBar as ProgressBar
 @onready var secondary_weapon_ammo_meter = $VBoxContainer/CombatAbilities/SideArm/ProgressBar as ProgressBar
+@onready var action_point_menu = $VBoxContainer/NonCombatAndStats/VBoxContainer/HBoxContainer as HBoxContainer
+
+var agent_controller: AgentController
+var ap_rect_cost_style
+var ap_rect_unused_style
+var ap_rect_used_style
 
 signal on_action(action_state)
 
@@ -17,6 +23,9 @@ func _ready() -> void:
 	watch_button.pressed.connect(func (): on_action_click(AgentController.ActionState.WATCH))
 	primary_weapon.pressed.connect(func (): on_action_click(AgentController.ActionState.PRIMARY_ATTACK))
 	secondary_weapon.pressed.connect(func (): on_action_click(AgentController.ActionState.SECONDARY_ATTACK))
+	ap_rect_cost_style = load("res://prefabs/ActionPoint_CostPreview.tres")
+	ap_rect_unused_style = load("res://prefabs/ActionPoint_Unused.tres")
+	ap_rect_used_style = load("res://prefabs/ActionPoint_Used.tres")
 
 func on_action_click(action_state: AgentController.ActionState):
 	on_action.emit(action_state)
@@ -52,3 +61,24 @@ func highlight_single_button(button):
 	var sb := StyleBoxFlat.new()
 	sb.bg_color = Color(0, 1, 0)
 	button.add_theme_stylebox_override("normal", sb)
+
+func preview_ap_cost(ap_cost):
+	var selected_agent = agent_controller.selected_agent
+	var ap_rects = action_point_menu.get_children().slice(0, selected_agent.rem_action_points)
+	ap_rects.reverse()
+	for i in range(0, ap_rects.size()):
+		var ap_rect = ap_rects[i] as Panel
+		if i < ap_cost:
+			ap_rect.add_theme_stylebox_override("panel", ap_rect_cost_style)
+		else:
+			ap_rect.add_theme_stylebox_override("panel", ap_rect_unused_style)
+
+func update_ap_menu():
+	var selected_agent = agent_controller.selected_agent
+	var ap_rects = action_point_menu.get_children()
+	for i in range(0, ap_rects.size()):
+		var ap_rect = ap_rects[i]
+		if i < selected_agent.rem_action_points:
+			ap_rect.add_theme_stylebox_override("panel", ap_rect_unused_style)
+		else:
+			ap_rect.add_theme_stylebox_override("panel", ap_rect_used_style)

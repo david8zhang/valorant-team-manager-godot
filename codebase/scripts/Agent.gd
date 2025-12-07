@@ -11,12 +11,14 @@ extends Node2D
 @export var vision_distance := 25
 @export var vision_angle_degrees := 60
 
-static var DEFAULT_SCALE = 1.25
+static var DEFAULT_SCALE = 1.5
+static var TOTAL_ACTION_POINTS = 5
 
 var map: Map
 var vision_direction: Vector2 = Vector2.UP
 var visible_tiles := []
 var is_showing_visible_tiles := false
+var rem_action_points = TOTAL_ACTION_POINTS
 
 signal on_agent_click(agent)
 
@@ -28,12 +30,15 @@ func agent_click():
 	on_agent_click.emit(self)
 
 func move_to_position(new_pos: Vector2, callback: Callable):
+	var prev_pos = Vector2(global_position.x, global_position.y)
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", new_pos, 0.5)
 	var on_complete = func _on_complete():
 		update_and_show_visible_tiles()
 		callback.call()
 	tween.finished.connect(on_complete)
+	var ap_cost = game_round.get_ap_cost_for_movement(prev_pos, new_pos)
+	rem_action_points -= ap_cost
 
 func update_and_show_visible_tiles():
 	visible_tiles = get_visible_tiles()
@@ -116,6 +121,9 @@ func show_visible_tiles(tiles: Array) -> void:
 		map.vision_layer.set_cell(t, source_id, atlas_coords)
 
 func attack_enemy_agent(enemy_to_attack: Agent, should_retaliate: bool, on_complete: Callable):
+	var ap_cost = game_round.get_ap_cost_for_primary_attack()
+	rem_action_points -= ap_cost
+
 	var game_camera = game_round.game_camera
 	game_camera.target_zoom = Vector2(1.5, 1.5)
 	var enemy_to_attack_pos = enemy_to_attack.global_position

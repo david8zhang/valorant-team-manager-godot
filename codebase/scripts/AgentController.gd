@@ -23,6 +23,7 @@ var selected_agent: Agent
 var curr_action_state: ActionState = ActionState.NONE
 var is_hovering_action_menu := false
 var enemy_to_attack: Agent
+var action_menu: ActionMenu
 
 func _ready() -> void:
 	await game_round.ready
@@ -34,14 +35,26 @@ func _ready() -> void:
 	for a in game_round.cpu_team.agents:
 		var agent = a as Agent
 		agent.on_agent_click.connect(handle_enemy_agent_click)
+		agent.button.mouse_entered.connect(handle_enemy_agent_hover)
+		agent.button.mouse_exited.connect(handle_enemy_agent_unhover)
 
 func handle_enemy_agent_click(agent):
 	if curr_action_state == ActionState.PRIMARY_ATTACK or curr_action_state == ActionState.SECONDARY_ATTACK:
-		var midpoint_pos = Vector2((selected_agent.global_position.x + agent.global_position.x) / 2, (selected_agent.global_position.y + agent.global_position.y) / 2)
-		game_round.game_camera.target_position = midpoint_pos
-		var battle_preview_menu = game_round.battle_preview_menu
-		battle_preview_menu.show()
-		enemy_to_attack = agent
+		if game_round.get_ap_cost_for_primary_attack() <= selected_agent.rem_action_points:
+			var midpoint_pos = Vector2((selected_agent.global_position.x + agent.global_position.x) / 2, (selected_agent.global_position.y + agent.global_position.y) / 2)
+			game_round.game_camera.target_position = midpoint_pos
+			var battle_preview_menu = game_round.battle_preview_menu
+			battle_preview_menu.show()
+			enemy_to_attack = agent
+
+func handle_enemy_agent_hover():
+	if curr_action_state == ActionState.PRIMARY_ATTACK or curr_action_state == ActionState.SECONDARY_ATTACK:
+		var ap_cost_for_attack = game_round.get_ap_cost_for_primary_attack()
+		action_menu.preview_ap_cost(ap_cost_for_attack)
+
+func handle_enemy_agent_unhover():
+	if curr_action_state == ActionState.PRIMARY_ATTACK or curr_action_state == ActionState.SECONDARY_ATTACK:
+		action_menu.update_ap_menu()
 
 func exit_hover_action_menu():
 	is_hovering_action_menu = false
@@ -53,6 +66,7 @@ func handle_new_action_state(new_action_state):
 	highlight_overlay.hide()
 	game_round.battle_preview_menu.hide()
 	enemy_to_attack = null
+	action_menu.update_ap_menu()
 	match new_action_state:
 		ActionState.MOVE:
 			highlight_overlay.show()
@@ -62,13 +76,19 @@ func _process(_delta):
 	if game_round.curr_turn_side == GameRound.Side.PLAYER and !is_hovering_action_menu:
 		match curr_action_state:
 			ActionState.MOVE:
+				var pos_to_move_to = game_round.map.get_world_pos_from_tile_pos(highlight_overlay.hovered_tile_pos)
+				var ap_cost_for_move = game_round.get_ap_cost_for_movement(selected_agent.global_position, pos_to_move_to)
+				highlight_overlay.is_pos_valid = ap_cost_for_move <= selected_agent.rem_action_points
+				action_menu.preview_ap_cost(ap_cost_for_move)
 				if Input.is_action_just_pressed("mouse_left"):
-					highlight_overlay.should_update_pos = false
-					var pos_to_move_to = game_round.map.ground_layer.map_to_local(highlight_overlay.hovered_tile_pos)
-					selected_agent.move_to_position(pos_to_move_to, complete_move)
+					if ap_cost_for_move <= selected_agent.rem_action_points:
+						highlight_overlay.should_update_pos = false
+						selected_agent.move_to_position(pos_to_move_to, complete_move)
+						action_menu.update_ap_menu()
 					center_camera_on_position(pos_to_move_to)
 				if Input.is_action_just_pressed("center_camera"):
 					center_camera_on_agent(selected_agent)
+
 
 func start_turn():
 	select_agent(team.agents[0])
@@ -96,6 +116,7 @@ func start_battle():
 	if enemy_to_attack != null:
 		game_round.battle_preview_menu.hide()
 		selected_agent.attack_enemy_agent(enemy_to_attack, true, on_battle_complete)
+		action_menu.update_ap_menu()
 
 func on_battle_complete():
 	print("battle complete!")

@@ -15,9 +15,14 @@ enum Side {
 @onready var action_menu := $CanvasLayer/Control/ActionMenu as ActionMenu
 @onready var battle_preview_menu := $CanvasLayer/Control/BattlePreview as BattlePreview
 
+static var AP_COST_MOVE_PER_SQUARE = 0.1
+static var AP_COST_PRIMARY_ATTACK = 1
+
 var curr_turn_side = Side.PLAYER
 
 func _ready():
+	action_menu.agent_controller = agent_controller
+	agent_controller.action_menu = action_menu
 	agent_controller.on_complete_turn.connect(on_complete_turn)
 	cpu_agent_controller.on_complete_turn.connect(on_complete_turn)
 	agent_controller.start_turn()
@@ -60,3 +65,12 @@ func is_position_occupied(tile_pos: Vector2):
 		if curr_agent_pos.x == tile_pos.x and curr_agent_pos.y == tile_pos.y:
 			return true
 	return false
+
+func get_ap_cost_for_movement(start: Vector2, end: Vector2):
+	var start_tile_pos = map.get_tile_pos_from_world_pos(start)
+	var end_tile_pos = map.get_tile_pos_from_world_pos(end)
+	var manhattan_dist = abs(start_tile_pos.x - end_tile_pos.x) + abs(start_tile_pos.y - end_tile_pos.y)
+	return max(1, round(manhattan_dist * AP_COST_MOVE_PER_SQUARE))
+	
+func get_ap_cost_for_primary_attack():
+	return AP_COST_PRIMARY_ATTACK

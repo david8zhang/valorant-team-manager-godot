@@ -6,6 +6,7 @@ extends Node2D
 var hovered_tile_pos: Vector2
 
 var should_update_pos := true
+var is_pos_valid := true
 
 func _process(_delta: float) -> void:
 	if map != null and game_round != null and should_update_pos:
@@ -19,4 +20,5 @@ func _draw() -> void:
 		var cell_size_vec2 = Vector2(cell_size.x, cell_size.y)
 		var tile_pos = map.ground_layer.map_to_local(hovered_tile_pos) as Vector2
 		var rect = Rect2(tile_pos - cell_size_vec2 / 2, cell_size)
-		draw_rect(rect, Color(0, 1, 0, 0.4), true)
+		var color = Color(0, 1, 0, 0.4) if is_pos_valid else Color(1, 0, 0, 0.4)
+		draw_rect(rect, color, true)

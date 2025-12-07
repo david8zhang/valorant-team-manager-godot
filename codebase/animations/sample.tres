@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://d02w635ulau0"]
 
-[ext_resource type="Texture2D" uid="uid://bmq71w50g0ccu" path="res://assets/placeholder/sample-agent.png" id="1_lwf5f"]
+[ext_resource type="Texture2D" uid="uid://beu1d2qdbfmxn" path="res://assets/agents/brimstone.png" id="1_lwf5f"]
 
 [resource]
 animations = [{
@@ -9,6 +9,6 @@ animations = [{
 "texture": ExtResource("1_lwf5f")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 5.0
 }]

@@ -12,8 +12,9 @@ script = ExtResource("1_2tte8")
 projectile_scene = ExtResource("2_gfyoo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1.5, 1.5)
+scale = Vector2(2, 2)
 sprite_frames = ExtResource("2_o1fgx")
+animation = &"idle"
 offset = Vector2(0, -5)
 
 [node name="Button" type="Button" parent="."]
@@ -32,9 +33,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -25.0
-offset_top = -25.0
+offset_top = -37.0
 offset_right = 25.0
-offset_bottom = -21.0
+offset_bottom = -33.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/background = ExtResource("3_n7dr3")
