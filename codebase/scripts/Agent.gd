@@ -5,6 +5,7 @@ extends Node2D
 @onready var sprite = $AnimatedSprite2D as AnimatedSprite2D
 @onready var button = $Button as Button
 @onready var health_bar = $HealthBar as ProgressBar
+@onready var shield_bar = $ShieldBar as ProgressBar
 @onready var weapon = $Weapon as Sprite2D
 
 @export var projectile_scene: PackedScene
@@ -21,6 +22,7 @@ var is_showing_visible_tiles := false
 var rem_action_points = TOTAL_ACTION_POINTS
 
 signal on_agent_click(agent)
+signal on_update_action_menu()
 
 func _ready() -> void:
 	sprite.scale = Vector2(DEFAULT_SCALE, DEFAULT_SCALE)
@@ -161,7 +163,10 @@ func on_attack_finished(projectile: Node2D, enemy_to_attack: Agent, should_retal
 		on_complete.call()
 
 func take_damage(damage):
-	health_bar.value -= damage
+	var dmg_to_hp = damage - shield_bar.value
+	shield_bar.value -= damage
+	health_bar.value -= dmg_to_hp
+	on_update_action_menu.emit()
 
 func wait_delay(delay: float):
 	var timer = Timer.new()

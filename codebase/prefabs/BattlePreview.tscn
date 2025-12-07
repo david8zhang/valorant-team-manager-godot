@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://c0xqijdur3pcu"]
 
-[ext_resource type="Texture2D" uid="uid://b66703nom17l2" path="res://assets/vandal.png" id="1_8j32h"]
 [ext_resource type="StyleBox" uid="uid://cnieekm2v0r8a" path="res://prefabs/Container.tres" id="1_x5g1f"]
 [ext_resource type="Script" uid="uid://ckegoqif7x5k5" path="res://scripts/BattlePreview.gd" id="2_vf6mc"]
-[ext_resource type="Texture2D" uid="uid://cg8ekko2m3ljw" path="res://assets/pistol.png" id="2_wjedh"]
 [ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="3_54uy7"]
 [ext_resource type="Texture2D" uid="uid://beu1d2qdbfmxn" path="res://assets/agents/brimstone.png" id="3_vf6mc"]
 [ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="4_vf6mc"]
+[ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="6_vf6mc"]
+[ext_resource type="Texture2D" uid="uid://ce26fvykqb5iq" path="res://assets/placeholder/pistol_ingame.png" id="7_5lld8"]
 
 [node name="BattlePreview" type="PanelContainer"]
 custom_minimum_size = Vector2(200, 100)
@@ -106,20 +106,20 @@ alignment = 1
 [node name="AttackerWeapon" type="TextureRect" parent="MarginContainer/VBoxContainer/WeaponPreview"]
 custom_minimum_size = Vector2(75, 50)
 layout_mode = 2
-texture = ExtResource("1_8j32h")
-expand_mode = 1
-stretch_mode = 6
+texture = ExtResource("6_vf6mc")
+expand_mode = 4
+stretch_mode = 5
 
 [node name="Control" type="Control" parent="MarginContainer/VBoxContainer/WeaponPreview"]
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="DefenderWeapon" type="TextureRect" parent="MarginContainer/VBoxContainer/WeaponPreview"]
-custom_minimum_size = Vector2(50, 25)
+custom_minimum_size = Vector2(75, 50)
 layout_mode = 2
 size_flags_vertical = 4
-texture = ExtResource("2_wjedh")
-expand_mode = 2
+texture = ExtResource("7_5lld8")
+expand_mode = 4
 stretch_mode = 5
 flip_h = true
 

@@ -9,6 +9,8 @@ extends PanelContainer
 @onready var primary_weapon_ammo_meter = $VBoxContainer/CombatAbilities/PrimaryWeapon/ProgressBar as ProgressBar
 @onready var secondary_weapon_ammo_meter = $VBoxContainer/CombatAbilities/SideArm/ProgressBar as ProgressBar
 @onready var action_point_menu = $VBoxContainer/NonCombatAndStats/VBoxContainer/HBoxContainer as HBoxContainer
+@onready var health_bar = $VBoxContainer/NonCombatAndStats/VBoxContainer/Health as ProgressBar
+@onready var shield_bar = $VBoxContainer/NonCombatAndStats/VBoxContainer/Shields as ProgressBar
 
 var agent_controller: AgentController
 var ap_rect_cost_style
@@ -82,3 +84,12 @@ func update_ap_menu():
 			ap_rect.add_theme_stylebox_override("panel", ap_rect_unused_style)
 		else:
 			ap_rect.add_theme_stylebox_override("panel", ap_rect_used_style)
+
+func update_health_and_shields():
+	var selected_agent = agent_controller.selected_agent as Agent
+	health_bar.value = selected_agent.health_bar.value
+	shield_bar.value = selected_agent.shield_bar.value
+
+func update_all():
+	update_ap_menu()
+	update_health_and_shields()

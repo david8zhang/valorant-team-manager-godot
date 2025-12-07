@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://beu1d2qdbfmxn" path="res://assets/agents/brimstone.png" id="1_d1d8l"]
 [ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="2_wjiy0"]
 [ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="3_knam2"]
-[ext_resource type="Texture2D" uid="uid://7x7bah3df7vw" path="res://assets/placeholder/vandal.png" id="4_knam2"]
 [ext_resource type="Texture2D" uid="uid://7pdwea6dt72o" path="res://assets/placeholder/bomb-solid-full.svg" id="5_d1d8l"]
+[ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="5_mjuwj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qsf7e"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -117,9 +117,9 @@ size_flags_horizontal = 3
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
-texture = ExtResource("4_knam2")
+texture = ExtResource("5_mjuwj")
 expand_mode = 2
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="Control" type="Control" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 5)

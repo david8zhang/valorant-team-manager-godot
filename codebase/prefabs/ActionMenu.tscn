@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://8f0kh0fhafed"]
+[gd_scene load_steps=17 format=3 uid="uid://8f0kh0fhafed"]
 
 [ext_resource type="Script" uid="uid://cvyhywt2dq3l7" path="res://scripts/ActionMenu.gd" id="1_0corr"]
 [ext_resource type="Texture2D" uid="uid://d3w1j5xmidi17" path="res://assets/placeholder/eye-solid-full.svg" id="1_yth5k"]
@@ -6,8 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://cyqkara66lajl" path="res://assets/placeholder/person-running-solid-full.svg" id="3_g67y3"]
 [ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="4_lbbqo"]
 [ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="5_3omt0"]
-[ext_resource type="Texture2D" uid="uid://7x7bah3df7vw" path="res://assets/placeholder/vandal.png" id="6_3omt0"]
 [ext_resource type="StyleBox" uid="uid://chsqfvkncdsw0" path="res://prefabs/ActionPoint_Unused.tres" id="6_86jlx"]
+[ext_resource type="StyleBox" uid="uid://cy5g0kjs21b00" path="res://prefabs/ShieldFill.tres" id="7_1bft1"]
+[ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="9_86jlx"]
+[ext_resource type="Texture2D" uid="uid://ce26fvykqb5iq" path="res://assets/placeholder/pistol_ingame.png" id="10_86jlx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knvme"]
 bg_color = Color(0.392157, 0.392157, 0.392157, 0.196078)
@@ -18,9 +20,6 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbbqo"]
-bg_color = Color(0.623529, 0.772549, 0.972549, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3omt0"]
 bg_color = Color(0.475924, 0.0723759, 0.0674149, 1)
@@ -187,7 +186,7 @@ theme_override_styles/panel = ExtResource("6_86jlx")
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/background = ExtResource("4_lbbqo")
-theme_override_styles/fill = SubResource("StyleBoxFlat_lbbqo")
+theme_override_styles/fill = ExtResource("7_1bft1")
 value = 100.0
 show_percentage = false
 
@@ -229,7 +228,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_y0g1e")
 theme_override_styles/fill = SubResource("StyleBoxFlat_1bft1")
-value = 50.0
+value = 100.0
 show_percentage = false
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/CombatAbilities/PrimaryWeapon"]
@@ -239,7 +238,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_3omt0")
+texture = ExtResource("9_86jlx")
 expand_mode = 1
 stretch_mode = 5
 
@@ -260,7 +259,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_y0g1e")
 theme_override_styles/fill = SubResource("StyleBoxFlat_1bft1")
-value = 50.0
+value = 100.0
 show_percentage = false
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/CombatAbilities/SideArm"]
@@ -270,7 +269,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_3omt0")
+texture = ExtResource("10_86jlx")
 expand_mode = 1
 stretch_mode = 5
 
