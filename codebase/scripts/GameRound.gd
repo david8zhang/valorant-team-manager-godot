@@ -27,6 +27,9 @@ func _ready():
 	cpu_agent_controller.on_complete_turn.connect(on_complete_turn)
 	agent_controller.start_turn()
 	game_camera.on_zoom.connect(scale_from_zoom)
+	for a in player_team.agents:
+		a.update_visible_tiles()
+	map.show_visible_tiles()
 
 func scale_from_zoom(curr_zoom):
 	scale_agents(player_team.agents, curr_zoom)
@@ -51,11 +54,12 @@ func update_visible_enemies():
 	var visible_tiles = player_team.get_all_visible_tiles() as Array
 	var enemy_agents = cpu_team.agents as Array[Agent]
 	for agent in enemy_agents:
-		var tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
-		if visible_tiles.has(tile_pos):
-			agent.show()
-		else:
-			agent.hide()
+		if !agent.is_dead():
+			var tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
+			if visible_tiles.has(tile_pos):
+				agent.show()
+			else:
+				agent.hide()
 
 func is_position_occupied(tile_pos: Vector2):
 	var all_agents = cpu_team.agents + player_team.agents

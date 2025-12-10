@@ -1,6 +1,7 @@
 class_name ActionMenu
 extends PanelContainer
 
+@onready var game_round = get_node("/root/GameRound") as GameRound
 @onready var watch_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Watch as Button
 @onready var bomb_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Bomb as Button
 @onready var move_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Move as Button
@@ -11,6 +12,7 @@ extends PanelContainer
 @onready var action_point_menu = $VBoxContainer/NonCombatAndStats/VBoxContainer/HBoxContainer as HBoxContainer
 @onready var health_bar = $VBoxContainer/NonCombatAndStats/VBoxContainer/Health as ProgressBar
 @onready var shield_bar = $VBoxContainer/NonCombatAndStats/VBoxContainer/Shields as ProgressBar
+@onready var end_turn_button = $VBoxContainer/NonCombatAndStats/EndTurn as Button
 
 var agent_controller: AgentController
 var ap_rect_cost_style
@@ -25,6 +27,7 @@ func _ready() -> void:
 	watch_button.pressed.connect(func (): on_action_click(AgentController.ActionState.WATCH))
 	primary_weapon.pressed.connect(func (): on_action_click(AgentController.ActionState.PRIMARY_ATTACK))
 	secondary_weapon.pressed.connect(func (): on_action_click(AgentController.ActionState.SECONDARY_ATTACK))
+	end_turn_button.pressed.connect(end_curr_turn)
 	ap_rect_cost_style = load("res://prefabs/ActionPoint_CostPreview.tres")
 	ap_rect_unused_style = load("res://prefabs/ActionPoint_Unused.tres")
 	ap_rect_used_style = load("res://prefabs/ActionPoint_Used.tres")
@@ -93,3 +96,8 @@ func update_health_and_shields():
 func update_all():
 	update_ap_menu()
 	update_health_and_shields()
+
+func end_curr_turn():
+	if game_round.curr_turn_side == GameRound.Side.PLAYER:
+		hide()
+		agent_controller.complete_turn()

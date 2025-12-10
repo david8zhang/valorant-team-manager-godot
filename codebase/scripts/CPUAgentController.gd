@@ -15,6 +15,8 @@ func move_agent():
 	selected_agent.move_to_position(rand_pos, complete_turn)
 
 func start_turn():
+	var agents_to_select = game_round.cpu_team.agents.filter(func (a: Agent): return !a.is_dead())
+	selected_agent = agents_to_select.pick_random()
 	move_agent()
 
 func complete_turn():

@@ -24,5 +24,6 @@ func _ready() -> void:
 func get_all_visible_tiles():
 	var all_visible_tiles := []
 	for agent in (agents as Array[Agent]):
-		all_visible_tiles += agent.visible_tiles
+		if !agent.is_dead():
+			all_visible_tiles += agent.visible_tiles
 	return all_visible_tiles

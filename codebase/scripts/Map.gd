@@ -1,6 +1,7 @@
 class_name Map
 extends Node2D
 
+@onready var game_round = get_node("/root/GameRound") as GameRound
 @onready var ground_layer := $GroundLayer as TileMapLayer
 @onready var walls_layer := $WallsLayer as TileMapLayer
 @onready var vision_layer := $VisionLayer as TileMapLayer
@@ -21,3 +22,11 @@ func get_world_pos_from_tile_pos(tile_pos: Vector2):
 func is_tile_pos_in_bounds(tile_pos: Vector2):
 	var map := ground_layer.get_used_rect()
 	return tile_pos.x >= 0 and tile_pos.x < map.size.x and tile_pos.y >= 0 and tile_pos.y < map.size.y
+
+func show_visible_tiles():
+	var all_visible_tiles = game_round.player_team.get_all_visible_tiles()
+	vision_layer.clear()
+	for t in all_visible_tiles:
+		var source_id = ground_layer.get_cell_source_id(t)
+		var atlas_coords = ground_layer.get_cell_atlas_coords(t)
+		vision_layer.set_cell(t, source_id, atlas_coords)

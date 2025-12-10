@@ -20,6 +20,7 @@ var vision_direction: Vector2 = Vector2.UP
 var visible_tiles := []
 var is_showing_visible_tiles := false
 var rem_action_points = TOTAL_ACTION_POINTS
+var has_completed_turn := false
 
 signal on_agent_click(agent)
 signal on_update_action_menu()
@@ -36,15 +37,14 @@ func move_to_position(new_pos: Vector2, callback: Callable):
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", new_pos, 0.5)
 	var on_complete = func _on_complete():
-		update_and_show_visible_tiles()
+		update_visible_tiles()
 		callback.call()
 	tween.finished.connect(on_complete)
 	var ap_cost = game_round.get_ap_cost_for_movement(prev_pos, new_pos)
 	rem_action_points -= ap_cost
 
-func update_and_show_visible_tiles():
+func update_visible_tiles():
 	visible_tiles = get_visible_tiles()
-	show_visible_tiles(visible_tiles)
 
 func get_visible_tiles() -> Array:
 	var px = map.ground_layer.local_to_map(global_position)
@@ -115,13 +115,6 @@ func bresenham_line(x0, y0, x1, y1) -> Array[Vector2i]:
 			y += sy
 	return line
 
-func show_visible_tiles(tiles: Array) -> void:
-	map.vision_layer.clear()
-	for t in tiles:
-		var source_id = map.ground_layer.get_cell_source_id(t)
-		var atlas_coords = map.ground_layer.get_cell_atlas_coords(t)
-		map.vision_layer.set_cell(t, source_id, atlas_coords)
-
 func attack_enemy_agent(enemy_to_attack: Agent, should_retaliate: bool, on_complete: Callable):
 	var ap_cost = game_round.get_ap_cost_for_primary_attack()
 	rem_action_points -= ap_cost
@@ -152,7 +145,7 @@ func on_attack_finished(projectile: Node2D, enemy_to_attack: Agent, should_retal
 	var rand_damage = randi_range(50, 75)
 	enemy_to_attack.take_damage(rand_damage)
 	projectile.queue_free()
-	if should_retaliate:
+	if should_retaliate and !enemy_to_attack.is_dead():
 		enemy_to_attack.attack_enemy_agent(self, false, on_complete)
 	else:
 		var t = wait_delay(0.5)
@@ -167,6 +160,17 @@ func take_damage(damage):
 	shield_bar.value -= damage
 	health_bar.value -= dmg_to_hp
 	on_update_action_menu.emit()
+
+	# Handle agent death
+	if health_bar.value == 0:
+		game_round.map.show_visible_tiles()
+		hide()
+		# If this is the currently selected player agent, switch to a different agent
+		if game_round.agent_controller.selected_agent == self:
+			game_round.agent_controller.complete_turn()
+
+func is_dead():
+	return health_bar.value == 0
 
 func wait_delay(delay: float):
 	var timer = Timer.new()

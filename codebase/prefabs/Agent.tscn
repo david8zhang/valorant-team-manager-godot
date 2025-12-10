@@ -59,7 +59,6 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/background = ExtResource("3_n7dr3")
 theme_override_styles/fill = ExtResource("6_efgjp")
-value = 100.0
 show_percentage = false
 
 [node name="Weapon" type="Sprite2D" parent="."]

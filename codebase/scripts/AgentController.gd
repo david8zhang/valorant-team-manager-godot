@@ -49,6 +49,7 @@ func handle_enemy_agent_click(agent):
 			game_round.game_camera.target_position = midpoint_pos
 			var battle_preview_menu = game_round.battle_preview_menu
 			battle_preview_menu.show()
+			battle_preview_menu.update_preview(selected_agent, agent)
 			enemy_to_attack = agent
 
 func handle_enemy_agent_hover():
@@ -93,22 +94,32 @@ func _process(_delta):
 				if Input.is_action_just_pressed("center_camera"):
 					center_camera_on_agent(selected_agent)
 
-
 func start_turn():
-	select_agent(team.agents[0])
+	var agents_to_select = []
+	for a in team.agents:
+		var agent = a as Agent
+		if !agent.is_dead() and !agent.has_completed_turn:
+			agents_to_select.append(agent)
+	select_agent(agents_to_select.pick_random())
 	game_round.update_visible_enemies()
 
 func complete_move():
 	highlight_overlay.should_update_pos = true
 	game_round.update_visible_enemies()
+	game_round.map.show_visible_tiles()
 
 func complete_turn():
+	selected_agent.has_completed_turn = true
+	selected_agent.sprite.self_modulate = Color(0.5, 0.5, 0.5)
 	on_complete_turn.emit()
 
 func select_agent(agent: Agent):
 	selected_agent = agent
 	center_camera_on_agent(agent)
-	selected_agent.update_and_show_visible_tiles()
+	action_menu.update_all()
+	action_menu.show()
+	selected_agent.update_visible_tiles()
+	game_round.map.show_visible_tiles()
 
 func center_camera_on_agent(agent: Agent):
 	game_round.game_camera.target_position = agent.global_position
