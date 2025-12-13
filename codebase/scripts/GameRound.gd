@@ -26,21 +26,9 @@ func _ready():
 	agent_controller.on_complete_turn.connect(on_complete_turn)
 	cpu_agent_controller.on_complete_turn.connect(on_complete_turn)
 	agent_controller.start_turn()
-	game_camera.on_zoom.connect(scale_from_zoom)
 	for a in player_team.agents:
 		a.update_visible_tiles()
-	map.show_visible_tiles()
-
-func scale_from_zoom(curr_zoom):
-	scale_agents(player_team.agents, curr_zoom)
-	scale_agents(cpu_team.agents, curr_zoom)
-
-func scale_agents(agents, curr_zoom):
-	for a in agents:
-		var agent = a as Agent
-		var scale_x = max(Agent.DEFAULT_SCALE, Agent.DEFAULT_SCALE / curr_zoom.x)
-		var scale_y = max(Agent.DEFAULT_SCALE, Agent.DEFAULT_SCALE / curr_zoom.y)
-		agent.sprite.scale = Vector2(scale_x, scale_y)
+	map.show_player_team_visible_tiles()
 
 func on_complete_turn():
 	if curr_turn_side == Side.PLAYER:
@@ -53,6 +41,9 @@ func on_complete_turn():
 func update_visible_enemies():
 	var visible_tiles = player_team.get_all_visible_tiles() as Array
 	var enemy_agents = cpu_team.agents as Array[Agent]
+	update_specific_visible_enemies(visible_tiles, enemy_agents)
+
+func update_specific_visible_enemies(visible_tiles, enemy_agents):
 	for agent in enemy_agents:
 		if !agent.is_dead():
 			var tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)

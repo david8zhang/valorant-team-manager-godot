@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cui8rqxwjorad"]
+[gd_scene load_steps=13 format=3 uid="uid://cui8rqxwjorad"]
 
 [ext_resource type="Script" uid="uid://ctv4akl0kybty" path="res://scripts/GameRound.gd" id="1_dq0hy"]
 [ext_resource type="PackedScene" uid="uid://8f0kh0fhafed" path="res://prefabs/ActionMenu.tscn" id="2_1ryu6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dl0x03lnvo0xy" path="res://scripts/GameCamera.gd" id="2_twj6c"]
 [ext_resource type="PackedScene" uid="uid://dgma3qa7i4xrv" path="res://prefabs/Agent.tscn" id="3_74q1x"]
 [ext_resource type="PackedScene" uid="uid://kcdgbmwfjvyx" path="res://prefabs/HighlightOverlay.tscn" id="4_cw3wy"]
+[ext_resource type="PackedScene" uid="uid://qvna5xhohysn" path="res://prefabs/DebugMenu.tscn" id="5_d8md6"]
 [ext_resource type="Script" uid="uid://ch0h06pbcapnb" path="res://scripts/Team.gd" id="5_dbxdc"]
 [ext_resource type="Script" uid="uid://c50pgvjn1f6c2" path="res://scripts/AgentController.gd" id="7_ryo32"]
 [ext_resource type="Script" uid="uid://sgc1ljm2q1sl" path="res://scripts/CPUAgentController.gd" id="8_twj6c"]
@@ -54,6 +55,10 @@ offset_left = -325.0
 offset_top = -106.5
 offset_right = -87.0
 offset_bottom = 106.5
+
+[node name="DebugMenu" parent="CanvasLayer/Control" instance=ExtResource("5_d8md6")]
+visible = false
+layout_mode = 1
 
 [node name="GameCamera" type="Camera2D" parent="."]
 script = ExtResource("2_twj6c")

@@ -90,7 +90,7 @@ func _process(_delta):
 						highlight_overlay.should_update_pos = false
 						selected_agent.move_to_position(pos_to_move_to, complete_move)
 						action_menu.update_all()
-					center_camera_on_position(pos_to_move_to)
+						center_camera_on_position(pos_to_move_to)
 				if Input.is_action_just_pressed("center_camera"):
 					center_camera_on_agent(selected_agent)
 
@@ -100,13 +100,14 @@ func start_turn():
 		var agent = a as Agent
 		if !agent.is_dead() and !agent.has_completed_turn:
 			agents_to_select.append(agent)
-	select_agent(agents_to_select.pick_random())
+	if !agents_to_select.is_empty():
+		select_agent(agents_to_select.pick_random())
 	game_round.update_visible_enemies()
 
 func complete_move():
 	highlight_overlay.should_update_pos = true
 	game_round.update_visible_enemies()
-	game_round.map.show_visible_tiles()
+	game_round.map.show_player_team_visible_tiles()
 
 func complete_turn():
 	selected_agent.has_completed_turn = true
@@ -119,7 +120,7 @@ func select_agent(agent: Agent):
 	action_menu.update_all()
 	action_menu.show()
 	selected_agent.update_visible_tiles()
-	game_round.map.show_visible_tiles()
+	game_round.map.show_player_team_visible_tiles()
 
 func center_camera_on_agent(agent: Agent):
 	game_round.game_camera.target_position = agent.global_position
@@ -134,7 +135,6 @@ func start_battle():
 		action_menu.update_all()
 
 func on_battle_complete():
-	print("battle complete!")
 	pass
 
 func update_action_menu():

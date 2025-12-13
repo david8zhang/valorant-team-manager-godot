@@ -23,10 +23,13 @@ func is_tile_pos_in_bounds(tile_pos: Vector2):
 	var map := ground_layer.get_used_rect()
 	return tile_pos.x >= 0 and tile_pos.x < map.size.x and tile_pos.y >= 0 and tile_pos.y < map.size.y
 
-func show_visible_tiles():
+func show_player_team_visible_tiles():
 	var all_visible_tiles = game_round.player_team.get_all_visible_tiles()
-	vision_layer.clear()
-	for t in all_visible_tiles:
+	vision_layer.clear()	
+	show_specific_visible_tiles(all_visible_tiles)
+
+func show_specific_visible_tiles(visible_tiles):
+	for t in visible_tiles:
 		var source_id = ground_layer.get_cell_source_id(t)
 		var atlas_coords = ground_layer.get_cell_atlas_coords(t)
-		vision_layer.set_cell(t, source_id, atlas_coords)
+		vision_layer.set_cell(t, source_id, atlas_coords)		

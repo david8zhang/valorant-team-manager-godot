@@ -137,6 +137,8 @@ func attack_enemy_agent(enemy_to_attack: Agent, should_retaliate: bool, on_compl
 	var projectile = projectile_scene.instantiate() as Node2D
 	weapon.add_child(projectile)
 	projectile.position = Vector2(weapon.position.x + 20, weapon.position.y + 5)
+	projectile.reparent(game_round)
+	projectile.show()
 	var tween = create_tween()
 	tween.tween_property(projectile, "global_position", enemy_to_attack_pos, 0.5)
 	tween.finished.connect(func (): on_attack_finished(projectile, enemy_to_attack, should_retaliate, on_complete))
@@ -145,7 +147,7 @@ func on_attack_finished(projectile: Node2D, enemy_to_attack: Agent, should_retal
 	var rand_damage = randi_range(50, 75)
 	enemy_to_attack.take_damage(rand_damage)
 	projectile.queue_free()
-	if should_retaliate and !enemy_to_attack.is_dead():
+	if should_retaliate and !enemy_to_attack.is_dead() and enemy_to_attack.has_vision_of_agent(self):
 		enemy_to_attack.attack_enemy_agent(self, false, on_complete)
 	else:
 		var t = wait_delay(0.5)
@@ -163,11 +165,7 @@ func take_damage(damage):
 
 	# Handle agent death
 	if health_bar.value == 0:
-		game_round.map.show_visible_tiles()
 		hide()
-		# If this is the currently selected player agent, switch to a different agent
-		if game_round.agent_controller.selected_agent == self:
-			game_round.agent_controller.complete_turn()
 
 func is_dead():
 	return health_bar.value == 0
@@ -179,3 +177,14 @@ func wait_delay(delay: float):
 	timer.wait_time = delay
 	add_child(timer)
 	return timer
+
+func get_curr_health():
+	return health_bar.value
+
+func has_vision_of_agent(other_agent: Agent):
+	update_visible_tiles()
+	var other_agent_tile_pos = game_round.map.get_tile_pos_from_world_pos(other_agent.global_position)
+	for t in visible_tiles:
+		if t.x == other_agent_tile_pos.x and t.y == other_agent_tile_pos.y:
+			return true
+	return false
