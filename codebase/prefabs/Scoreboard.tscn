@@ -1,0 +1,137 @@
+[gd_scene load_steps=3 format=3 uid="uid://do06qong074fn"]
+
+[ext_resource type="Script" uid="uid://fxjfmqji77tn" path="res://scripts/Scoreboard.gd" id="1_agxdj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7gbi6"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Scoreboard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_agxdj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="PlayerScoreContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PlayerScoreContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 10
+
+[node name="PlayerScore" type="HBoxContainer" parent="HBoxContainer/PlayerScoreContainer/MarginContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/PlayerScoreContainer/MarginContainer/PlayerScore"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Player"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="HBoxContainer/PlayerScoreContainer/MarginContainer/PlayerScore"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+
+[node name="RoundInfoContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7gbi6")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/RoundInfoContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+
+[node name="RoundInfo" type="VBoxContainer" parent="HBoxContainer/RoundInfoContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Round 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Turns" type="Label" parent="HBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "10"
+horizontal_alignment = 1
+
+[node name="TurnsLabel" type="Label" parent="HBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Turns Left"
+horizontal_alignment = 1
+
+[node name="BuyPhase" type="Label" parent="HBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "BUY"
+horizontal_alignment = 1
+
+[node name="CPUScoreContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CPUScoreContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 10
+
+[node name="CPUScore" type="HBoxContainer" parent="HBoxContainer/CPUScoreContainer/MarginContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Score" type="Label" parent="HBoxContainer/CPUScoreContainer/MarginContainer/CPUScore"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/CPUScoreContainer/MarginContainer/CPUScore"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "CPU"
+horizontal_alignment = 1

@@ -14,6 +14,7 @@ enum Side {
 @onready var game_camera := $GameCamera as GameCamera
 @onready var action_menu := $CanvasLayer/Control/ActionMenu as ActionMenu
 @onready var battle_preview_menu := $CanvasLayer/Control/BattlePreview as BattlePreview
+@onready var scoreboard := $CanvasLayer/Control/Scoreboard as Scoreboard
 
 static var AP_COST_MOVE_PER_SQUARE = 0.1
 static var AP_COST_PRIMARY_ATTACK = 1
@@ -31,12 +32,32 @@ func _ready():
 	map.show_player_team_visible_tiles()
 
 func on_complete_turn():
+	# Check if all agents have completed their turns
+	if have_all_agents_completed_turn():
+		go_to_next_turn_cycle()
 	if curr_turn_side == Side.PLAYER:
 		curr_turn_side = Side.CPU
 		cpu_agent_controller.start_turn()
 	else:
 		curr_turn_side = Side.PLAYER
 		agent_controller.start_turn()
+
+func have_all_agents_completed_turn():
+	var all_agents = player_team.agents + cpu_team.agents
+	for a in all_agents:
+		var agent = a as Agent
+		if !agent.is_dead() and !agent.has_completed_turn:
+			return false
+
+func go_to_next_turn_cycle():
+	scoreboard.decrement_turn()
+	var all_agents = player_team.agents + cpu_team.agents
+	for a in all_agents:
+		var agent = a as Agent
+		agent.has_completed_turn = false
+	for a in player_team.agents:
+		var agent = a as Agent
+		agent.sprite.self_modulate = Color(1, 1, 1)
 
 func update_visible_enemies():
 	var visible_tiles = player_team.get_all_visible_tiles() as Array

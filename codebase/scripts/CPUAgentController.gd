@@ -20,9 +20,12 @@ func move_agent():
 	selected_agent.move_to_position(rand_pos, complete_move)
 
 func start_turn():
-	var agents_to_select = game_round.cpu_team.agents.filter(func (a: Agent): return !a.is_dead())
-	selected_agent = agents_to_select.pick_random()
-	move_agent()
+	var agents_to_select = game_round.cpu_team.agents.filter(func (a: Agent): return !a.is_dead() and !a.has_completed_turn)
+	if agents_to_select.is_empty():
+		complete_turn()
+	else:
+		selected_agent = agents_to_select.pick_random()
+		move_agent()
 
 func complete_move():
 	on_complete_move.emit()
@@ -52,6 +55,7 @@ func attack_target_if_possible():
 		complete_turn()
 
 func complete_turn():
+	selected_agent.has_completed_turn = true
 	on_complete_turn.emit()
 
 func get_positions_to_move_to():
