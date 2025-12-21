@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://wxeqn8voogow"]
+[gd_scene load_steps=10 format=3 uid="uid://wxeqn8voogow"]
 
 [ext_resource type="Texture2D" uid="uid://beu1d2qdbfmxn" path="res://assets/agents/brimstone.png" id="1_d1d8l"]
 [ext_resource type="Script" uid="uid://bjddamp2r15i4" path="res://scripts/AgentStatus.gd" id="1_mjuwj"]
 [ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="2_wjiy0"]
 [ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="3_knam2"]
+[ext_resource type="StyleBox" uid="uid://cy5g0kjs21b00" path="res://prefabs/ShieldFill.tres" id="4_tpx7d"]
 [ext_resource type="Texture2D" uid="uid://7pdwea6dt72o" path="res://assets/placeholder/bomb-solid-full.svg" id="5_d1d8l"]
 [ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="5_mjuwj"]
 
@@ -36,14 +37,22 @@ custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("1_d1d8l")
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="AgentNameLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Player 1"
 vertical_alignment = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+[node name="ShieldBar" type="ProgressBar" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+theme_override_styles/background = ExtResource("2_wjiy0")
+theme_override_styles/fill = ExtResource("4_tpx7d")
+value = 100.0
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 theme_override_styles/background = ExtResource("2_wjiy0")

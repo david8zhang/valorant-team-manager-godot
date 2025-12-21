@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://y4eeluvjf47n"]
+[gd_scene load_steps=3 format=3 uid="uid://y4eeluvjf47n"]
 
 [ext_resource type="PackedScene" uid="uid://wxeqn8voogow" path="res://prefabs/AgentStatus.tscn" id="1_j12q7"]
+[ext_resource type="Script" uid="uid://gituouproq72" path="res://scripts/TeamStatus.gd" id="1_vb1qt"]
 
 [node name="TeamStatus" type="Control"]
 custom_minimum_size = Vector2(250, 0)
@@ -11,6 +12,8 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_vb1qt")
+agent_status_scene = ExtResource("1_j12q7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(100, 0)
@@ -24,18 +27,3 @@ offset_right = 125.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
-
-[node name="AgentStatus" parent="VBoxContainer" instance=ExtResource("1_j12q7")]
-layout_mode = 2
-
-[node name="AgentStatus2" parent="VBoxContainer" instance=ExtResource("1_j12q7")]
-layout_mode = 2
-
-[node name="AgentStatus3" parent="VBoxContainer" instance=ExtResource("1_j12q7")]
-layout_mode = 2
-
-[node name="AgentStatus4" parent="VBoxContainer" instance=ExtResource("1_j12q7")]
-layout_mode = 2
-
-[node name="AgentStatus5" parent="VBoxContainer" instance=ExtResource("1_j12q7")]
-layout_mode = 2

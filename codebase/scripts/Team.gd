@@ -1,6 +1,10 @@
 class_name Team
 extends Node2D
 
+@onready var game_round = get_node("/root/GameRound") as GameRound
+
+@export var side: GameRound.Side
+@export var team_status: TeamStatus
 @export var agent_scene: PackedScene
 @export var num_agents = 5
 @export var map: Map
@@ -22,6 +26,9 @@ func _ready() -> void:
 		agents.append(new_agent)
 		map.move_node_to_pos(new_agent, x_pos, y_pos)
 		x_pos += space_btwn_agents
+	
+	await game_round.ready
+	team_status.update_from_team(agents)
 
 func get_all_visible_tiles():
 	var all_visible_tiles := []

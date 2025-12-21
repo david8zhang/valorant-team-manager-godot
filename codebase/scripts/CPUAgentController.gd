@@ -34,7 +34,7 @@ func complete_move():
 	attack_target_if_possible()
 
 func attack_target_if_possible():
-	var visible_tiles = game_round.cpu_team.get_all_visible_tiles()
+	var visible_tiles = selected_agent.get_visible_tiles()
 	var attackable_targets = []
 	for tile in visible_tiles:
 		for a in game_round.player_team.agents:

@@ -39,7 +39,6 @@ anchor_right = 0.0
 grow_horizontal = 1
 
 [node name="TeamStatus2" parent="CanvasLayer/Control" instance=ExtResource("2_ngxvu")]
-visible = false
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -74,8 +73,9 @@ script = ExtResource("2_twj6c")
 visible = false
 map = NodePath("../Map")
 
-[node name="PlayerTeam" type="Node2D" parent="." node_paths=PackedStringArray("map")]
+[node name="PlayerTeam" type="Node2D" parent="." node_paths=PackedStringArray("team_status", "map")]
 script = ExtResource("5_dbxdc")
+team_status = NodePath("../CanvasLayer/Control/TeamStatus")
 agent_scene = ExtResource("3_74q1x")
 map = NodePath("../Map")
 start_x = 50
@@ -88,8 +88,10 @@ script = ExtResource("7_ryo32")
 highlight_overlay = NodePath("../../HighlightOverlay")
 team = NodePath("..")
 
-[node name="CPUTeam" type="Node2D" parent="." node_paths=PackedStringArray("map")]
+[node name="CPUTeam" type="Node2D" parent="." node_paths=PackedStringArray("team_status", "map")]
 script = ExtResource("5_dbxdc")
+side = 1
+team_status = NodePath("../CanvasLayer/Control/TeamStatus2")
 agent_scene = ExtResource("3_74q1x")
 map = NodePath("../Map")
 start_x = 50

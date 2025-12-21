@@ -15,6 +15,7 @@ enum Side {
 @onready var action_menu := $CanvasLayer/Control/ActionMenu as ActionMenu
 @onready var battle_preview_menu := $CanvasLayer/Control/BattlePreview as BattlePreview
 @onready var scoreboard := $CanvasLayer/Control/Scoreboard as Scoreboard
+@onready var canvas_control := $CanvasLayer/Control as Control
 
 static var AP_COST_MOVE_PER_SQUARE = 0.1
 static var AP_COST_PRIMARY_ATTACK = 1
@@ -29,6 +30,15 @@ func _ready():
 	agent_controller.start_turn()
 	for a in player_team.agents:
 		a.update_visible_tiles()
+
+	var all_agents = player_team.agents + cpu_team.agents
+	for a in all_agents:
+		var agent = a as Agent
+		agent.on_take_damage.connect(update_team_statuses)
+
+func update_team_statuses():
+	player_team.team_status.update_from_team(player_team.agents)
+	cpu_team.team_status.update_from_team(cpu_team.agents)
 
 func on_complete_turn():
 	# Check if all agents have completed their turns
@@ -109,3 +119,6 @@ func get_ap_cost_for_primary_attack():
 
 func is_round_over():
 	return scoreboard.turns_remaining == 0
+
+func add_canvas_item(item: Control):
+	canvas_control.add_child(item)

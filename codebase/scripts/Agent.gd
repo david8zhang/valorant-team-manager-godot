@@ -25,6 +25,7 @@ var has_completed_turn := false
 
 signal on_agent_click(agent)
 signal on_update_action_menu()
+signal on_take_damage()
 
 func _ready() -> void:
 	sprite.scale = Vector2(DEFAULT_SCALE, DEFAULT_SCALE)
@@ -163,6 +164,7 @@ func take_damage(damage):
 	shield_bar.value -= damage
 	health_bar.value -= dmg_to_hp
 	on_update_action_menu.emit()
+	on_take_damage.emit()
 
 	# Handle agent death
 	if health_bar.value == 0:
