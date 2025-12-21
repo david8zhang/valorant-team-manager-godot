@@ -7,6 +7,7 @@ extends Node2D
 @export var start_x = 0
 @export var start_y = 0
 @export var space_btwn_agents = 2
+@export var name_prefix := ""
 
 var agents := []
 
@@ -16,6 +17,7 @@ func _ready() -> void:
 	for i in range(0, num_agents):
 		var new_agent = agent_scene.instantiate() as Agent
 		new_agent.map = map
+		new_agent.agent_name = name_prefix + "_" + str(i)
 		add_child(new_agent)
 		agents.append(new_agent)
 		map.move_node_to_pos(new_agent, x_pos, y_pos)

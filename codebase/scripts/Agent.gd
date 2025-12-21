@@ -15,6 +15,7 @@ extends Node2D
 static var DEFAULT_SCALE = 1.5
 static var TOTAL_ACTION_POINTS = 5
 
+var agent_name := ""
 var map: Map
 var vision_direction: Vector2 = Vector2.UP
 var visible_tiles := []

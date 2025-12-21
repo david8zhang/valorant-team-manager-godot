@@ -80,6 +80,7 @@ map = NodePath("../Map")
 start_x = 50
 start_y = 75
 space_btwn_agents = 5
+name_prefix = "PLAYER"
 
 [node name="AgentController" type="Node2D" parent="PlayerTeam" node_paths=PackedStringArray("highlight_overlay", "team")]
 script = ExtResource("7_ryo32")
@@ -93,6 +94,7 @@ map = NodePath("../Map")
 start_x = 50
 start_y = 40
 space_btwn_agents = 5
+name_prefix = "CPU"
 
 [node name="CPUAgentController" type="Node2D" parent="CPUTeam"]
 script = ExtResource("8_twj6c")

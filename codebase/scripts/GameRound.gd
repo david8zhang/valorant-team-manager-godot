@@ -48,6 +48,7 @@ func have_all_agents_completed_turn():
 		var agent = a as Agent
 		if !agent.is_dead() and !agent.has_completed_turn:
 			return false
+	return true
 
 func go_to_next_turn_cycle():
 	scoreboard.decrement_turn()
@@ -55,6 +56,7 @@ func go_to_next_turn_cycle():
 	for a in all_agents:
 		var agent = a as Agent
 		agent.has_completed_turn = false
+		agent.rem_action_points = Agent.TOTAL_ACTION_POINTS
 	for a in player_team.agents:
 		var agent = a as Agent
 		agent.sprite.self_modulate = Color(1, 1, 1)

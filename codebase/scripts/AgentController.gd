@@ -102,6 +102,8 @@ func start_turn():
 			agents_to_select.append(agent)
 	if !agents_to_select.is_empty():
 		select_agent(agents_to_select.pick_random())
+	else:
+		complete_turn()
 	game_round.update_visible_enemies()
 
 func complete_move():
