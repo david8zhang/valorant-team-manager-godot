@@ -30,7 +30,7 @@ func start_turn():
 func complete_move():
 	on_complete_move.emit()
 	# Update visible enemies for player, since the game is from player's perspective
-	game_round.update_visible_enemies()
+	game_round.update_visible_enemies_to_player()
 	attack_target_if_possible()
 
 func attack_target_if_possible():

@@ -189,3 +189,19 @@ func has_vision_of_agent(other_agent: Agent):
 		if t.x == other_agent_tile_pos.x and t.y == other_agent_tile_pos.y:
 			return true
 	return false
+
+func hide_in_fog_of_war():
+	var shader = sprite.material as ShaderMaterial
+	shader.set_shader_parameter("enabled", true)
+	health_bar.hide()
+	shield_bar.hide()
+
+func hide_fully():
+	hide()
+
+func show_fully():
+	show()
+	health_bar.show()
+	shield_bar.show()
+	var shader = sprite.material as ShaderMaterial
+	shader.set_shader_parameter("enabled", false)

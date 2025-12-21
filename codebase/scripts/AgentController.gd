@@ -44,7 +44,7 @@ func _ready() -> void:
 
 func handle_enemy_agent_click(agent):
 	if curr_action_state == ActionState.PRIMARY_ATTACK or curr_action_state == ActionState.SECONDARY_ATTACK:
-		if game_round.get_ap_cost_for_primary_attack() <= selected_agent.rem_action_points:
+		if game_round.get_ap_cost_for_primary_attack() <= selected_agent.rem_action_points and has_vision_on_enemy(selected_agent, agent):
 			var midpoint_pos = Vector2((selected_agent.global_position.x + agent.global_position.x) / 2, (selected_agent.global_position.y + agent.global_position.y) / 2)
 			game_round.game_camera.target_position = midpoint_pos
 			var battle_preview_menu = game_round.battle_preview_menu
@@ -104,12 +104,12 @@ func start_turn():
 		select_agent(agents_to_select.pick_random())
 	else:
 		complete_turn()
-	game_round.update_visible_enemies()
+	game_round.update_visible_enemies_to_player()
 
 func complete_move():
 	highlight_overlay.should_update_pos = true
-	game_round.update_visible_enemies()
-	game_round.map.show_player_team_visible_tiles()
+	game_round.update_visible_enemies_to_player()
+	show_visible_tiles_for_selected_agent()
 
 func complete_turn():
 	selected_agent.has_completed_turn = true
@@ -121,8 +121,7 @@ func select_agent(agent: Agent):
 	center_camera_on_agent(agent)
 	action_menu.update_all()
 	action_menu.show()
-	selected_agent.update_visible_tiles()
-	game_round.map.show_player_team_visible_tiles()
+	show_visible_tiles_for_selected_agent()
 
 func center_camera_on_agent(agent: Agent):
 	game_round.game_camera.target_position = agent.global_position
@@ -137,7 +136,18 @@ func start_battle():
 		action_menu.update_all()
 
 func on_battle_complete():
-	pass
+	if selected_agent.is_dead():
+		complete_turn()
 
 func update_action_menu():
 	action_menu.update_all()
+
+func has_vision_on_enemy(curr_agent, target):
+	var visible_tiles = curr_agent.visible_tiles
+	var enemy_tile_pos = game_round.map.get_tile_pos_from_world_pos(target.global_position)
+	return visible_tiles.has(enemy_tile_pos)
+
+func show_visible_tiles_for_selected_agent():
+	selected_agent.update_visible_tiles()
+	game_round.map.vision_layer.clear()
+	game_round.map.show_specific_visible_tiles(selected_agent.visible_tiles)

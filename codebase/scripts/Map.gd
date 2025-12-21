@@ -25,7 +25,7 @@ func is_tile_pos_in_bounds(tile_pos: Vector2):
 
 func show_player_team_visible_tiles():
 	var all_visible_tiles = game_round.player_team.get_all_visible_tiles()
-	vision_layer.clear()	
+	vision_layer.clear()
 	show_specific_visible_tiles(all_visible_tiles)
 
 func show_specific_visible_tiles(visible_tiles):

@@ -29,11 +29,12 @@ func _ready():
 	agent_controller.start_turn()
 	for a in player_team.agents:
 		a.update_visible_tiles()
-	map.show_player_team_visible_tiles()
 
 func on_complete_turn():
 	# Check if all agents have completed their turns
 	if have_all_agents_completed_turn():
+		if is_round_over():
+			return
 		go_to_next_turn_cycle()
 	if curr_turn_side == Side.PLAYER:
 		curr_turn_side = Side.CPU
@@ -61,10 +62,23 @@ func go_to_next_turn_cycle():
 		var agent = a as Agent
 		agent.sprite.self_modulate = Color(1, 1, 1)
 
-func update_visible_enemies():
-	var visible_tiles = player_team.get_all_visible_tiles() as Array
+func update_visible_enemies_to_player():
+	# Only show visible enemies for selected agent, otherwise, just show them as gray blobs
+	var selected_agent = agent_controller.selected_agent as Agent
+	var visible_tiles_for_selected_agent = selected_agent.visible_tiles
+	var other_visible_tiles = player_team.get_all_visible_tiles().filter(func (p): return !visible_tiles_for_selected_agent.has(p))
 	var enemy_agents = cpu_team.agents as Array[Agent]
-	update_specific_visible_enemies(visible_tiles, enemy_agents)
+
+	for agent in enemy_agents:
+		if !agent.is_dead():
+			var tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
+			if visible_tiles_for_selected_agent.has(tile_pos):
+				agent.show_fully()
+			else:
+				if other_visible_tiles.has(tile_pos):
+					agent.hide_in_fog_of_war()
+				else:
+					agent.hide_fully()
 
 func update_specific_visible_enemies(visible_tiles, enemy_agents):
 	for agent in enemy_agents:
@@ -92,3 +106,6 @@ func get_ap_cost_for_movement(start: Vector2, end: Vector2):
 	
 func get_ap_cost_for_primary_attack():
 	return AP_COST_PRIMARY_ATTACK
+
+func is_round_over():
+	return scoreboard.turns_remaining == 0

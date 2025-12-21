@@ -39,4 +39,4 @@ func show_player_vision():
 		if !agent.is_dead():
 			agent.show()
 	game_round.map.show_player_team_visible_tiles()
-	game_round.update_visible_enemies()
+	game_round.update_visible_enemies_to_player()
