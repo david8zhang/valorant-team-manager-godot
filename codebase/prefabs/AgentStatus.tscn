@@ -33,7 +33,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 texture = ExtResource("1_d1d8l")
 
@@ -41,11 +41,12 @@ texture = ExtResource("1_d1d8l")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_font_sizes/font_size = 20
 text = "Player 1"
 vertical_alignment = 2
 
 [node name="ShieldBar" type="ProgressBar" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 5)
+custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 theme_override_styles/background = ExtResource("2_wjiy0")
 theme_override_styles/fill = ExtResource("4_tpx7d")
@@ -53,7 +54,7 @@ value = 100.0
 show_percentage = false
 
 [node name="HealthBar" type="ProgressBar" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 15)
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/background = ExtResource("2_wjiy0")
 theme_override_styles/fill = ExtResource("3_knam2")
@@ -81,7 +82,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Ability1"]
-custom_minimum_size = Vector2(50, 40)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("5_d1d8l")
 expand_mode = 2
@@ -103,7 +104,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Ability2"]
-custom_minimum_size = Vector2(50, 40)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("5_d1d8l")
 expand_mode = 2
@@ -132,10 +133,6 @@ texture = ExtResource("5_mjuwj")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Control" type="Control" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 5)
-layout_mode = 2
-
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 2
@@ -144,7 +141,7 @@ alignment = 2
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer"]
-custom_minimum_size = Vector2(15, 15)
+custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 texture = ExtResource("5_d1d8l")
 expand_mode = 3
@@ -159,7 +156,7 @@ text = "5"
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2"]
-custom_minimum_size = Vector2(15, 15)
+custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 texture = ExtResource("5_d1d8l")
 expand_mode = 3
@@ -174,7 +171,7 @@ text = "5"
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer3"]
-custom_minimum_size = Vector2(15, 15)
+custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 texture = ExtResource("5_d1d8l")
 expand_mode = 3

@@ -22,6 +22,9 @@ var visible_tiles := []
 var is_showing_visible_tiles := false
 var rem_action_points = TOTAL_ACTION_POINTS
 var has_completed_turn := false
+var curr_side: GameRound.Side
+
+var confidence_level # Dictates turn queue ordering (higher is better)
 
 signal on_agent_click(agent)
 signal on_update_action_menu()
@@ -30,6 +33,7 @@ signal on_take_damage()
 func _ready() -> void:
 	sprite.scale = Vector2(DEFAULT_SCALE, DEFAULT_SCALE)
 	button.pressed.connect(agent_click)
+	confidence_level = randi_range(1, 10)
 
 func agent_click():
 	on_agent_click.emit(self)

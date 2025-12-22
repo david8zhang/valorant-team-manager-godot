@@ -19,13 +19,9 @@ func move_agent():
 	var rand_pos = game_round.map.get_world_pos_from_tile_pos(pos_to_move_to.pick_random())
 	selected_agent.move_to_position(rand_pos, complete_move)
 
-func start_turn():
-	var agents_to_select = game_round.cpu_team.agents.filter(func (a: Agent): return !a.is_dead() and !a.has_completed_turn)
-	if agents_to_select.is_empty():
-		complete_turn()
-	else:
-		selected_agent = agents_to_select.pick_random()
-		move_agent()
+func start_turn(agent_to_select: Agent):
+	selected_agent = agent_to_select
+	move_agent()
 
 func complete_move():
 	on_complete_move.emit()

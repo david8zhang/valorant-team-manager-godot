@@ -94,16 +94,8 @@ func _process(_delta):
 				if Input.is_action_just_pressed("center_camera"):
 					center_camera_on_agent(selected_agent)
 
-func start_turn():
-	var agents_to_select = []
-	for a in team.agents:
-		var agent = a as Agent
-		if !agent.is_dead() and !agent.has_completed_turn:
-			agents_to_select.append(agent)
-	if !agents_to_select.is_empty():
-		select_agent(agents_to_select.pick_random())
-	else:
-		complete_turn()
+func start_turn(agent_to_select: Agent):
+	select_agent(agent_to_select)
 	game_round.update_visible_enemies_to_player()
 
 func complete_move():

@@ -17,6 +17,9 @@ enum Side {
 @onready var scoreboard := $CanvasLayer/Control/Scoreboard as Scoreboard
 @onready var canvas_control := $CanvasLayer/Control as Control
 
+var turn_queue = []
+var curr_turn_index = 0
+
 static var AP_COST_MOVE_PER_SQUARE = 0.1
 static var AP_COST_PRIMARY_ATTACK = 1
 
@@ -25,9 +28,8 @@ var curr_turn_side = Side.PLAYER
 func _ready():
 	action_menu.agent_controller = agent_controller
 	agent_controller.action_menu = action_menu
-	agent_controller.on_complete_turn.connect(on_complete_turn)
-	cpu_agent_controller.on_complete_turn.connect(on_complete_turn)
-	agent_controller.start_turn()
+	agent_controller.on_complete_turn.connect(go_to_next_turn)
+	cpu_agent_controller.on_complete_turn.connect(go_to_next_turn)
 	for a in player_team.agents:
 		a.update_visible_tiles()
 
@@ -36,22 +38,31 @@ func _ready():
 		var agent = a as Agent
 		agent.on_take_damage.connect(update_team_statuses)
 
+	create_turn_queue(all_agents)
+	start_turn_for_next_agent()
+
 func update_team_statuses():
 	player_team.team_status.update_from_team(player_team.agents)
 	cpu_team.team_status.update_from_team(cpu_team.agents)
 
-func on_complete_turn():
+func start_turn_for_next_agent():
+	var next_agent_in_turn_queue = get_agent_for_name(turn_queue[curr_turn_index]) as Agent
+	if next_agent_in_turn_queue != null:
+		if next_agent_in_turn_queue.curr_side == Side.PLAYER:
+			agent_controller.start_turn(next_agent_in_turn_queue)
+		else:
+			cpu_agent_controller.start_turn(next_agent_in_turn_queue)
+
+
+func go_to_next_turn():
+	curr_turn_index = (curr_turn_index + 1) % turn_queue.size()
 	# Check if all agents have completed their turns
 	if have_all_agents_completed_turn():
 		if is_round_over():
 			return
 		go_to_next_turn_cycle()
-	if curr_turn_side == Side.PLAYER:
-		curr_turn_side = Side.CPU
-		cpu_agent_controller.start_turn()
-	else:
-		curr_turn_side = Side.PLAYER
-		agent_controller.start_turn()
+	start_turn_for_next_agent()
+
 
 func have_all_agents_completed_turn():
 	var all_agents = player_team.agents + cpu_team.agents
@@ -75,20 +86,21 @@ func go_to_next_turn_cycle():
 func update_visible_enemies_to_player():
 	# Only show visible enemies for selected agent, otherwise, just show them as gray blobs
 	var selected_agent = agent_controller.selected_agent as Agent
-	var visible_tiles_for_selected_agent = selected_agent.visible_tiles
-	var other_visible_tiles = player_team.get_all_visible_tiles().filter(func (p): return !visible_tiles_for_selected_agent.has(p))
-	var enemy_agents = cpu_team.agents as Array[Agent]
+	if selected_agent != null:
+		var visible_tiles_for_selected_agent = selected_agent.visible_tiles
+		var other_visible_tiles = player_team.get_all_visible_tiles().filter(func (p): return !visible_tiles_for_selected_agent.has(p))
+		var enemy_agents = cpu_team.agents as Array[Agent]
 
-	for agent in enemy_agents:
-		if !agent.is_dead():
-			var tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
-			if visible_tiles_for_selected_agent.has(tile_pos):
-				agent.show_fully()
-			else:
-				if other_visible_tiles.has(tile_pos):
-					agent.hide_in_fog_of_war()
+		for agent in enemy_agents:
+			if !agent.is_dead():
+				var tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
+				if visible_tiles_for_selected_agent.has(tile_pos):
+					agent.show_fully()
 				else:
-					agent.hide_fully()
+					if other_visible_tiles.has(tile_pos):
+						agent.hide_in_fog_of_war()
+					else:
+						agent.hide_fully()
 
 func update_specific_visible_enemies(visible_tiles, enemy_agents):
 	for agent in enemy_agents:
@@ -122,3 +134,16 @@ func is_round_over():
 
 func add_canvas_item(item: Control):
 	canvas_control.add_child(item)
+
+func create_turn_queue(all_agents: Array):
+	all_agents.sort_custom(func (a: Agent, b: Agent): return b.confidence_level - a.confidence_level)
+	turn_queue = all_agents.map(func (a: Agent): return a.agent_name)
+	print(turn_queue)
+
+func get_agent_for_name(agent_name: String):
+	var all_agents = cpu_team.agents + player_team.agents
+	for a in all_agents:
+		var agent = a as Agent
+		if agent.agent_name == agent_name:
+			return agent
+	return null

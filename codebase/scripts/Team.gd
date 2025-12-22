@@ -22,6 +22,7 @@ func _ready() -> void:
 		var new_agent = agent_scene.instantiate() as Agent
 		new_agent.map = map
 		new_agent.agent_name = name_prefix + "_" + str(i)
+		new_agent.curr_side = side
 		add_child(new_agent)
 		agents.append(new_agent)
 		map.move_node_to_pos(new_agent, x_pos, y_pos)

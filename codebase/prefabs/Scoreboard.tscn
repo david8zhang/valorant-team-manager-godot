@@ -35,9 +35,9 @@ size_flags_vertical = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PlayerScoreContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 30
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 30
+theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 5
 
 [node name="PlayerScore" type="HBoxContainer" parent="HBoxContainer/PlayerScoreContainer/MarginContainer"]
@@ -50,57 +50,64 @@ alignment = 1
 [node name="Label" type="Label" parent="HBoxContainer/PlayerScoreContainer/MarginContainer/PlayerScore"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 20
 text = "Player"
-horizontal_alignment = 1
+horizontal_alignment = 2
+
+[node name="Control" type="Control" parent="HBoxContainer/PlayerScoreContainer/MarginContainer/PlayerScore"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
 
 [node name="Score" type="Label" parent="HBoxContainer/PlayerScoreContainer/MarginContainer/PlayerScore"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 40
 text = "0"
 horizontal_alignment = 1
 
-[node name="RoundInfoContainer" type="PanelContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="RoundInfoContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7gbi6")
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/RoundInfoContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/RoundInfoContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 5
 
-[node name="RoundInfo" type="VBoxContainer" parent="HBoxContainer/RoundInfoContainer/MarginContainer"]
+[node name="RoundInfo" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/RoundInfoContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Label" type="Label" parent="HBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "Round 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Turns" type="Label" parent="HBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo"]
+[node name="Turns" type="Label" parent="HBoxContainer/VBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 35
 text = "10"
 horizontal_alignment = 1
 
-[node name="TurnsLabel" type="Label" parent="HBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo"]
+[node name="TurnsLabel" type="Label" parent="HBoxContainer/VBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 14
 text = "Turns Left"
 horizontal_alignment = 1
 
-[node name="BuyPhase" type="Label" parent="HBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo"]
+[node name="BuyPhase" type="Label" parent="HBoxContainer/VBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -108,15 +115,22 @@ theme_override_font_sizes/font_size = 40
 text = "BUY"
 horizontal_alignment = 1
 
+[node name="ShowTurnOrder" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 12
+text = "Show Turn Order"
+flat = true
+
 [node name="CPUScoreContainer" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CPUScoreContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 30
+theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 30
+theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 5
 
 [node name="CPUScore" type="HBoxContainer" parent="HBoxContainer/CPUScoreContainer/MarginContainer"]
@@ -129,13 +143,16 @@ alignment = 1
 [node name="Score" type="Label" parent="HBoxContainer/CPUScoreContainer/MarginContainer/CPUScore"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 40
 text = "0"
 horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="HBoxContainer/CPUScoreContainer/MarginContainer/CPUScore"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/CPUScoreContainer/MarginContainer/CPUScore"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 20
 text = "CPU"
-horizontal_alignment = 1
