@@ -15,17 +15,11 @@ var round_num := 1
 var player_score := 0
 var cpu_score := 0
 
-signal on_show_turn_order
-
 func _ready() -> void:
 	turns_remaining_label.text = str(turns_remaining)
 	round_number_label.text = "Round " + str(round_num)
 	player_score_label.text = str(player_score)
 	cpu_score_label.text = str(cpu_score)
-	show_turn_order_button.pressed.connect(show_turn_order)
-
-func show_turn_order():
-	on_show_turn_order.emit()
 
 func decrement_turn():
 	turns_remaining = max(0, turns_remaining - 1)

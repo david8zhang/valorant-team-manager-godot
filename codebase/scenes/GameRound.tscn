@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cui8rqxwjorad"]
+[gd_scene load_steps=15 format=3 uid="uid://cui8rqxwjorad"]
 
 [ext_resource type="Script" uid="uid://ctv4akl0kybty" path="res://scripts/GameRound.gd" id="1_dq0hy"]
 [ext_resource type="PackedScene" uid="uid://8f0kh0fhafed" path="res://prefabs/ActionMenu.tscn" id="2_1ryu6"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://do06qong074fn" path="res://prefabs/Scoreboard.tscn" id="2_d43p7"]
 [ext_resource type="PackedScene" uid="uid://y4eeluvjf47n" path="res://prefabs/TeamStatus.tscn" id="2_ngxvu"]
 [ext_resource type="Script" uid="uid://dl0x03lnvo0xy" path="res://scripts/GameCamera.gd" id="2_twj6c"]
+[ext_resource type="PackedScene" uid="uid://cg5uegvis8jsw" path="res://prefabs/TurnOrder.tscn" id="2_w36hm"]
 [ext_resource type="PackedScene" uid="uid://dgma3qa7i4xrv" path="res://prefabs/Agent.tscn" id="3_74q1x"]
 [ext_resource type="PackedScene" uid="uid://kcdgbmwfjvyx" path="res://prefabs/HighlightOverlay.tscn" id="4_cw3wy"]
 [ext_resource type="PackedScene" uid="uid://qvna5xhohysn" path="res://prefabs/DebugMenu.tscn" id="5_d8md6"]
@@ -27,6 +28,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="TurnOrder" parent="CanvasLayer/Control" instance=ExtResource("2_w36hm")]
+visible = false
+layout_mode = 1
 
 [node name="Scoreboard" parent="CanvasLayer/Control" instance=ExtResource("2_d43p7")]
 layout_mode = 1
@@ -63,6 +68,19 @@ offset_bottom = 106.5
 [node name="DebugMenu" parent="CanvasLayer/Control" instance=ExtResource("5_d8md6")]
 visible = false
 layout_mode = 1
+
+[node name="ToggleTopView" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -108.0
+offset_bottom = 25.0
+grow_horizontal = 0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 12
+text = "Show Turn Order"
+flat = true
 
 [node name="GameCamera" type="Camera2D" parent="."]
 script = ExtResource("2_twj6c")

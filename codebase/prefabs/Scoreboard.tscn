@@ -115,13 +115,6 @@ theme_override_font_sizes/font_size = 40
 text = "BUY"
 horizontal_alignment = 1
 
-[node name="ShowTurnOrder" type="Button" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 12
-text = "Show Turn Order"
-flat = true
-
 [node name="CPUScoreContainer" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0

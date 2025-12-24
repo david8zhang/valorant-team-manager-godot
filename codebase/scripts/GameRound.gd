@@ -16,6 +16,8 @@ enum Side {
 @onready var battle_preview_menu := $CanvasLayer/Control/BattlePreview as BattlePreview
 @onready var scoreboard := $CanvasLayer/Control/Scoreboard as Scoreboard
 @onready var canvas_control := $CanvasLayer/Control as Control
+@onready var turn_order_list_view := $CanvasLayer/Control/TurnOrder as TurnOrder
+@onready var toggle_top_view_button := $CanvasLayer/Control/ToggleTopView as Button
 
 var turn_queue = []
 var curr_turn_index = 0
@@ -24,6 +26,7 @@ static var AP_COST_MOVE_PER_SQUARE = 0.1
 static var AP_COST_PRIMARY_ATTACK = 1
 
 var curr_turn_side = Side.PLAYER
+var is_showing_scoreboard := true
 
 func _ready():
 	action_menu.agent_controller = agent_controller
@@ -40,6 +43,7 @@ func _ready():
 
 	create_turn_queue(all_agents)
 	start_turn_for_next_agent()
+	toggle_top_view_button.pressed.connect(toggle_top_view)
 
 func update_team_statuses():
 	player_team.team_status.update_from_team(player_team.agents)
@@ -47,6 +51,7 @@ func update_team_statuses():
 
 func start_turn_for_next_agent():
 	var next_agent_in_turn_queue = get_agent_for_name(turn_queue[curr_turn_index]) as Agent
+	turn_order_list_view.update_turn_order_list(get_turn_queue_agents())
 	if next_agent_in_turn_queue != null:
 		if next_agent_in_turn_queue.curr_side == Side.PLAYER:
 			agent_controller.start_turn(next_agent_in_turn_queue)
@@ -138,7 +143,7 @@ func add_canvas_item(item: Control):
 func create_turn_queue(all_agents: Array):
 	all_agents.sort_custom(func (a: Agent, b: Agent): return b.confidence_level - a.confidence_level)
 	turn_queue = all_agents.map(func (a: Agent): return a.agent_name)
-	print(turn_queue)
+	turn_order_list_view.init_turn_order_list(all_agents)
 
 func get_agent_for_name(agent_name: String):
 	var all_agents = cpu_team.agents + player_team.agents
@@ -147,3 +152,17 @@ func get_agent_for_name(agent_name: String):
 		if agent.agent_name == agent_name:
 			return agent
 	return null
+
+func toggle_top_view():
+	if is_showing_scoreboard:
+		toggle_top_view_button.text = "Show Scoreboard"
+		scoreboard.hide()
+		turn_order_list_view.show()
+	else:
+		toggle_top_view_button.text = "Show Turn Order"
+		scoreboard.show()
+		turn_order_list_view.hide()
+	is_showing_scoreboard = !is_showing_scoreboard
+
+func get_turn_queue_agents():
+	return turn_queue.map(func (agent_name): return get_agent_for_name(agent_name))
