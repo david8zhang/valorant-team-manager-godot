@@ -23,12 +23,15 @@ var is_showing_visible_tiles := false
 var rem_action_points = TOTAL_ACTION_POINTS
 var has_completed_turn := false
 var curr_side: GameRound.Side
+var damage_source_mapping = {}
 
 var confidence_level # Dictates turn queue ordering (higher is better)
 
 signal on_agent_click(agent)
 signal on_update_action_menu()
 signal on_take_damage()
+signal on_death()
+signal on_kill()
 
 func _ready() -> void:
 	sprite.scale = Vector2(DEFAULT_SCALE, DEFAULT_SCALE)
@@ -152,6 +155,18 @@ func attack_enemy_agent(enemy_to_attack: Agent, should_retaliate: bool, on_compl
 func on_attack_finished(projectile: Node2D, enemy_to_attack: Agent, should_retaliate: bool, on_complete: Callable):
 	var rand_damage = randi_range(50, 75)
 	enemy_to_attack.take_damage(rand_damage)
+
+	# Log damage from this agent to enemy in order to calculate assists
+	if !enemy_to_attack.damage_source_mapping.has(agent_name):
+		enemy_to_attack.damage_source_mapping[agent_name] = 0
+	enemy_to_attack.damage_source_mapping[agent_name] += rand_damage
+
+	# If kill is scored, emit a kill or assit signal
+	if enemy_to_attack.get_curr_health() == 0:
+		GameRoundVariables.update_kill_count_for_agent(agent_name)
+		GameRoundVariables.update_assist_counts(enemy_to_attack, agent_name)
+		on_kill.emit()
+
 	projectile.queue_free()
 	if should_retaliate and !enemy_to_attack.is_dead() and enemy_to_attack.has_vision_of_agent(self):
 		enemy_to_attack.attack_enemy_agent(self, false, on_complete)
@@ -172,6 +187,8 @@ func take_damage(damage):
 
 	# Handle agent death
 	if health_bar.value == 0:
+		GameRoundVariables.update_death_count_for_agent(agent_name)
+		on_death.emit()
 		hide()
 
 func is_dead():

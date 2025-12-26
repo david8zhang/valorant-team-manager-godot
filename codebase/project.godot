@@ -15,13 +15,15 @@ run/main_scene="uid://cui8rqxwjorad"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameRoundVariables="*res://scripts/GameRoundVariables.gd"
+
 [display]
 
 window/size/viewport_width=1200
 window/size/viewport_height=900
 window/size/initial_position_type=0
-window/size/window_width_override=2400
-window/size/window_height_override=1800
 window/stretch/mode="canvas_items"
 
 [input]

@@ -147,7 +147,7 @@ texture = ExtResource("5_d1d8l")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer"]
+[node name="KillCount" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "5"
@@ -162,7 +162,7 @@ texture = ExtResource("5_d1d8l")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2"]
+[node name="DeathCount" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "5"
@@ -177,7 +177,7 @@ texture = ExtResource("5_d1d8l")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer3"]
+[node name="AssistCount" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer3"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "5"

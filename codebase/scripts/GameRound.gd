@@ -40,10 +40,21 @@ func _ready():
 	for a in all_agents:
 		var agent = a as Agent
 		agent.on_take_damage.connect(update_team_statuses)
+		agent.on_kill.connect(update_team_statuses)
+		agent.on_death.connect(update_team_statuses)
 
 	create_turn_queue(all_agents)
 	start_turn_for_next_agent()
 	toggle_top_view_button.pressed.connect(toggle_top_view)
+	setup_game_round_variables()
+
+func setup_game_round_variables():
+	if GameRoundVariables.agent_game_stat_mapping.is_empty():
+		var all_agents = player_team.agents + cpu_team.agents
+		for a in all_agents:
+			var agent = a as Agent
+			GameRoundVariables.agent_game_stat_mapping[agent.agent_name] = GameRoundVariables.AgentGameStats.new()
+
 
 func update_team_statuses():
 	player_team.team_status.update_from_team(player_team.agents)
@@ -141,7 +152,7 @@ func add_canvas_item(item: Control):
 	canvas_control.add_child(item)
 
 func create_turn_queue(all_agents: Array):
-	all_agents.sort_custom(func (a: Agent, b: Agent): return b.confidence_level - a.confidence_level)
+	all_agents.sort_custom(func (a: Agent, b: Agent): return b.confidence_level < a.confidence_level)
 	turn_queue = all_agents.map(func (a: Agent): return a.agent_name)
 	turn_order_list_view.init_turn_order_list(all_agents)
 
