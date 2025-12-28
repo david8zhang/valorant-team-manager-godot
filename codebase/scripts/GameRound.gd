@@ -44,9 +44,9 @@ func _ready():
 		agent.on_death.connect(update_team_statuses)
 
 	create_turn_queue(all_agents)
-	start_turn_for_next_agent()
 	toggle_top_view_button.pressed.connect(toggle_top_view)
 	setup_game_round_variables()
+	start_turn_for_next_agent()
 
 func setup_game_round_variables():
 	if GameRoundVariables.agent_game_stat_mapping.is_empty():
@@ -54,7 +54,7 @@ func setup_game_round_variables():
 		for a in all_agents:
 			var agent = a as Agent
 			var agent_game_stats = GameRoundVariables.AgentGameStats.new()
-			agent.init_from_game_stat(agent_game_stats)
+			agent.init_from_game_stats(agent_game_stats)
 			GameRoundVariables.agent_game_stat_mapping[agent.agent_name] = agent_game_stats
 
 func update_team_statuses():

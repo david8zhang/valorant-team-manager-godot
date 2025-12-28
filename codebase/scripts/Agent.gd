@@ -27,6 +27,7 @@ var damage_source_mapping = {}
 
 var primary_weapon: Weapon = null
 var sidearm_weapon: Weapon = null
+var weapon_to_attack_with: Weapon = null
 
 var confidence_level # Dictates turn queue ordering (higher is better)
 
@@ -141,6 +142,9 @@ func attack_enemy_agent(enemy_to_attack: Agent, should_retaliate: bool, on_compl
 	var enemy_to_attack_pos = enemy_to_attack.global_position
 	var selected_agent_pos = self.global_position
 	var angle = rad_to_deg((enemy_to_attack_pos - selected_agent_pos).angle())
+
+	assert(weapon_to_attack_with != null, "Weapon to attack with is null!")
+	weapon_sprite.texture = weapon_to_attack_with.weapon_stats.texture
 	weapon_sprite.show()
 	weapon_sprite.rotation_degrees = angle
 	weapon_sprite.flip_v = weapon_sprite.rotation_degrees <= -90 and weapon_sprite.rotation_degrees >= -270 or \
@@ -161,13 +165,13 @@ func attack_enemy_agent(enemy_to_attack: Agent, should_retaliate: bool, on_compl
 	tween.finished.connect(func (): on_attack_finished(projectile, enemy_to_attack, should_retaliate, on_complete))
 
 func on_attack_finished(projectile: Node2D, enemy_to_attack: Agent, should_retaliate: bool, on_complete: Callable):
-	var rand_damage = randi_range(50, 75)
-	enemy_to_attack.take_damage(rand_damage)
+	var damage = calculate_damage_to_deal()
+	enemy_to_attack.take_damage(damage)
 
 	# Log damage from this agent to enemy in order to calculate assists
 	if !enemy_to_attack.damage_source_mapping.has(agent_name):
 		enemy_to_attack.damage_source_mapping[agent_name] = 0
-	enemy_to_attack.damage_source_mapping[agent_name] += rand_damage
+	enemy_to_attack.damage_source_mapping[agent_name] += damage
 
 	# If kill is scored, emit a kill or assit signal
 	if enemy_to_attack.get_curr_health() == 0:
@@ -177,6 +181,8 @@ func on_attack_finished(projectile: Node2D, enemy_to_attack: Agent, should_retal
 
 	projectile.queue_free()
 	if should_retaliate and !enemy_to_attack.is_dead() and enemy_to_attack.has_vision_of_agent(self):
+		# Set defending agent weapon
+		enemy_to_attack.weapon_to_attack_with = enemy_to_attack.primary_weapon if enemy_to_attack.primary_weapon != null else enemy_to_attack.sidearm_weapon		
 		enemy_to_attack.attack_enemy_agent(self, false, on_complete)
 	else:
 		var t = wait_delay(0.5)
@@ -184,7 +190,25 @@ func on_attack_finished(projectile: Node2D, enemy_to_attack: Agent, should_retal
 		enemy_to_attack.weapon_sprite.hide()
 		weapon_sprite.hide()
 		game_round.game_camera.target_zoom = Vector2.ONE
+		weapon_to_attack_with = null
 		on_complete.call()
+
+func calculate_damage_to_deal():
+	assert(weapon_to_attack_with != null, "Weapon to attack with is null when calculating damage!")
+	var hit_roll = randi_range(0, 100)
+	
+	# replace this with actual accuracy stat
+	if hit_roll < 40:
+		print("Missed!")
+		return 0
+	else:
+		var headshot_roll = randi_range(0, 100)
+		if headshot_roll >= 80:
+			return weapon_to_attack_with.weapon_stats.headshot_damage
+		else:
+			return weapon_to_attack_with.weapon_stats.body_damage
+	
+
 
 func take_damage(damage):
 	var dmg_to_hp = damage - shield_bar.value

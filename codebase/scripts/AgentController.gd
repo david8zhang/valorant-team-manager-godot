@@ -45,11 +45,12 @@ func _ready() -> void:
 func handle_enemy_agent_click(agent):
 	if curr_action_state == ActionState.PRIMARY_ATTACK or curr_action_state == ActionState.SECONDARY_ATTACK:
 		if game_round.get_ap_cost_for_primary_attack() <= selected_agent.rem_action_points and has_vision_on_enemy(selected_agent, agent):
+			var weapon_to_attack_with = selected_agent.primary_weapon if curr_action_state == ActionState.PRIMARY_ATTACK else selected_agent.sidearm_weapon
 			var midpoint_pos = Vector2((selected_agent.global_position.x + agent.global_position.x) / 2, (selected_agent.global_position.y + agent.global_position.y) / 2)
 			game_round.game_camera.target_position = midpoint_pos
 			var battle_preview_menu = game_round.battle_preview_menu
 			battle_preview_menu.show()
-			battle_preview_menu.update_preview(selected_agent, agent)
+			battle_preview_menu.update_preview(selected_agent, agent, weapon_to_attack_with)
 			enemy_to_attack = agent
 
 func handle_enemy_agent_hover():
@@ -123,6 +124,8 @@ func center_camera_on_position(new_pos: Vector2):
 
 func start_battle():
 	if enemy_to_attack != null:
+		var weapon_to_attack_with = selected_agent.primary_weapon if curr_action_state == ActionState.PRIMARY_ATTACK else selected_agent.sidearm_weapon
+		selected_agent.weapon_to_attack_with = weapon_to_attack_with
 		game_round.battle_preview_menu.hide()
 		selected_agent.attack_enemy_agent(enemy_to_attack, true, on_battle_complete)
 		action_menu.update_all()

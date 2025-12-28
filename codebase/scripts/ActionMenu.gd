@@ -5,10 +5,9 @@ extends PanelContainer
 @onready var watch_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Watch as Button
 @onready var bomb_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Bomb as Button
 @onready var move_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Move as Button
-@onready var primary_weapon = $VBoxContainer/CombatAbilities/PrimaryWeapon as Button
-@onready var secondary_weapon = $VBoxContainer/CombatAbilities/SideArm as Button
-@onready var primary_weapon_ammo_meter = $VBoxContainer/CombatAbilities/PrimaryWeapon/ProgressBar as ProgressBar
-@onready var secondary_weapon_ammo_meter = $VBoxContainer/CombatAbilities/SideArm/ProgressBar as ProgressBar
+@onready var primary_weapon = $VBoxContainer/CombatAbilities/PrimaryWeapon as ActionMenuWeapon
+@onready var sidearm_weapon = $VBoxContainer/CombatAbilities/SidearmWeapon as ActionMenuWeapon
+
 @onready var action_point_menu = $VBoxContainer/NonCombatAndStats/VBoxContainer/HBoxContainer as HBoxContainer
 @onready var health_bar = $VBoxContainer/NonCombatAndStats/VBoxContainer/Health as ProgressBar
 @onready var shield_bar = $VBoxContainer/NonCombatAndStats/VBoxContainer/Shields as ProgressBar
@@ -26,7 +25,7 @@ func _ready() -> void:
 	bomb_button.pressed.connect(func (): on_action_click(AgentController.ActionState.DEFUSE))
 	watch_button.pressed.connect(func (): on_action_click(AgentController.ActionState.WATCH))
 	primary_weapon.pressed.connect(func (): on_action_click(AgentController.ActionState.PRIMARY_ATTACK))
-	secondary_weapon.pressed.connect(func (): on_action_click(AgentController.ActionState.SECONDARY_ATTACK))
+	sidearm_weapon.pressed.connect(func (): on_action_click(AgentController.ActionState.SECONDARY_ATTACK))
 	end_turn_button.pressed.connect(end_curr_turn)
 	ap_rect_cost_style = load("res://prefabs/ActionPoint_CostPreview.tres")
 	ap_rect_unused_style = load("res://prefabs/ActionPoint_Unused.tres")
@@ -48,14 +47,14 @@ func set_button_highlight_from_state(curr_action_state: AgentController.ActionSt
 		AgentController.ActionState.PRIMARY_ATTACK:
 			highlight_single_button(primary_weapon)
 		AgentController.ActionState.SECONDARY_ATTACK:
-			highlight_single_button(secondary_weapon)
+			highlight_single_button(sidearm_weapon)
 
 func de_highlight_all_buttons():
 	dehighlight_single_button(watch_button)
 	dehighlight_single_button(bomb_button)
 	dehighlight_single_button(move_button)
 	dehighlight_single_button(primary_weapon, 0.75)
-	dehighlight_single_button(secondary_weapon, 0.75)
+	dehighlight_single_button(sidearm_weapon, 0.75)
 
 func dehighlight_single_button(button, color = 0.6):
 	var sb := StyleBoxFlat.new()
@@ -93,9 +92,15 @@ func update_health_and_shields():
 	health_bar.value = selected_agent.health_bar.value
 	shield_bar.value = selected_agent.shield_bar.value
 
+func update_weapon_info():
+	var selected_agent = agent_controller.selected_agent as Agent
+	primary_weapon.update_from_weapon(selected_agent.primary_weapon)
+	sidearm_weapon.update_from_weapon(selected_agent.sidearm_weapon)
+
 func update_all():
 	update_ap_menu()
 	update_health_and_shields()
+	update_weapon_info()
 
 func end_curr_turn():
 	if game_round.curr_turn_side == GameRound.Side.PLAYER:

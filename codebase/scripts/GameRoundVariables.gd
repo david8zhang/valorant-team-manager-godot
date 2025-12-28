@@ -34,4 +34,11 @@ func update_assist_counts(killed_enemy: Agent, killer_name: String):
             agent_game_stats.assist_count += 1
 
 func load_weapon_from_name(weapon_name: WeaponStats.WeaponNames):
-    pass
+    var weapon_name_str = ""
+    for enum_name in WeaponStats.WeaponNames.keys():
+        if WeaponStats.WeaponNames[enum_name] == weapon_name:
+            weapon_name_str = enum_name
+    if weapon_name != WeaponStats.WeaponNames.NO_WEAPON:
+        var weapon_resource = load("res://resources/weapons/" + weapon_name_str.to_pascal_case() + ".tres")
+        return Weapon.new(weapon_resource)
+    return null

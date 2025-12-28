@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://8f0kh0fhafed"]
+[gd_scene load_steps=14 format=3 uid="uid://8f0kh0fhafed"]
 
 [ext_resource type="Script" uid="uid://cvyhywt2dq3l7" path="res://scripts/ActionMenu.gd" id="1_0corr"]
 [ext_resource type="Texture2D" uid="uid://d3w1j5xmidi17" path="res://assets/placeholder/eye-solid-full.svg" id="1_yth5k"]
@@ -8,8 +8,7 @@
 [ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="5_3omt0"]
 [ext_resource type="StyleBox" uid="uid://chsqfvkncdsw0" path="res://prefabs/ActionPoint_Unused.tres" id="6_86jlx"]
 [ext_resource type="StyleBox" uid="uid://cy5g0kjs21b00" path="res://prefabs/ShieldFill.tres" id="7_1bft1"]
-[ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="9_86jlx"]
-[ext_resource type="Texture2D" uid="uid://ce26fvykqb5iq" path="res://assets/placeholder/pistol_ingame.png" id="10_86jlx"]
+[ext_resource type="PackedScene" uid="uid://bhtv2q1vdqnm8" path="res://prefabs/ActionMenuWeapon.tscn" id="9_86jlx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knvme"]
 bg_color = Color(0.392157, 0.392157, 0.392157, 0.196078)
@@ -31,22 +30,6 @@ corner_radius_bottom_left = 5
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0corr"]
 bg_color = Color(0.760784, 0.760784, 0.760784, 1)
 border_color = Color(1, 1, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0g1e"]
-bg_color = Color(0.762404, 0.762404, 0.762403, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(1, 1, 0, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bft1"]
-bg_color = Color(0.2798, 0.640408, 0.439183, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.8, 0.8, 0.8, 0)
 
 [node name="ActionMenu" type="PanelContainer"]
 custom_minimum_size = Vector2(600, 150)
@@ -209,69 +192,12 @@ text = "End Turn"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PrimaryWeapon" type="Button" parent="VBoxContainer/CombatAbilities"]
-custom_minimum_size = Vector2(250, 0)
+[node name="PrimaryWeapon" parent="VBoxContainer/CombatAbilities" instance=ExtResource("9_86jlx")]
 layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 0
-mouse_filter = 1
-theme_override_styles/hover = SubResource("StyleBoxFlat_0corr")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0corr")
-theme_override_styles/normal = SubResource("StyleBoxFlat_0corr")
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/CombatAbilities/PrimaryWeapon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_y0g1e")
-theme_override_styles/fill = SubResource("StyleBoxFlat_1bft1")
-value = 100.0
-show_percentage = false
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CombatAbilities/PrimaryWeapon"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("9_86jlx")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="SideArm" type="Button" parent="VBoxContainer/CombatAbilities"]
+[node name="SidearmWeapon" parent="VBoxContainer/CombatAbilities" instance=ExtResource("9_86jlx")]
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 0
-mouse_filter = 1
-theme_override_styles/hover = SubResource("StyleBoxFlat_0corr")
-theme_override_styles/normal = SubResource("StyleBoxFlat_0corr")
-
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/CombatAbilities/SideArm"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_y0g1e")
-theme_override_styles/fill = SubResource("StyleBoxFlat_1bft1")
-value = 100.0
-show_percentage = false
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CombatAbilities/SideArm"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("10_86jlx")
-expand_mode = 1
-stretch_mode = 5
 
 [node name="Ability1" type="Button" parent="VBoxContainer/CombatAbilities"]
 layout_mode = 2
@@ -296,8 +222,10 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/CombatAbilities/Ability1/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 4
+size_flags_vertical = 6
 texture = ExtResource("2_05y7h")
 expand_mode = 1
 stretch_mode = 5
@@ -337,8 +265,10 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/CombatAbilities/Ability2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 4
+size_flags_vertical = 6
 texture = ExtResource("2_05y7h")
 expand_mode = 1
 stretch_mode = 5
