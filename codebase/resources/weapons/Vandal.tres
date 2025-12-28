@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://cnwmctdcmepdv"]
+
+[ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_iibho"]
+[ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="2_n30am"]
+
+[resource]
+script = ExtResource("1_iibho")
+body_damage = 40
+headshot_damage = 160
+texture = ExtResource("2_n30am")
+weapon_type = 0
+weapon_name = 3
+metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

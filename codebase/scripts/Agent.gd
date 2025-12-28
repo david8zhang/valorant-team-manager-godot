@@ -6,7 +6,7 @@ extends Node2D
 @onready var button = $Button as Button
 @onready var health_bar = $HealthBar as ProgressBar
 @onready var shield_bar = $ShieldBar as ProgressBar
-@onready var weapon = $Weapon as Sprite2D
+@onready var weapon_sprite = $Weapon as Sprite2D
 
 @export var projectile_scene: PackedScene
 @export var vision_distance := 25
@@ -25,6 +25,9 @@ var has_completed_turn := false
 var curr_side: GameRound.Side
 var damage_source_mapping = {}
 
+var primary_weapon: Weapon = null
+var sidearm_weapon: Weapon = null
+
 var confidence_level # Dictates turn queue ordering (higher is better)
 
 signal on_agent_click(agent)
@@ -37,6 +40,11 @@ func _ready() -> void:
 	sprite.scale = Vector2(DEFAULT_SCALE, DEFAULT_SCALE)
 	button.pressed.connect(agent_click)
 	confidence_level = randi_range(1, 10)
+
+func init_from_game_stats(agent_game_stats: GameRoundVariables.AgentGameStats):
+	# Load weapons
+	primary_weapon = GameRoundVariables.load_weapon_from_name(agent_game_stats.primary_weapon_name)
+	sidearm_weapon = GameRoundVariables.load_weapon_from_name(agent_game_stats.sidearm_weapon_name)
 
 func agent_click():
 	on_agent_click.emit(self)
@@ -133,10 +141,10 @@ func attack_enemy_agent(enemy_to_attack: Agent, should_retaliate: bool, on_compl
 	var enemy_to_attack_pos = enemy_to_attack.global_position
 	var selected_agent_pos = self.global_position
 	var angle = rad_to_deg((enemy_to_attack_pos - selected_agent_pos).angle())
-	weapon.show()
-	weapon.rotation_degrees = angle
-	weapon.flip_v = weapon.rotation_degrees <= -90 and weapon.rotation_degrees >= -270 or \
-									weapon.rotation_degrees >= 90 and weapon.rotation_degrees <= 270
+	weapon_sprite.show()
+	weapon_sprite.rotation_degrees = angle
+	weapon_sprite.flip_v = weapon_sprite.rotation_degrees <= -90 and weapon_sprite.rotation_degrees >= -270 or \
+									weapon_sprite.rotation_degrees >= 90 and weapon_sprite.rotation_degrees <= 270
 
 	# Add a 1-second delay
 	var t = wait_delay(0.5)
@@ -144,8 +152,8 @@ func attack_enemy_agent(enemy_to_attack: Agent, should_retaliate: bool, on_compl
 
 	# Shoot bullet from gun
 	var projectile = projectile_scene.instantiate() as Node2D
-	weapon.add_child(projectile)
-	projectile.position = Vector2(weapon.position.x + 20, weapon.position.y + 5)
+	weapon_sprite.add_child(projectile)
+	projectile.position = Vector2(weapon_sprite.position.x + 20, weapon_sprite.position.y + 5)
 	projectile.reparent(game_round)
 	projectile.show()
 	var tween = create_tween()
@@ -173,8 +181,8 @@ func on_attack_finished(projectile: Node2D, enemy_to_attack: Agent, should_retal
 	else:
 		var t = wait_delay(0.5)
 		await t.timeout
-		enemy_to_attack.weapon.hide()
-		weapon.hide()
+		enemy_to_attack.weapon_sprite.hide()
+		weapon_sprite.hide()
 		game_round.game_camera.target_zoom = Vector2.ONE
 		on_complete.call()
 

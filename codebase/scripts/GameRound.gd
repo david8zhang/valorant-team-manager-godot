@@ -53,8 +53,9 @@ func setup_game_round_variables():
 		var all_agents = player_team.agents + cpu_team.agents
 		for a in all_agents:
 			var agent = a as Agent
-			GameRoundVariables.agent_game_stat_mapping[agent.agent_name] = GameRoundVariables.AgentGameStats.new()
-
+			var agent_game_stats = GameRoundVariables.AgentGameStats.new()
+			agent.init_from_game_stat(agent_game_stats)
+			GameRoundVariables.agent_game_stat_mapping[agent.agent_name] = agent_game_stats
 
 func update_team_statuses():
 	player_team.team_status.update_from_team(player_team.agents)
