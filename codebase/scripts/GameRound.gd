@@ -6,6 +6,12 @@ enum Side {
 	CPU
 }
 
+enum TopViewState {
+	SCOREBOARD,
+	TURN_QUEUE,
+	HIDDEN
+}
+
 @onready var agent_controller = $PlayerTeam/AgentController as AgentController
 @onready var cpu_agent_controller = $CPUTeam/CPUAgentController as CPUAgentController
 @onready var player_team = $PlayerTeam as Team
@@ -27,6 +33,7 @@ static var AP_COST_PRIMARY_ATTACK = 1
 
 var curr_turn_side = Side.PLAYER
 var is_showing_scoreboard := true
+var top_view_state := TopViewState.SCOREBOARD
 
 func _ready():
 	action_menu.agent_controller = agent_controller
@@ -166,15 +173,20 @@ func get_agent_for_name(agent_name: String):
 	return null
 
 func toggle_top_view():
-	if is_showing_scoreboard:
-		toggle_top_view_button.text = "Show Scoreboard"
-		scoreboard.hide()
-		turn_order_list_view.show()
-	else:
-		toggle_top_view_button.text = "Show Turn Order"
-		scoreboard.show()
-		turn_order_list_view.hide()
-	is_showing_scoreboard = !is_showing_scoreboard
+	match top_view_state:
+		TopViewState.SCOREBOARD:
+			toggle_top_view_button.text = "Hide Top View"
+			scoreboard.hide()
+			turn_order_list_view.show()
+			top_view_state = TopViewState.TURN_QUEUE
+		TopViewState.TURN_QUEUE:
+			toggle_top_view_button.text = "Show Scoreboard"
+			turn_order_list_view.hide()
+			top_view_state = TopViewState.HIDDEN
+		TopViewState.HIDDEN:
+			toggle_top_view_button.text = "Show Turn Order"
+			scoreboard.show()
+			top_view_state = TopViewState.SCOREBOARD
 
 func get_turn_queue_agents():
 	return turn_queue.map(func (agent_name): return get_agent_for_name(agent_name))

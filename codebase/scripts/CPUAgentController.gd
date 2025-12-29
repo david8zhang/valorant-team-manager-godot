@@ -48,6 +48,8 @@ func attack_target_if_possible():
 		# Move camera & attack
 		var midpoint_pos = Vector2((selected_agent.global_position.x + target_to_attack.global_position.x) / 2, (selected_agent.global_position.y + target_to_attack.global_position.y) / 2)
 		game_round.game_camera.target_position = midpoint_pos
+		var weapon_to_attack_with = selected_agent.primary_weapon if selected_agent.primary_weapon != null else selected_agent.sidearm_weapon
+		selected_agent.weapon_to_attack_with = weapon_to_attack_with
 		selected_agent.attack_enemy_agent(target_to_attack, true, complete_turn)
 	else:
 		complete_turn()

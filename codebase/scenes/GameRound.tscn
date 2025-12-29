@@ -70,6 +70,7 @@ visible = false
 layout_mode = 1
 
 [node name="ToggleTopView" type="Button" parent="CanvasLayer/Control"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -80,7 +81,6 @@ grow_horizontal = 0
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 12
 text = "Show Turn Order"
-flat = true
 
 [node name="GameCamera" type="Camera2D" parent="."]
 script = ExtResource("2_twj6c")
