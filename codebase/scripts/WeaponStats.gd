@@ -16,9 +16,17 @@ enum WeaponNames {
     ODIN
 }
 
+enum WeaponFireRate {
+    LOW,
+    MED,
+    HIGH
+}
+
 @export var body_damage := 0
 @export var headshot_damage := 0
 @export var max_ammo := 0
+@export var cost := 0
 @export var texture: Texture
 @export var weapon_type: WeaponType
 @export var weapon_name: WeaponNames
+@export var weapon_fire_rate: WeaponFireRate

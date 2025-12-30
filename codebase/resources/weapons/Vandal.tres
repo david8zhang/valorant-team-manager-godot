@@ -7,7 +7,10 @@
 script = ExtResource("1_iibho")
 body_damage = 40
 headshot_damage = 160
+max_ammo = 50
+cost = 2900
 texture = ExtResource("2_n30am")
 weapon_type = 0
 weapon_name = 3
+weapon_fire_rate = 1
 metadata/_custom_type_script = "uid://c72xoo8v4uyhs"
