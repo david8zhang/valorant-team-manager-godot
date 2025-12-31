@@ -16,14 +16,13 @@ func init_turn_order_list(agents_list):
 		else:
 			new_turn_order_card.dehighlight_curr_card()
 
-func update_turn_order_list(agents_list):
+func update_turn_order_list(agents_list, next_agent):
 	for i in range(0, hbox_container.get_child_count()):
 		var turn_order_card = hbox_container.get_child(i) as TurnOrderCard
 		var agent = agents_list[i] as Agent
 		if agent.is_dead():
-			pass
-		if agent.agent_name == game_round.turn_queue[game_round.curr_turn_index]:
-			print("highlighting card for: " + agent.agent_name)
+			turn_order_card.hide()
+		elif next_agent != null and agent.agent_name == next_agent.agent_name:
 			turn_order_card.highlight_curr_card()
 		else:
 			turn_order_card.dehighlight_curr_card()

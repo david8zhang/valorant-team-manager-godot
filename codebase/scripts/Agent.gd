@@ -28,6 +28,7 @@ var damage_source_mapping = {}
 var primary_weapon: Weapon = null
 var sidearm_weapon: Weapon = null
 var weapon_to_attack_with: Weapon = null
+var has_bomb := false
 
 var confidence_level # Dictates turn queue ordering (higher is better)
 
@@ -55,11 +56,22 @@ func move_to_position(new_pos: Vector2, callback: Callable):
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", new_pos, 0.5)
 	var on_complete = func _on_complete():
+		if game_round.attack_side == curr_side:
+			acquire_bomb_if_possible(new_pos)
 		update_visible_tiles()
 		callback.call()
 	tween.finished.connect(on_complete)
 	var ap_cost = game_round.get_ap_cost_for_movement(prev_pos, new_pos)
 	rem_action_points -= ap_cost
+
+func acquire_bomb_if_possible(new_pos: Vector2):
+	if new_pos == game_round.bomb.global_position && game_round.bomb.curr_bomb_state == Bomb.BombState.DROPPED:
+		game_round.bomb.set_bomb_state(Bomb.BombState.CARRIED)
+		has_bomb = true
+
+func drop_bomb():
+	game_round.bomb.global_position = Vector2(global_position.x, global_position.y)
+	game_round.bomb.set_bomb_state(Bomb.BombState.DROPPED)
 
 func update_visible_tiles():
 	visible_tiles = get_visible_tiles()
@@ -219,6 +231,9 @@ func take_damage(damage):
 
 	# Handle agent death
 	if health_bar.value == 0:
+		if has_bomb:
+			has_bomb = false
+			drop_bomb()
 		GameRoundVariables.update_death_count_for_agent(agent_name)
 		on_death.emit()
 		hide()

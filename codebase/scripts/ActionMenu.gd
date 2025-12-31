@@ -97,10 +97,18 @@ func update_weapon_info():
 	primary_weapon.update_from_weapon(selected_agent.primary_weapon)
 	sidearm_weapon.update_from_weapon(selected_agent.sidearm_weapon)
 
+func update_bomb_status():
+	var selected_agent = agent_controller.selected_agent as Agent
+	if selected_agent.has_bomb:
+		bomb_button.show()
+	else:
+		bomb_button.hide()
+
 func update_all():
 	update_ap_menu()
 	update_health_and_shields()
 	update_weapon_info()
+	update_bomb_status()
 
 func end_curr_turn():
 	if game_round.curr_turn_side == GameRound.Side.PLAYER:

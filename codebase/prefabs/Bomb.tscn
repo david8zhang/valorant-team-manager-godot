@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwxh0x0hbhhs0"]
+
+[ext_resource type="Script" uid="uid://d2eyfd1mat7hh" path="res://scripts/Bomb.gd" id="1_3mwyo"]
+[ext_resource type="Texture2D" uid="uid://c5hyokeoj1hq8" path="res://assets/placeholder/bomb_ingame.png" id="1_v070q"]
+
+[node name="Bomb" type="Node2D"]
+script = ExtResource("1_3mwyo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_v070q")

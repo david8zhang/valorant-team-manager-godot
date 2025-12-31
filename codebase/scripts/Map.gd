@@ -3,6 +3,7 @@ extends Node2D
 
 @onready var game_round = get_node("/root/GameRound") as GameRound
 @onready var ground_layer := $GroundLayer as TileMapLayer
+@onready var site_layer := $SiteLayer as TileMapLayer
 @onready var walls_layer := $WallsLayer as TileMapLayer
 @onready var vision_layer := $VisionLayer as TileMapLayer
 
@@ -30,6 +31,14 @@ func show_player_team_visible_tiles():
 
 func show_specific_visible_tiles(visible_tiles):
 	for t in visible_tiles:
-		var source_id = ground_layer.get_cell_source_id(t)
-		var atlas_coords = ground_layer.get_cell_atlas_coords(t)
-		vision_layer.set_cell(t, source_id, atlas_coords)		
+		var g_source_id = ground_layer.get_cell_source_id(t)
+		var g_atlas_coords = ground_layer.get_cell_atlas_coords(t)
+		var s_source_id = site_layer.get_cell_source_id(t)
+		var s_atlas_coords = site_layer.get_cell_atlas_coords(t)
+		if g_source_id != -1:
+			vision_layer.set_cell(t, g_source_id, g_atlas_coords)
+		elif s_source_id != -1:
+			vision_layer.set_cell(t, s_source_id, s_atlas_coords)
+
+func is_at_bomb_site(tile_pos: Vector2):
+	return site_layer.get_cell_source_id(tile_pos) != -1

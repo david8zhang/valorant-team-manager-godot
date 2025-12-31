@@ -102,6 +102,7 @@ func start_turn(agent_to_select: Agent):
 func complete_move():
 	highlight_overlay.should_update_pos = true
 	game_round.update_visible_enemies_to_player()
+	action_menu.update_all()
 	show_visible_tiles_for_selected_agent()
 
 func complete_turn():

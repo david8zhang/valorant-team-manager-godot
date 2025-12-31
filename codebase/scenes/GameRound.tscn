@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://cui8rqxwjorad"]
+[gd_scene load_steps=16 format=3 uid="uid://cui8rqxwjorad"]
 
 [ext_resource type="Script" uid="uid://ctv4akl0kybty" path="res://scripts/GameRound.gd" id="1_dq0hy"]
+[ext_resource type="PackedScene" uid="uid://bwxh0x0hbhhs0" path="res://prefabs/Bomb.tscn" id="2_0iflm"]
 [ext_resource type="PackedScene" uid="uid://8f0kh0fhafed" path="res://prefabs/ActionMenu.tscn" id="2_1ryu6"]
 [ext_resource type="PackedScene" uid="uid://dle3ma7ge5t1o" path="res://prefabs/Map.tscn" id="2_74q1x"]
 [ext_resource type="PackedScene" uid="uid://do06qong074fn" path="res://prefabs/Scoreboard.tscn" id="2_d43p7"]
@@ -17,6 +18,7 @@
 
 [node name="GameRound" type="Node2D"]
 script = ExtResource("1_dq0hy")
+bomb_scene = ExtResource("2_0iflm")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

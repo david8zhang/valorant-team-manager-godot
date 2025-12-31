@@ -25,15 +25,20 @@ enum TopViewState {
 @onready var turn_order_list_view := $CanvasLayer/Control/TurnOrder as TurnOrder
 @onready var toggle_top_view_button := $CanvasLayer/Control/ToggleTopView as Button
 
+@export var bomb_scene: PackedScene
+
 var turn_queue = []
 var curr_turn_index = 0
 
 static var AP_COST_MOVE_PER_SQUARE = 0.1
 static var AP_COST_PRIMARY_ATTACK = 1
+static var BOMB_SPAWN_TILE_COORD = Vector2(60, 70)
 
 var curr_turn_side = Side.PLAYER
+var attack_side = Side.PLAYER
 var is_showing_scoreboard := true
 var top_view_state := TopViewState.SCOREBOARD
+var bomb: Bomb
 
 func _ready():
 	action_menu.agent_controller = agent_controller
@@ -50,10 +55,16 @@ func _ready():
 		agent.on_kill.connect(update_team_statuses)
 		agent.on_death.connect(update_team_statuses)
 
+	place_bomb()
 	create_turn_queue(all_agents)
 	toggle_top_view_button.pressed.connect(toggle_top_view)
 	setup_game_round_variables()
 	start_turn_for_next_agent()
+
+func place_bomb():
+	bomb = bomb_scene.instantiate() as Bomb
+	add_child(bomb)
+	bomb.global_position = map.get_world_pos_from_tile_pos(BOMB_SPAWN_TILE_COORD)
 
 func setup_game_round_variables():
 	if GameRoundVariables.agent_game_stat_mapping.is_empty():
@@ -69,8 +80,8 @@ func update_team_statuses():
 	cpu_team.team_status.update_from_team(cpu_team.agents)
 
 func start_turn_for_next_agent():
-	var next_agent_in_turn_queue = get_agent_for_name(turn_queue[curr_turn_index]) as Agent
-	turn_order_list_view.update_turn_order_list(get_turn_queue_agents())
+	var next_agent_in_turn_queue = get_agent_for_name(turn_queue[curr_turn_index])
+	turn_order_list_view.update_turn_order_list(get_turn_queue_agents(), next_agent_in_turn_queue)
 	if next_agent_in_turn_queue != null:
 		if next_agent_in_turn_queue.curr_side == Side.PLAYER:
 			agent_controller.start_turn(next_agent_in_turn_queue)
@@ -79,7 +90,12 @@ func start_turn_for_next_agent():
 
 
 func go_to_next_turn():
-	curr_turn_index = (curr_turn_index + 1) % turn_queue.size()
+	for i in range(curr_turn_index + 1, curr_turn_index + 1 + turn_queue.size()):
+		var index = i % turn_queue.size()
+		var agent = get_agent_for_name(turn_queue[index])
+		if agent != null and !agent.is_dead():
+			curr_turn_index = index
+			break
 	# Check if all agents have completed their turns
 	if have_all_agents_completed_turn():
 		if is_round_over():
