@@ -1,13 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://do06qong074fn"]
 
 [ext_resource type="Script" uid="uid://fxjfmqji77tn" path="res://scripts/Scoreboard.gd" id="1_agxdj"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7gbi6"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[ext_resource type="StyleBox" uid="uid://cb5kqole3x6kr" path="res://prefabs/RoundTurnRem.tres" id="2_kehhf"]
 
 [node name="Scoreboard" type="Control"]
 layout_mode = 3
@@ -70,7 +64,7 @@ layout_mode = 2
 
 [node name="RoundInfoContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_7gbi6")
+theme_override_styles/panel = ExtResource("2_kehhf")
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/RoundInfoContainer"]
 layout_mode = 2

@@ -96,6 +96,7 @@ func _process(_delta):
 					center_camera_on_agent(selected_agent)
 
 func start_turn(agent_to_select: Agent):
+	agent_to_select.rem_action_points = Agent.TOTAL_ACTION_POINTS
 	select_agent(agent_to_select)
 	game_round.update_visible_enemies_to_player()
 
@@ -106,6 +107,7 @@ func complete_move():
 	show_visible_tiles_for_selected_agent()
 
 func complete_turn():
+	selected_agent.rem_action_points = Agent.TOTAL_ACTION_POINTS
 	selected_agent.has_completed_turn = true
 	selected_agent.sprite.self_modulate = Color(0.5, 0.5, 0.5)
 	on_complete_turn.emit()

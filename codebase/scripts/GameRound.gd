@@ -118,7 +118,6 @@ func go_to_next_turn_cycle():
 	for a in all_agents:
 		var agent = a as Agent
 		agent.has_completed_turn = false
-		agent.rem_action_points = Agent.TOTAL_ACTION_POINTS
 	for a in player_team.agents:
 		var agent = a as Agent
 		agent.sprite.self_modulate = Color(1, 1, 1)
@@ -206,3 +205,11 @@ func toggle_top_view():
 
 func get_turn_queue_agents():
 	return turn_queue.map(func (agent_name): return get_agent_for_name(agent_name))
+
+func plant_bomb(planter: Agent, plant_pos: Vector2):
+	planter.has_bomb = false
+	action_menu.update_all()
+	bomb.global_position = Vector2(plant_pos.x, plant_pos.y)
+	bomb.show()
+	bomb.set_bomb_state(Bomb.BombState.PLANTED)
+	scoreboard.on_bomb_planted()

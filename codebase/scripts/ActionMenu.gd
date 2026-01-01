@@ -22,7 +22,7 @@ signal on_action(action_state)
 
 func _ready() -> void:
 	move_button.pressed.connect(func (): on_action_click(AgentController.ActionState.MOVE))
-	bomb_button.pressed.connect(func (): on_action_click(AgentController.ActionState.DEFUSE))
+	bomb_button.pressed.connect(on_bomb_button_clicked)
 	watch_button.pressed.connect(func (): on_action_click(AgentController.ActionState.WATCH))
 	primary_weapon.pressed.connect(func (): on_action_click(AgentController.ActionState.PRIMARY_ATTACK))
 	sidearm_weapon.pressed.connect(func (): on_action_click(AgentController.ActionState.SECONDARY_ATTACK))
@@ -101,8 +101,21 @@ func update_bomb_status():
 	var selected_agent = agent_controller.selected_agent as Agent
 	if selected_agent.has_bomb:
 		bomb_button.show()
+		if can_plant_bomb(selected_agent):
+			bomb_button.disabled = false
+		else:
+			bomb_button.disabled = true
 	else:
 		bomb_button.hide()
+
+func can_plant_bomb(selected_agent: Agent):
+	var agent_tile_pos = game_round.map.get_tile_pos_from_world_pos(selected_agent.global_position)
+	return game_round.map.is_at_bomb_site(agent_tile_pos) and selected_agent.has_bomb and selected_agent.rem_action_points == 5
+
+func on_bomb_button_clicked():
+	var selected_agent = agent_controller.selected_agent as Agent
+	if can_plant_bomb(selected_agent):
+		game_round.plant_bomb(selected_agent, selected_agent.global_position)
 
 func update_all():
 	update_ap_menu()

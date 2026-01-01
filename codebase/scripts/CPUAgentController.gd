@@ -21,6 +21,7 @@ func move_agent():
 
 func start_turn(agent_to_select: Agent):
 	selected_agent = agent_to_select
+	selected_agent.rem_action_points = Agent.TOTAL_ACTION_POINTS
 	move_agent()
 
 func complete_move():

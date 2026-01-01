@@ -4,7 +4,9 @@ extends Control
 @onready var player_score_label = $HBoxContainer/PlayerScoreContainer/MarginContainer/PlayerScore/Score
 @onready var cpu_score_label = $HBoxContainer/CPUScoreContainer/MarginContainer/CPUScore/Score
 @onready var round_number_label = $HBoxContainer/VBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo/Label
+@onready var round_info_container = $HBoxContainer/VBoxContainer/RoundInfoContainer as PanelContainer
 @onready var turns_remaining_label = $HBoxContainer/VBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo/Turns
+@onready var turns_remaining_bottom_label = $HBoxContainer/VBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo/TurnsLabel as Label
 @onready var show_turn_order_button = $HBoxContainer/VBoxContainer/ShowTurnOrder as Button
 
 @export var PLANT_PHASE_TURN_LIMIT = 10
@@ -26,3 +28,12 @@ func decrement_turn():
 	if turns_remaining == 0:
 		print("Phase over!")
 	turns_remaining_label.text = str(turns_remaining)
+
+func on_bomb_planted():
+	turns_remaining = DEFUSE_PHASE_TURN_LIMIT
+	turns_remaining_label.text = str(turns_remaining)
+	round_number_label.text = "PLANTED"
+	round_number_label.add_theme_color_override("font_color", Color.WHITE)
+	turns_remaining_label.add_theme_color_override("font_color", Color.WHITE)
+	turns_remaining_bottom_label.add_theme_color_override("font_color", Color.WHITE)
+	round_info_container.add_theme_stylebox_override("panel", load("res://prefabs/PlantedTurnRem.tres"))
