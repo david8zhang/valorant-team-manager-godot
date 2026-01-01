@@ -1,6 +1,13 @@
 class_name Scoreboard
 extends Control
 
+enum Phase {
+	BUY,
+	SETUP,
+	ROUND,
+	PLANT
+}
+
 @onready var player_score_label = $HBoxContainer/PlayerScoreContainer/MarginContainer/PlayerScore/Score
 @onready var cpu_score_label = $HBoxContainer/CPUScoreContainer/MarginContainer/CPUScore/Score
 @onready var round_number_label = $HBoxContainer/VBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo/Label
@@ -16,6 +23,7 @@ var turns_remaining = PLANT_PHASE_TURN_LIMIT
 var round_num := 1
 var player_score := 0
 var cpu_score := 0
+var curr_phase := Phase.ROUND
 
 func _ready() -> void:
 	turns_remaining_label.text = str(turns_remaining)
@@ -30,6 +38,7 @@ func decrement_turn():
 	turns_remaining_label.text = str(turns_remaining)
 
 func on_bomb_planted():
+	curr_phase = Phase.PLANT
 	turns_remaining = DEFUSE_PHASE_TURN_LIMIT
 	turns_remaining_label.text = str(turns_remaining)
 	round_number_label.text = "PLANTED"

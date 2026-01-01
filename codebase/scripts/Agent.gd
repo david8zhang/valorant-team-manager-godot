@@ -219,8 +219,6 @@ func calculate_damage_to_deal():
 			return weapon_to_attack_with.weapon_stats.headshot_damage
 		else:
 			return weapon_to_attack_with.weapon_stats.body_damage
-	
-
 
 func take_damage(damage):
 	var dmg_to_hp = damage - shield_bar.value

@@ -207,6 +207,7 @@ func get_turn_queue_agents():
 	return turn_queue.map(func (agent_name): return get_agent_for_name(agent_name))
 
 func plant_bomb(planter: Agent, plant_pos: Vector2):
+	planter.rem_action_points = 0
 	planter.has_bomb = false
 	action_menu.update_all()
 	bomb.global_position = Vector2(plant_pos.x, plant_pos.y)
