@@ -24,6 +24,7 @@ enum TopViewState {
 @onready var canvas_control := $CanvasLayer/Control as Control
 @onready var turn_order_list_view := $CanvasLayer/Control/TurnOrder as TurnOrder
 @onready var toggle_top_view_button := $CanvasLayer/Control/ToggleTopView as Button
+@onready var round_result = $CanvasLayer/Control/RoundResult as RoundResult
 
 @export var bomb_scene: PackedScene
 
@@ -41,6 +42,7 @@ var top_view_state := TopViewState.SCOREBOARD
 var bomb: Bomb
 
 func _ready():
+	round_result.on_continue.connect(incr_score_and_go_to_next_round)
 	action_menu.agent_controller = agent_controller
 	agent_controller.action_menu = action_menu
 	agent_controller.on_complete_turn.connect(go_to_next_turn)
@@ -83,6 +85,7 @@ func start_turn_for_next_agent():
 	var next_agent_in_turn_queue = get_agent_for_name(turn_queue[curr_turn_index])
 	turn_order_list_view.update_turn_order_list(get_turn_queue_agents(), next_agent_in_turn_queue)
 	if next_agent_in_turn_queue != null:
+		curr_turn_side = next_agent_in_turn_queue.curr_side
 		if next_agent_in_turn_queue.curr_side == Side.PLAYER:
 			agent_controller.start_turn(next_agent_in_turn_queue)
 		else:
@@ -98,11 +101,8 @@ func go_to_next_turn():
 			break
 	# Check if all agents have completed their turns
 	if have_all_agents_completed_turn():
-		if is_round_over():
-			return
 		go_to_next_turn_cycle()
 	start_turn_for_next_agent()
-
 
 func have_all_agents_completed_turn():
 	var all_agents = player_team.agents + cpu_team.agents
@@ -114,13 +114,26 @@ func have_all_agents_completed_turn():
 
 func go_to_next_turn_cycle():
 	scoreboard.decrement_turn()
-	var all_agents = player_team.agents + cpu_team.agents
-	for a in all_agents:
-		var agent = a as Agent
-		agent.has_completed_turn = false
-	for a in player_team.agents:
-		var agent = a as Agent
-		agent.sprite.self_modulate = Color(1, 1, 1)
+	var win_condition = get_win_condition()
+	if win_condition != -1:
+		handle_win_condition(win_condition)
+	else:
+		var all_agents = player_team.agents + cpu_team.agents
+		for a in all_agents:
+			var agent = a as Agent
+			agent.has_completed_turn = false
+		for a in player_team.agents:
+			var agent = a as Agent
+			agent.sprite.self_modulate = Color(1, 1, 1)
+
+func handle_win_condition(win_condition):
+	match win_condition:
+		RoundResult.WinCondition.TIME:
+			var winning_side = Side.PLAYER if attack_side == Side.CPU else Side.CPU
+			round_result.show_winning_side(winning_side, win_condition)
+		RoundResult.WinCondition.ELIMINATION:
+			var winning_side = Side.PLAYER if all_cpu_agents_eliminated() else Side.CPU
+			round_result.show_winning_side(winning_side, win_condition)
 
 func update_visible_enemies_to_player():
 	# Only show visible enemies for selected agent, otherwise, just show them as gray blobs
@@ -168,8 +181,25 @@ func get_ap_cost_for_movement(start: Vector2, end: Vector2):
 func get_ap_cost_for_primary_attack():
 	return AP_COST_PRIMARY_ATTACK
 
-func is_round_over():
+func get_win_condition():
+	if is_timeout():
+		if bomb.curr_bomb_state == Bomb.BombState.PLANTED:
+			return RoundResult.WinCondition.DETONATION
+		return RoundResult.WinCondition.TIME
+	if all_cpu_agents_eliminated() or all_player_agents_eliminated():
+		return RoundResult.WinCondition.ELIMINATION
+	return -1
+
+func is_timeout():
 	return scoreboard.turns_remaining == 0
+
+func all_cpu_agents_eliminated():
+	var living_cpu_agents = cpu_team.agents.filter(func (a: Agent): return !a.is_dead())
+	return living_cpu_agents.size() == 0
+
+func all_player_agents_eliminated():
+	var living_player_agents = player_team.agents.filter(func (a: Agent): return !a.is_dead())
+	return living_player_agents.size() == 0
 
 func add_canvas_item(item: Control):
 	canvas_control.add_child(item)
@@ -214,3 +244,16 @@ func plant_bomb(planter: Agent, plant_pos: Vector2):
 	bomb.show()
 	bomb.set_bomb_state(Bomb.BombState.PLANTED)
 	scoreboard.on_bomb_planted()
+
+func incr_score_and_go_to_next_round(last_winning_side: GameRound.Side):
+	scoreboard.incr_score(last_winning_side)
+	scoreboard.incr_round()
+	scoreboard.switch_to_phase(Scoreboard.Phase.ROUND)
+	curr_turn_index = 0
+	player_team.reset_agents()
+	cpu_team.reset_agents()
+	for a in player_team.agents:
+		a.update_visible_tiles()
+		a.show()
+	place_bomb()
+	start_turn_for_next_agent()

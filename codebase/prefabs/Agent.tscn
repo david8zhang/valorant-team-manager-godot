@@ -14,6 +14,9 @@ resource_local_to_scene = true
 shader = ExtResource("3_ajnbc")
 shader_parameter/enabled = false
 shader_parameter/solid_color = Color(0.392157, 0.392157, 0.392157, 1)
+shader_parameter/outline_enabled = false
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 2.0
 
 [node name="Agent" type="Node2D"]
 script = ExtResource("1_2tte8")
@@ -27,10 +30,10 @@ animation = &"idle"
 offset = Vector2(0, -5)
 
 [node name="Button" type="Button" parent="."]
-offset_left = -11.0
-offset_top = -12.0
-offset_right = 12.0
-offset_bottom = 8.0
+offset_left = -17.0
+offset_top = -26.0
+offset_right = 17.0
+offset_bottom = 6.0
 mouse_default_cursor_shape = 2
 flat = true
 

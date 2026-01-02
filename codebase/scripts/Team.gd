@@ -24,6 +24,8 @@ func _ready() -> void:
 		new_agent.agent_name = name_prefix + "_" + str(i)
 		new_agent.curr_side = side
 		add_child(new_agent)
+		var outline_color = Color8(39, 239, 190) if side == GameRound.Side.PLAYER else Color.RED
+		new_agent.set_outline(outline_color)
 		agents.append(new_agent)
 		map.move_node_to_pos(new_agent, x_pos, y_pos)
 		x_pos += space_btwn_agents
@@ -37,3 +39,14 @@ func get_all_visible_tiles():
 		if !agent.is_dead():
 			all_visible_tiles += agent.visible_tiles
 	return all_visible_tiles
+
+func reset_agents():
+	var x_pos = start_x
+	var y_pos = start_y
+	for a in agents:
+		var agent = a as Agent
+		agent.set_curr_health(Agent.MAX_HEALTH)
+		agent.rem_action_points = Agent.TOTAL_ACTION_POINTS
+		agent.has_completed_turn = false
+		map.move_node_to_pos(agent, x_pos, y_pos)
+		x_pos += space_btwn_agents

@@ -14,6 +14,7 @@ extends Node2D
 
 static var DEFAULT_SCALE = 1.5
 static var TOTAL_ACTION_POINTS = 5
+static var MAX_HEALTH = 100
 
 var agent_name := ""
 var map: Map
@@ -250,6 +251,9 @@ func wait_delay(delay: float):
 func get_curr_health():
 	return health_bar.value
 
+func set_curr_health(amt):
+	health_bar.value = amt
+
 func has_vision_of_agent(other_agent: Agent):
 	update_visible_tiles()
 	var other_agent_tile_pos = game_round.map.get_tile_pos_from_world_pos(other_agent.global_position)
@@ -273,3 +277,8 @@ func show_fully():
 	shield_bar.show()
 	var shader = sprite.material as ShaderMaterial
 	shader.set_shader_parameter("enabled", false)
+
+func set_outline(outline_color):
+	var shader = sprite.material as ShaderMaterial
+	shader.set_shader_parameter("outline_enabled", true)
+	shader.set_shader_parameter("outline_color", outline_color)

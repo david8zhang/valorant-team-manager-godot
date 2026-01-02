@@ -16,8 +16,8 @@ enum Phase {
 @onready var turns_remaining_bottom_label = $HBoxContainer/VBoxContainer/RoundInfoContainer/MarginContainer/RoundInfo/TurnsLabel as Label
 @onready var show_turn_order_button = $HBoxContainer/VBoxContainer/ShowTurnOrder as Button
 
-@export var PLANT_PHASE_TURN_LIMIT = 10
-@export var DEFUSE_PHASE_TURN_LIMIT = 5
+static var PLANT_PHASE_TURN_LIMIT = 2
+static var DEFUSE_PHASE_TURN_LIMIT = 5
 
 var turns_remaining = PLANT_PHASE_TURN_LIMIT
 var round_num := 1
@@ -33,16 +33,42 @@ func _ready() -> void:
 
 func decrement_turn():
 	turns_remaining = max(0, turns_remaining - 1)
-	if turns_remaining == 0:
-		print("Phase over!")
+	turns_remaining_label.text = str(turns_remaining)
+
+func reset_turns_remaining(turns):
+	turns_remaining = turns
 	turns_remaining_label.text = str(turns_remaining)
 
 func on_bomb_planted():
-	curr_phase = Phase.PLANT
-	turns_remaining = DEFUSE_PHASE_TURN_LIMIT
-	turns_remaining_label.text = str(turns_remaining)
-	round_number_label.text = "PLANTED"
-	round_number_label.add_theme_color_override("font_color", Color.WHITE)
-	turns_remaining_label.add_theme_color_override("font_color", Color.WHITE)
-	turns_remaining_bottom_label.add_theme_color_override("font_color", Color.WHITE)
-	round_info_container.add_theme_stylebox_override("panel", load("res://prefabs/PlantedTurnRem.tres"))
+	switch_to_phase(Scoreboard.Phase.PLANT)
+
+func incr_score(side: GameRound.Side):
+	if side == GameRound.Side.CPU:
+		cpu_score += 1
+		cpu_score_label.text = str(cpu_score)
+	else:
+		player_score += 1
+		player_score_label.text = str(player_score)
+
+func incr_round():
+	round_num += 1
+
+func switch_to_phase(phase: Scoreboard.Phase):
+	curr_phase = phase
+	match phase:
+		Phase.ROUND:
+			turns_remaining = PLANT_PHASE_TURN_LIMIT
+			turns_remaining_label.text = str(turns_remaining)
+			round_number_label.text = "Round " + str(round_num)
+			round_number_label.add_theme_color_override("font_color", Color.BLACK)
+			turns_remaining_label.add_theme_color_override("font_color", Color.BLACK)
+			turns_remaining_bottom_label.add_theme_color_override("font_color", Color.BLACK)
+			round_info_container.add_theme_stylebox_override("panel", load("res://prefabs/RoundTurnRem.tres"))
+		Phase.PLANT:
+			turns_remaining = DEFUSE_PHASE_TURN_LIMIT
+			turns_remaining_label.text = str(turns_remaining)
+			round_number_label.text = "PLANTED"
+			round_number_label.add_theme_color_override("font_color", Color.WHITE)
+			turns_remaining_label.add_theme_color_override("font_color", Color.WHITE)
+			turns_remaining_bottom_label.add_theme_color_override("font_color", Color.WHITE)
+			round_info_container.add_theme_stylebox_override("panel", load("res://prefabs/PlantedTurnRem.tres"))
