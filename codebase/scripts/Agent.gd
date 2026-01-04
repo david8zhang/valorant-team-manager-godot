@@ -33,6 +33,7 @@ var has_bomb := false
 
 var confidence_level # Dictates turn queue ordering (higher is better)
 var is_defusing := false
+var is_planting := false
 
 signal on_agent_click(agent)
 signal on_update_action_menu()
@@ -46,7 +47,6 @@ func _ready() -> void:
 	confidence_level = randi_range(1, 10)
 
 func init_from_game_stats(agent_game_stats: GameRoundVariables.AgentGameStats):
-	# Load weapons
 	primary_weapon = GameRoundVariables.load_weapon_from_name(agent_game_stats.primary_weapon_name)
 	sidearm_weapon = GameRoundVariables.load_weapon_from_name(agent_game_stats.sidearm_weapon_name)
 

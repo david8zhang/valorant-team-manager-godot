@@ -48,5 +48,7 @@ func reset_agents():
 		agent.set_curr_health(Agent.MAX_HEALTH)
 		agent.rem_action_points = Agent.TOTAL_ACTION_POINTS
 		agent.has_completed_turn = false
+		agent.is_planting = false
+		agent.is_defusing = false
 		map.move_node_to_pos(agent, x_pos, y_pos)
 		x_pos += space_btwn_agents

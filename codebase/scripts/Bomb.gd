@@ -16,8 +16,10 @@ func set_bomb_state(new_state: BombState):
     curr_bomb_state = new_state
     match new_state:
         BombState.CARRIED:
+            sprite.self_modulate = Color(1, 1, 1, 1)
             hide()
         BombState.DROPPED:
+            sprite.self_modulate = Color(1, 1, 1, 1)
             show()
         BombState.PLANTED:
             sprite.self_modulate = Color(1, 0, 0, 0.5)

@@ -84,10 +84,11 @@ func _process(_delta):
 			ActionState.MOVE:
 				var pos_to_move_to = game_round.map.get_world_pos_from_tile_pos(highlight_overlay.hovered_tile_pos)
 				var ap_cost_for_move = game_round.get_ap_cost_for_movement(selected_agent.global_position, pos_to_move_to)
-				highlight_overlay.is_pos_valid = ap_cost_for_move <= selected_agent.rem_action_points and !selected_agent.is_defusing
+				var is_defusing_or_planting = selected_agent.is_defusing or selected_agent.is_planting
+				highlight_overlay.is_pos_valid = ap_cost_for_move <= selected_agent.rem_action_points and !is_defusing_or_planting
 				action_menu.preview_ap_cost(ap_cost_for_move)
 				if Input.is_action_just_pressed("mouse_left"):
-					if ap_cost_for_move <= selected_agent.rem_action_points and !selected_agent.is_defusing:
+					if ap_cost_for_move <= selected_agent.rem_action_points and !is_defusing_or_planting:
 						highlight_overlay.should_update_pos = false
 						selected_agent.move_to_position(pos_to_move_to, complete_move)
 						action_menu.update_all()
@@ -110,6 +111,11 @@ func complete_turn():
 	selected_agent.rem_action_points = Agent.TOTAL_ACTION_POINTS
 	selected_agent.has_completed_turn = true
 	selected_agent.sprite.self_modulate = Color(0.5, 0.5, 0.5)
+	if selected_agent.is_defusing:
+		game_round.continue_bomb_defuse(selected_agent)
+	elif selected_agent.is_planting:
+		game_round.continue_bomb_plant(selected_agent)
+
 	on_complete_turn.emit()
 
 func select_agent(agent: Agent):

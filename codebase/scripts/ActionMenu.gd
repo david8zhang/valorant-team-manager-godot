@@ -4,6 +4,7 @@ extends PanelContainer
 @onready var game_round = get_node("/root/GameRound") as GameRound
 @onready var watch_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Watch as Button
 @onready var bomb_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Bomb as Button
+@onready var bomb_texture = $VBoxContainer/NonCombatAndStats/NonCombatActions/Bomb/TextureRect as TextureRect
 @onready var move_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Move as Button
 @onready var defuse_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Defuse as Button
 @onready var defuse_texture = $VBoxContainer/NonCombatAndStats/NonCombatActions/Defuse/TextureRect as TextureRect
@@ -130,7 +131,12 @@ func can_defuse_bomb(selected_agent: Agent):
 func on_bomb_button_clicked():
 	var selected_agent = agent_controller.selected_agent as Agent
 	if can_plant_bomb(selected_agent):
-		game_round.plant_bomb(selected_agent, selected_agent.global_position)
+		if !selected_agent.is_planting:
+			bomb_texture.texture = load("res://assets/placeholder/ban-solid-full.svg")
+			game_round.start_plant_bomb(selected_agent)
+		else:
+			bomb_texture.texture = load("res://assets/placeholder/bomb-solid-full.svg")
+			game_round.stop_plant_bomb(selected_agent)
 
 func on_defuse_button_clicked():
 	var selected_agent = agent_controller.selected_agent as Agent
