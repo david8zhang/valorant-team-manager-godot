@@ -32,6 +32,7 @@ var weapon_to_attack_with: Weapon = null
 var has_bomb := false
 
 var confidence_level # Dictates turn queue ordering (higher is better)
+var is_defusing := false
 
 signal on_agent_click(agent)
 signal on_update_action_menu()

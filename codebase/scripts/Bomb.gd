@@ -8,14 +8,20 @@ enum BombState {
     DEFUSING
 }
 
-static var DEFUSE_TURN_TIMER := 2
-
 @onready var sprite = $Sprite2D
 var curr_bomb_state := BombState.DROPPED
-var curr_defuse_timer := DEFUSE_TURN_TIMER
+var bomb_timer := 5
 
 func set_bomb_state(new_state: BombState):
-    if new_state == BombState.CARRIED:
-        hide()
-    elif new_state == BombState.DROPPED:
-        show()
+    curr_bomb_state = new_state
+    match new_state:
+        BombState.CARRIED:
+            hide()
+        BombState.DROPPED:
+            show()
+        BombState.PLANTED:
+            sprite.self_modulate = Color(1, 0, 0, 0.5)
+            show()
+        BombState.DEFUSING:
+            sprite.self_modulate = Color(0, 0, 1, 0.5)
+            show()

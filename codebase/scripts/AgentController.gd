@@ -84,10 +84,10 @@ func _process(_delta):
 			ActionState.MOVE:
 				var pos_to_move_to = game_round.map.get_world_pos_from_tile_pos(highlight_overlay.hovered_tile_pos)
 				var ap_cost_for_move = game_round.get_ap_cost_for_movement(selected_agent.global_position, pos_to_move_to)
-				highlight_overlay.is_pos_valid = ap_cost_for_move <= selected_agent.rem_action_points
+				highlight_overlay.is_pos_valid = ap_cost_for_move <= selected_agent.rem_action_points and !selected_agent.is_defusing
 				action_menu.preview_ap_cost(ap_cost_for_move)
 				if Input.is_action_just_pressed("mouse_left"):
-					if ap_cost_for_move <= selected_agent.rem_action_points:
+					if ap_cost_for_move <= selected_agent.rem_action_points and !selected_agent.is_defusing:
 						highlight_overlay.should_update_pos = false
 						selected_agent.move_to_position(pos_to_move_to, complete_move)
 						action_menu.update_all()

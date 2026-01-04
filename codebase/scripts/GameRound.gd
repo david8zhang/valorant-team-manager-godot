@@ -36,7 +36,7 @@ static var AP_COST_PRIMARY_ATTACK = 1
 static var BOMB_SPAWN_TILE_COORD = Vector2(60, 70)
 
 var curr_turn_side = Side.PLAYER
-var attack_side = Side.PLAYER
+var attack_side = Side.CPU
 var is_showing_scoreboard := true
 var top_view_state := TopViewState.SCOREBOARD
 var bomb: Bomb
@@ -62,6 +62,13 @@ func _ready():
 	toggle_top_view_button.pressed.connect(toggle_top_view)
 	setup_game_round_variables()
 	start_turn_for_next_agent()
+
+	# Test bomb defusal logic
+	scoreboard.switch_to_phase(Scoreboard.Phase.POST_PLANT)
+	bomb.set_bomb_state(Bomb.BombState.PLANTED)
+	var plant_tile_pos = Vector2(22, 26)
+	var plant_global_pos = map.get_world_pos_from_tile_pos(plant_tile_pos)
+	bomb.global_position = Vector2(plant_global_pos.x, plant_global_pos.y)
 
 func place_bomb():
 	bomb = bomb_scene.instantiate() as Bomb
@@ -127,13 +134,17 @@ func go_to_next_turn_cycle():
 			agent.sprite.self_modulate = Color(1, 1, 1)
 
 func handle_win_condition(win_condition):
+	var winning_side: GameRound.Side
 	match win_condition:
 		RoundResult.WinCondition.TIME:
-			var winning_side = Side.PLAYER if attack_side == Side.CPU else Side.CPU
-			round_result.show_winning_side(winning_side, win_condition)
+			winning_side = Side.PLAYER if attack_side == Side.CPU else Side.CPU
 		RoundResult.WinCondition.ELIMINATION:
-			var winning_side = Side.PLAYER if all_cpu_agents_eliminated() else Side.CPU
-			round_result.show_winning_side(winning_side, win_condition)
+			winning_side = Side.PLAYER if all_cpu_agents_eliminated() else Side.CPU
+		RoundResult.WinCondition.DETONATION:
+			winning_side = Side.PLAYER if attack_side == Side.PLAYER else Side.CPU
+		RoundResult.WinCondition.DEFUSE:
+			winning_side = Side.PLAYER if attack_side == Side.CPU else Side.PLAYER
+	round_result.show_winning_side(winning_side, win_condition)
 
 func update_visible_enemies_to_player():
 	# Only show visible enemies for selected agent, otherwise, just show them as gray blobs
@@ -185,6 +196,9 @@ func get_win_condition():
 	if is_timeout():
 		if bomb.curr_bomb_state == Bomb.BombState.PLANTED:
 			return RoundResult.WinCondition.DETONATION
+		elif bomb.curr_bomb_state == Bomb.BombState.DEFUSING:
+			return RoundResult.WinCondition.DEFUSE
+		print(bomb.curr_bomb_state)
 		return RoundResult.WinCondition.TIME
 	if all_cpu_agents_eliminated() or all_player_agents_eliminated():
 		return RoundResult.WinCondition.ELIMINATION
@@ -243,12 +257,25 @@ func plant_bomb(planter: Agent, plant_pos: Vector2):
 	bomb.global_position = Vector2(plant_pos.x, plant_pos.y)
 	bomb.show()
 	bomb.set_bomb_state(Bomb.BombState.PLANTED)
-	scoreboard.on_bomb_planted()
+	scoreboard.switch_to_phase(Scoreboard.Phase.POST_PLANT)
+
+func start_defuse_bomb(defuser: Agent):
+	defuser.rem_action_points = 0
+	defuser.is_defusing = true
+	action_menu.update_all()
+	bomb.set_bomb_state(Bomb.BombState.DEFUSING)
+	if defuser.curr_side == Side.PLAYER:
+		agent_controller.complete_turn()
+
+func stop_defuse_bomb(defuser: Agent):
+	defuser.is_defusing = false
+	action_menu.update_all()
+	bomb.set_bomb_state(Bomb.BombState.PLANTED)
 
 func incr_score_and_go_to_next_round(last_winning_side: GameRound.Side):
 	scoreboard.incr_score(last_winning_side)
 	scoreboard.incr_round()
-	scoreboard.switch_to_phase(Scoreboard.Phase.ROUND)
+	scoreboard.switch_to_phase(Scoreboard.Phase.PRE_PLANT)
 	curr_turn_index = 0
 	player_team.reset_agents()
 	cpu_team.reset_agents()

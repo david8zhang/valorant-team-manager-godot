@@ -5,6 +5,8 @@ extends PanelContainer
 @onready var watch_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Watch as Button
 @onready var bomb_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Bomb as Button
 @onready var move_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Move as Button
+@onready var defuse_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Defuse as Button
+@onready var defuse_texture = $VBoxContainer/NonCombatAndStats/NonCombatActions/Defuse/TextureRect as TextureRect
 @onready var primary_weapon = $VBoxContainer/CombatAbilities/PrimaryWeapon as ActionMenuWeapon
 @onready var sidearm_weapon = $VBoxContainer/CombatAbilities/SidearmWeapon as ActionMenuWeapon
 
@@ -23,6 +25,7 @@ signal on_action(action_state)
 func _ready() -> void:
 	move_button.pressed.connect(func (): on_action_click(AgentController.ActionState.MOVE))
 	bomb_button.pressed.connect(on_bomb_button_clicked)
+	defuse_button.pressed.connect(on_defuse_button_clicked)
 	watch_button.pressed.connect(func (): on_action_click(AgentController.ActionState.WATCH))
 	primary_weapon.pressed.connect(func (): on_action_click(AgentController.ActionState.PRIMARY_ATTACK))
 	sidearm_weapon.pressed.connect(func (): on_action_click(AgentController.ActionState.SECONDARY_ATTACK))
@@ -97,6 +100,15 @@ func update_weapon_info():
 	primary_weapon.update_from_weapon(selected_agent.primary_weapon)
 	sidearm_weapon.update_from_weapon(selected_agent.sidearm_weapon)
 
+func update_defuse_status():
+	var selected_agent = agent_controller.selected_agent as Agent
+	if game_round.attack_side != selected_agent.curr_side:
+		var is_at_bomb_pos = selected_agent.global_position == game_round.bomb.global_position
+		if is_at_bomb_pos:
+			defuse_button.show()
+		else:
+			defuse_button.hide()
+
 func update_bomb_status():
 	var selected_agent = agent_controller.selected_agent as Agent
 	if selected_agent.has_bomb:
@@ -112,15 +124,29 @@ func can_plant_bomb(selected_agent: Agent):
 	var agent_tile_pos = game_round.map.get_tile_pos_from_world_pos(selected_agent.global_position)
 	return game_round.map.is_at_bomb_site(agent_tile_pos) and selected_agent.has_bomb and selected_agent.rem_action_points == 5
 
+func can_defuse_bomb(selected_agent: Agent):
+	return selected_agent.rem_action_points == 5
+
 func on_bomb_button_clicked():
 	var selected_agent = agent_controller.selected_agent as Agent
 	if can_plant_bomb(selected_agent):
 		game_round.plant_bomb(selected_agent, selected_agent.global_position)
 
+func on_defuse_button_clicked():
+	var selected_agent = agent_controller.selected_agent as Agent
+	if can_defuse_bomb(selected_agent):
+		if !selected_agent.is_defusing:
+			defuse_texture.texture = load("res://assets/placeholder/ban-solid-full.svg")
+			game_round.start_defuse_bomb(selected_agent)
+		else:
+			defuse_texture.texture = load("res://assets/placeholder/wrench-solid-full.svg")
+			game_round.stop_defuse_bomb(selected_agent)
+
 func update_all():
 	update_ap_menu()
 	update_health_and_shields()
 	update_weapon_info()
+	update_defuse_status()
 	update_bomb_status()
 
 func end_curr_turn():
