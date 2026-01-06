@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj7jqevcv2wem"]
+
+[ext_resource type="PackedScene" uid="uid://c3hk0br2pjrhf" path="res://prefabs/AgentBuyMenu.tscn" id="1_mtvm6"]
+
+[node name="BuyMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CreditsLabel" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Credits"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CreditsAmount" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "5000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AgentBuyMenu" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_mtvm6")]
+layout_mode = 2
+
+[node name="AgentBuyMenu2" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_mtvm6")]
+layout_mode = 2
+
+[node name="AgentBuyMenu3" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_mtvm6")]
+layout_mode = 2
+
+[node name="AgentBuyMenu4" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_mtvm6")]
+layout_mode = 2
+
+[node name="AgentBuyMenu5" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_mtvm6")]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2

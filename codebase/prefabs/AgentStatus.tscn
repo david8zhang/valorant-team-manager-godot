@@ -7,12 +7,10 @@
 [ext_resource type="StyleBox" uid="uid://cy5g0kjs21b00" path="res://prefabs/ShieldFill.tres" id="4_tpx7d"]
 [ext_resource type="Texture2D" uid="uid://7pdwea6dt72o" path="res://assets/placeholder/bomb-solid-full.svg" id="5_d1d8l"]
 [ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="5_mjuwj"]
+[ext_resource type="StyleBox" uid="uid://catg2lupwuxlc" path="res://prefabs/AgentStatusPanelBG.tres" id="6_y7sud"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qsf7e"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wjiy0"]
-bg_color = Color(0.6, 0.6, 0.6, 0.784314)
 
 [node name="AgentStatus" type="PanelContainer"]
 custom_minimum_size = Vector2(250, 100)
@@ -63,7 +61,7 @@ show_percentage = false
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_wjiy0")
+theme_override_styles/panel = ExtResource("6_y7sud")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
