@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj7jqevcv2wem"]
+[gd_scene load_steps=5 format=3 uid="uid://bj7jqevcv2wem"]
 
 [ext_resource type="PackedScene" uid="uid://c3hk0br2pjrhf" path="res://prefabs/AgentBuyMenu.tscn" id="1_mtvm6"]
+[ext_resource type="StyleBox" uid="uid://k2ihmpstyn38" path="res://prefabs/BuyMenuWeaponHeader.tres" id="2_4kfsn"]
+[ext_resource type="StyleBox" uid="uid://i60bo6vogxxm" path="res://prefabs/BuyMenuWeapon.tres" id="3_0edcf"]
+[ext_resource type="Texture2D" uid="uid://doyiqs3ra7cy1" path="res://assets/placeholder/pistol.png" id="4_ohcbr"]
 
 [node name="BuyMenu" type="Control"]
 layout_mode = 3
@@ -9,64 +12,809 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
 layout_mode = 2
-alignment = 1
+mouse_filter = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="CreditsLabel" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="CreditsLabel" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Credits"
+text = "CREDITS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CreditsAmount" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="CreditsAmount" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "5000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AgentBuyMenu" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_mtvm6")]
+[node name="AgentBuyMenu" parent="PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1_mtvm6")]
 layout_mode = 2
 
-[node name="AgentBuyMenu2" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_mtvm6")]
+[node name="AgentBuyMenu2" parent="PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1_mtvm6")]
 layout_mode = 2
 
-[node name="AgentBuyMenu3" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_mtvm6")]
+[node name="AgentBuyMenu3" parent="PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1_mtvm6")]
 layout_mode = 2
 
-[node name="AgentBuyMenu4" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_mtvm6")]
+[node name="AgentBuyMenu4" parent="PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1_mtvm6")]
 layout_mode = 2
 
-[node name="AgentBuyMenu5" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_mtvm6")]
+[node name="AgentBuyMenu5" parent="PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1_mtvm6")]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+columns = 3
+
+[node name="Sidearms" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_4kfsn")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/HeaderPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/HeaderPanel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GunTypeLabel" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/HeaderPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "SIDEARMS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Classic" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms"]
+custom_minimum_size = Vector2(0, 143.75)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_0edcf")
+
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic"]
+layout_mode = 2
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_ohcbr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Classic"
+
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Free"
+
+[node name="Classic2" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms"]
+custom_minimum_size = Vector2(0, 143.75)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_0edcf")
+
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic2"]
+layout_mode = 2
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic2"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic2/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_ohcbr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic2/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Classic"
+
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic2/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic2/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Free"
+
+[node name="Classic3" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms"]
+custom_minimum_size = Vector2(0, 143.75)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_0edcf")
+
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic3"]
+layout_mode = 2
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic3"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic3/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic3/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_ohcbr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Classic"
+
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Free"
+
+[node name="Classic4" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms"]
+custom_minimum_size = Vector2(0, 143.75)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_0edcf")
+
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic4"]
+layout_mode = 2
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic4"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic4/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic4/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_ohcbr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic4/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Classic"
+
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Sidearms/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Free"
+
+[node name="Col2Weapons" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="SMGs" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_4kfsn")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/HeaderPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/HeaderPanel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GunTypeLabel" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/HeaderPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "SMGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stinger" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs"]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_0edcf")
+
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Stinger"]
+layout_mode = 2
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Stinger"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Stinger/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Stinger/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_ohcbr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Stinger/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Stinger/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Classic"
+
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Stinger/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Stinger/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Free"
+
+[node name="Spectre" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs"]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_0edcf")
+
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Spectre"]
+layout_mode = 2
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Spectre"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Spectre/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Spectre/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_ohcbr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Spectre/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Spectre/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Classic"
+
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Spectre/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/SMGs/Spectre/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Free"
+
+[node name="Rifles" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_4kfsn")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/HeaderPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/HeaderPanel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GunTypeLabel" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/HeaderPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "RIFLES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stinger" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles"]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_0edcf")
+
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Stinger"]
+layout_mode = 2
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Stinger"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Stinger/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Stinger/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_ohcbr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Stinger/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Stinger/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Classic"
+
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Stinger/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Stinger/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Free"
+
+[node name="Spectre" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles"]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_0edcf")
+
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Spectre"]
+layout_mode = 2
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Spectre"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Spectre/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Spectre/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_ohcbr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Spectre/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Spectre/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Classic"
+
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Spectre/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col2Weapons/Rifles/Spectre/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Free"
+
+[node name="Col3Weapons" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="SMGs" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_4kfsn")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/HeaderPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/HeaderPanel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GunTypeLabel" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/HeaderPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "SMGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stinger" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs"]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_0edcf")
+
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Stinger"]
+layout_mode = 2
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Stinger"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Stinger/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Stinger/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_ohcbr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Stinger/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Stinger/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Classic"
+
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Stinger/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Stinger/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Free"
+
+[node name="Spectre" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs"]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_0edcf")
+
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Spectre"]
+layout_mode = 2
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Spectre"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Spectre/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Spectre/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_ohcbr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Spectre/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Spectre/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Classic"
+
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Spectre/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/SMGs/Spectre/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Free"
+
+[node name="Rifles" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_4kfsn")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/HeaderPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/HeaderPanel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GunTypeLabel" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/HeaderPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "RIFLES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stinger" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles"]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_0edcf")
+
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Stinger"]
+layout_mode = 2
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Stinger"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Stinger/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Stinger/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_ohcbr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Stinger/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Stinger/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Classic"
+
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Stinger/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Stinger/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Free"
+
+[node name="Spectre" type="PanelContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles"]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_0edcf")
+
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Spectre"]
+layout_mode = 2
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Spectre"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Spectre/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Spectre/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_ohcbr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Spectre/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Spectre/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Classic"
+
+[node name="Control" type="Control" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Spectre/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/GridContainer/Col3Weapons/Rifles/Spectre/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Free"
