@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cg5uegvis8jsw"]
 
-[ext_resource type="Script" uid="uid://dow21enry0k47" path="res://scripts/TurnOrder.gd" id="1_grn3g"]
+[ext_resource type="Script" path="res://scripts/TurnOrder.gd" id="1_grn3g"]
 [ext_resource type="PackedScene" uid="uid://davlo4xqlsenx" path="res://prefabs/TurnOrderCard.tscn" id="2_kpawf"]
 
 [node name="TurnOrder" type="Control"]
@@ -18,4 +18,5 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
+theme_override_constants/separation = 0
 alignment = 1

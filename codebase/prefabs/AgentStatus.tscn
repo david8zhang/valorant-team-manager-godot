@@ -39,9 +39,9 @@ texture = ExtResource("1_d1d8l")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 16
 text = "Player 1"
-vertical_alignment = 2
+vertical_alignment = 1
 
 [node name="ShieldBar" type="ProgressBar" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 4)

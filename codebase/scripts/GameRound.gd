@@ -25,6 +25,7 @@ enum TopViewState {
 @onready var turn_order_list_view := $CanvasLayer/Control/TurnOrder as TurnOrder
 @onready var toggle_top_view_button := $CanvasLayer/Control/ToggleTopView as Button
 @onready var round_result = $CanvasLayer/Control/RoundResult as RoundResult
+@onready var buy_menu = $CanvasLayer/Control/BuyMenu as BuyMenu
 
 @export var bomb_scene: PackedScene
 
@@ -42,7 +43,7 @@ var top_view_state := TopViewState.SCOREBOARD
 var bomb: Bomb
 
 func _ready():
-	round_result.on_continue.connect(incr_score_and_go_to_next_round)
+	round_result.on_continue.connect(incr_score_and_go_to_buy_phase)
 	action_menu.agent_controller = agent_controller
 	agent_controller.action_menu = action_menu
 	agent_controller.on_complete_turn.connect(go_to_next_turn)
@@ -62,6 +63,7 @@ func _ready():
 	toggle_top_view_button.pressed.connect(toggle_top_view)
 	setup_game_round_variables()
 	start_turn_for_next_agent()
+	set_top_view_state(top_view_state)
 
 	# Test bomb defusal logic
 	# attack_side = Side.CPU
@@ -101,7 +103,6 @@ func start_turn_for_next_agent():
 		else:
 			action_menu.hide()
 			cpu_agent_controller.start_turn(next_agent_in_turn_queue)
-
 
 func go_to_next_turn():
 	for i in range(curr_turn_index + 1, curr_turn_index + 1 + turn_queue.size()):
@@ -237,21 +238,30 @@ func get_agent_for_name(agent_name: String):
 			return agent
 	return null
 
+func set_top_view_state(new_state: TopViewState):
+	match new_state:
+		TopViewState.SCOREBOARD:
+			toggle_top_view_button.text = "Show Turn Order"
+			turn_order_list_view.hide()
+			scoreboard.show()
+		TopViewState.TURN_QUEUE:
+			toggle_top_view_button.text = "Hide"
+			turn_order_list_view.show()
+			scoreboard.hide()
+		TopViewState.HIDDEN:
+			toggle_top_view_button.text = "Show Scoreboard"
+			scoreboard.hide()
+			turn_order_list_view.hide()
+	top_view_state = new_state
+
 func toggle_top_view():
 	match top_view_state:
 		TopViewState.SCOREBOARD:
-			toggle_top_view_button.text = "Hide Top View"
-			scoreboard.hide()
-			turn_order_list_view.show()
-			top_view_state = TopViewState.TURN_QUEUE
+			set_top_view_state(TopViewState.TURN_QUEUE)
 		TopViewState.TURN_QUEUE:
-			toggle_top_view_button.text = "Show Scoreboard"
-			turn_order_list_view.hide()
-			top_view_state = TopViewState.HIDDEN
+			set_top_view_state(TopViewState.HIDDEN)
 		TopViewState.HIDDEN:
-			toggle_top_view_button.text = "Show Turn Order"
-			scoreboard.show()
-			top_view_state = TopViewState.SCOREBOARD
+			set_top_view_state(TopViewState.SCOREBOARD)
 
 func get_turn_queue_agents():
 	return turn_queue.map(func (agent_name): return get_agent_for_name(agent_name))
@@ -305,17 +315,22 @@ func stop_defuse_bomb(defuser: Agent):
 	bomb.set_bomb_state(Bomb.BombState.PLANTED)
 	scoreboard.reset_defuse_container()
 
-func incr_score_and_go_to_next_round(last_winning_side: GameRound.Side):
+func incr_score_and_go_to_buy_phase(last_winning_side: GameRound.Side):
 	scoreboard.incr_score(last_winning_side)
 	scoreboard.incr_round()
-	scoreboard.switch_to_phase(Scoreboard.Phase.PRE_PLANT)
 	curr_turn_index = 0
 	scoreboard.reset()
-	player_team.reset_agents()
-	cpu_team.reset_agents()
+	# player_team.reset_agents()
+	# cpu_team.reset_agents()
 	for a in player_team.agents:
 		a.update_visible_tiles()
 		a.show()
 	place_bomb()
 	bomb.set_bomb_state(Bomb.BombState.DROPPED)
-	start_turn_for_next_agent()
+	scoreboard.switch_to_phase(Scoreboard.Phase.BUY)
+
+func setup_player_buy_menu(last_winning_side: GameRound.Side):
+	toggle_top_view_button.hide()
+	buy_menu.show()
+	buy_menu.init_agent_info(player_team.agents)
+	buy_menu.setup_credits(last_winning_side)

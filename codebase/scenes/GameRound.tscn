@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cui8rqxwjorad"]
+[gd_scene load_steps=18 format=3 uid="uid://cui8rqxwjorad"]
 
 [ext_resource type="Script" uid="uid://ctv4akl0kybty" path="res://scripts/GameRound.gd" id="1_dq0hy"]
 [ext_resource type="PackedScene" uid="uid://bwxh0x0hbhhs0" path="res://prefabs/Bomb.tscn" id="2_0iflm"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://sgc1ljm2q1sl" path="res://scripts/CPUAgentController.gd" id="8_twj6c"]
 [ext_resource type="PackedScene" uid="uid://c0xqijdur3pcu" path="res://prefabs/BattlePreview.tscn" id="9_1ryu6"]
 [ext_resource type="PackedScene" uid="uid://b7whhr7p0we7h" path="res://prefabs/RoundResult.tscn" id="9_yiupv"]
+[ext_resource type="PackedScene" uid="uid://bj7jqevcv2wem" path="res://prefabs/BuyMenu.tscn" id="10_khead"]
 
 [node name="GameRound" type="Node2D"]
 script = ExtResource("1_dq0hy")
@@ -34,9 +35,6 @@ mouse_filter = 2
 
 [node name="TurnOrder" parent="CanvasLayer/Control" instance=ExtResource("2_w36hm")]
 visible = false
-layout_mode = 1
-
-[node name="Scoreboard" parent="CanvasLayer/Control" instance=ExtResource("2_d43p7")]
 layout_mode = 1
 
 [node name="TeamStatus" parent="CanvasLayer/Control" instance=ExtResource("2_ngxvu")]
@@ -87,6 +85,13 @@ text = "Show Turn Order"
 
 [node name="RoundResult" parent="CanvasLayer/Control" instance=ExtResource("9_yiupv")]
 visible = false
+layout_mode = 1
+
+[node name="BuyMenu" parent="CanvasLayer/Control" instance=ExtResource("10_khead")]
+visible = false
+layout_mode = 1
+
+[node name="Scoreboard" parent="CanvasLayer/Control" instance=ExtResource("2_d43p7")]
 layout_mode = 1
 
 [node name="GameCamera" type="Camera2D" parent="."]

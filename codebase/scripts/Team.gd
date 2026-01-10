@@ -13,6 +13,9 @@ extends Node2D
 @export var space_btwn_agents = 2
 @export var name_prefix := ""
 
+# Start with 800 credits per agent (800 x 5)
+var num_credits := 4000
+
 var agents := []
 
 func _ready() -> void:
