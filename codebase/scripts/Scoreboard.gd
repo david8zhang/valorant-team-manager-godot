@@ -81,7 +81,7 @@ func switch_to_phase(phase: Scoreboard.Phase):
 			turns_remaining_bottom_label.add_theme_color_override("font_color", Color.WHITE)
 			round_info_container.add_theme_stylebox_override("panel", load("res://prefabs/PlantedTurnRem.tres"))
 		Phase.BUY:
-			round_number_label.text = "PLANTED"
+			round_number_label.text = "BUY"
 			round_number_label.add_theme_color_override("font_color", Color.BLACK)
 			round_number_label.add_theme_color_override("font_color", Color.BLACK)
 			turns_remaining_label.add_theme_color_override("font_color", Color.BLACK)

@@ -282,6 +282,7 @@ func continue_bomb_plant(planter: Agent):
 	if scoreboard.plant_progress == Scoreboard.PLANT_REQ_TURNS:
 		planter.has_bomb = false
 		planter.is_planting = false
+		planter.did_plant_this_round = true
 		var plant_pos = planter.global_position
 		bomb.global_position = Vector2(plant_pos.x, plant_pos.y)
 		bomb.show()
@@ -308,6 +309,8 @@ func continue_bomb_defuse(defuser: Agent):
 	defuser.rem_action_points = 0
 	action_menu.update_all()
 	scoreboard.incr_defuse_container()
+	if scoreboard.defuse_progress == Scoreboard.DEFUSE_REQ_TURNS:
+		defuser.did_defuse_this_round = true
 
 func stop_defuse_bomb(defuser: Agent):
 	defuser.is_defusing = false
@@ -328,9 +331,10 @@ func incr_score_and_go_to_buy_phase(last_winning_side: GameRound.Side):
 	place_bomb()
 	bomb.set_bomb_state(Bomb.BombState.DROPPED)
 	scoreboard.switch_to_phase(Scoreboard.Phase.BUY)
+	setup_player_buy_menu(last_winning_side)
 
 func setup_player_buy_menu(last_winning_side: GameRound.Side):
 	toggle_top_view_button.hide()
 	buy_menu.show()
 	buy_menu.init_agent_info(player_team.agents)
-	buy_menu.setup_credits(last_winning_side)
+	buy_menu.setup_credits(player_team.agents, last_winning_side)

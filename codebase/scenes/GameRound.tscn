@@ -37,14 +37,14 @@ mouse_filter = 2
 visible = false
 layout_mode = 1
 
-[node name="TeamStatus" parent="CanvasLayer/Control" instance=ExtResource("2_ngxvu")]
+[node name="PlayerTeamStatus" parent="CanvasLayer/Control" instance=ExtResource("2_ngxvu")]
 layout_mode = 1
 anchors_preset = 9
 anchor_left = 0.0
 anchor_right = 0.0
 grow_horizontal = 1
 
-[node name="TeamStatus2" parent="CanvasLayer/Control" instance=ExtResource("2_ngxvu")]
+[node name="CPUTeamStatus" parent="CanvasLayer/Control" instance=ExtResource("2_ngxvu")]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -105,7 +105,7 @@ map = NodePath("../Map")
 
 [node name="PlayerTeam" type="Node2D" parent="." node_paths=PackedStringArray("team_status", "map")]
 script = ExtResource("5_dbxdc")
-team_status = NodePath("../CanvasLayer/Control/TeamStatus")
+team_status = NodePath("../CanvasLayer/Control/PlayerTeamStatus")
 agent_scene = ExtResource("3_74q1x")
 map = NodePath("../Map")
 start_x = 50
@@ -121,7 +121,7 @@ team = NodePath("..")
 [node name="CPUTeam" type="Node2D" parent="." node_paths=PackedStringArray("team_status", "map")]
 script = ExtResource("5_dbxdc")
 side = 1
-team_status = NodePath("../CanvasLayer/Control/TeamStatus2")
+team_status = NodePath("../CanvasLayer/Control/CPUTeamStatus")
 agent_scene = ExtResource("3_74q1x")
 map = NodePath("../Map")
 start_x = 50

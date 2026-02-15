@@ -25,6 +25,9 @@ var rem_action_points = TOTAL_ACTION_POINTS
 var has_completed_turn := false
 var curr_side: GameRound.Side
 var damage_source_mapping = {}
+var kills_this_round := 0
+var did_plant_this_round := false
+var did_defuse_this_round := false
 
 var primary_weapon: Weapon = null
 var sidearm_weapon: Weapon = null
@@ -112,7 +115,6 @@ func get_visible_tiles() -> Array:
 				res.append(tile)
 	return res
 
-
 func is_tile_blocked(start: Vector2i, target: Vector2i) -> bool:
 	var points := bresenham_line(start.x, start.y, target.x, target.y)
 	for p in points:
@@ -121,7 +123,6 @@ func is_tile_blocked(start: Vector2i, target: Vector2i) -> bool:
 		if map.walls_layer.get_cell_source_id(p) != -1:
 			return true
 	return false
-
 
 func bresenham_line(x0, y0, x1, y1) -> Array[Vector2i]:
 	var line: Array[Vector2i] = []
@@ -191,6 +192,7 @@ func on_attack_finished(projectile: Node2D, enemy_to_attack: Agent, should_retal
 	if enemy_to_attack.get_curr_health() == 0:
 		GameRoundVariables.update_kill_count_for_agent(agent_name)
 		GameRoundVariables.update_assist_counts(enemy_to_attack, agent_name)
+		kills_this_round += 1
 		on_kill.emit()
 
 	projectile.queue_free()

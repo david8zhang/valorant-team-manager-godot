@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://wxeqn8voogow"]
 
 [ext_resource type="Texture2D" uid="uid://beu1d2qdbfmxn" path="res://assets/agents/brimstone.png" id="1_d1d8l"]
-[ext_resource type="Script" path="res://scripts/AgentStatus.gd" id="1_mjuwj"]
+[ext_resource type="Script" uid="uid://bjddamp2r15i4" path="res://scripts/AgentStatus.gd" id="1_mjuwj"]
 [ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="2_wjiy0"]
 [ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="3_knam2"]
 [ext_resource type="StyleBox" uid="uid://cy5g0kjs21b00" path="res://prefabs/ShieldFill.tres" id="4_tpx7d"]

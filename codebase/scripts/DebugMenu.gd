@@ -4,12 +4,17 @@ extends Control
 @onready var game_round = get_node("/root/GameRound") as GameRound
 @onready var show_cpu_vision_button = $VBoxContainer/ShowCPUVision as Button
 @onready var show_player_vision_button = $VBoxContainer/ShowPlayerVision as Button
+@onready var force_player_win_elim_button = $VBoxContainer/ForcePlayerElimWin as Button
+@onready var force_player_win_detonate_button = $VBoxContainer/ForcePlayerDetonateWin as Button
+@onready var force_cpu_win_elim_button = $VBoxContainer/ForceCPUElimWin as Button
+@onready var force_cpu_win_defuse_button = $VBoxContainer/ForceCPUDefuseWin as Button
 
 var vision_side_to_show := GameRound.Side.PLAYER
 
 func _ready() -> void:
 	show_cpu_vision_button.pressed.connect(show_cpu_vision)
 	show_player_vision_button.pressed.connect(show_player_vision)
+	force_player_win_elim_button.pressed.connect(force_player_win_elim)
 	await game_round.ready
 	game_round.cpu_agent_controller.on_complete_move.connect(update_cpu_vision_after_move)
 
@@ -40,3 +45,14 @@ func show_player_vision():
 			agent.show()
 	game_round.map.show_player_team_visible_tiles()
 	game_round.update_visible_enemies_to_player()
+
+func force_player_win_elim():
+	for a in game_round.player_team.agents:
+		var agent = a as Agent
+		GameRoundVariables.update_kill_count_for_agent(agent.agent_name)
+		agent.kills_this_round += 1
+	for a in game_round.cpu_team.agents:
+		var agent = a as Agent
+		agent.health_bar.value = 0
+	game_round.handle_win_condition(RoundResult.WinCondition.ELIMINATION)
+	visible = false

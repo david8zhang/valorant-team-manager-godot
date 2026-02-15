@@ -53,5 +53,8 @@ func reset_agents():
 		agent.has_completed_turn = false
 		agent.is_planting = false
 		agent.is_defusing = false
+		agent.did_defuse_this_round = false
+		agent.did_plant_this_round = false
+		agent.kills_this_round = 0
 		map.move_node_to_pos(agent, x_pos, y_pos)
 		x_pos += space_btwn_agents
