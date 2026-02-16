@@ -26,6 +26,8 @@ enum TopViewState {
 @onready var toggle_top_view_button := $CanvasLayer/Control/ToggleTopView as Button
 @onready var round_result = $CanvasLayer/Control/RoundResult as RoundResult
 @onready var buy_menu = $CanvasLayer/Control/BuyMenu as BuyMenu
+@onready var player_team_status = $CanvasLayer/Control/PlayerTeamStatus as TeamStatus
+@onready var cpu_team_status = $CanvasLayer/Control/CPUTeamStatus as TeamStatus
 
 @export var bomb_scene: PackedScene
 
@@ -323,8 +325,6 @@ func incr_score_and_go_to_buy_phase(last_winning_side: GameRound.Side):
 	scoreboard.incr_round()
 	curr_turn_index = 0
 	scoreboard.reset()
-	# player_team.reset_agents()
-	# cpu_team.reset_agents()
 	for a in player_team.agents:
 		a.update_visible_tiles()
 		a.show()
@@ -338,3 +338,17 @@ func setup_player_buy_menu(last_winning_side: GameRound.Side):
 	buy_menu.show()
 	buy_menu.init_agent_info(player_team.agents)
 	buy_menu.setup_credits(player_team.agents, last_winning_side)
+	player_team_status.hide()
+	cpu_team_status.hide()
+	action_menu.hide()
+
+func on_buy_finished():
+	player_team.reset_agents()
+	cpu_team.reset_agents()
+	scoreboard.switch_to_phase(Scoreboard.Phase.PRE_PLANT)
+	buy_menu.hide()
+	player_team_status.update_from_team(player_team.agents)
+	cpu_team_status.update_from_team(cpu_team.agents)
+	player_team_status.show()
+	cpu_team_status.show()
+	action_menu.show()

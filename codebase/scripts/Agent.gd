@@ -15,6 +15,7 @@ extends Node2D
 static var DEFAULT_SCALE = 1.5
 static var TOTAL_ACTION_POINTS = 5
 static var MAX_HEALTH = 100
+static var MAX_SHIELDS = 50
 
 var agent_name := ""
 var map: Map

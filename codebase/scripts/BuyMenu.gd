@@ -3,7 +3,8 @@ extends Control
 
 @onready var agent_buy_menu_container = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer as VBoxContainer
 @onready var credits_amount_label = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/CreditsAmount as Label
-@export var agent_buy_menu_scene: PackedScene
+@onready var continue_button = $Button as Button
+@onready var game_round = get_node("/root/GameRound") as GameRound
 
 # Buy menu options
 @onready var classic_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic as GunBuyMenuOption
@@ -21,6 +22,8 @@ extends Control
 @onready var ability_1_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Abilities/HBoxContainer/Ability1 as GunBuyMenuOption
 @onready var ability_2_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Abilities/HBoxContainer/Ability2 as GunBuyMenuOption
 @onready var shields_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Armor/HBoxContainer/Shields as GunBuyMenuOption
+
+@export var agent_buy_menu_scene: PackedScene
 
 var agent_to_buy_for: AgentBuyMenu
 var selected_buy_option: GunBuyMenuOption
@@ -54,7 +57,7 @@ func _ready() -> void:
 	for o in all_buy_options:
 		var option = o as GunBuyMenuOption
 		option.on_click.connect(select_option_to_buy)
-
+	continue_button.pressed.connect(game_round.on_buy_finished)
 
 func init_agent_info(agents):
 	for a in agents:
