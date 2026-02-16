@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bj7jqevcv2wem"]
+[gd_scene load_steps=5 format=3 uid="uid://bj7jqevcv2wem"]
 
 [ext_resource type="Script" uid="uid://62jjydbsvanb" path="res://scripts/BuyMenu.gd" id="1_3ejf4"]
 [ext_resource type="PackedScene" uid="uid://c3hk0br2pjrhf" path="res://prefabs/AgentBuyMenu.tscn" id="1_mtvm6"]
 [ext_resource type="StyleBox" uid="uid://k2ihmpstyn38" path="res://prefabs/BuyMenuWeaponHeader.tres" id="2_4kfsn"]
-[ext_resource type="StyleBox" uid="uid://i60bo6vogxxm" path="res://prefabs/BuyMenuWeapon.tres" id="3_0edcf"]
-[ext_resource type="Texture2D" uid="uid://doyiqs3ra7cy1" path="res://assets/placeholder/pistol.png" id="4_ohcbr"]
+[ext_resource type="PackedScene" uid="uid://bxqir2xgtiyhh" path="res://prefabs/GunBuyMenuOption.tscn" id="6_3ejf4"]
 
 [node name="BuyMenu" type="Control"]
 layout_mode = 3
@@ -109,205 +108,25 @@ text = "SIDEARMS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Classic" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms"]
-custom_minimum_size = Vector2(0, 100)
+[node name="Classic" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 size_flags_vertical = 3
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_0edcf")
+gun_name = "Classic"
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic"]
-layout_mode = 2
-flat = true
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_ohcbr")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Classic"
-
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Free"
-
-[node name="Classic2" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms"]
-custom_minimum_size = Vector2(0, 100)
+[node name="Frenzy" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 size_flags_vertical = 3
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_0edcf")
+gun_name = "Frenzy"
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic2"]
-layout_mode = 2
-flat = true
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic2"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic2/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic2/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_ohcbr")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic2/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Classic"
-
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic2/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic2/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Free"
-
-[node name="Classic3" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms"]
-custom_minimum_size = Vector2(0, 100)
+[node name="Ghost" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 size_flags_vertical = 3
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_0edcf")
+gun_name = "Ghost"
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic3"]
-layout_mode = 2
-flat = true
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic3"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic3/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic3/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_ohcbr")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic3/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Classic"
-
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Free"
-
-[node name="Classic4" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms"]
-custom_minimum_size = Vector2(0, 100)
+[node name="Sheriff" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 size_flags_vertical = 3
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_0edcf")
-
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic4"]
-layout_mode = 2
-flat = true
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic4"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic4/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic4/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_ohcbr")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic4/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Classic"
-
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Free"
+gun_name = "Sheriff"
 
 [node name="Col2Weapons" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer"]
 layout_mode = 2
@@ -340,103 +159,13 @@ text = "SMGS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Classic3" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs"]
-custom_minimum_size = Vector2(0, 100)
+[node name="Stinger" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_0edcf")
+gun_name = "Stinger"
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic3"]
+[node name="Spectre" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
-flat = true
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic3"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic3/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic3/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_ohcbr")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic3/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Classic"
-
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Free"
-
-[node name="Classic4" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_0edcf")
-
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic4"]
-layout_mode = 2
-flat = true
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic4"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic4/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic4/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_ohcbr")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic4/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Classic"
-
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Free"
+gun_name = "Spectre"
 
 [node name="Rifles" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons"]
 layout_mode = 2
@@ -464,103 +193,12 @@ text = "RIFLES"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Classic3" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles"]
-custom_minimum_size = Vector2(0, 100)
+[node name="Vandal" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_0edcf")
+gun_name = "Vandal"
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic3"]
+[node name="Guardian" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
-flat = true
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic3"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic3/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic3/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_ohcbr")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic3/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Classic"
-
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Free"
-
-[node name="Classic4" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_0edcf")
-
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic4"]
-layout_mode = 2
-flat = true
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic4"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic4/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic4/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_ohcbr")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic4/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Classic"
-
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Free"
 
 [node name="Col2Weapons2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer"]
 layout_mode = 2
@@ -568,253 +206,73 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 5
 
-[node name="SMGs" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2"]
+[node name="SniperRifles" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs"]
+[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles"]
 custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_4kfsn")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/HeaderPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles/HeaderPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/HeaderPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles/HeaderPanel/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="GunTypeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/HeaderPanel/MarginContainer/HBoxContainer"]
+[node name="GunTypeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles/HeaderPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "SMGS"
+text = "SNIPER RIFLES"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Classic3" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs"]
-custom_minimum_size = Vector2(0, 100)
+[node name="Marshall" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_0edcf")
+gun_name = "Marshall"
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic3"]
+[node name="Operator" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
-flat = true
+gun_name = "Operator"
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic3"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic3/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic3/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_ohcbr")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic3/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Classic"
-
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Free"
-
-[node name="Classic4" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_0edcf")
-
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic4"]
-layout_mode = 2
-flat = true
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic4"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic4/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic4/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_ohcbr")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic4/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Classic"
-
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SMGs/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Free"
-
-[node name="Rifles" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2"]
+[node name="MachineGuns" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles"]
+[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns"]
 custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_4kfsn")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/HeaderPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns/HeaderPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/HeaderPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns/HeaderPanel/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="GunTypeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/HeaderPanel/MarginContainer/HBoxContainer"]
+[node name="GunTypeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns/HeaderPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "RIFLES"
+text = "MACHINE GUNS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Classic3" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles"]
-custom_minimum_size = Vector2(0, 100)
+[node name="Ares" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_0edcf")
+gun_name = "Ares"
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic3"]
+[node name="Odin" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
-flat = true
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic3"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic3/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic3/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_ohcbr")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic3/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Classic"
-
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Free"
-
-[node name="Classic4" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_0edcf")
-
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic4"]
-layout_mode = 2
-flat = true
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic4"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic4/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic4/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_ohcbr")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic4/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Classic"
-
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/Rifles/Classic4/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Free"
+gun_name = "Odin"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(896, 0)
@@ -822,214 +280,76 @@ layout_mode = 2
 size_flags_horizontal = 8
 alignment = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+[node name="Abilities" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer"]
+[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Abilities"]
 custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_4kfsn")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HeaderPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Abilities/HeaderPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HeaderPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Abilities/HeaderPanel/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="AbilitiesLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HeaderPanel/MarginContainer/HBoxContainer"]
+[node name="AbilitiesLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Abilities/HeaderPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "ABILITIES"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Abilities"]
 layout_mode = 2
 
-[node name="Classic" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_0edcf")
-
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic"]
-layout_mode = 2
-flat = true
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_ohcbr")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Classic"
-
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Ability1" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Abilities/HBoxContainer" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 size_flags_horizontal = 3
+gun_name = "ABILITY_1"
 
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Free"
-
-[node name="Classic2" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
+[node name="Ability2" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Abilities/HBoxContainer" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_0edcf")
+gun_name = "ABILITY_2"
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic2"]
-layout_mode = 2
-flat = true
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic2"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic2/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic2/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_ohcbr")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic2/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Classic"
-
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic2/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer/HBoxContainer/Classic2/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Free"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+[node name="Armor" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
 layout_mode = 2
 
-[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer2"]
+[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Armor"]
 custom_minimum_size = Vector2(300, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("2_4kfsn")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer2/HeaderPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Armor/HeaderPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer2/HeaderPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Armor/HeaderPanel/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="ArmorLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer2/HeaderPanel/MarginContainer/HBoxContainer"]
+[node name="ArmorLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Armor/HeaderPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "ARMOR"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Armor"]
 layout_mode = 2
 
-[node name="Classic" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
+[node name="Shields" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Armor/HBoxContainer" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("3_0edcf")
-
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer2/HBoxContainer/Classic"]
-layout_mode = 2
-flat = true
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer2/HBoxContainer/Classic"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer2/HBoxContainer/Classic/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer2/HBoxContainer/Classic/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 80)
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("4_ohcbr")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer2/HBoxContainer/Classic/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer2/HBoxContainer/Classic/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Classic"
-
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer2/HBoxContainer/Classic/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/VBoxContainer2/HBoxContainer/Classic/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Free"
+gun_name = "Shields"
 
 [node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2(150, 0)

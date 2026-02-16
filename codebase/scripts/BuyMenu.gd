@@ -5,6 +5,26 @@ extends Control
 @onready var credits_amount_label = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/CreditsAmount as Label
 @export var agent_buy_menu_scene: PackedScene
 
+# Buy menu options
+@onready var classic_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Classic as GunBuyMenuOption
+@onready var frenzy_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Frenzy as GunBuyMenuOption
+@onready var ghost_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Ghost as GunBuyMenuOption
+@onready var sheriff_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms/Sheriff as GunBuyMenuOption
+@onready var stinger_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Stinger as GunBuyMenuOption
+@onready var spectre_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/Spectre as GunBuyMenuOption
+@onready var vandal_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Vandal as GunBuyMenuOption
+@onready var guardian_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/Guardian as GunBuyMenuOption
+@onready var marshall_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles/Marshall as GunBuyMenuOption
+@onready var operator_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles/Operator as GunBuyMenuOption
+@onready var ares_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns/Ares as GunBuyMenuOption
+@onready var odin_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns/Odin as GunBuyMenuOption
+@onready var ability_1_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Abilities/HBoxContainer/Ability1 as GunBuyMenuOption
+@onready var ability_2_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Abilities/HBoxContainer/Ability2 as GunBuyMenuOption
+@onready var shields_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Armor/HBoxContainer/Shields as GunBuyMenuOption
+
+var agent_to_buy_for: AgentBuyMenu
+var selected_buy_option: GunBuyMenuOption
+
 static var CREDITS_WIN = 3000
 static var CREDITS_SURVIVE_LOSS = 1000
 static var CREDITS_ONE_LOSS = 1900
@@ -13,12 +33,48 @@ static var CREDITS_THREE_LOSS = 2900
 static var CREDITS_SPIKE_PLANT = 300
 static var CREDITS_KILL = 200
 
+func _ready() -> void:
+	var all_buy_options = [
+		classic_buy_option,
+		frenzy_buy_option,
+		ghost_buy_option,
+		sheriff_buy_option,
+		stinger_buy_option,
+		spectre_buy_option,
+		vandal_buy_option,
+		guardian_buy_option,
+		marshall_buy_option,
+		operator_buy_option,
+		ares_buy_option,
+		odin_buy_option,
+		ability_1_option,
+		ability_2_option,
+		shields_option
+	]
+	for o in all_buy_options:
+		var option = o as GunBuyMenuOption
+		option.on_click.connect(select_option_to_buy)
+
+
 func init_agent_info(agents):
 	for a in agents:
 		var agent = a as Agent
 		var agent_buy_menu = agent_buy_menu_scene.instantiate() as AgentBuyMenu
 		agent_buy_menu_container.add_child(agent_buy_menu)
 		agent_buy_menu.init_from_agent(agent)
+		agent_buy_menu.on_click.connect(select_agent_to_buy_for)
+
+func select_agent_to_buy_for(agent_buy_menu: AgentBuyMenu):
+	if agent_to_buy_for != null:
+		agent_to_buy_for.de_highlight()
+	agent_to_buy_for = agent_buy_menu
+	agent_buy_menu.highlight()
+
+func select_option_to_buy(gun_buy_menu_option: GunBuyMenuOption):
+	if selected_buy_option != null:
+		selected_buy_option.de_highlight()
+	selected_buy_option = gun_buy_menu_option
+	gun_buy_menu_option.highlight()
 
 func setup_credits(agents, winning_side: GameRound.Side):
 	for a in agents:

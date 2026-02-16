@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxqir2xgtiyhh"]
+
+[ext_resource type="Texture2D" uid="uid://doyiqs3ra7cy1" path="res://assets/placeholder/pistol.png" id="1_3ub3c"]
+[ext_resource type="StyleBox" uid="uid://i60bo6vogxxm" path="res://prefabs/BuyMenuWeapon.tres" id="1_y22a2"]
+[ext_resource type="Script" uid="uid://crhkbeik66irf" path="res://scripts/GunBuyMenuOption.gd" id="2_ul52r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ul52r"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.27451, 0.854902, 0.65098, 1)
+
+[node name="GunBuyMenuOption" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 100)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_y22a2")
+script = ExtResource("2_ul52r")
+gun_name = "Guardian"
+texture = ExtResource("1_3ub3c")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_ul52r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ul52r")
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_3ub3c")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Guardian"
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Free"
