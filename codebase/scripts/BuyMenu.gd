@@ -57,7 +57,8 @@ func _ready() -> void:
 	for o in all_buy_options:
 		var option = o as GunBuyMenuOption
 		option.on_click.connect(select_option_to_buy)
-	continue_button.pressed.connect(game_round.on_buy_finished)
+	if game_round != null:
+		continue_button.pressed.connect(game_round.on_buy_finished)
 
 func init_agent_info(agents):
 	for a in agents:

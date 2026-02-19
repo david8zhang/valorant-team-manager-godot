@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bj7jqevcv2wem"]
+[gd_scene load_steps=6 format=3 uid="uid://bj7jqevcv2wem"]
 
 [ext_resource type="Script" uid="uid://62jjydbsvanb" path="res://scripts/BuyMenu.gd" id="1_3ejf4"]
 [ext_resource type="PackedScene" uid="uid://c3hk0br2pjrhf" path="res://prefabs/AgentBuyMenu.tscn" id="1_mtvm6"]
 [ext_resource type="StyleBox" uid="uid://k2ihmpstyn38" path="res://prefabs/BuyMenuWeaponHeader.tres" id="2_4kfsn"]
+[ext_resource type="Texture2D" uid="uid://7x7bah3df7vw" path="res://assets/placeholder/vandal.png" id="5_0yq0h"]
 [ext_resource type="PackedScene" uid="uid://bxqir2xgtiyhh" path="res://prefabs/GunBuyMenuOption.tscn" id="6_3ejf4"]
 
 [node name="BuyMenu" type="Control"]
@@ -196,6 +197,7 @@ vertical_alignment = 1
 [node name="Vandal" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 gun_name = "Vandal"
+texture = ExtResource("5_0yq0h")
 
 [node name="Guardian" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles" instance=ExtResource("6_3ejf4")]
 layout_mode = 2

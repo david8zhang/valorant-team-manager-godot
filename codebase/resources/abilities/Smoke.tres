@@ -7,6 +7,7 @@
 script = ExtResource("1_juqvr")
 ability_name = "Smoke"
 ability_texture = ExtResource("1_sju02")
+ability_type = 4
 total_charges = 3
 ap_cost = 2
 metadata/_custom_type_script = "uid://d35gwtg7scsg5"

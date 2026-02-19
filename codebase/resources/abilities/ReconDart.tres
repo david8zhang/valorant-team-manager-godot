@@ -7,6 +7,7 @@
 script = ExtResource("1_3qkwe")
 ability_name = "Recon Dart"
 ability_texture = ExtResource("1_0j0kk")
+ability_type = 3
 total_charges = 1
 ap_cost = 3
 metadata/_custom_type_script = "uid://d35gwtg7scsg5"

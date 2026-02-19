@@ -7,6 +7,7 @@
 script = ExtResource("1_p04rb")
 ability_name = "Stim"
 ability_texture = ExtResource("1_iymc1")
+ability_type = 5
 total_charges = 1
 ap_cost = 3
 metadata/_custom_type_script = "uid://d35gwtg7scsg5"
