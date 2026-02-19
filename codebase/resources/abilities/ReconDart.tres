@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AbilityStats" load_steps=3 format=3 uid="uid://0xbxs735ehwb"]
+
+[ext_resource type="Texture2D" uid="uid://b0aphmn06gkvt" path="res://assets/abilities/recon-dart.png" id="1_0j0kk"]
+[ext_resource type="Script" uid="uid://d35gwtg7scsg5" path="res://scripts/AbilityStats.gd" id="1_3qkwe"]
+
+[resource]
+script = ExtResource("1_3qkwe")
+ability_name = "Recon Dart"
+ability_texture = ExtResource("1_0j0kk")
+total_charges = 1
+ap_cost = 3
+metadata/_custom_type_script = "uid://d35gwtg7scsg5"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3hk0br2pjrhf"]
+[gd_scene load_steps=10 format=3 uid="uid://c3hk0br2pjrhf"]
 
 [ext_resource type="Script" uid="uid://bhow40faq2uvu" path="res://scripts/AgentBuyMenu.gd" id="1_3pwj6"]
 [ext_resource type="StyleBox" uid="uid://catg2lupwuxlc" path="res://prefabs/AgentStatusPanelBG.tres" id="1_nnlhy"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bggumpekt0l5b" path="res://assets/placeholder/shield-solid-full.svg" id="3_5ylxy"]
 [ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="4_a1xcx"]
 [ext_resource type="Texture2D" uid="uid://7pdwea6dt72o" path="res://assets/placeholder/bomb-solid-full.svg" id="5_a1xcx"]
+[ext_resource type="Texture2D" uid="uid://ocrq5toydwyj" path="res://assets/abilities/molly.png" id="6_pw3e2"]
+[ext_resource type="Texture2D" uid="uid://c5dsbrghgsubs" path="res://assets/abilities/smoke.png" id="7_y4d75"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a1xcx"]
 bg_color = Color(0.404511, 0.404511, 0.404511, 1)
@@ -86,7 +88,7 @@ alignment = 1
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Ability1"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("5_a1xcx")
+texture = ExtResource("7_y4d75")
 expand_mode = 2
 stretch_mode = 5
 
@@ -109,7 +111,7 @@ alignment = 1
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Ability2"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("5_a1xcx")
+texture = ExtResource("6_pw3e2")
 expand_mode = 2
 stretch_mode = 5
 

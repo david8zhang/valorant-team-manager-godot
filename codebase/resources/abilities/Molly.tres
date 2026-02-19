@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AbilityStats" load_steps=3 format=3 uid="uid://nncdw1wgtm3g"]
+
+[ext_resource type="Texture2D" uid="uid://ocrq5toydwyj" path="res://assets/abilities/molly.png" id="1_3j6ox"]
+[ext_resource type="Script" uid="uid://d35gwtg7scsg5" path="res://scripts/AbilityStats.gd" id="1_biiyj"]
+
+[resource]
+script = ExtResource("1_biiyj")
+ability_name = "Molly"
+ability_texture = ExtResource("1_3j6ox")
+total_charges = 1
+ap_cost = 3
+metadata/_custom_type_script = "uid://d35gwtg7scsg5"
