@@ -9,6 +9,11 @@ extends PanelContainer
 @onready var assist_count = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer3/AssistCount
 @onready var weapon_texture = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/WeaponTexture as TextureRect
 
+@onready var ability_1_texture = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Ability1/TextureRect as TextureRect
+@onready var ability_1_charges_container = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Ability1/HBoxContainer as HBoxContainer
+@onready var ability_2_texture = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Ability2/TextureRect as TextureRect
+@onready var ability_2_charges_container = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Ability2/HBoxContainer as HBoxContainer
+
 func update_from_agent(agent: Agent):
 	agent_name_label.text = agent.agent_name
 	shield_bar.value = agent.shield_bar.value

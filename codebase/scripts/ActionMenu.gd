@@ -16,6 +16,13 @@ extends PanelContainer
 @onready var shield_bar = $VBoxContainer/NonCombatAndStats/VBoxContainer/Shields as ProgressBar
 @onready var end_turn_button = $VBoxContainer/NonCombatAndStats/EndTurn as Button
 
+@onready var ability_1_texture = $VBoxContainer/CombatAbilities/Ability1/MarginContainer/VBoxContainer/TextureRect as TextureRect
+@onready var ability_1_charges_container = $VBoxContainer/CombatAbilities/Ability1/MarginContainer/VBoxContainer/HBoxContainer as HBoxContainer
+@onready var ability_2_texture = $VBoxContainer/CombatAbilities/Ability2/MarginContainer/VBoxContainer/TextureRect as TextureRect
+@onready var ability_2_charges_container = $VBoxContainer/CombatAbilities/Ability2/MarginContainer/VBoxContainer/HBoxContainer as HBoxContainer
+
+@export var ability_charge_scene: PackedScene
+
 var agent_controller: AgentController
 var ap_rect_cost_style
 var ap_rect_unused_style
@@ -148,12 +155,30 @@ func on_defuse_button_clicked():
 			defuse_texture.texture = load("res://assets/placeholder/wrench-solid-full.svg")
 			game_round.stop_defuse_bomb(selected_agent)
 
+func update_ability_menu():
+	var selected_agent = agent_controller.selected_agent
+	var ability_1: AbilityStats = selected_agent.agent_stats.ability_1
+	var ability_2: AbilityStats = selected_agent.agent_stats.ability_2
+	ability_1_texture.texture = ability_1.ability_texture
+	ability_2_texture.texture = ability_2.ability_texture
+	for c in ability_1_charges_container.get_children():
+		ability_1_charges_container.remove_child(c)
+	for c in ability_2_charges_container.get_children():
+		ability_2_charges_container.remove_child(c)
+	for i in range(0, selected_agent.ability_1_charges):
+		var charge_rect = ability_charge_scene.instantiate() as ColorRect
+		ability_1_charges_container.add_child(charge_rect)
+	for i in range(0, selected_agent.ability_2_charges):
+		var charge_rect = ability_charge_scene.instantiate() as ColorRect
+		ability_2_charges_container.add_child(charge_rect)
+
 func update_all():
 	update_ap_menu()
 	update_health_and_shields()
 	update_weapon_info()
 	update_defuse_status()
 	update_bomb_status()
+	update_ability_menu()
 
 func end_curr_turn():
 	if game_round.curr_turn_side == GameRound.Side.PLAYER:

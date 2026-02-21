@@ -8,6 +8,8 @@ class AgentGameStats:
 	var credits := 0
 	var primary_weapon_name := WeaponStats.WeaponNames.NO_WEAPON
 	var sidearm_weapon_name := WeaponStats.WeaponNames.CLASSIC
+	var ability_1_charges := 0
+	var ability_2_charges := 0
 
 	func _init() -> void:
 			pass
@@ -53,3 +55,11 @@ func load_weapon_from_name(weapon_name: WeaponStats.WeaponNames):
 		var weapon_resource = load("res://resources/weapons/" + weapon_name_str.to_pascal_case() + ".tres")
 		return Weapon.new(weapon_resource)
 	return null
+
+func purchase_ability_charge(agent_name, ability_index):
+	var agent_game_stats = get_or_create_agent_game_stat(agent_name)
+	if ability_index == 1:
+		agent_game_stats.ability_1_charges += 1
+	elif ability_index == 2:
+		agent_game_stats.ability_2_charges += 1
+		

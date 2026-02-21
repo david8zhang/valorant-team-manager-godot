@@ -17,6 +17,9 @@ static var TOTAL_ACTION_POINTS = 5
 static var MAX_HEALTH = 100
 static var MAX_SHIELDS = 50
 
+var agent_stats: AgentStats
+var ability_1_charges := 0
+var ability_2_charges := 0
 var agent_name := ""
 var map: Map
 var vision_direction: Vector2 = Vector2.UP
@@ -53,6 +56,9 @@ func _ready() -> void:
 func init_from_game_stats(agent_game_stats: GameRoundVariables.AgentGameStats):
 	primary_weapon = GameRoundVariables.load_weapon_from_name(agent_game_stats.primary_weapon_name)
 	sidearm_weapon = GameRoundVariables.load_weapon_from_name(agent_game_stats.sidearm_weapon_name)
+	# TBD - make this based on buy menu option
+	ability_1_charges = agent_stats.ability_1.total_charges
+	ability_2_charges = agent_stats.ability_2.total_charges
 
 func agent_click():
 	on_agent_click.emit(self)

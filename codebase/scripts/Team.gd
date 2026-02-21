@@ -26,6 +26,7 @@ func _ready() -> void:
 		new_agent.map = map
 		new_agent.agent_name = name_prefix + "_" + str(i)
 		new_agent.curr_side = side
+		new_agent.agent_stats = load("res://resources/agents/Brimstone.tres")
 		add_child(new_agent)
 		var outline_color = Color8(39, 239, 190) if side == GameRound.Side.PLAYER else Color.RED
 		new_agent.set_outline(outline_color)
