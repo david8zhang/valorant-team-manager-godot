@@ -14,6 +14,8 @@ extends PanelContainer
 @onready var ability_2_texture = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Ability2/TextureRect as TextureRect
 @onready var ability_2_charges_container = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Ability2/HBoxContainer as HBoxContainer
 
+@export var ability_charge_scene: PackedScene
+
 func update_from_agent(agent: Agent):
 	agent_name_label.text = agent.agent_name
 	shield_bar.value = agent.shield_bar.value
@@ -29,3 +31,19 @@ func update_from_agent(agent: Agent):
 			weapon_texture.texture = agent.primary_weapon.weapon_stats.texture
 		else:
 			weapon_texture.texture = agent.sidearm_weapon.weapon_stats.texture
+		ability_1_texture.texture = agent.agent_stats.ability_1.ability_texture
+		ability_2_texture.texture = agent.agent_stats.ability_2.ability_texture
+		for c in ability_1_charges_container.get_children():
+			ability_1_charges_container.remove_child(c)
+		for c in ability_2_charges_container.get_children():
+			ability_2_charges_container.remove_child(c)
+		for i in range(0, agent.ability_1_charges):
+			_add_ability_charge(ability_1_charges_container)
+		for i in range(0, agent.ability_2_charges):
+			_add_ability_charge(ability_2_charges_container)
+
+func _add_ability_charge(container: HBoxContainer):
+	var charge_rect = ability_charge_scene.instantiate() as AbilityChargeRect
+	charge_rect.rect_width = 8
+	charge_rect.rect_height = 8
+	container.add_child(charge_rect)

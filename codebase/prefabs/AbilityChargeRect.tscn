@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://b171uwes5dbse"]
+[gd_scene load_steps=2 format=3 uid="uid://b171uwes5dbse"]
+
+[ext_resource type="Script" uid="uid://bqoqq204vjnyb" path="res://scripts/AbilityChargeRect.gd" id="1_qfp2f"]
 
 [node name="AbilityChargeRect" type="ColorRect"]
 custom_minimum_size = Vector2(10, 10)
+script = ExtResource("1_qfp2f")

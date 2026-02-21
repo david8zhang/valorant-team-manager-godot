@@ -95,6 +95,8 @@ func _process(_delta):
 						center_camera_on_position(pos_to_move_to)
 				if Input.is_action_just_pressed("center_camera"):
 					center_camera_on_agent(selected_agent)
+			ActionState.ABILITY_ONE or ActionState.ABILITY_TWO:
+				pass
 
 func start_turn(agent_to_select: Agent):
 	agent_to_select.rem_action_points = Agent.TOTAL_ACTION_POINTS

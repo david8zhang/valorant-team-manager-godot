@@ -10,6 +10,8 @@ extends PanelContainer
 @onready var defuse_texture = $VBoxContainer/NonCombatAndStats/NonCombatActions/Defuse/TextureRect as TextureRect
 @onready var primary_weapon = $VBoxContainer/CombatAbilities/PrimaryWeapon as ActionMenuWeapon
 @onready var sidearm_weapon = $VBoxContainer/CombatAbilities/SidearmWeapon as ActionMenuWeapon
+@onready var ability_1 = $VBoxContainer/CombatAbilities/Ability1 as Button
+@onready var ability_2 = $VBoxContainer/CombatAbilities/Ability2 as Button
 
 @onready var action_point_menu = $VBoxContainer/NonCombatAndStats/VBoxContainer/HBoxContainer as HBoxContainer
 @onready var health_bar = $VBoxContainer/NonCombatAndStats/VBoxContainer/Health as ProgressBar
@@ -37,6 +39,8 @@ func _ready() -> void:
 	watch_button.pressed.connect(func (): on_action_click(AgentController.ActionState.WATCH))
 	primary_weapon.pressed.connect(func (): on_action_click(AgentController.ActionState.PRIMARY_ATTACK))
 	sidearm_weapon.pressed.connect(func (): on_action_click(AgentController.ActionState.SECONDARY_ATTACK))
+	ability_1.pressed.connect(func (): on_action_click(AgentController.ActionState.ABILITY_ONE))
+	ability_2.pressed.connect(func (): on_action_click(AgentController.ActionState.ABILITY_TWO))
 	end_turn_button.pressed.connect(end_curr_turn)
 	ap_rect_cost_style = load("res://prefabs/ActionPoint_CostPreview.tres")
 	ap_rect_unused_style = load("res://prefabs/ActionPoint_Unused.tres")
@@ -59,6 +63,10 @@ func set_button_highlight_from_state(curr_action_state: AgentController.ActionSt
 			highlight_single_button(primary_weapon)
 		AgentController.ActionState.SECONDARY_ATTACK:
 			highlight_single_button(sidearm_weapon)
+		AgentController.ActionState.ABILITY_ONE:
+			highlight_single_button(ability_1)
+		AgentController.ActionState.ABILITY_TWO:
+			highlight_single_button(ability_2)
 
 func de_highlight_all_buttons():
 	dehighlight_single_button(watch_button)
@@ -66,6 +74,8 @@ func de_highlight_all_buttons():
 	dehighlight_single_button(move_button)
 	dehighlight_single_button(primary_weapon, 0.75)
 	dehighlight_single_button(sidearm_weapon, 0.75)
+	dehighlight_single_button(ability_1, 0.75)
+	dehighlight_single_button(ability_2, 0.75)
 
 func dehighlight_single_button(button, color = 0.6):
 	var sb := StyleBoxFlat.new()
@@ -74,7 +84,7 @@ func dehighlight_single_button(button, color = 0.6):
 
 func highlight_single_button(button):
 	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color(0, 1, 0)
+	sb.bg_color = Color("#46daa69b")
 	button.add_theme_stylebox_override("normal", sb)
 
 func preview_ap_cost(ap_cost):
@@ -157,20 +167,18 @@ func on_defuse_button_clicked():
 
 func update_ability_menu():
 	var selected_agent = agent_controller.selected_agent
-	var ability_1: AbilityStats = selected_agent.agent_stats.ability_1
-	var ability_2: AbilityStats = selected_agent.agent_stats.ability_2
-	ability_1_texture.texture = ability_1.ability_texture
-	ability_2_texture.texture = ability_2.ability_texture
+	var ability_1_stats: AbilityStats = selected_agent.agent_stats.ability_1
+	var ability_2_stats: AbilityStats = selected_agent.agent_stats.ability_2
+	ability_1_texture.texture = ability_1_stats.ability_texture
+	ability_2_texture.texture = ability_2_stats.ability_texture
 	for c in ability_1_charges_container.get_children():
 		ability_1_charges_container.remove_child(c)
 	for c in ability_2_charges_container.get_children():
 		ability_2_charges_container.remove_child(c)
 	for i in range(0, selected_agent.ability_1_charges):
-		var charge_rect = ability_charge_scene.instantiate() as ColorRect
-		ability_1_charges_container.add_child(charge_rect)
+		_add_ability_charge(ability_1_charges_container)
 	for i in range(0, selected_agent.ability_2_charges):
-		var charge_rect = ability_charge_scene.instantiate() as ColorRect
-		ability_2_charges_container.add_child(charge_rect)
+		_add_ability_charge(ability_2_charges_container)
 
 func update_all():
 	update_ap_menu()
@@ -184,3 +192,9 @@ func end_curr_turn():
 	if game_round.curr_turn_side == GameRound.Side.PLAYER:
 		hide()
 		agent_controller.complete_turn()
+
+func _add_ability_charge(container: HBoxContainer):
+	var charge_rect = ability_charge_scene.instantiate() as AbilityChargeRect
+	charge_rect.rect_width = 10
+	charge_rect.rect_height = 10
+	container.add_child(charge_rect)
