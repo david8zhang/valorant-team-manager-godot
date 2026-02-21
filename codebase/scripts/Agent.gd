@@ -37,6 +37,8 @@ var primary_weapon: Weapon = null
 var sidearm_weapon: Weapon = null
 var weapon_to_attack_with: Weapon = null
 var has_bomb := false
+var ability_1: Ability
+var ability_2: Ability
 
 var confidence_level # Dictates turn queue ordering (higher is better)
 var is_defusing := false
@@ -52,6 +54,8 @@ func _ready() -> void:
 	sprite.scale = Vector2(DEFAULT_SCALE, DEFAULT_SCALE)
 	button.pressed.connect(agent_click)
 	confidence_level = randi_range(1, 10)
+	ability_1 = AbilityCreator.create_ability(agent_stats.ability_1)
+	ability_2 = AbilityCreator.create_ability(agent_stats.ability_2)
 
 func init_from_game_stats(agent_game_stats: GameRoundVariables.AgentGameStats):
 	primary_weapon = GameRoundVariables.load_weapon_from_name(agent_game_stats.primary_weapon_name)

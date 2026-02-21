@@ -42,3 +42,11 @@ func show_specific_visible_tiles(visible_tiles):
 
 func is_at_bomb_site(tile_pos: Vector2):
 	return site_layer.get_cell_source_id(tile_pos) != -1
+
+func highlight_tile_at_tile_pos(x_pos, y_pos, color):
+	var cell_size = ground_layer.tile_set.tile_size
+	var cell_size_vec2 = Vector2(cell_size.x, cell_size.y)
+	var tile_pos_to_hl = Vector2(x_pos, y_pos)
+	var tile_pos = ground_layer.map_to_local(tile_pos_to_hl) as Vector2
+	var rect = Rect2(tile_pos - cell_size_vec2 / 2, cell_size)
+	draw_rect(rect, color, true)

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AbilityStats" load_steps=3 format=3 uid="uid://0u30eksri2yi"]
 
-[ext_resource type="Script" uid="uid://d35gwtg7scsg5" path="res://scripts/AbilityStats.gd" id="1_juqvr"]
+[ext_resource type="Script" uid="uid://d35gwtg7scsg5" path="res://scripts/abilities/AbilityStats.gd" id="1_juqvr"]
 [ext_resource type="Texture2D" uid="uid://c5dsbrghgsubs" path="res://assets/abilities/smoke.png" id="1_sju02"]
 
 [resource]

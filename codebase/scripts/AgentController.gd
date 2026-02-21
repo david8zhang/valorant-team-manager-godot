@@ -73,6 +73,12 @@ func handle_new_action_state(new_action_state):
 	game_round.battle_preview_menu.hide()
 	enemy_to_attack = null
 	action_menu.update_all()
+	# Handle old action state
+	match curr_action_state:
+		ActionState.ABILITY_ONE, ActionState.ABILITY_TWO:
+			var ability_to_process = selected_agent.ability_1 if curr_action_state == ActionState.ABILITY_ONE else selected_agent.ability_2
+			ability_to_process.deselect()
+	# Handle new action state
 	match new_action_state:
 		ActionState.MOVE:
 			highlight_overlay.show()
@@ -95,8 +101,15 @@ func _process(_delta):
 						center_camera_on_position(pos_to_move_to)
 				if Input.is_action_just_pressed("center_camera"):
 					center_camera_on_agent(selected_agent)
-			ActionState.ABILITY_ONE or ActionState.ABILITY_TWO:
-				pass
+			ActionState.ABILITY_ONE, ActionState.ABILITY_TWO:
+				var ability_to_process = selected_agent.ability_1 if curr_action_state == ActionState.ABILITY_ONE else selected_agent.ability_2
+				var map = game_round.map
+				var mouse_world_pos = get_global_mouse_position()
+				var hovered_tile_pos = map.ground_layer.local_to_map(game_round.to_local(mouse_world_pos))
+				ability_to_process.handle_hover(hovered_tile_pos.x, hovered_tile_pos.y)
+				action_menu.preview_ap_cost(ability_to_process.ability_stats.ap_cost)
+				if Input.is_action_just_pressed("mouse_left"):
+					ability_to_process.handle_click(hovered_tile_pos.x, hovered_tile_pos.y)
 
 func start_turn(agent_to_select: Agent):
 	agent_to_select.rem_action_points = Agent.TOTAL_ACTION_POINTS
