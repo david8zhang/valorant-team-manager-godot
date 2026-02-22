@@ -4,6 +4,7 @@ extends Ability
 static var SMOKE_RADIUS = 4
 
 var hl_tiles = []
+var smoke_sprites_on_map = []
 
 func handle_hover(x_pos: int, y_pos: int):
 	var circle_tiles = get_circle_tiles(Vector2(x_pos, y_pos), SMOKE_RADIUS)
@@ -13,9 +14,11 @@ func handle_hover(x_pos: int, y_pos: int):
 	hl_tiles = []
 	for tile in circle_tiles:
 		var color_rect = ColorRect.new()
-		color_rect.custom_minimum_size.x = map.ground_layer.tile_set.tile_size.x
-		color_rect.custom_minimum_size.y = map.ground_layer.tile_set.tile_size.y
+		var tile_size = map.ground_layer.tile_set.tile_size
+		color_rect.custom_minimum_size.x = tile_size.x
+		color_rect.custom_minimum_size.y = tile_size.y
 		color_rect.color = Color("#555555")
+		color_rect.mouse_filter = Control.MOUSE_FILTER_PASS
 		color_rect.color.a = 0.5
 		game_round.add_child(color_rect)
 		color_rect.global_position = map.get_world_pos_from_tile_pos(tile)
@@ -36,3 +39,12 @@ func deselect():
 	for tile in hl_tiles:
 		tile.queue_free()
 	hl_tiles = []
+
+func handle_click(x_pos: int, y_pos: int):
+	var smoke_texture = load("res://assets/abilities/in-game/smoke.png") as Texture
+	var smoke_sprite = Sprite2D.new()
+	smoke_sprite.texture = smoke_texture
+	game_round.add_child(smoke_sprite)
+	var world_pos = game_round.map.get_world_pos_from_tile_pos(Vector2(x_pos, y_pos))
+	smoke_sprite.global_position = Vector2(world_pos.x + 8, world_pos.y)
+	smoke_sprites_on_map.append(smoke_sprite)
