@@ -43,6 +43,7 @@ var attack_side = Side.PLAYER
 var is_showing_scoreboard := true
 var top_view_state := TopViewState.SCOREBOARD
 var bomb: Bomb
+var smokes_on_field := []
 
 func _ready():
 	round_result.on_continue.connect(incr_score_and_go_to_buy_phase)
@@ -352,3 +353,10 @@ func on_buy_finished():
 	player_team_status.show()
 	cpu_team_status.show()
 	action_menu.show()
+
+func is_tile_smoked(point: Vector2i):
+	for s in smokes_on_field:
+		var smoke = s as Smoke.InGameSmoke
+		if smoke.is_position_smoked(point):
+			return true
+	return false

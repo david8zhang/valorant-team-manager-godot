@@ -2,9 +2,29 @@ class_name Smoke
 extends Ability
 
 static var SMOKE_RADIUS = 4
+static var SMOKE_TURN_DURATION = 3
 
 var hl_tiles = []
 var smoke_sprites_on_map = []
+
+class InGameSmoke:
+	var sprite: Sprite2D
+	var center_position: Vector2
+	var circle_tiles := []
+	var turns_to_live = Smoke.SMOKE_TURN_DURATION
+
+	func _init(_sprite, _center_position, _circle_tiles) -> void:
+		sprite = _sprite
+		center_position = _center_position
+		circle_tiles = _circle_tiles
+
+	func is_position_smoked(pos: Vector2i):
+		for t in circle_tiles:
+			var tile = t as Vector2i
+			if tile.x == pos.x and tile.y == pos.y:
+				return true
+		return false
+	
 
 func handle_hover(x_pos: int, y_pos: int):
 	var circle_tiles = get_circle_tiles(Vector2(x_pos, y_pos), SMOKE_RADIUS)
@@ -24,7 +44,7 @@ func handle_hover(x_pos: int, y_pos: int):
 		color_rect.global_position = map.get_world_pos_from_tile_pos(tile)
 		hl_tiles.append(color_rect)
 		
-func get_circle_tiles(center: Vector2i, radius: int) -> Array[Vector2i]:
+static func get_circle_tiles(center: Vector2i, radius: int) -> Array[Vector2i]:
 	var tiles: Array[Vector2i] = []
 	var r_squared = (radius + 0.3) * (radius + 0.3)
 	for x in range(center.x - radius, center.x + radius + 1):
@@ -47,4 +67,8 @@ func handle_click(x_pos: int, y_pos: int):
 	game_round.add_child(smoke_sprite)
 	var world_pos = game_round.map.get_world_pos_from_tile_pos(Vector2(x_pos, y_pos))
 	smoke_sprite.global_position = Vector2(world_pos.x + 8, world_pos.y)
+	smoke_sprite.modulate.a = 0.75
 	smoke_sprites_on_map.append(smoke_sprite)
+	var circle_tiles = get_circle_tiles(Vector2i(x_pos, y_pos), SMOKE_RADIUS)
+	var in_game_smoke = InGameSmoke.new(smoke_sprite, smoke_sprite.global_position, circle_tiles)
+	game_round.smokes_on_field.append(in_game_smoke)

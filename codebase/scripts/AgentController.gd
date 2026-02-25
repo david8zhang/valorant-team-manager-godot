@@ -123,6 +123,8 @@ func complete_move():
 	show_visible_tiles_for_selected_agent()
 
 func complete_turn():
+	selected_agent.ability_1.deselect()
+	selected_agent.ability_2.deselect()
 	selected_agent.rem_action_points = Agent.TOTAL_ACTION_POINTS
 	selected_agent.has_completed_turn = true
 	selected_agent.sprite.self_modulate = Color(0.5, 0.5, 0.5)

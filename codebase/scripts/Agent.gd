@@ -133,6 +133,8 @@ func is_tile_blocked(start: Vector2i, target: Vector2i) -> bool:
 			continue
 		if map.walls_layer.get_cell_source_id(p) != -1:
 			return true
+		if game_round.is_tile_smoked(p):
+			return true
 	return false
 
 func bresenham_line(x0, y0, x1, y1) -> Array[Vector2i]:
