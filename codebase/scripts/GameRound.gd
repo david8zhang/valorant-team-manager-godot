@@ -129,6 +129,7 @@ func have_all_agents_completed_turn():
 
 func go_to_next_turn_cycle():
 	scoreboard.decrement_turn()
+	handle_smoke_timers()
 	var win_condition = get_win_condition()
 	if win_condition != -1:
 		handle_win_condition(win_condition)
@@ -360,3 +361,13 @@ func is_tile_smoked(point: Vector2i):
 		if smoke.is_position_smoked(point):
 			return true
 	return false
+
+func handle_smoke_timers():
+	for s in smokes_on_field:
+		var smoke = s as Smoke.InGameSmoke
+		smoke.turns_to_live -= 1
+		if smoke.turns_to_live == 0:
+			smoke.dissipate()
+	smokes_on_field = smokes_on_field.filter(func (smoke): return smoke.turns_to_live > 0)
+	for a in player_team.agents:
+		a.update_visible_tiles()

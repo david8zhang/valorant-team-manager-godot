@@ -86,11 +86,11 @@ func handle_new_action_state(new_action_state):
 
 func _process(_delta):
 	if game_round.curr_turn_side == GameRound.Side.PLAYER and !is_hovering_action_menu:
+		var is_defusing_or_planting = selected_agent.is_defusing or selected_agent.is_planting
 		match curr_action_state:
 			ActionState.MOVE:
 				var pos_to_move_to = game_round.map.get_world_pos_from_tile_pos(highlight_overlay.hovered_tile_pos)
 				var ap_cost_for_move = game_round.get_ap_cost_for_movement(selected_agent.global_position, pos_to_move_to)
-				var is_defusing_or_planting = selected_agent.is_defusing or selected_agent.is_planting
 				highlight_overlay.is_pos_valid = ap_cost_for_move <= selected_agent.rem_action_points and !is_defusing_or_planting
 				action_menu.preview_ap_cost(ap_cost_for_move)
 				if Input.is_action_just_pressed("mouse_left"):
@@ -107,9 +107,13 @@ func _process(_delta):
 				var mouse_world_pos = get_global_mouse_position()
 				var hovered_tile_pos = map.ground_layer.local_to_map(game_round.to_local(mouse_world_pos))
 				ability_to_process.handle_hover(hovered_tile_pos.x, hovered_tile_pos.y)
-				action_menu.preview_ap_cost(ability_to_process.ability_stats.ap_cost)
+				var ap_cost_for_ability = ability_to_process.ability_stats.ap_cost
+				action_menu.preview_ap_cost(ap_cost_for_ability)
 				if Input.is_action_just_pressed("mouse_left"):
-					ability_to_process.handle_click(hovered_tile_pos.x, hovered_tile_pos.y)
+					if ap_cost_for_ability <= selected_agent.rem_action_points and !is_defusing_or_planting:
+						selected_agent.rem_action_points -= ap_cost_for_ability
+						action_menu.update_all()
+						ability_to_process.handle_click(hovered_tile_pos.x, hovered_tile_pos.y)
 
 func start_turn(agent_to_select: Agent):
 	agent_to_select.rem_action_points = Agent.TOTAL_ACTION_POINTS
@@ -132,7 +136,6 @@ func complete_turn():
 		game_round.continue_bomb_defuse(selected_agent)
 	elif selected_agent.is_planting:
 		game_round.continue_bomb_plant(selected_agent)
-
 	on_complete_turn.emit()
 
 func select_agent(agent: Agent):

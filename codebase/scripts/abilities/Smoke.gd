@@ -2,7 +2,7 @@ class_name Smoke
 extends Ability
 
 static var SMOKE_RADIUS = 4
-static var SMOKE_TURN_DURATION = 3
+static var SMOKE_TURN_DURATION = 2
 
 var hl_tiles = []
 var smoke_sprites_on_map = []
@@ -24,6 +24,13 @@ class InGameSmoke:
 			if tile.x == pos.x and tile.y == pos.y:
 				return true
 		return false
+
+	func dissipate():
+		var tween = sprite.create_tween()
+		tween.tween_property(sprite, "modulate:a", 0, 0.5)
+		var on_finished = func _finished():
+			sprite.queue_free()
+		tween.finished.connect(on_finished)
 	
 
 func handle_hover(x_pos: int, y_pos: int):
