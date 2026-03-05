@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bhow40faq2uvu" path="res://scripts/AgentBuyMenu.gd" id="1_3pwj6"]
 [ext_resource type="StyleBox" uid="uid://catg2lupwuxlc" path="res://prefabs/AgentStatusPanelBG.tres" id="1_nnlhy"]
-[ext_resource type="Texture2D" uid="uid://beu1d2qdbfmxn" path="res://assets/agents/brimstone.png" id="2_l8mtm"]
 [ext_resource type="Texture2D" uid="uid://bggumpekt0l5b" path="res://assets/placeholder/shield-solid-full.svg" id="3_5ylxy"]
+[ext_resource type="Texture2D" uid="uid://da5goh1o6rfie" path="res://assets/agents/brimstone-static.png" id="3_pw3e2"]
 [ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="4_a1xcx"]
 [ext_resource type="Texture2D" uid="uid://7pdwea6dt72o" path="res://assets/placeholder/bomb-solid-full.svg" id="5_a1xcx"]
 [ext_resource type="Texture2D" uid="uid://ocrq5toydwyj" path="res://assets/abilities/molly.png" id="6_pw3e2"]
@@ -61,7 +61,7 @@ custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("2_l8mtm")
+texture = ExtResource("3_pw3e2")
 stretch_mode = 5
 
 [node name="Shield" type="TextureRect" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]

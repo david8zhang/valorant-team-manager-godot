@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://wxeqn8voogow"]
 
-[ext_resource type="Texture2D" uid="uid://beu1d2qdbfmxn" path="res://assets/agents/brimstone.png" id="1_d1d8l"]
 [ext_resource type="Script" uid="uid://bjddamp2r15i4" path="res://scripts/AgentStatus.gd" id="1_mjuwj"]
 [ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="2_wjiy0"]
 [ext_resource type="PackedScene" uid="uid://b171uwes5dbse" path="res://prefabs/AbilityChargeRect.tscn" id="2_yomwo"]
 [ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="3_knam2"]
+[ext_resource type="Texture2D" uid="uid://da5goh1o6rfie" path="res://assets/agents/brimstone-static.png" id="3_yomwo"]
 [ext_resource type="StyleBox" uid="uid://cy5g0kjs21b00" path="res://prefabs/ShieldFill.tres" id="4_tpx7d"]
 [ext_resource type="Texture2D" uid="uid://7pdwea6dt72o" path="res://assets/placeholder/bomb-solid-full.svg" id="5_d1d8l"]
 [ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="5_mjuwj"]
@@ -35,7 +35,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
-texture = ExtResource("1_d1d8l")
+texture = ExtResource("3_yomwo")
 
 [node name="AgentNameLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2

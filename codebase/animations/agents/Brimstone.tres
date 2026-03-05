@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://ogj18jbgkw4f"]
+
+[ext_resource type="Texture2D" uid="uid://cxfduug6to1k4" path="res://animations/agents/brimstone-animations.png" id="1_6ltrr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgk42"]
+atlas = ExtResource("1_6ltrr")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1q82"]
+atlas = ExtResource("1_6ltrr")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0we8l"]
+atlas = ExtResource("1_6ltrr")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_junh0"]
+atlas = ExtResource("1_6ltrr")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pypdm"]
+atlas = ExtResource("1_6ltrr")
+region = Rect2(80, 0, 20, 20)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgk42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1q82")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0we8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_junh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pypdm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]

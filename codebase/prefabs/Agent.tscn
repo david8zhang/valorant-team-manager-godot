@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cousgjyl2dre2" path="res://scripts/Agent.gd" id="1_2tte8"]
 [ext_resource type="PackedScene" uid="uid://kmph2uqtkb3c" path="res://prefabs/Projectile.tscn" id="2_gfyoo"]
-[ext_resource type="SpriteFrames" uid="uid://d02w635ulau0" path="res://animations/sample.tres" id="2_o1fgx"]
 [ext_resource type="Shader" uid="uid://bf76nfgiouag3" path="res://shaders/solid_color.gdshader" id="3_ajnbc"]
 [ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="3_n7dr3"]
+[ext_resource type="SpriteFrames" uid="uid://ogj18jbgkw4f" path="res://animations/agents/Brimstone.tres" id="4_ajnbc"]
 [ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="4_j1ufw"]
 [ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="5_j1ufw"]
 [ext_resource type="StyleBox" uid="uid://cy5g0kjs21b00" path="res://prefabs/ShieldFill.tres" id="6_efgjp"]
@@ -25,8 +25,11 @@ projectile_scene = ExtResource("2_gfyoo")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_bgk42")
 scale = Vector2(2, 2)
-sprite_frames = ExtResource("2_o1fgx")
+sprite_frames = ExtResource("4_ajnbc")
 animation = &"idle"
+autoplay = "idle"
+frame = 4
+frame_progress = 0.579919
 offset = Vector2(0, -5)
 
 [node name="Button" type="Button" parent="."]

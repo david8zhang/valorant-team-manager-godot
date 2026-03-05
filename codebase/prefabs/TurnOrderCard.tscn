@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://davlo4xqlsenx"]
 
-[ext_resource type="Script" uid="uid://jcw1oo3vt4jv" path="res://scripts/TurnOrderCard.gd" id="1_l638e"]
-[ext_resource type="Texture2D" uid="uid://beu1d2qdbfmxn" path="res://assets/agents/brimstone.png" id="1_rxfhq"]
+[ext_resource type="Script" path="res://scripts/TurnOrderCard.gd" id="1_l638e"]
+[ext_resource type="Texture2D" uid="uid://da5goh1o6rfie" path="res://assets/agents/brimstone-static.png" id="2_l638e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l638e"]
 resource_local_to_scene = true
@@ -54,7 +54,7 @@ alignment = 1
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
-texture = ExtResource("1_rxfhq")
+texture = ExtResource("2_l638e")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]

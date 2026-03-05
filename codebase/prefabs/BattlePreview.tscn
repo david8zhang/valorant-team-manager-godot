@@ -2,8 +2,8 @@
 
 [ext_resource type="StyleBox" uid="uid://cnieekm2v0r8a" path="res://prefabs/Container.tres" id="1_x5g1f"]
 [ext_resource type="Script" uid="uid://ckegoqif7x5k5" path="res://scripts/BattlePreview.gd" id="2_vf6mc"]
+[ext_resource type="Texture2D" uid="uid://da5goh1o6rfie" path="res://assets/agents/brimstone-static.png" id="3_5lld8"]
 [ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="3_54uy7"]
-[ext_resource type="Texture2D" uid="uid://beu1d2qdbfmxn" path="res://assets/agents/brimstone.png" id="3_vf6mc"]
 [ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="4_vf6mc"]
 [ext_resource type="StyleBox" uid="uid://cy5g0kjs21b00" path="res://prefabs/ShieldFill.tres" id="5_5lld8"]
 [ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="6_vf6mc"]
@@ -58,7 +58,7 @@ alignment = 1
 [node name="Attacker" type="TextureRect" parent="MarginContainer/VBoxContainer/HeroPreview"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture = ExtResource("3_vf6mc")
+texture = ExtResource("3_5lld8")
 stretch_mode = 5
 
 [node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HeroPreview"]
@@ -68,7 +68,7 @@ size_flags_horizontal = 3
 [node name="Defender" type="TextureRect" parent="MarginContainer/VBoxContainer/HeroPreview"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture = ExtResource("3_vf6mc")
+texture = ExtResource("3_5lld8")
 stretch_mode = 5
 flip_h = true
 
