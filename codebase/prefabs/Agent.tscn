@@ -9,11 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="5_j1ufw"]
 [ext_resource type="StyleBox" uid="uid://cy5g0kjs21b00" path="res://prefabs/ShieldFill.tres" id="6_efgjp"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bgk42"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ajnbc"]
 resource_local_to_scene = true
 shader = ExtResource("3_ajnbc")
 shader_parameter/enabled = false
-shader_parameter/solid_color = Color(0.392157, 0.392157, 0.392157, 1)
+shader_parameter/solid_color = Color(0.313726, 0.313726, 0.313726, 1)
 shader_parameter/outline_enabled = false
 shader_parameter/outline_color = Color(0, 0, 0, 1)
 shader_parameter/outline_width = 2.0
@@ -23,7 +23,7 @@ script = ExtResource("1_2tte8")
 projectile_scene = ExtResource("2_gfyoo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_bgk42")
+material = SubResource("ShaderMaterial_ajnbc")
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("4_ajnbc")
 animation = &"death"

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="AgentStats" load_steps=6 format=3 uid="uid://cdx51s4mdvrek"]
 
+[ext_resource type="Resource" uid="uid://rueq2w3skrwr" path="res://resources/abilities/Drone.tres" id="1_0bmlf"]
 [ext_resource type="Script" uid="uid://4aj2lbry2gha" path="res://scripts/AgentStats.gd" id="1_02btp"]
 [ext_resource type="Resource" uid="uid://0xbxs735ehwb" path="res://resources/abilities/ReconDart.tres" id="1_shq27"]
-[ext_resource type="Resource" uid="uid://2n3c2l8casr1" path="res://resources/abilities/InfoBeacon.tres" id="2_0bmlf"]
 [ext_resource type="SpriteFrames" uid="uid://c4qc8tj2gl6c5" path="res://animations/agents/Sova.tres" id="3_0bmlf"]
 [ext_resource type="Texture2D" uid="uid://886r84wuy6dk" path="res://assets/agents/sova-static.png" id="4_bb07n"]
 
@@ -12,6 +12,6 @@ agent_type = 1
 agent_name = "Sova"
 animations = ExtResource("3_0bmlf")
 texture = ExtResource("4_bb07n")
-ability_1 = ExtResource("1_shq27")
-ability_2 = ExtResource("2_0bmlf")
+ability_1 = ExtResource("1_0bmlf")
+ability_2 = ExtResource("1_shq27")
 metadata/_custom_type_script = "uid://4aj2lbry2gha"

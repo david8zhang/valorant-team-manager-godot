@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AbilityStats" load_steps=3 format=3 uid="uid://bp6ghlcw7nl20"]
+
+[ext_resource type="Script" uid="uid://d35gwtg7scsg5" path="res://scripts/abilities/AbilityStats.gd" id="1_8rrnd"]
+[ext_resource type="Texture2D" uid="uid://b5cxok15bc50f" path="res://assets/abilities/heal.png" id="1_bdo5n"]
+
+[resource]
+script = ExtResource("1_8rrnd")
+ability_name = "Heal"
+ability_texture = ExtResource("1_bdo5n")
+ability_type = 8
+total_charges = 1
+ap_cost = 2
+metadata/_custom_type_script = "uid://d35gwtg7scsg5"

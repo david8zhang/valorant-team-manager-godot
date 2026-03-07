@@ -51,10 +51,10 @@ signal on_death()
 signal on_kill()
 
 func _ready() -> void:
+	reload_shader()
 	sprite.scale = Vector2(DEFAULT_SCALE, DEFAULT_SCALE)
 	sprite.sprite_frames = agent_stats.animations
-	sprite.animation = "idle"
-	sprite.play()
+	sprite.play("idle")
 	button.pressed.connect(agent_click)
 	confidence_level = randi_range(1, 10)
 	ability_1 = AbilityCreator.create_ability(agent_stats.ability_1)
@@ -71,10 +71,12 @@ func agent_click():
 	on_agent_click.emit(self)
 
 func move_to_position(new_pos: Vector2, callback: Callable):
+	sprite.play("walk")
 	var prev_pos = Vector2(global_position.x, global_position.y)
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", new_pos, 0.5)
 	var on_complete = func _on_complete():
+		sprite.play("idle")
 		if game_round.attack_side == curr_side:
 			acquire_bomb_if_possible(new_pos)
 		update_visible_tiles()
@@ -196,7 +198,8 @@ func attack_enemy_agent(enemy_to_attack: Agent, should_retaliate: bool, on_compl
 	tween.finished.connect(func (): on_attack_finished(projectile, enemy_to_attack, should_retaliate, on_complete))
 
 func on_attack_finished(projectile: Node2D, enemy_to_attack: Agent, should_retaliate: bool, on_complete: Callable):
-	var damage = calculate_damage_to_deal()
+	# var damage = calculate_damage_to_deal()
+	var damage = 250
 	enemy_to_attack.take_damage(damage)
 
 	# Log damage from this agent to enemy in order to calculate assists
@@ -249,12 +252,28 @@ func take_damage(damage):
 
 	# Handle agent death
 	if health_bar.value == 0:
-		if has_bomb:
-			has_bomb = false
-			drop_bomb()
-		GameRoundVariables.update_death_count_for_agent(agent_name)
-		on_death.emit()
-		hide()
+		die()
+
+func die():
+	var on_death_anim_finished = func _on_death_anim_finished():
+		sprite.material = null
+		var on_fade = func _on_fade():
+			reload_shader()
+			sprite.modulate.a = 1
+			if has_bomb:
+				has_bomb = false
+				drop_bomb()
+			GameRoundVariables.update_death_count_for_agent(agent_name)
+			on_death.emit()
+			hide()
+			# Clear all animation finished connections (so we don't get duplicate callback invocations)
+			for conn in sprite.animation_finished.get_connections():
+					sprite.animation_finished.disconnect(conn.callable)
+		var tween = create_tween()
+		tween.tween_property(sprite, "modulate:a", 0, 0.5)
+		tween.finished.connect(on_fade)
+	sprite.animation_finished.connect(on_death_anim_finished)
+	sprite.play("death")
 
 func is_dead():
 	return health_bar.value == 0
@@ -283,6 +302,7 @@ func has_vision_of_agent(other_agent: Agent):
 
 func hide_in_fog_of_war():
 	var shader = sprite.material as ShaderMaterial
+	shader.set_shader_parameter("solid_color", Color("#555555"))
 	shader.set_shader_parameter("enabled", true)
 	health_bar.hide()
 	shield_bar.hide()
@@ -301,3 +321,7 @@ func set_outline(outline_color):
 	var shader = sprite.material as ShaderMaterial
 	shader.set_shader_parameter("outline_enabled", true)
 	shader.set_shader_parameter("outline_color", outline_color)
+
+func reload_shader():
+	sprite.material = ShaderMaterial.new()
+	sprite.material.shader = load("res://shaders/solid_color.gdshader")

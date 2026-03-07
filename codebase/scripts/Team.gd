@@ -26,9 +26,9 @@ func _ready() -> void:
 		new_agent.map = map
 		new_agent.agent_name = name_prefix + "_" + str(i)
 		new_agent.curr_side = side
-		new_agent.agent_stats = load("res://resources/agents/Brimstone.tres")
+		new_agent.agent_stats = GameRoundVariables.load_random_agent_stat()
 		add_child(new_agent)
-		var outline_color = Color8(39, 239, 190) if side == GameRound.Side.PLAYER else Color.RED
+		var outline_color = GameRoundVariables.PLAYER_OUTLINE_COLOR if side == GameRound.Side.PLAYER else GameRoundVariables.CPU_OUTLINE_COLOR
 		new_agent.set_outline(outline_color)
 		agents.append(new_agent)
 		map.move_node_to_pos(new_agent, x_pos, y_pos)
@@ -57,5 +57,8 @@ func reset_agents():
 		agent.did_defuse_this_round = false
 		agent.did_plant_this_round = false
 		agent.kills_this_round = 0
+		agent.sprite.play("idle")
+		var outline_color = GameRoundVariables.PLAYER_OUTLINE_COLOR if side == GameRound.Side.PLAYER else GameRoundVariables.CPU_OUTLINE_COLOR
+		agent.set_outline(outline_color)
 		map.move_node_to_pos(agent, x_pos, y_pos)
 		x_pos += space_btwn_agents

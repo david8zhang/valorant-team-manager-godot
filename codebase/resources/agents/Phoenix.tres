@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://bm1misdal4qmi" path="res://resources/abilities/Flash.tres" id="1_4ft3n"]
 [ext_resource type="Script" uid="uid://4aj2lbry2gha" path="res://scripts/AgentStats.gd" id="1_c4ttn"]
-[ext_resource type="Resource" uid="uid://wp8uwf7jm63h" path="res://resources/abilities/Stim.tres" id="2_4b860"]
+[ext_resource type="Resource" uid="uid://nncdw1wgtm3g" path="res://resources/abilities/Molly.tres" id="2_scrhr"]
 [ext_resource type="SpriteFrames" uid="uid://dion1flfhvoot" path="res://animations/agents/Phoenix.tres" id="3_scrhr"]
 [ext_resource type="Texture2D" uid="uid://bkqa6dmgyd8wh" path="res://assets/agents/phoenix-static.png" id="4_qx1vw"]
 
@@ -13,5 +13,5 @@ agent_name = "Phoenix"
 animations = ExtResource("3_scrhr")
 texture = ExtResource("4_qx1vw")
 ability_1 = ExtResource("1_4ft3n")
-ability_2 = ExtResource("2_4b860")
+ability_2 = ExtResource("2_scrhr")
 metadata/_custom_type_script = "uid://4aj2lbry2gha"

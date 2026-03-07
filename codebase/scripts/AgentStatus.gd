@@ -2,6 +2,7 @@ class_name AgentStatus
 extends PanelContainer
 
 @onready var agent_name_label = $VBoxContainer/HBoxContainer/AgentNameLabel as Label
+@onready var agent_image = $VBoxContainer/HBoxContainer/TextureRect as TextureRect
 @onready var shield_bar = $VBoxContainer/ShieldBar as ProgressBar
 @onready var health_bar = $VBoxContainer/HealthBar as ProgressBar
 @onready var kill_count = $VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/KillCount
@@ -18,6 +19,7 @@ extends PanelContainer
 
 func update_from_agent(agent: Agent):
 	agent_name_label.text = agent.agent_name
+	agent_image.texture = agent.agent_stats.texture
 	shield_bar.value = agent.shield_bar.value
 	health_bar.value = agent.health_bar.value
 

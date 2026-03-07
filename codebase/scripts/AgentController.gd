@@ -24,6 +24,7 @@ var curr_action_state: ActionState = ActionState.NONE
 var is_hovering_action_menu := false
 var enemy_to_attack: Agent
 var action_menu: ActionMenu
+var cached_top_view_state: GameRound.TopViewState
 
 func _ready() -> void:
 	await game_round.ready
@@ -153,13 +154,16 @@ func center_camera_on_position(new_pos: Vector2):
 
 func start_battle():
 	if enemy_to_attack != null:
+		cached_top_view_state = game_round.top_view_state
+		game_round.set_top_view_state(GameRound.TopViewState.HIDDEN)
+		game_round.battle_preview_menu.hide()		
 		var weapon_to_attack_with = selected_agent.primary_weapon if curr_action_state == ActionState.PRIMARY_ATTACK else selected_agent.sidearm_weapon
 		selected_agent.weapon_to_attack_with = weapon_to_attack_with
-		game_round.battle_preview_menu.hide()
 		selected_agent.attack_enemy_agent(enemy_to_attack, true, on_battle_complete)
 		action_menu.update_all()
 
 func on_battle_complete():
+	game_round.set_top_view_state(cached_top_view_state)
 	if selected_agent.is_dead():
 		complete_turn()
 

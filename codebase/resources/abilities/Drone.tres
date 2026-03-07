@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AbilityStats" load_steps=3 format=3 uid="uid://rueq2w3skrwr"]
+
+[ext_resource type="Texture2D" uid="uid://cxtcxgmfsxq2o" path="res://assets/abilities/drone.png" id="1_1ooiq"]
+[ext_resource type="Script" uid="uid://d35gwtg7scsg5" path="res://scripts/abilities/AbilityStats.gd" id="1_cirny"]
+
+[resource]
+script = ExtResource("1_cirny")
+ability_name = "Drone"
+ability_texture = ExtResource("1_1ooiq")
+ability_type = 8
+total_charges = 1
+ap_cost = 3
+metadata/_custom_type_script = "uid://d35gwtg7scsg5"

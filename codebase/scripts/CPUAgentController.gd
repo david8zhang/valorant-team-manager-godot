@@ -5,6 +5,7 @@ extends Node2D
 signal on_complete_turn
 signal on_complete_move
 var selected_agent: Agent
+var cached_top_view_state
 
 func _ready() -> void:
 	await game_round.ready
@@ -51,11 +52,15 @@ func attack_target_if_possible():
 		game_round.game_camera.target_position = midpoint_pos
 		var weapon_to_attack_with = selected_agent.primary_weapon if selected_agent.primary_weapon != null else selected_agent.sidearm_weapon
 		selected_agent.weapon_to_attack_with = weapon_to_attack_with
+		cached_top_view_state = game_round.top_view_state
+		game_round.set_top_view_state(GameRound.TopViewState.HIDDEN)
 		selected_agent.attack_enemy_agent(target_to_attack, true, complete_turn)
 	else:
 		complete_turn()
 
 func complete_turn():
+	if cached_top_view_state != null:
+		game_round.set_top_view_state(cached_top_view_state)
 	selected_agent.has_completed_turn = true
 	on_complete_turn.emit()
 

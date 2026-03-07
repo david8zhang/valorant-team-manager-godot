@@ -8,8 +8,9 @@ enum AbilityType {
 	RECON_DART,
 	SMOKE,
 	STIM,
-	STUN_GRENADE,
-	WALL
+	WALL,
+	HEAL,
+	DRONE
 }
 
 @export var ability_name := ""

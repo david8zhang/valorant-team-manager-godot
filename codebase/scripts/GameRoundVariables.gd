@@ -22,6 +22,15 @@ class RoundResultRecord:
 	func _init() -> void:
 		pass
 
+static var AGENT_STAT_RESOURCES = [
+	load("res://resources/agents/Brimstone.tres"),
+	load("res://resources/agents/Phoenix.tres"),
+	load("res://resources/agents/Sage.tres"),
+	load("res://resources/agents/Sova.tres")
+]
+static var PLAYER_OUTLINE_COLOR = Color8(39, 239, 190)
+static var CPU_OUTLINE_COLOR = Color.RED
+
 var agent_game_stat_mapping = {}
 var credits := 0
 var round_result_record_list = []
@@ -63,3 +72,5 @@ func purchase_ability_charge(agent_name, ability_index):
 	elif ability_index == 2:
 		agent_game_stats.ability_2_charges += 1
 		
+func load_random_agent_stat():
+	return AGENT_STAT_RESOURCES.pick_random()

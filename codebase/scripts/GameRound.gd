@@ -354,6 +354,8 @@ func on_buy_finished():
 	player_team_status.show()
 	cpu_team_status.show()
 	action_menu.show()
+	curr_turn_index = 0
+	start_turn_for_next_agent()
 
 func is_tile_smoked(point: Vector2i):
 	for s in smokes_on_field:
