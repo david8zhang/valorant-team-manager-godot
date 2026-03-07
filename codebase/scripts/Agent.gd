@@ -52,6 +52,9 @@ signal on_kill()
 
 func _ready() -> void:
 	sprite.scale = Vector2(DEFAULT_SCALE, DEFAULT_SCALE)
+	sprite.sprite_frames = agent_stats.animations
+	sprite.animation = "idle"
+	sprite.play()
 	button.pressed.connect(agent_click)
 	confidence_level = randi_range(1, 10)
 	ability_1 = AbilityCreator.create_ability(agent_stats.ability_1)

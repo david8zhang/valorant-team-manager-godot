@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="AgentStats" load_steps=5 format=3 uid="uid://buxj01y2dslfb"]
+[gd_resource type="Resource" script_class="AgentStats" load_steps=6 format=3 uid="uid://buxj01y2dslfb"]
 
 [ext_resource type="Script" uid="uid://4aj2lbry2gha" path="res://scripts/AgentStats.gd" id="1_4qeei"]
 [ext_resource type="Resource" uid="uid://c2bi57de2tabc" path="res://resources/abilities/Wall.tres" id="1_k1w0e"]
 [ext_resource type="Texture2D" uid="uid://e73uxb76bbj6" path="res://assets/agents/sage-static.png" id="2_jt6ee"]
 [ext_resource type="Resource" uid="uid://1lqn1p7rk7pt" path="res://resources/abilities/StunGrenade.tres" id="2_jyds3"]
+[ext_resource type="SpriteFrames" uid="uid://cg0clrsl0d3n4" path="res://animations/agents/Sage.tres" id="3_jyds3"]
 
 [resource]
 script = ExtResource("1_4qeei")
 agent_type = 2
 agent_name = "Sage"
+animations = ExtResource("3_jyds3")
 texture = ExtResource("2_jt6ee")
 ability_1 = ExtResource("1_k1w0e")
 ability_2 = ExtResource("2_jyds3")

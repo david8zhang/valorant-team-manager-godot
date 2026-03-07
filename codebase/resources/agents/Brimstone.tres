@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="AgentStats" load_steps=5 format=3 uid="uid://dfab0h24psde5"]
+[gd_resource type="Resource" script_class="AgentStats" load_steps=6 format=3 uid="uid://dfab0h24psde5"]
 
 [ext_resource type="Script" uid="uid://4aj2lbry2gha" path="res://scripts/AgentStats.gd" id="1_0yeqw"]
 [ext_resource type="Resource" uid="uid://nncdw1wgtm3g" path="res://resources/abilities/Molly.tres" id="1_koms2"]
 [ext_resource type="Resource" uid="uid://0u30eksri2yi" path="res://resources/abilities/Smoke.tres" id="2_2h1u6"]
+[ext_resource type="SpriteFrames" uid="uid://ogj18jbgkw4f" path="res://animations/agents/Brimstone.tres" id="3_djr4b"]
 [ext_resource type="Texture2D" uid="uid://da5goh1o6rfie" path="res://assets/agents/brimstone-static.png" id="4_2h1u6"]
 
 [resource]
 script = ExtResource("1_0yeqw")
 agent_type = 3
 agent_name = "Brimstone"
+animations = ExtResource("3_djr4b")
 texture = ExtResource("4_2h1u6")
 ability_1 = ExtResource("1_koms2")
 ability_2 = ExtResource("2_2h1u6")
