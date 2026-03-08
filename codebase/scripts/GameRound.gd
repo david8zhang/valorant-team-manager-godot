@@ -373,3 +373,11 @@ func handle_smoke_timers():
 	smokes_on_field = smokes_on_field.filter(func (smoke): return smoke.turns_to_live > 0)
 	for a in player_team.agents:
 		a.update_visible_tiles()
+
+func is_round_underway():
+	var curr_phase = scoreboard.curr_phase
+	return curr_phase == Scoreboard.Phase.PRE_PLANT or curr_phase == Scoreboard.Phase.POST_PLANT
+
+func can_move_to_pos(world_pos: Vector2):
+	var tile_pos = map.get_tile_pos_from_world_pos(world_pos)
+	return map.is_tile_pos_in_bounds(tile_pos) and !map.is_tile_pos_obstructed(tile_pos)

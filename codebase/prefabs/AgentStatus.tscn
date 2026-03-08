@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://wxeqn8voogow"]
+[gd_scene load_steps=14 format=3 uid="uid://wxeqn8voogow"]
 
 [ext_resource type="Script" uid="uid://bjddamp2r15i4" path="res://scripts/AgentStatus.gd" id="1_mjuwj"]
 [ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="2_wjiy0"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://7pdwea6dt72o" path="res://assets/placeholder/bomb-solid-full.svg" id="5_d1d8l"]
 [ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="5_mjuwj"]
 [ext_resource type="StyleBox" uid="uid://catg2lupwuxlc" path="res://prefabs/AgentStatusPanelBG.tres" id="6_y7sud"]
+[ext_resource type="Texture2D" uid="uid://vqn7b5cqbwtq" path="res://assets/icons/kills.png" id="10_3pplx"]
+[ext_resource type="Texture2D" uid="uid://dyp2qmtnhr1fv" path="res://assets/icons/deaths.png" id="11_bgwlc"]
+[ext_resource type="Texture2D" uid="uid://bxub1o8hrkamg" path="res://assets/icons/assists.png" id="12_t8we2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qsf7e"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -132,7 +135,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
-texture = ExtResource("5_d1d8l")
+texture = ExtResource("10_3pplx")
 expand_mode = 3
 stretch_mode = 5
 
@@ -147,7 +150,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
-texture = ExtResource("5_d1d8l")
+texture = ExtResource("11_bgwlc")
 expand_mode = 3
 stretch_mode = 5
 
@@ -162,7 +165,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer3"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
-texture = ExtResource("5_d1d8l")
+texture = ExtResource("12_t8we2")
 expand_mode = 3
 stretch_mode = 5
 

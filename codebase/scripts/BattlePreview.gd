@@ -2,6 +2,8 @@ class_name BattlePreview
 extends PanelContainer
 
 @onready var fire_button = $MarginContainer/VBoxContainer/Fire as Button
+@onready var attacker_texture_rect = $MarginContainer/VBoxContainer/HeroPreview/Attacker as TextureRect
+@onready var defender_texture_rect = $MarginContainer/VBoxContainer/HeroPreview/Defender as TextureRect
 @onready var attacker_shields = $MarginContainer/VBoxContainer/HealthPreview/AttackerStats/AttackerShields
 @onready var attacker_health = $MarginContainer/VBoxContainer/HealthPreview/AttackerStats/AttackerHealth
 @onready var defender_shields = $MarginContainer/VBoxContainer/HealthPreview/DefenderStats/DefenderShields
@@ -18,6 +20,8 @@ func on_fire():
 	on_fire_clicked.emit()
 
 func update_preview(attacker: Agent, defender: Agent, weapon_to_attack_with: Weapon):
+	attacker_texture_rect.texture = attacker.agent_stats.texture
+	defender_texture_rect.texture = defender.agent_stats.texture	
 	attacker_shields.value = attacker.shield_bar.value
 	attacker_health.value = attacker.health_bar.value
 	defender_shields.value = defender.shield_bar.value

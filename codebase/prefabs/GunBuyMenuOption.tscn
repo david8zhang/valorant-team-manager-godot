@@ -50,6 +50,7 @@ mouse_filter = 2
 texture = ExtResource("1_3ub3c")
 expand_mode = 3
 stretch_mode = 5
+flip_h = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

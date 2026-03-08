@@ -86,16 +86,16 @@ func handle_new_action_state(new_action_state):
 	curr_action_state = new_action_state
 
 func _process(_delta):
-	if game_round.curr_turn_side == GameRound.Side.PLAYER and !is_hovering_action_menu:
+	if game_round.curr_turn_side == GameRound.Side.PLAYER and !is_hovering_action_menu and game_round.is_round_underway():
 		var is_defusing_or_planting = selected_agent.is_defusing or selected_agent.is_planting
 		match curr_action_state:
 			ActionState.MOVE:
 				var pos_to_move_to = game_round.map.get_world_pos_from_tile_pos(highlight_overlay.hovered_tile_pos)
 				var ap_cost_for_move = game_round.get_ap_cost_for_movement(selected_agent.global_position, pos_to_move_to)
-				highlight_overlay.is_pos_valid = ap_cost_for_move <= selected_agent.rem_action_points and !is_defusing_or_planting
+				highlight_overlay.is_pos_valid = ap_cost_for_move <= selected_agent.rem_action_points and !is_defusing_or_planting and game_round.can_move_to_pos(pos_to_move_to)
 				action_menu.preview_ap_cost(ap_cost_for_move)
 				if Input.is_action_just_pressed("mouse_left"):
-					if ap_cost_for_move <= selected_agent.rem_action_points and !is_defusing_or_planting:
+					if highlight_overlay.is_pos_valid:
 						highlight_overlay.should_update_pos = false
 						selected_agent.move_to_position(pos_to_move_to, complete_move)
 						action_menu.update_all()

@@ -7,9 +7,6 @@ extends Node2D
 @onready var walls_layer := $WallsLayer as TileMapLayer
 @onready var vision_layer := $VisionLayer as TileMapLayer
 
-func _ready() -> void:
-	is_tile_pos_in_bounds(Vector2(-1, -1))
-
 func move_node_to_pos(node: Node2D, x: int, y: int):
 	var world_pos = ground_layer.map_to_local(Vector2(x, y))
 	node.global_position = world_pos
@@ -50,3 +47,6 @@ func highlight_tile_at_tile_pos(x_pos, y_pos, color):
 	var tile_pos = ground_layer.map_to_local(tile_pos_to_hl) as Vector2
 	var rect = Rect2(tile_pos - cell_size_vec2 / 2, cell_size)
 	draw_rect(rect, color, true)
+
+func is_tile_pos_obstructed(tile_pos):
+	return walls_layer.get_cell_source_id(tile_pos) != -1
