@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://c3hk0br2pjrhf" path="res://prefabs/AgentBuyMenu.tscn" id="1_mtvm6"]
 [ext_resource type="StyleBox" uid="uid://k2ihmpstyn38" path="res://prefabs/BuyMenuWeaponHeader.tres" id="2_4kfsn"]
 [ext_resource type="Texture2D" uid="uid://7x7bah3df7vw" path="res://assets/placeholder/vandal.png" id="5_0yq0h"]
-[ext_resource type="Texture2D" uid="uid://bg2tfiudtfaco" path="res://assets/weapons/classic-icon.png" id="5_3ejf4"]
+[ext_resource type="Texture2D" uid="uid://bmpvy403dy2jl" path="res://assets/weapons/classic-icon.png" id="5_3ejf4"]
 [ext_resource type="PackedScene" uid="uid://bxqir2xgtiyhh" path="res://prefabs/GunBuyMenuOption.tscn" id="6_3ejf4"]
-[ext_resource type="Texture2D" uid="uid://cqidb1r7x7qso" path="res://assets/weapons/frenzy-icon.png" id="6_8iy0v"]
-[ext_resource type="Texture2D" uid="uid://cfrdl43me47qn" path="res://assets/weapons/ghost.png" id="7_dpjfq"]
-[ext_resource type="Texture2D" uid="uid://ca47wqd6c6mey" path="res://assets/weapons/sheriff.png" id="8_rm2ea"]
+[ext_resource type="Texture2D" uid="uid://c804yrlgsqxik" path="res://assets/weapons/frenzy-icon.png" id="6_8iy0v"]
+[ext_resource type="Texture2D" uid="uid://f8qo58ck2fil" path="res://assets/weapons/ghost.png" id="7_dpjfq"]
+[ext_resource type="Texture2D" uid="uid://bapi4jxwfmtor" path="res://assets/weapons/sheriff.png" id="8_rm2ea"]
 
 [node name="BuyMenu" type="Control"]
 layout_mode = 3

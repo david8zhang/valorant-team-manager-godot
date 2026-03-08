@@ -26,8 +26,8 @@ func update_preview(attacker: Agent, defender: Agent, weapon_to_attack_with: Wea
 	attacker_health.value = attacker.health_bar.value
 	defender_shields.value = defender.shield_bar.value
 	defender_health.value = defender.health_bar.value
-	attacker_weapon.texture = weapon_to_attack_with.weapon_stats.texture
+	attacker_weapon.texture = weapon_to_attack_with.weapon_stats.in_menu_texture
 	if defender.primary_weapon:
-		defender_weapon.texture = defender.primary_weapon.weapon_stats.texture
+		defender_weapon.texture = defender.primary_weapon.weapon_stats.in_menu_texture
 	else:
-		defender_weapon.texture = defender.sidearm_weapon.weapon_stats.texture
+		defender_weapon.texture = defender.sidearm_weapon.weapon_stats.in_menu_texture

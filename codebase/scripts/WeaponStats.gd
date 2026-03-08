@@ -26,7 +26,8 @@ enum WeaponFireRate {
 @export var headshot_damage := 0
 @export var max_ammo := 0
 @export var cost := 0
-@export var texture: Texture
+@export var in_game_texture: Texture
+@export var in_menu_texture: Texture
 @export var weapon_type: WeaponType
 @export var weapon_name: WeaponNames
 @export var weapon_fire_rate: WeaponFireRate

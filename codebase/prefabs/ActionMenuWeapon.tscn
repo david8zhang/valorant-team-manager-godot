@@ -54,7 +54,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_4dbdy")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 3
 
 [node name="NoWeaponLabel" type="Label" parent="."]
 visible = false

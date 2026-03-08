@@ -33,7 +33,7 @@ func init_from_agent(agent: Agent):
 	elif agent.sidearm_weapon != null:
 		weapon_stats = agent.sidearm_weapon.weapon_stats
 	if weapon_stats != null:
-		weapon_sprite.texture = weapon_stats.texture
+		weapon_sprite.texture = weapon_stats.in_menu_texture
 
 	# Show if agent has shields or not
 	var alpha = 1 if agent.shield_bar.value == Agent.MAX_SHIELDS else 0

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://epm7vu8jkk5n"]
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=4 format=3 uid="uid://epm7vu8jkk5n"]
 
 [ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_i1gso"]
-[ext_resource type="Texture2D" uid="uid://ce26fvykqb5iq" path="res://assets/placeholder/pistol_ingame.png" id="2_uqp4d"]
+[ext_resource type="Texture2D" uid="uid://df5dnnjx3u1ec" path="res://assets/weapons/classic-ingame.png" id="2_i1gso"]
+[ext_resource type="Texture2D" uid="uid://bmpvy403dy2jl" path="res://assets/weapons/classic-icon.png" id="2_uqp4d"]
 
 [resource]
 script = ExtResource("1_i1gso")
@@ -9,8 +10,8 @@ body_damage = 26
 headshot_damage = 78
 max_ammo = 36
 cost = 0
-texture = ExtResource("2_uqp4d")
+in_game_texture = ExtResource("2_i1gso")
+in_menu_texture = ExtResource("2_uqp4d")
 weapon_type = 1
 weapon_name = 1
 weapon_fire_rate = 0
-metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

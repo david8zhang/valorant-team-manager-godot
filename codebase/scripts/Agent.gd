@@ -177,7 +177,7 @@ func attack_enemy_agent(enemy_to_attack: Agent, should_retaliate: bool, on_compl
 	var angle = rad_to_deg((enemy_to_attack_pos - selected_agent_pos).angle())
 
 	assert(weapon_to_attack_with != null, "Weapon to attack with is null!")
-	weapon_sprite.texture = weapon_to_attack_with.weapon_stats.texture
+	weapon_sprite.texture = weapon_to_attack_with.weapon_stats.in_game_texture
 	weapon_sprite.show()
 	weapon_sprite.rotation_degrees = angle
 	weapon_sprite.flip_v = weapon_sprite.rotation_degrees <= -90 and weapon_sprite.rotation_degrees >= -270 or \

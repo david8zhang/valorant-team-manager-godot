@@ -15,5 +15,5 @@ func update_from_weapon(weapon: Weapon):
         ammo_meter.value = weapon.curr_ammo
         ammo_meter.max_value = weapon.max_ammo
         texture_rect.show()
-        texture_rect.texture = weapon.weapon_stats.texture
+        texture_rect.texture = weapon.weapon_stats.in_menu_texture
         no_weapon_label.hide()

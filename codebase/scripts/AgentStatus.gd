@@ -30,9 +30,10 @@ func update_from_agent(agent: Agent):
 		death_count.text = str(agent_game_stat.death_count)
 		assist_count.text = str(agent_game_stat.assist_count)
 		if agent.primary_weapon != null:
-			weapon_texture.texture = agent.primary_weapon.weapon_stats.texture
+			weapon_texture.texture = agent.primary_weapon.weapon_stats.in_menu_texture
 		else:
-			weapon_texture.texture = agent.sidearm_weapon.weapon_stats.texture
+			weapon_texture.texture = agent.sidearm_weapon.weapon_stats.in_menu_texture
+		weapon_texture.flip_h = agent.curr_side == GameRound.Side.CPU
 		ability_1_texture.texture = agent.agent_stats.ability_1.ability_texture
 		ability_2_texture.texture = agent.agent_stats.ability_2.ability_texture
 		for c in ability_1_charges_container.get_children():
