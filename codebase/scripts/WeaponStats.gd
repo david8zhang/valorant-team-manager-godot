@@ -9,10 +9,16 @@ enum WeaponType {
 enum WeaponNames {
     NO_WEAPON,
     CLASSIC,
+		FRENZY,
+		GHOST,
     SHERIFF,
+		GUARDIAN,
     VANDAL,
+		MARSHALL,
     OPERATOR,
+		STINGER,
     SPECTRE,
+		ARES,
     ODIN
 }
 

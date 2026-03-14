@@ -198,8 +198,7 @@ func attack_enemy_agent(enemy_to_attack: Agent, should_retaliate: bool, on_compl
 	tween.finished.connect(func (): on_attack_finished(projectile, enemy_to_attack, should_retaliate, on_complete))
 
 func on_attack_finished(projectile: Node2D, enemy_to_attack: Agent, should_retaliate: bool, on_complete: Callable):
-	# var damage = calculate_damage_to_deal()
-	var damage = 250
+	var damage = calculate_damage_to_deal()
 	enemy_to_attack.take_damage(damage)
 
 	# Log damage from this agent to enemy in order to calculate assists
