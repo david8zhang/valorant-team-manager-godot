@@ -6,8 +6,8 @@
 [ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="3_n7dr3"]
 [ext_resource type="SpriteFrames" uid="uid://cg0clrsl0d3n4" path="res://animations/agents/Sage.tres" id="4_ajnbc"]
 [ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="4_j1ufw"]
-[ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="5_j1ufw"]
 [ext_resource type="StyleBox" uid="uid://cy5g0kjs21b00" path="res://prefabs/ShieldFill.tres" id="6_efgjp"]
+[ext_resource type="SpriteFrames" uid="uid://c17kfxrm0jyfv" path="res://assets/weapons/classic/classic.tres" id="8_ajnbc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ajnbc"]
 resource_local_to_scene = true
@@ -72,9 +72,12 @@ theme_override_styles/background = ExtResource("3_n7dr3")
 theme_override_styles/fill = ExtResource("6_efgjp")
 show_percentage = false
 
-[node name="Weapon" type="Sprite2D" parent="."]
+[node name="Weapon" type="AnimatedSprite2D" parent="."]
 visible = false
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("5_j1ufw")
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("8_ajnbc")
+animation = &"firing"
+frame = 4
+frame_progress = 1.0
 centered = false
 offset = Vector2(0, -8)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f8qo58ck2fil"
-path="res://.godot/imported/ghost.png-475265b902242aec17377a4424ada1ce.ctex"
+uid="uid://bapi4jxwfmtor"
+path="res://.godot/imported/sheriff.png-6cc909e54a5099bb6322c983fd443735.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/weapons/ghost.png"
-dest_files=["res://.godot/imported/ghost.png-475265b902242aec17377a4424ada1ce.ctex"]
+source_file="res://assets/weapons/sheriff/sheriff.png"
+dest_files=["res://.godot/imported/sheriff.png-6cc909e54a5099bb6322c983fd443735.ctex"]
 
 [params]
 

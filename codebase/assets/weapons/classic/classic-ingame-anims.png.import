@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsln0xxpp1j1o"
-path="res://.godot/imported/frenzy-ingame.png-756f1d1a32e88ed08e63282f2f9eef9f.ctex"
+uid="uid://c7jc63jlxywtt"
+path="res://.godot/imported/classic-ingame-anims.png-cd7cbd8978570a97154331ed52add21a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/weapons/frenzy-ingame.png"
-dest_files=["res://.godot/imported/frenzy-ingame.png-756f1d1a32e88ed08e63282f2f9eef9f.ctex"]
+source_file="res://assets/weapons/classic/classic-ingame-anims.png"
+dest_files=["res://.godot/imported/classic-ingame-anims.png-cd7cbd8978570a97154331ed52add21a.ctex"]
 
 [params]
 

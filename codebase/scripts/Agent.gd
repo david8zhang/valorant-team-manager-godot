@@ -6,7 +6,7 @@ extends Node2D
 @onready var button = $Button as Button
 @onready var health_bar = $HealthBar as ProgressBar
 @onready var shield_bar = $ShieldBar as ProgressBar
-@onready var weapon_sprite = $Weapon as Sprite2D
+@onready var weapon_sprite = $Weapon as AnimatedSprite2D
 
 @export var projectile_scene: PackedScene
 @export var vision_distance := 25
@@ -61,8 +61,8 @@ func _ready() -> void:
 	ability_2 = AbilityCreator.create_ability(agent_stats.ability_2)
 
 func init_from_game_stats(agent_game_stats: GameRoundVariables.AgentGameStats):
-	primary_weapon = GameRoundVariables.load_weapon_from_name(agent_game_stats.primary_weapon_name)
-	sidearm_weapon = GameRoundVariables.load_weapon_from_name(agent_game_stats.sidearm_weapon_name)
+	primary_weapon = GameRoundVariables.load_weapon_from_name(agent_game_stats.primary_weapon_name, game_round)
+	sidearm_weapon = GameRoundVariables.load_weapon_from_name(agent_game_stats.sidearm_weapon_name, game_round)
 	# TBD - make this based on buy menu option
 	ability_1_charges = agent_stats.ability_1.total_charges
 	ability_2_charges = agent_stats.ability_2.total_charges
@@ -172,48 +172,16 @@ func attack_enemy_agent(enemy_to_attack: Agent, should_retaliate: bool, on_compl
 
 	var game_camera = game_round.game_camera
 	game_camera.target_zoom = Vector2(1.5, 1.5)
-	var enemy_to_attack_pos = enemy_to_attack.global_position
-	var selected_agent_pos = self.global_position
-	var angle = rad_to_deg((enemy_to_attack_pos - selected_agent_pos).angle())
-
 	assert(weapon_to_attack_with != null, "Weapon to attack with is null!")
-	weapon_sprite.texture = weapon_to_attack_with.weapon_stats.in_game_texture
-	weapon_sprite.show()
-	weapon_sprite.rotation_degrees = angle
-	weapon_sprite.flip_v = weapon_sprite.rotation_degrees <= -90 and weapon_sprite.rotation_degrees >= -270 or \
-									weapon_sprite.rotation_degrees >= 90 and weapon_sprite.rotation_degrees <= 270
 
 	# Add a 1-second delay
 	var t = wait_delay(0.5)
 	await t.timeout
 
 	# Shoot bullet from gun
-	var projectile = projectile_scene.instantiate() as Node2D
-	weapon_sprite.add_child(projectile)
-	projectile.position = Vector2(weapon_sprite.position.x + 20, weapon_sprite.position.y + 5)
-	projectile.reparent(game_round)
-	projectile.show()
-	var tween = create_tween()
-	tween.tween_property(projectile, "global_position", enemy_to_attack_pos, 0.5)
-	tween.finished.connect(func (): on_attack_finished(projectile, enemy_to_attack, should_retaliate, on_complete))
+	weapon_to_attack_with.fire_at_enemy(weapon_sprite, self, enemy_to_attack, func (): on_attack_finished(enemy_to_attack, should_retaliate, on_complete))
 
-func on_attack_finished(projectile: Node2D, enemy_to_attack: Agent, should_retaliate: bool, on_complete: Callable):
-	var damage = calculate_damage_to_deal()
-	enemy_to_attack.take_damage(damage)
-
-	# Log damage from this agent to enemy in order to calculate assists
-	if !enemy_to_attack.damage_source_mapping.has(agent_name):
-		enemy_to_attack.damage_source_mapping[agent_name] = 0
-	enemy_to_attack.damage_source_mapping[agent_name] += damage
-
-	# If kill is scored, emit a kill or assit signal
-	if enemy_to_attack.get_curr_health() == 0:
-		GameRoundVariables.update_kill_count_for_agent(agent_name)
-		GameRoundVariables.update_assist_counts(enemy_to_attack, agent_name)
-		kills_this_round += 1
-		on_kill.emit()
-
-	projectile.queue_free()
+func on_attack_finished(enemy_to_attack: Agent, should_retaliate: bool, on_complete: Callable):
 	if should_retaliate and !enemy_to_attack.is_dead() and enemy_to_attack.has_vision_of_agent(self):
 		# Set defending agent weapon
 		enemy_to_attack.weapon_to_attack_with = enemy_to_attack.primary_weapon if enemy_to_attack.primary_weapon != null else enemy_to_attack.sidearm_weapon		
@@ -226,21 +194,6 @@ func on_attack_finished(projectile: Node2D, enemy_to_attack: Agent, should_retal
 		game_round.game_camera.target_zoom = Vector2.ONE
 		weapon_to_attack_with = null
 		on_complete.call()
-
-func calculate_damage_to_deal():
-	assert(weapon_to_attack_with != null, "Weapon to attack with is null when calculating damage!")
-	var hit_roll = randi_range(0, 100)
-	
-	# replace this with actual accuracy stat
-	if hit_roll < 40:
-		print("Missed!")
-		return 0
-	else:
-		var headshot_roll = randi_range(0, 100)
-		if headshot_roll >= 80:
-			return weapon_to_attack_with.weapon_stats.headshot_damage
-		else:
-			return weapon_to_attack_with.weapon_stats.body_damage
 
 func take_damage(damage):
 	var dmg_to_hp = damage - shield_bar.value

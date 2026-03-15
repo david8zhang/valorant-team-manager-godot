@@ -37,3 +37,4 @@ enum WeaponFireRate {
 @export var weapon_type: WeaponType
 @export var weapon_name: WeaponNames
 @export var weapon_fire_rate: WeaponFireRate
+@export var animations: SpriteFrames

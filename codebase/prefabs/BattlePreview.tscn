@@ -6,7 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="3_54uy7"]
 [ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="4_vf6mc"]
 [ext_resource type="StyleBox" uid="uid://cy5g0kjs21b00" path="res://prefabs/ShieldFill.tres" id="5_5lld8"]
-[ext_resource type="Texture2D" uid="uid://f8qo58ck2fil" path="res://assets/weapons/ghost.png" id="7_vf6mc"]
+[ext_resource type="Texture2D" uid="uid://f8qo58ck2fil" path="res://assets/weapons/ghost/ghost.png" id="7_vf6mc"]
 
 [node name="BattlePreview" type="PanelContainer"]
 custom_minimum_size = Vector2(200, 100)

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="WeaponStats" load_steps=4 format=3 uid="uid://dfbewojqxfixw"]
 
-[ext_resource type="Texture2D" uid="uid://dsln0xxpp1j1o" path="res://assets/weapons/frenzy-ingame.png" id="1_l1fwl"]
+[ext_resource type="Texture2D" uid="uid://dsln0xxpp1j1o" path="res://assets/weapons/frenzy/frenzy-ingame.png" id="1_l1fwl"]
 [ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_ohap3"]
-[ext_resource type="Texture2D" uid="uid://c804yrlgsqxik" path="res://assets/weapons/frenzy-icon.png" id="2_wavq5"]
+[ext_resource type="Texture2D" uid="uid://c804yrlgsqxik" path="res://assets/weapons/frenzy/frenzy-icon.png" id="2_wavq5"]
 
 [resource]
 script = ExtResource("1_ohap3")
