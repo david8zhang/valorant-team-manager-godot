@@ -7,6 +7,7 @@ extends Node2D
 @onready var health_bar = $HealthBar as ProgressBar
 @onready var shield_bar = $ShieldBar as ProgressBar
 @onready var weapon_sprite = $Weapon as AnimatedSprite2D
+@onready var shake_component = $ShakeComponent as ShakeComponent
 
 @export var projectile_scene: PackedScene
 @export var vision_distance := 25

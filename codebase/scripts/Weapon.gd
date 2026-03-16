@@ -91,11 +91,7 @@ func show_bullet_tracer(weapon_sprite: AnimatedSprite2D, enemy_to_attack: Agent,
 	timer.one_shot = true
 	timer.autostart = true
 	var tracer_dissolve = func _tracer_dissolve():
-		var shader = enemy_to_attack.sprite.material as ShaderMaterial
-		var prev_solid_color = shader.get_shader_parameter("solid_color")
-		if damage > 0:
-			shader.set_shader_parameter("solid_color", Color.RED)
-			shader.set_shader_parameter("enabled", true)
+		show_enemy_damage(enemy_to_attack, damage)
 		var three_q_point = (tracer_line.points[0] + tracer_end_point * 3) / 4
 		tracer_line.points = [three_q_point, tracer_end_point]
 		var timer2 = Timer.new()
@@ -103,8 +99,6 @@ func show_bullet_tracer(weapon_sprite: AnimatedSprite2D, enemy_to_attack: Agent,
 		timer2.one_shot = true
 		timer2.autostart = true
 		var remove_tracer = func _remove_tracer():
-			shader.set_shader_parameter("solid_color", prev_solid_color)
-			shader.set_shader_parameter("enabled", false)
 			tracer_line.queue_free()
 		timer2.timeout.connect(remove_tracer)
 		game_round.add_child(timer2)
@@ -112,8 +106,22 @@ func show_bullet_tracer(weapon_sprite: AnimatedSprite2D, enemy_to_attack: Agent,
 	game_round.add_child(timer)
 
 
-func show_enemy_damage():
-	pass
+func show_enemy_damage(enemy_to_attack: Agent, damage: int):
+	var shader = enemy_to_attack.sprite.material as ShaderMaterial
+	var prev_solid_color = shader.get_shader_parameter("solid_color")
+	if damage > 0:
+		enemy_to_attack.shake_component.shake(3.0, 0.1)
+		shader.set_shader_parameter("solid_color", Color.RED)
+		shader.set_shader_parameter("enabled", true)
+	var timer = Timer.new()
+	timer.wait_time = 0.1
+	timer.autostart = true
+	timer.one_shot = true
+	var on_complete = func _on_complete():
+		shader.set_shader_parameter("solid_color", prev_solid_color)
+		shader.set_shader_parameter("enabled", false)
+	timer.timeout.connect(on_complete)
+	game_round.add_child(timer)
 
 
 func calculate_damage_to_deal():
