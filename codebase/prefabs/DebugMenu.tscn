@@ -44,6 +44,10 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 text = "Show Player Vision"
 
+[node name="KillCurrAgent" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Kill Current Agent"
+
 [node name="ForcePlayerElimWin" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=5 format=3 uid="uid://bho50khjna0l4"]
+
+[ext_resource type="SpriteFrames" uid="uid://d24b3uyiw6foq" path="res://assets/weapons/ghost/ghost.tres" id="1_fatbw"]
+[ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_vbop7"]
+[ext_resource type="Texture2D" uid="uid://bsh25r6ut1f8j" path="res://assets/weapons/ghost/ghost-ingame.png" id="2_e6lmr"]
+[ext_resource type="Texture2D" uid="uid://f8qo58ck2fil" path="res://assets/weapons/ghost/ghost.png" id="3_ktrkd"]
+
+[resource]
+script = ExtResource("1_vbop7")
+body_damage = 30
+headshot_damage = 105
+max_ammo = 39
+cost = 500
+in_game_texture = ExtResource("2_e6lmr")
+in_menu_texture = ExtResource("3_ktrkd")
+weapon_type = 1
+weapon_name = 3
+weapon_fire_rate = 1
+animations = ExtResource("1_fatbw")
+barrel_x_pos = 23
+metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

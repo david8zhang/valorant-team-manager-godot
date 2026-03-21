@@ -51,10 +51,11 @@ alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_right = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
 
 [node name="PlayerAvatar" type="TextureRect" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(75, 75)
@@ -78,7 +79,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("4_a1xcx")
-expand_mode = 3
+expand_mode = 2
 stretch_mode = 5
 
 [node name="Ability1" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
@@ -86,7 +87,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Ability1"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 texture = ExtResource("7_y4d75")
 expand_mode = 2
@@ -109,7 +110,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/Ability2"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 texture = ExtResource("6_pw3e2")
 expand_mode = 2

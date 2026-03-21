@@ -17,3 +17,4 @@ weapon_type = 1
 weapon_name = 1
 weapon_fire_rate = 1
 animations = ExtResource("1_54fil")
+barrel_x_pos = 20

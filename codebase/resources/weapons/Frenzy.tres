@@ -17,4 +17,5 @@ weapon_type = 1
 weapon_name = 2
 weapon_fire_rate = 2
 animations = ExtResource("1_wavq5")
+barrel_x_pos = 20
 metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

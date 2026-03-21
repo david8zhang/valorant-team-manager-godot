@@ -44,6 +44,7 @@ var is_showing_scoreboard := true
 var top_view_state := TopViewState.SCOREBOARD
 var bomb: Bomb
 var smokes_on_field := []
+var is_round_over := false
 
 func _ready():
 	round_result.on_continue.connect(incr_score_and_go_to_buy_phase)
@@ -117,7 +118,8 @@ func go_to_next_turn():
 	# Check if all agents have completed their turns
 	if have_all_agents_completed_turn():
 		go_to_next_turn_cycle()
-	start_turn_for_next_agent()
+	if !is_round_over:
+		start_turn_for_next_agent()
 
 func have_all_agents_completed_turn():
 	var all_agents = player_team.agents + cpu_team.agents
@@ -133,6 +135,7 @@ func go_to_next_turn_cycle():
 	var win_condition = get_win_condition()
 	if win_condition != -1:
 		handle_win_condition(win_condition)
+		is_round_over = true
 	else:
 		var all_agents = player_team.agents + cpu_team.agents
 		for a in all_agents:
@@ -345,6 +348,7 @@ func setup_player_buy_menu(last_winning_side: GameRound.Side):
 	action_menu.hide()
 
 func on_buy_finished():
+	is_round_over = false
 	player_team.reset_agents()
 	cpu_team.reset_agents()
 	scoreboard.switch_to_phase(Scoreboard.Phase.PRE_PLANT)

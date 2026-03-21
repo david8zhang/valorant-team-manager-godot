@@ -8,6 +8,7 @@ extends Control
 @onready var force_player_win_detonate_button = $VBoxContainer/ForcePlayerDetonateWin as Button
 @onready var force_cpu_win_elim_button = $VBoxContainer/ForceCPUElimWin as Button
 @onready var force_cpu_win_defuse_button = $VBoxContainer/ForceCPUDefuseWin as Button
+@onready var kill_curr_agent_button = $VBoxContainer/KillCurrAgent as Button
 
 var vision_side_to_show := GameRound.Side.PLAYER
 
@@ -15,6 +16,7 @@ func _ready() -> void:
 	show_cpu_vision_button.pressed.connect(show_cpu_vision)
 	show_player_vision_button.pressed.connect(show_player_vision)
 	force_player_win_elim_button.pressed.connect(force_player_win_elim)
+	kill_curr_agent_button.pressed.connect(kill_curr_agent)
 	await game_round.ready
 	game_round.cpu_agent_controller.on_complete_move.connect(update_cpu_vision_after_move)
 
@@ -56,3 +58,8 @@ func force_player_win_elim():
 		agent.health_bar.value = 0
 	game_round.handle_win_condition(RoundResult.WinCondition.ELIMINATION)
 	visible = false
+
+func kill_curr_agent():
+	var agent_controller = game_round.agent_controller
+	var selected_agent = agent_controller.selected_agent
+	selected_agent.take_damage(1000)

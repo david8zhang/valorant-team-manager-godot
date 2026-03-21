@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://d24b3uyiw6foq"]
+
+[ext_resource type="Texture2D" uid="uid://cnb385v830l2y" path="res://assets/weapons/ghost/ghost-ingame-anims.png" id="1_5kds5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kds5"]
+atlas = ExtResource("1_5kds5")
+region = Rect2(0, 0, 30, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6rq1"]
+atlas = ExtResource("1_5kds5")
+region = Rect2(30, 0, 30, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ppfk"]
+atlas = ExtResource("1_5kds5")
+region = Rect2(60, 0, 30, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mstmf"]
+atlas = ExtResource("1_5kds5")
+region = Rect2(90, 0, 30, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipoi6"]
+atlas = ExtResource("1_5kds5")
+region = Rect2(120, 0, 30, 24)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kds5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6rq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ppfk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mstmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipoi6")
+}],
+"loop": false,
+"name": &"firing",
+"speed": 10.0
+}]
