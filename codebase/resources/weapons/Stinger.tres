@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=5 format=3 uid="uid://bh8ciosfkbui1"]
+
+[ext_resource type="SpriteFrames" uid="uid://y610823p3j68" path="res://assets/weapons/stinger/stinger.tres" id="1_ba4cf"]
+[ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_uipm6"]
+[ext_resource type="Texture2D" uid="uid://ba5e7jeib2jgb" path="res://assets/weapons/stinger/stinger-ingame.png" id="2_61exk"]
+[ext_resource type="Texture2D" uid="uid://l3csil8nl15a" path="res://assets/weapons/stinger/stinger-icon.png" id="3_7wvmn"]
+
+[resource]
+script = ExtResource("1_uipm6")
+body_damage = 27
+headshot_damage = 67
+max_ammo = 60
+cost = 1100
+in_game_texture = ExtResource("2_61exk")
+in_menu_texture = ExtResource("3_7wvmn")
+weapon_type = 0
+weapon_name = 9
+weapon_fire_rate = 2
+animations = ExtResource("1_ba4cf")
+barrel_x_pos = 26
+metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

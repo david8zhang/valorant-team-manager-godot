@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://c6rgplgbm5ixn"]
+
+[ext_resource type="Texture2D" uid="uid://bgod4hrw4op52" path="res://assets/weapons/sheriff/sheriff-ingame-anims.png" id="1_q7oyo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31nhl"]
+atlas = ExtResource("1_q7oyo")
+region = Rect2(0, 0, 28, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtlel"]
+atlas = ExtResource("1_q7oyo")
+region = Rect2(28, 0, 28, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36pk3"]
+atlas = ExtResource("1_q7oyo")
+region = Rect2(56, 0, 28, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfqln"]
+atlas = ExtResource("1_q7oyo")
+region = Rect2(84, 0, 28, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5j6w"]
+atlas = ExtResource("1_q7oyo")
+region = Rect2(112, 0, 28, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1bg4"]
+atlas = ExtResource("1_q7oyo")
+region = Rect2(140, 0, 28, 24)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31nhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtlel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36pk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfqln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5j6w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1bg4")
+}],
+"loop": false,
+"name": &"firing",
+"speed": 10.0
+}]

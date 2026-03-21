@@ -6,8 +6,8 @@ class AgentGameStats:
 	var death_count := 0
 	var assist_count := 0
 	var credits := 0
-	var primary_weapon_name := WeaponStats.WeaponNames.NO_WEAPON
-	var sidearm_weapon_name := WeaponStats.WeaponNames.GHOST
+	var primary_weapon_name := WeaponStats.WeaponNames.STINGER
+	var sidearm_weapon_name := WeaponStats.WeaponNames.SHERIFF
 	var ability_1_charges := 0
 	var ability_2_charges := 0
 
