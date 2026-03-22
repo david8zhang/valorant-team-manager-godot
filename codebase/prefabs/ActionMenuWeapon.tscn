@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bhtv2q1vdqnm8"]
 
-[ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="1_4dbdy"]
 [ext_resource type="Script" uid="uid://cgkurcwxyv5tu" path="res://scripts/ActionMenuWeapon.gd" id="1_j6xc5"]
+[ext_resource type="Texture2D" uid="uid://dccydnoa5oegn" path="res://assets/weapons/vandal/vandal-ingame.png" id="2_j6xc5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0corr"]
 bg_color = Color(0.760784, 0.760784, 0.760784, 1)
@@ -52,9 +52,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_4dbdy")
-expand_mode = 1
-stretch_mode = 3
+texture = ExtResource("2_j6xc5")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="NoWeaponLabel" type="Label" parent="."]
 visible = false

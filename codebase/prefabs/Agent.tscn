@@ -75,6 +75,7 @@ show_percentage = false
 
 [node name="Weapon" type="AnimatedSprite2D" parent="."]
 visible = false
+scale = Vector2(1.5, 1.5)
 sprite_frames = ExtResource("8_bgk42")
 animation = &"firing"
 centered = false

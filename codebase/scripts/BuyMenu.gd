@@ -61,6 +61,9 @@ func _ready() -> void:
 		continue_button.pressed.connect(game_round.on_buy_finished)
 
 func init_agent_info(agents):
+	for c in agent_buy_menu_container.get_children():
+		if c is AgentBuyMenu:
+			c.queue_free()
 	for a in agents:
 		var agent = a as Agent
 		var agent_buy_menu = agent_buy_menu_scene.instantiate() as AgentBuyMenu

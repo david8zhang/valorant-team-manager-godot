@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://cnwmctdcmepdv"]
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=5 format=3 uid="uid://cnwmctdcmepdv"]
 
+[ext_resource type="SpriteFrames" uid="uid://dr2em81mpit4w" path="res://assets/weapons/vandal/vandal.tres" id="1_ftrxh"]
+[ext_resource type="Texture2D" uid="uid://dccydnoa5oegn" path="res://assets/weapons/vandal/vandal-ingame.png" id="1_ghh5d"]
 [ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_iibho"]
-[ext_resource type="Texture2D" uid="uid://bw87xas1a5usf" path="res://assets/placeholder/vandal_ingame.png" id="2_n30am"]
+[ext_resource type="Texture2D" uid="uid://du3rd3qpvunhh" path="res://assets/weapons/vandal/vandal-icon.png" id="2_ftrxh"]
 
 [resource]
 script = ExtResource("1_iibho")
@@ -9,8 +11,12 @@ body_damage = 40
 headshot_damage = 160
 max_ammo = 50
 cost = 2900
-texture = ExtResource("2_n30am")
+in_game_texture = ExtResource("1_ghh5d")
+in_menu_texture = ExtResource("2_ftrxh")
 weapon_type = 0
-weapon_name = 3
+weapon_name = 6
 weapon_fire_rate = 1
+animations = ExtResource("1_ftrxh")
+barrel_x_pos = 43
+scale = 1.0
 metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

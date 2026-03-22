@@ -6,7 +6,7 @@ class AgentGameStats:
 	var death_count := 0
 	var assist_count := 0
 	var credits := 0
-	var primary_weapon_name := WeaponStats.WeaponNames.STINGER
+	var primary_weapon_name := WeaponStats.WeaponNames.VANDAL if randi_range(0, 1) == 0 else WeaponStats.WeaponNames.SPECTRE
 	var sidearm_weapon_name := WeaponStats.WeaponNames.SHERIFF
 	var ability_1_charges := 0
 	var ability_2_charges := 0
@@ -56,14 +56,18 @@ func update_assist_counts(killed_enemy: Agent, killer_name: String):
 			agent_game_stats.assist_count += 1
 
 func load_weapon_from_name(weapon_name: WeaponStats.WeaponNames, game_round: GameRound):
-	var weapon_name_str = ""
-	for enum_name in WeaponStats.WeaponNames.keys():
-		if WeaponStats.WeaponNames[enum_name] == weapon_name:
-				weapon_name_str = enum_name
+	var weapon_name_str = get_weapon_name_str(weapon_name)
 	if weapon_name != WeaponStats.WeaponNames.NO_WEAPON:
 		var weapon_resource = load("res://resources/weapons/" + weapon_name_str.to_pascal_case() + ".tres")
 		return Weapon.new(weapon_resource, game_round)
 	return null
+
+func get_weapon_name_str(weapon_name: WeaponStats.WeaponNames):
+	var weapon_name_str = ""
+	for enum_name in WeaponStats.WeaponNames.keys():
+		if WeaponStats.WeaponNames[enum_name] == weapon_name:
+				weapon_name_str = enum_name	
+	return weapon_name_str
 
 func purchase_ability_charge(agent_name, ability_index):
 	var agent_game_stats = get_or_create_agent_game_stat(agent_name)

@@ -23,6 +23,7 @@ func fire_at_enemy(weapon_sprite: AnimatedSprite2D, selected_agent: Agent, enemy
 	var angle = rad_to_deg((enemy_to_attack_pos - selected_agent_pos).angle())
 	weapon_sprite.sprite_frames = weapon_stats.animations
 	weapon_sprite.show()
+	weapon_sprite.scale = Vector2(weapon_stats.scale, weapon_stats.scale)
 	weapon_sprite.rotation_degrees = angle
 	weapon_sprite.flip_v = weapon_sprite.rotation_degrees <= -90 and weapon_sprite.rotation_degrees >= -270 or \
 									weapon_sprite.rotation_degrees >= 90 and weapon_sprite.rotation_degrees <= 270

@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dr2em81mpit4w"]
+
+[ext_resource type="Texture2D" uid="uid://dixtehloyn6mn" path="res://assets/weapons/vandal/vandal-ingame-anims.png" id="1_ia62c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ia62c"]
+atlas = ExtResource("1_ia62c")
+region = Rect2(0, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvix7"]
+atlas = ExtResource("1_ia62c")
+region = Rect2(68, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgsso"]
+atlas = ExtResource("1_ia62c")
+region = Rect2(136, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_840jh"]
+atlas = ExtResource("1_ia62c")
+region = Rect2(204, 0, 68, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ia62c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvix7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgsso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_840jh")
+}],
+"loop": false,
+"name": &"firing",
+"speed": 12.0
+}]

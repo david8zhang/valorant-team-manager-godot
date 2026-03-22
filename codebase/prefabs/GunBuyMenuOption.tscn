@@ -21,8 +21,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_y22a2")
 script = ExtResource("2_ul52r")
-gun_name = "Guardian"
-texture = ExtResource("1_3ub3c")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2

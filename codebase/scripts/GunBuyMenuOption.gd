@@ -6,17 +6,16 @@ extends PanelContainer
 @onready var price_label = $MarginContainer/VBoxContainer/HBoxContainer/Label2 as Label
 @onready var button = $Button as Button
 
-@export var gun_name := ""
-@export var gun_price := 0
-@export var texture: Texture2D
+@export var weapon_stats: WeaponStats
 
 signal on_click(gun_buy_menu_option)
 
 func _ready() -> void:
-	name_label.text = gun_name
-	price_label.text = "Free" if gun_price == 0 else str(gun_price)
-	texture_rect.texture = texture
-	button.pressed.connect(click)
+	if weapon_stats != null:
+		name_label.text = GameRoundVariables.get_weapon_name_str(weapon_stats.weapon_name).to_pascal_case()
+		price_label.text = "Free" if weapon_stats.cost == 0 else str(weapon_stats.cost)
+		texture_rect.texture = weapon_stats.in_menu_texture
+		button.pressed.connect(click)
 
 func click():
 	on_click.emit(self)

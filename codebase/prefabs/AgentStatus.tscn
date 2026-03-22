@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://wxeqn8voogow"]
+[gd_scene load_steps=14 format=3 uid="uid://wxeqn8voogow"]
 
 [ext_resource type="Script" uid="uid://bjddamp2r15i4" path="res://scripts/AgentStatus.gd" id="1_mjuwj"]
 [ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="2_wjiy0"]
@@ -8,6 +8,7 @@
 [ext_resource type="StyleBox" uid="uid://cy5g0kjs21b00" path="res://prefabs/ShieldFill.tres" id="4_tpx7d"]
 [ext_resource type="Texture2D" uid="uid://7pdwea6dt72o" path="res://assets/placeholder/bomb-solid-full.svg" id="5_d1d8l"]
 [ext_resource type="StyleBox" uid="uid://catg2lupwuxlc" path="res://prefabs/AgentStatusPanelBG.tres" id="6_y7sud"]
+[ext_resource type="Texture2D" uid="uid://dccydnoa5oegn" path="res://assets/weapons/vandal/vandal-ingame.png" id="9_3pplx"]
 [ext_resource type="Texture2D" uid="uid://vqn7b5cqbwtq" path="res://assets/icons/kills.png" id="10_3pplx"]
 [ext_resource type="Texture2D" uid="uid://dyp2qmtnhr1fv" path="res://assets/icons/deaths.png" id="11_bgwlc"]
 [ext_resource type="Texture2D" uid="uid://bxub1o8hrkamg" path="res://assets/icons/assists.png" id="12_t8we2"]
@@ -116,6 +117,7 @@ size_flags_horizontal = 3
 [node name="WeaponTexture" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
+texture = ExtResource("9_3pplx")
 expand_mode = 2
 stretch_mode = 5
 

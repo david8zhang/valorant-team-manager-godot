@@ -18,4 +18,5 @@ weapon_name = 4
 weapon_fire_rate = 0
 animations = ExtResource("1_4vglj")
 barrel_x_pos = 20
+scale = 2.0
 metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

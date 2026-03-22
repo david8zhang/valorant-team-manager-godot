@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=5 format=3 uid="uid://dpjy6jusowpqv"]
+
+[ext_resource type="SpriteFrames" uid="uid://cfu531454ch0s" path="res://assets/weapons/spectre/spectre.tres" id="1_aqx8h"]
+[ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_qh801"]
+[ext_resource type="Texture2D" uid="uid://b20cpdb3a0o6g" path="res://assets/weapons/spectre/spectre-ingame.png" id="2_kpb1g"]
+[ext_resource type="Texture2D" uid="uid://b7ujt32px0tqw" path="res://assets/weapons/spectre/spectre-icon.png" id="3_bqsi6"]
+
+[resource]
+script = ExtResource("1_qh801")
+body_damage = 26
+headshot_damage = 78
+max_ammo = 90
+cost = 1600
+in_game_texture = ExtResource("2_kpb1g")
+in_menu_texture = ExtResource("3_bqsi6")
+weapon_type = 0
+weapon_name = 10
+weapon_fire_rate = 2
+animations = ExtResource("1_aqx8h")
+barrel_x_pos = 48
+scale = 1.25
+metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

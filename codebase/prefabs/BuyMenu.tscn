@@ -1,14 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://bj7jqevcv2wem"]
+[gd_scene load_steps=12 format=3 uid="uid://bj7jqevcv2wem"]
 
 [ext_resource type="Script" uid="uid://62jjydbsvanb" path="res://scripts/BuyMenu.gd" id="1_3ejf4"]
 [ext_resource type="PackedScene" uid="uid://c3hk0br2pjrhf" path="res://prefabs/AgentBuyMenu.tscn" id="1_mtvm6"]
 [ext_resource type="StyleBox" uid="uid://k2ihmpstyn38" path="res://prefabs/BuyMenuWeaponHeader.tres" id="2_4kfsn"]
-[ext_resource type="Texture2D" uid="uid://7x7bah3df7vw" path="res://assets/placeholder/vandal.png" id="5_0yq0h"]
-[ext_resource type="Texture2D" uid="uid://bmpvy403dy2jl" path="res://assets/weapons/classic/classic-icon.png" id="5_3ejf4"]
+[ext_resource type="Resource" uid="uid://epm7vu8jkk5n" path="res://resources/weapons/Classic.tres" id="5_0yq0h"]
 [ext_resource type="PackedScene" uid="uid://bxqir2xgtiyhh" path="res://prefabs/GunBuyMenuOption.tscn" id="6_3ejf4"]
-[ext_resource type="Texture2D" uid="uid://c804yrlgsqxik" path="res://assets/weapons/frenzy/frenzy-icon.png" id="6_8iy0v"]
-[ext_resource type="Texture2D" uid="uid://f8qo58ck2fil" path="res://assets/weapons/ghost/ghost.png" id="7_dpjfq"]
-[ext_resource type="Texture2D" uid="uid://bapi4jxwfmtor" path="res://assets/weapons/sheriff/sheriff.png" id="8_rm2ea"]
+[ext_resource type="Resource" uid="uid://bho50khjna0l4" path="res://resources/weapons/Ghost.tres" id="6_8iy0v"]
+[ext_resource type="Resource" uid="uid://dfbewojqxfixw" path="res://resources/weapons/Frenzy.tres" id="6_dpjfq"]
+[ext_resource type="Resource" uid="uid://jpexs5dd4xly" path="res://resources/weapons/Sheriff.tres" id="8_dpjfq"]
+[ext_resource type="Resource" uid="uid://bh8ciosfkbui1" path="res://resources/weapons/Stinger.tres" id="9_rm2ea"]
+[ext_resource type="Resource" uid="uid://dpjy6jusowpqv" path="res://resources/weapons/Spectre.tres" id="10_8h8xm"]
+[ext_resource type="Resource" uid="uid://cnwmctdcmepdv" path="res://resources/weapons/Vandal.tres" id="10_d1hj2"]
 
 [node name="BuyMenu" type="Control"]
 layout_mode = 3
@@ -116,26 +118,22 @@ vertical_alignment = 1
 [node name="Classic" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 size_flags_vertical = 3
-gun_name = "Classic"
-texture = ExtResource("5_3ejf4")
+weapon_stats = ExtResource("5_0yq0h")
 
 [node name="Frenzy" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 size_flags_vertical = 3
-gun_name = "Frenzy"
-texture = ExtResource("6_8iy0v")
+weapon_stats = ExtResource("6_dpjfq")
 
 [node name="Ghost" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 size_flags_vertical = 3
-gun_name = "Ghost"
-texture = ExtResource("7_dpjfq")
+weapon_stats = ExtResource("6_8iy0v")
 
 [node name="Sheriff" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 size_flags_vertical = 3
-gun_name = "Sheriff"
-texture = ExtResource("8_rm2ea")
+weapon_stats = ExtResource("8_dpjfq")
 
 [node name="Col2Weapons" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer"]
 layout_mode = 2
@@ -170,11 +168,11 @@ vertical_alignment = 1
 
 [node name="Stinger" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
-gun_name = "Stinger"
+weapon_stats = ExtResource("9_rm2ea")
 
 [node name="Spectre" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
-gun_name = "Spectre"
+weapon_stats = ExtResource("10_8h8xm")
 
 [node name="Rifles" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons"]
 layout_mode = 2
@@ -204,8 +202,7 @@ vertical_alignment = 1
 
 [node name="Vandal" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
-gun_name = "Vandal"
-texture = ExtResource("5_0yq0h")
+weapon_stats = ExtResource("10_d1hj2")
 
 [node name="Guardian" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
@@ -244,11 +241,9 @@ vertical_alignment = 1
 
 [node name="Marshall" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
-gun_name = "Marshall"
 
 [node name="Operator" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
-gun_name = "Operator"
 
 [node name="MachineGuns" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2"]
 layout_mode = 2
@@ -278,11 +273,9 @@ vertical_alignment = 1
 
 [node name="Ares" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
-gun_name = "Ares"
 
 [node name="Odin" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
-gun_name = "Odin"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(896, 0)
@@ -321,12 +314,10 @@ layout_mode = 2
 [node name="Ability1" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Abilities/HBoxContainer" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 size_flags_horizontal = 3
-gun_name = "ABILITY_1"
 
 [node name="Ability2" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Abilities/HBoxContainer" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 size_flags_horizontal = 3
-gun_name = "ABILITY_2"
 
 [node name="Armor" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
 layout_mode = 2
@@ -359,7 +350,6 @@ layout_mode = 2
 [node name="Shields" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/Armor/HBoxContainer" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 size_flags_horizontal = 3
-gun_name = "Shields"
 
 [node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2(150, 0)
