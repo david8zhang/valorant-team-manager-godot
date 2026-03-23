@@ -6,8 +6,10 @@ class AgentGameStats:
 	var death_count := 0
 	var assist_count := 0
 	var credits := 0
-	var primary_weapon_name := WeaponStats.WeaponNames.GUARDIAN
-	var sidearm_weapon_name := WeaponStats.WeaponNames.SHERIFF
+	var primary_weapon_name := GameRoundVariables.get_random_weapon(
+		[WeaponStats.WeaponNames.VANDAL, WeaponStats.WeaponNames.GUARDIAN, WeaponStats.WeaponNames.SPECTRE, WeaponStats.WeaponNames.STINGER]
+	)
+	var sidearm_weapon_name := WeaponStats.WeaponNames.FRENZY
 	var ability_1_charges := 0
 	var ability_2_charges := 0
 
@@ -68,6 +70,9 @@ func get_weapon_name_str(weapon_name: WeaponStats.WeaponNames):
 		if WeaponStats.WeaponNames[enum_name] == weapon_name:
 				weapon_name_str = enum_name	
 	return weapon_name_str
+
+func get_random_weapon(rand_weapon_list = []) -> WeaponStats.WeaponNames:
+	return rand_weapon_list.pick_random()
 
 func purchase_ability_charge(agent_name, ability_index):
 	var agent_game_stats = get_or_create_agent_game_stat(agent_name)

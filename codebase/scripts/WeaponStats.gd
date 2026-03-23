@@ -14,12 +14,12 @@ enum WeaponNames {
     SHERIFF,
 		GUARDIAN,
     VANDAL,
-		MARSHALL,
-    OPERATOR,
 		STINGER,
     SPECTRE,
-		ARES,
-    ODIN
+		# MARSHALL,
+    # OPERATOR,
+		# ARES,
+    # ODIN
 }
 
 enum WeaponFireRate {
