@@ -75,7 +75,8 @@ func handle_enemy_damage(weapon_sprite, selected_agent: Agent, enemy_to_attack: 
 func show_bullet_tracer(weapon_sprite: AnimatedSprite2D, enemy_to_attack: Agent, damage):
 	var tracer_line = Line2D.new()
 	var barrel_x_pos = weapon_stats.barrel_x_pos
-	var tracer_start_pos = Vector2(weapon_sprite.position.x + barrel_x_pos, weapon_sprite.position.y + 5)
+	var barrel_y_pos = weapon_stats.barrel_y_pos
+	var tracer_start_pos = Vector2(weapon_sprite.position.x + barrel_x_pos, weapon_sprite.position.y + barrel_y_pos)
 	var tracer_end_point = enemy_to_attack.global_position
 
 	# Make the tracer line off if it's a missed shot

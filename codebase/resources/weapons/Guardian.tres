@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=5 format=3 uid="uid://0ij2qvisi30v"]
+
+[ext_resource type="SpriteFrames" uid="uid://c4attdcab5irl" path="res://assets/weapons/guardian/guardian.tres" id="1_ioufv"]
+[ext_resource type="Texture2D" uid="uid://dwrkdnnk23apu" path="res://assets/weapons/guardian/guardian-ingame.png" id="1_rw8oy"]
+[ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_tduk5"]
+[ext_resource type="Texture2D" uid="uid://duwe8qeve24am" path="res://assets/weapons/guardian/guardian-icon.png" id="2_ioufv"]
+
+[resource]
+script = ExtResource("1_tduk5")
+body_damage = 65
+headshot_damage = 195
+max_ammo = 36
+cost = 2250
+in_game_texture = ExtResource("1_rw8oy")
+in_menu_texture = ExtResource("2_ioufv")
+weapon_type = 0
+weapon_name = 5
+weapon_fire_rate = 0
+animations = ExtResource("1_ioufv")
+barrel_x_pos = 70
+barrel_y_pos = 12
+scale = 1.0
+metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

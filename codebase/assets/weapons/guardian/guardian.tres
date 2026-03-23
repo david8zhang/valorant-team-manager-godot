@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://c4attdcab5irl"]
+
+[ext_resource type="Texture2D" uid="uid://b62qqf345auk0" path="res://assets/weapons/guardian/guardian-ingame-anims.png" id="1_kiufb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqj4d"]
+atlas = ExtResource("1_kiufb")
+region = Rect2(0, 0, 79, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwb1q"]
+atlas = ExtResource("1_kiufb")
+region = Rect2(79, 0, 79, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hbb8"]
+atlas = ExtResource("1_kiufb")
+region = Rect2(158, 0, 79, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xaaex"]
+atlas = ExtResource("1_kiufb")
+region = Rect2(237, 0, 79, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5ja8"]
+atlas = ExtResource("1_kiufb")
+region = Rect2(316, 0, 79, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqj4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwb1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hbb8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xaaex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5ja8")
+}],
+"loop": false,
+"name": &"firing",
+"speed": 10.0
+}]
