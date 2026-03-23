@@ -68,7 +68,7 @@ texture = ExtResource("3_pw3e2")
 stretch_mode = 5
 
 [node name="Shield" type="TextureRect" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -76,7 +76,7 @@ texture = ExtResource("3_5ylxy")
 expand_mode = 3
 
 [node name="Gun" type="TextureRect" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(75, 50)
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
