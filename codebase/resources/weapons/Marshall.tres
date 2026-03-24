@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=5 format=3 uid="uid://22gmdimsctmc"]
+
+[ext_resource type="SpriteFrames" uid="uid://bfgpl7bn73ppx" path="res://assets/weapons/marshall/marshall.tres" id="1_dsfjt"]
+[ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_i5alf"]
+[ext_resource type="Texture2D" uid="uid://cymqv8ujmewhr" path="res://assets/weapons/marshall/marshall-ingame-single.png" id="2_jsksu"]
+[ext_resource type="Texture2D" uid="uid://cc3w3tgxbqv7u" path="res://assets/weapons/marshall/marshall-icon.png" id="3_cr4nl"]
+
+[resource]
+script = ExtResource("1_i5alf")
+body_damage = 101
+headshot_damage = 202
+max_ammo = 15
+cost = 950
+in_game_texture = ExtResource("2_jsksu")
+in_menu_texture = ExtResource("3_cr4nl")
+weapon_type = 0
+weapon_name = 9
+weapon_fire_rate = 0
+animations = ExtResource("1_dsfjt")
+barrel_x_pos = 78
+barrel_y_pos = 14
+scale = 1.0
+metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

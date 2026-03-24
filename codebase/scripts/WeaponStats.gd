@@ -16,10 +16,10 @@ enum WeaponNames {
     VANDAL,
 		STINGER,
     SPECTRE,
-		# MARSHALL,
-    # OPERATOR,
-		# ARES,
-    # ODIN
+		MARSHALL,
+    OPERATOR,
+		ARES,
+    ODIN
 }
 
 enum WeaponFireRate {

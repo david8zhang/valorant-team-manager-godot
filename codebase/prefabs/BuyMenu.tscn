@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bj7jqevcv2wem"]
+[gd_scene load_steps=14 format=3 uid="uid://bj7jqevcv2wem"]
 
 [ext_resource type="Script" uid="uid://62jjydbsvanb" path="res://scripts/BuyMenu.gd" id="1_3ejf4"]
 [ext_resource type="PackedScene" uid="uid://c3hk0br2pjrhf" path="res://prefabs/AgentBuyMenu.tscn" id="1_mtvm6"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://dpjy6jusowpqv" path="res://resources/weapons/Spectre.tres" id="10_8h8xm"]
 [ext_resource type="Resource" uid="uid://cnwmctdcmepdv" path="res://resources/weapons/Vandal.tres" id="10_d1hj2"]
 [ext_resource type="Resource" uid="uid://0ij2qvisi30v" path="res://resources/weapons/Guardian.tres" id="12_yd5dk"]
+[ext_resource type="Resource" uid="uid://22gmdimsctmc" path="res://resources/weapons/Marshall.tres" id="13_8ko7j"]
 
 [node name="BuyMenu" type="Control"]
 layout_mode = 3
@@ -243,6 +244,7 @@ vertical_alignment = 1
 
 [node name="Marshall" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
+weapon_stats = ExtResource("13_8ko7j")
 
 [node name="Operator" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
