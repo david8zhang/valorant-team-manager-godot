@@ -2,29 +2,29 @@
 
 [ext_resource type="Texture2D" uid="uid://dlscnc6br3s3w" path="res://assets/weapons/stinger/stinger-ingame-anims.png" id="1_t0y1m"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0y1m"]
+atlas = ExtResource("1_t0y1m")
+region = Rect2(0, 0, 53, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_cq0rm"]
 atlas = ExtResource("1_t0y1m")
-region = Rect2(0, 0, 32, 24)
+region = Rect2(53, 0, 53, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uqu41"]
 atlas = ExtResource("1_t0y1m")
-region = Rect2(32, 0, 32, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ydj34"]
-atlas = ExtResource("1_t0y1m")
-region = Rect2(64, 0, 32, 24)
+region = Rect2(106, 0, 53, 32)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_t0y1m")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_cq0rm")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uqu41")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ydj34")
 }],
 "loop": false,
 "name": &"firing",

@@ -4,7 +4,7 @@
 [ext_resource type="StyleBox" uid="uid://catg2lupwuxlc" path="res://prefabs/AgentStatusPanelBG.tres" id="1_nnlhy"]
 [ext_resource type="Texture2D" uid="uid://bggumpekt0l5b" path="res://assets/placeholder/shield-solid-full.svg" id="3_5ylxy"]
 [ext_resource type="Texture2D" uid="uid://da5goh1o6rfie" path="res://assets/agents/brimstone-static.png" id="3_pw3e2"]
-[ext_resource type="Texture2D" uid="uid://dccydnoa5oegn" path="res://assets/weapons/vandal/vandal-ingame.png" id="5_ihvw1"]
+[ext_resource type="Texture2D" uid="uid://wuexr4rm8jg6" path="res://assets/weapons/spectre/spectre-ingame-single.png" id="5_ihvw1"]
 [ext_resource type="Texture2D" uid="uid://ocrq5toydwyj" path="res://assets/abilities/molly.png" id="6_pw3e2"]
 [ext_resource type="Texture2D" uid="uid://c5dsbrghgsubs" path="res://assets/abilities/smoke.png" id="7_y4d75"]
 [ext_resource type="Texture2D" uid="uid://vqn7b5cqbwtq" path="res://assets/icons/kills.png" id="8_ihvw1"]
@@ -81,7 +81,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("5_ihvw1")
-stretch_mode = 5
+expand_mode = 2
+stretch_mode = 3
 
 [node name="Ability1" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2

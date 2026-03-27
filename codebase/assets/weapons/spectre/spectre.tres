@@ -1,18 +1,18 @@
 [gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://cfu531454ch0s"]
 
-[ext_resource type="Texture2D" uid="uid://ujpxa3tuxfnt" path="res://assets/weapons/spectre/spectre-anims.png" id="1_cdbjx"]
+[ext_resource type="Texture2D" uid="uid://djsa5puo21lqu" path="res://assets/weapons/spectre/spectre-ingame-anims.png" id="1_cdbjx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ki6gb"]
 atlas = ExtResource("1_cdbjx")
-region = Rect2(0, 0, 48, 24)
+region = Rect2(0, 0, 64, 30)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1d8en"]
 atlas = ExtResource("1_cdbjx")
-region = Rect2(48, 0, 48, 24)
+region = Rect2(64, 0, 64, 30)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4kugm"]
 atlas = ExtResource("1_cdbjx")
-region = Rect2(96, 0, 48, 24)
+region = Rect2(128, 0, 64, 30)
 
 [resource]
 animations = [{

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ba5e7jeib2jgb"
-path="res://.godot/imported/stinger-ingame.png-3f0fa055380b22c7b343f1685f3affbb.ctex"
+uid="uid://djsa5puo21lqu"
+path="res://.godot/imported/spectre-ingame-anims.png-43a71dff078a74dc02843e36cf04f95f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/weapons/stinger/stinger-ingame.png"
-dest_files=["res://.godot/imported/stinger-ingame.png-3f0fa055380b22c7b343f1685f3affbb.ctex"]
+source_file="res://assets/weapons/spectre/spectre-ingame-anims.png"
+dest_files=["res://.godot/imported/spectre-ingame-anims.png-43a71dff078a74dc02843e36cf04f95f.ctex"]
 
 [params]
 

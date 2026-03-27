@@ -7,7 +7,7 @@ class AgentGameStats:
 	var assist_count := 0
 	var credits := 0
 	var primary_weapon_name := GameRoundVariables.get_random_weapon(
-		[WeaponStats.WeaponNames.VANDAL, WeaponStats.WeaponNames.MARSHALL, WeaponStats.WeaponNames.GUARDIAN]
+		[WeaponStats.WeaponNames.VANDAL, WeaponStats.WeaponNames.MARSHALL, WeaponStats.WeaponNames.GUARDIAN, WeaponStats.WeaponNames.STINGER]
 	)
 	var sidearm_weapon_name := WeaponStats.WeaponNames.FRENZY
 	var ability_1_charges := 0
