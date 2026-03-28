@@ -2,7 +2,7 @@
 
 [ext_resource type="SpriteFrames" uid="uid://c17kfxrm0jyfv" path="res://assets/weapons/classic/classic.tres" id="1_54fil"]
 [ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_i1gso"]
-[ext_resource type="Texture2D" uid="uid://df5dnnjx3u1ec" path="res://assets/weapons/classic/classic-ingame.png" id="2_61u0k"]
+[ext_resource type="Texture2D" uid="uid://cgs3mqe5240pq" path="res://assets/weapons/classic/classic-ingame-single.png" id="2_54fil"]
 [ext_resource type="Texture2D" uid="uid://bmpvy403dy2jl" path="res://assets/weapons/classic/classic-icon.png" id="3_xgr2e"]
 
 [resource]
@@ -11,12 +11,13 @@ body_damage = 26
 headshot_damage = 78
 max_ammo = 36
 cost = 0
-in_game_texture = ExtResource("2_61u0k")
+in_game_texture = ExtResource("2_54fil")
 in_menu_texture = ExtResource("3_xgr2e")
 weapon_type = 1
 weapon_name = 1
 weapon_fire_rate = 1
 animations = ExtResource("1_54fil")
-barrel_x_pos = 20
-barrel_y_pos = 5
-scale = 2.0
+barrel_x_pos = 26
+barrel_y_pos = 9
+barrel_y_pos_flip = 8
+scale = 1.0

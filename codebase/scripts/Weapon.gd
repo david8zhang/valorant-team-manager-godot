@@ -74,9 +74,15 @@ func handle_enemy_damage(weapon_sprite, selected_agent: Agent, enemy_to_attack: 
 
 func show_bullet_tracer(weapon_sprite: AnimatedSprite2D, enemy_to_attack: Agent, damage):
 	var tracer_line = Line2D.new()
-	var barrel_x_pos = weapon_stats.barrel_x_pos
-	var barrel_y_pos = weapon_stats.barrel_y_pos
-	var tracer_start_pos = Vector2(weapon_sprite.position.x + barrel_x_pos, weapon_sprite.position.y + barrel_y_pos)
+	var barrel_offset = Vector2(weapon_stats.barrel_x_pos, weapon_stats.barrel_y_pos) + Vector2(0, -8)
+	if weapon_sprite.flip_v:
+			barrel_offset.y += weapon_stats.barrel_y_pos_flip
+
+	# Rotate the offset to match the weapon's rotation
+	var rotated_offset = barrel_offset.rotated(weapon_sprite.rotation)
+
+	# Tracer start position in world coordinates
+	var tracer_start_pos = weapon_sprite.global_position + rotated_offset
 	var tracer_end_point = enemy_to_attack.global_position
 
 	# Make the tracer line off if it's a missed shot
@@ -85,7 +91,7 @@ func show_bullet_tracer(weapon_sprite: AnimatedSprite2D, enemy_to_attack: Agent,
 		var offset_x = randi_range(15, 20) if too_far_right else randi_range(-20, -15)
 		tracer_end_point.x += offset_x
 
-	tracer_line.points = [weapon_sprite.to_global(tracer_start_pos), tracer_end_point]
+	tracer_line.points = [tracer_start_pos, tracer_end_point]
 	tracer_line.default_color = Color("#fbf236")
 	tracer_line.width = 3
 	game_round.add_child(tracer_line)

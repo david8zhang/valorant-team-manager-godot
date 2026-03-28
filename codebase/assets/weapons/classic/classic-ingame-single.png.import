@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df5dnnjx3u1ec"
-path="res://.godot/imported/classic-ingame.png-6e870fa80504ca1b3bb862ea27c8f7aa.ctex"
+uid="uid://cgs3mqe5240pq"
+path="res://.godot/imported/classic-ingame-single.png-01c98c5166d584109ea44033dd2b76d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/weapons/classic/classic-ingame.png"
-dest_files=["res://.godot/imported/classic-ingame.png-6e870fa80504ca1b3bb862ea27c8f7aa.ctex"]
+source_file="res://assets/weapons/classic/classic-ingame-single.png"
+dest_files=["res://.godot/imported/classic-ingame-single.png-01c98c5166d584109ea44033dd2b76d2.ctex"]
 
 [params]
 

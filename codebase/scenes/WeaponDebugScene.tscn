@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvx36hs7tqwdl"]
+
+[ext_resource type="Script" uid="uid://d1dtew5skc77s" path="res://scripts/debug/WeaponDebugScene.gd" id="1_jokck"]
+[ext_resource type="Resource" uid="uid://bh8ciosfkbui1" path="res://resources/weapons/Stinger.tres" id="2_x4kdc"]
+[ext_resource type="SpriteFrames" uid="uid://dfte4nf86qrun" path="res://assets/weapons/frenzy/frenzy.tres" id="3_x4kdc"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_jokck")
+weapon_stats = ExtResource("2_x4kdc")
+
+[node name="Weapon" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("3_x4kdc")
+animation = &"firing"
+centered = false
+offset = Vector2(0, -8)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)

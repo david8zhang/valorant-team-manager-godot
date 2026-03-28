@@ -6,8 +6,10 @@
 [ext_resource type="StyleBox" uid="uid://dg87xambkxjlc" path="res://prefabs/HealthBG.tres" id="3_54uy7"]
 [ext_resource type="StyleBox" uid="uid://dy7sneapy3v78" path="res://prefabs/HealthFill.tres" id="4_vf6mc"]
 [ext_resource type="StyleBox" uid="uid://cy5g0kjs21b00" path="res://prefabs/ShieldFill.tres" id="5_5lld8"]
-[ext_resource type="Texture2D" uid="uid://bsh25r6ut1f8j" path="res://assets/weapons/ghost/ghost-ingame.png" id="7_5lld8"]
 [ext_resource type="Texture2D" uid="uid://dccydnoa5oegn" path="res://assets/weapons/vandal/vandal-ingame.png" id="8_uc8c0"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vf6mc"]
+load_path = "res://.godot/imported/ghost-ingame.png-a83ab5bdb2817ca9c351c0b4e72089d3.ctex"
 
 [node name="BattlePreview" type="PanelContainer"]
 custom_minimum_size = Vector2(200, 100)
@@ -133,7 +135,7 @@ alignment = 1
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 size_flags_vertical = 4
-texture = ExtResource("7_5lld8")
+texture = SubResource("CompressedTexture2D_vf6mc")
 expand_mode = 3
 stretch_mode = 3
 

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="WeaponStats" load_steps=5 format=3 uid="uid://dfbewojqxfixw"]
 
-[ext_resource type="Texture2D" uid="uid://dsln0xxpp1j1o" path="res://assets/weapons/frenzy/frenzy-ingame.png" id="1_l1fwl"]
 [ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_ohap3"]
 [ext_resource type="SpriteFrames" uid="uid://dfte4nf86qrun" path="res://assets/weapons/frenzy/frenzy.tres" id="1_wavq5"]
 [ext_resource type="Texture2D" uid="uid://c804yrlgsqxik" path="res://assets/weapons/frenzy/frenzy-icon.png" id="2_wavq5"]
+[ext_resource type="Texture2D" uid="uid://c7248o7y1afr2" path="res://assets/weapons/frenzy/frenzy-ingame-single.png" id="2_wdksj"]
 
 [resource]
 script = ExtResource("1_ohap3")
@@ -11,13 +11,14 @@ body_damage = 26
 headshot_damage = 78
 max_ammo = 60
 cost = 450
-in_game_texture = ExtResource("1_l1fwl")
+in_game_texture = ExtResource("2_wdksj")
 in_menu_texture = ExtResource("2_wavq5")
 weapon_type = 1
 weapon_name = 2
 weapon_fire_rate = 2
 animations = ExtResource("1_wavq5")
-barrel_x_pos = 20
-barrel_y_pos = 5
-scale = 2.0
+barrel_x_pos = 37
+barrel_y_pos = 11
+barrel_y_pos_flip = 20
+scale = 1.0
 metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

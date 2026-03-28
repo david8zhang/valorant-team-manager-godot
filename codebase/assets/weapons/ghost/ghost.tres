@@ -1,26 +1,26 @@
 [gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://d24b3uyiw6foq"]
 
-[ext_resource type="Texture2D" uid="uid://cnb385v830l2y" path="res://assets/weapons/ghost/ghost-ingame-anims.png" id="1_5kds5"]
+[ext_resource type="Texture2D" uid="uid://c71a4il0p7b2p" path="res://assets/weapons/ghost/ghost-ingame-anims.png" id="1_5kds5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5kds5"]
 atlas = ExtResource("1_5kds5")
-region = Rect2(0, 0, 30, 24)
+region = Rect2(0, 0, 62, 30)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u6rq1"]
 atlas = ExtResource("1_5kds5")
-region = Rect2(30, 0, 30, 24)
+region = Rect2(62, 0, 62, 30)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ppfk"]
 atlas = ExtResource("1_5kds5")
-region = Rect2(60, 0, 30, 24)
+region = Rect2(124, 0, 62, 30)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mstmf"]
 atlas = ExtResource("1_5kds5")
-region = Rect2(90, 0, 30, 24)
+region = Rect2(186, 0, 62, 30)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipoi6"]
 atlas = ExtResource("1_5kds5")
-region = Rect2(120, 0, 30, 24)
+region = Rect2(248, 0, 62, 30)
 
 [resource]
 animations = [{

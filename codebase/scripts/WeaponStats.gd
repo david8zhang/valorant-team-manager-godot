@@ -40,4 +40,5 @@ enum WeaponFireRate {
 @export var animations: SpriteFrames
 @export var barrel_x_pos := 0
 @export var barrel_y_pos := 0
+@export var barrel_y_pos_flip := 0
 @export var scale := 0.0

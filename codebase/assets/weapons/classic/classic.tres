@@ -1,30 +1,33 @@
 [gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://c17kfxrm0jyfv"]
 
-[ext_resource type="Texture2D" uid="uid://c7jc63jlxywtt" path="res://assets/weapons/classic/classic-ingame-anims.png" id="1_4moeo"]
+[ext_resource type="Texture2D" uid="uid://c5f0l6mvimfym" path="res://assets/weapons/classic/classic-ingame-anims.png" id="1_4moeo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4moeo"]
+atlas = ExtResource("1_4moeo")
+region = Rect2(0, 0, 33, 26)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a6qbj"]
 atlas = ExtResource("1_4moeo")
-region = Rect2(0, 0, 24, 24)
+region = Rect2(33, 0, 33, 26)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vet16"]
 atlas = ExtResource("1_4moeo")
-region = Rect2(24, 0, 24, 24)
+region = Rect2(66, 0, 33, 26)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jbhoj"]
 atlas = ExtResource("1_4moeo")
-region = Rect2(48, 0, 24, 24)
+region = Rect2(99, 0, 33, 26)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_idoov"]
 atlas = ExtResource("1_4moeo")
-region = Rect2(72, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mcge4"]
-atlas = ExtResource("1_4moeo")
-region = Rect2(96, 0, 24, 24)
+region = Rect2(132, 0, 33, 26)
 
 [resource]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4moeo")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a6qbj")
 }, {
@@ -36,9 +39,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_idoov")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mcge4")
 }],
 "loop": false,
 "name": &"firing",

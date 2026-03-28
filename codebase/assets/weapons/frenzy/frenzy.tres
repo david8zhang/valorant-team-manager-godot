@@ -2,29 +2,29 @@
 
 [ext_resource type="Texture2D" uid="uid://cnbfpsteb7jjj" path="res://assets/weapons/frenzy/frenzy-ingame-anims.png" id="1_tp5c1"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_tp5c1"]
+atlas = ExtResource("1_tp5c1")
+region = Rect2(0, 0, 48, 44)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_4uru1"]
 atlas = ExtResource("1_tp5c1")
-region = Rect2(0, 0, 24, 24)
+region = Rect2(48, 0, 48, 44)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p3n8x"]
 atlas = ExtResource("1_tp5c1")
-region = Rect2(24, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6enx6"]
-atlas = ExtResource("1_tp5c1")
-region = Rect2(48, 0, 24, 24)
+region = Rect2(96, 0, 48, 44)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_tp5c1")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_4uru1")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p3n8x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6enx6")
 }],
 "loop": false,
 "name": &"firing",
