@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://bj5kaigrpmey"]
+
+[ext_resource type="Texture2D" uid="uid://n2sjyd54c0e4" path="res://assets/weapons/operator/operator-ingame-anims.png" id="1_wmrpx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkm8a"]
+atlas = ExtResource("1_wmrpx")
+region = Rect2(0, 0, 120, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdlcu"]
+atlas = ExtResource("1_wmrpx")
+region = Rect2(120, 0, 120, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2j6j"]
+atlas = ExtResource("1_wmrpx")
+region = Rect2(240, 0, 120, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4smuv"]
+atlas = ExtResource("1_wmrpx")
+region = Rect2(360, 0, 120, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phf7w"]
+atlas = ExtResource("1_wmrpx")
+region = Rect2(480, 0, 120, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0qnh"]
+atlas = ExtResource("1_wmrpx")
+region = Rect2(600, 0, 120, 40)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkm8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdlcu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2j6j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4smuv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phf7w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0qnh")
+}],
+"loop": false,
+"name": &"firing",
+"speed": 10.0
+}]
