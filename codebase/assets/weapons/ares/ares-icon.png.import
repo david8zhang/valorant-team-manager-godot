@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brd08nvl53nh8"
-path="res://.godot/imported/sheriff-ingame.png-fde08486e94a9fa0c4c833ca7f5ec4d7.ctex"
+uid="uid://bwdunlofbtkq4"
+path="res://.godot/imported/ares-icon.png-d30ca208d89bb634e102795f20d52392.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/weapons/sheriff/sheriff-ingame.png"
-dest_files=["res://.godot/imported/sheriff-ingame.png-fde08486e94a9fa0c4c833ca7f5ec4d7.ctex"]
+source_file="res://assets/weapons/ares/ares-icon.png"
+dest_files=["res://.godot/imported/ares-icon.png-d30ca208d89bb634e102795f20d52392.ctex"]
 
 [params]
 

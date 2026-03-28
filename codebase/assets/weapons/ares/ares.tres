@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://cytp2mikd7orl"]
+
+[ext_resource type="Texture2D" uid="uid://bxrdyb47gwqch" path="res://assets/weapons/ares/ares-ingame-anims.png" id="1_xs4ax"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gn0e4"]
+atlas = ExtResource("1_xs4ax")
+region = Rect2(0, 0, 109, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijwe3"]
+atlas = ExtResource("1_xs4ax")
+region = Rect2(109, 0, 109, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orjpb"]
+atlas = ExtResource("1_xs4ax")
+region = Rect2(218, 0, 109, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23khb"]
+atlas = ExtResource("1_xs4ax")
+region = Rect2(327, 0, 109, 40)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gn0e4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijwe3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orjpb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23khb")
+}],
+"loop": false,
+"name": &"firing",
+"speed": 20.0
+}]

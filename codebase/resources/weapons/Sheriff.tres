@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_4ixy8"]
 [ext_resource type="SpriteFrames" uid="uid://c6rgplgbm5ixn" path="res://assets/weapons/sheriff/sheriff.tres" id="1_4vglj"]
-[ext_resource type="Texture2D" uid="uid://brd08nvl53nh8" path="res://assets/weapons/sheriff/sheriff-ingame.png" id="1_e53jy"]
 [ext_resource type="Texture2D" uid="uid://bapi4jxwfmtor" path="res://assets/weapons/sheriff/sheriff.png" id="2_4vglj"]
+[ext_resource type="Texture2D" uid="uid://x3tkcpvssldd" path="res://assets/weapons/sheriff/sheriff-ingame-single.png" id="2_ijf6a"]
 
 [resource]
 script = ExtResource("1_4ixy8")
@@ -11,13 +11,14 @@ body_damage = 55
 headshot_damage = 159
 max_ammo = 24
 cost = 800
-in_game_texture = ExtResource("1_e53jy")
+in_game_texture = ExtResource("2_ijf6a")
 in_menu_texture = ExtResource("2_4vglj")
 weapon_type = 1
 weapon_name = 4
 weapon_fire_rate = 0
 animations = ExtResource("1_4vglj")
-barrel_x_pos = 20
-barrel_y_pos = 5
-scale = 2.0
+barrel_x_pos = 38
+barrel_y_pos = 12
+barrel_y_pos_flip = 8
+scale = 1.0
 metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bj7jqevcv2wem"]
+[gd_scene load_steps=16 format=3 uid="uid://bj7jqevcv2wem"]
 
 [ext_resource type="Script" uid="uid://62jjydbsvanb" path="res://scripts/BuyMenu.gd" id="1_3ejf4"]
 [ext_resource type="PackedScene" uid="uid://c3hk0br2pjrhf" path="res://prefabs/AgentBuyMenu.tscn" id="1_mtvm6"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://0ij2qvisi30v" path="res://resources/weapons/Guardian.tres" id="12_yd5dk"]
 [ext_resource type="Resource" uid="uid://22gmdimsctmc" path="res://resources/weapons/Marshall.tres" id="13_8ko7j"]
 [ext_resource type="Resource" uid="uid://bynihd0whd5m0" path="res://resources/weapons/Operator.tres" id="14_pld1j"]
+[ext_resource type="Resource" uid="uid://sux1v260wpmq" path="res://resources/weapons/Ares.tres" id="15_74u30"]
 
 [node name="BuyMenu" type="Control"]
 layout_mode = 3
@@ -279,6 +280,7 @@ vertical_alignment = 1
 
 [node name="Ares" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
+weapon_stats = ExtResource("15_74u30")
 
 [node name="Odin" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
