@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://bf7hmxy6yun8p"]
+
+[ext_resource type="Texture2D" uid="uid://divwet48xawap" path="res://assets/weapons/odin/odin-ingame-anims.png" id="1_fm1ba"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwqec"]
+atlas = ExtResource("1_fm1ba")
+region = Rect2(0, 0, 108, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52w8o"]
+atlas = ExtResource("1_fm1ba")
+region = Rect2(108, 0, 108, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8el7"]
+atlas = ExtResource("1_fm1ba")
+region = Rect2(216, 0, 108, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_353y8"]
+atlas = ExtResource("1_fm1ba")
+region = Rect2(324, 0, 108, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kx4yi"]
+atlas = ExtResource("1_fm1ba")
+region = Rect2(432, 0, 108, 48)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwqec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52w8o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8el7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_353y8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kx4yi")
+}],
+"loop": false,
+"name": &"firing",
+"speed": 15.0
+}]

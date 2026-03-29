@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=5 format=3 uid="uid://dutw66ne5kg4n"]
+
+[ext_resource type="Texture2D" uid="uid://dpiidmxqdabno" path="res://assets/weapons/odin/odin-ingame-single.png" id="1_3omqj"]
+[ext_resource type="Texture2D" uid="uid://us5oy7oqlq63" path="res://assets/weapons/odin/odin-icon.png" id="1_6ec4c"]
+[ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_s2mfp"]
+[ext_resource type="SpriteFrames" uid="uid://bf7hmxy6yun8p" path="res://assets/weapons/odin/odin.tres" id="1_unv7c"]
+
+[resource]
+script = ExtResource("1_s2mfp")
+body_damage = 38
+headshot_damage = 95
+max_ammo = 200
+cost = 3200
+in_game_texture = ExtResource("1_3omqj")
+in_menu_texture = ExtResource("1_6ec4c")
+weapon_type = 0
+weapon_name = 12
+weapon_fire_rate = 2
+animations = ExtResource("1_unv7c")
+barrel_x_pos = 97
+barrel_y_pos = 18
+barrel_y_pos_flip = 12
+scale = 1.0
+metadata/_custom_type_script = "uid://c72xoo8v4uyhs"
