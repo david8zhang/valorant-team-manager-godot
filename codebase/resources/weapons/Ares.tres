@@ -20,5 +20,5 @@ animations = ExtResource("1_0y2wu")
 barrel_x_pos = 93
 barrel_y_pos = 14
 barrel_y_pos_flip = 10
-scale = 1.0
+scale = 0.8
 metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

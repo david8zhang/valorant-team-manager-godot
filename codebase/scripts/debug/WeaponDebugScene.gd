@@ -14,30 +14,17 @@ func _input(event):
 
 
 func get_tracer_start_pos() -> Vector2:
-		# Local barrel tip relative to sprite origin
 		var barrel_local = Vector2(weapon_stats.barrel_x_pos, weapon_stats.barrel_y_pos) + Vector2(0, -8)  # adjust for sprite origin/offset
-
-		# Mirror X if sprite is flipped vertically
 		if weapon.flip_v:
 				barrel_local.y += weapon_stats.barrel_y_pos_flip
-
-		# Rotate according to weapon rotation
 		var rotated_barrel = barrel_local.rotated(weapon.rotation)
-
-		# Convert to global space
 		return weapon.global_position + rotated_barrel
 
 func fire_weapon_at_position(pos: Vector2) -> void:
-		# Rotate weapon toward target
 		weapon.rotation = (pos - weapon.global_position).angle()
-		
-		# Keep your flip_v logic
 		weapon.flip_v = weapon.rotation_degrees <= -90 and weapon.rotation_degrees >= -270 or \
 										weapon.rotation_degrees >= 90 and weapon.rotation_degrees <= 270
-		
 		weapon.play("firing")
-
-		# Tracer start/end
 		var tracer_start = get_tracer_start_pos()
 		var tracer_end = pos
 
@@ -47,7 +34,6 @@ func fire_weapon_at_position(pos: Vector2) -> void:
 		tracer_line.default_color = Color("#fbf236")
 		add_child(tracer_line)
 
-		# Dissolve tracer (your timer logic)
 		var timer = Timer.new()
 		timer.wait_time = 0.03
 		timer.one_shot = true

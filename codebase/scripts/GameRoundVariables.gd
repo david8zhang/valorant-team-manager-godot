@@ -7,7 +7,7 @@ class AgentGameStats:
 	var assist_count := 0
 	var credits := 0
 	var primary_weapon_name := GameRoundVariables.get_random_weapon(
-		[WeaponStats.WeaponNames.ODIN]
+		[WeaponStats.WeaponNames.MARSHALL, WeaponStats.WeaponNames.OPERATOR]
 	)
 	var sidearm_weapon_name := WeaponStats.WeaponNames.SHERIFF
 	var ability_1_charges := 0
