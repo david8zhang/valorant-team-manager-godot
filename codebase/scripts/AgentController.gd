@@ -97,6 +97,7 @@ func _process(_delta):
 				if Input.is_action_just_pressed("mouse_left"):
 					if highlight_overlay.is_pos_valid:
 						highlight_overlay.should_update_pos = false
+						action_menu.can_go_to_next_turn = false
 						selected_agent.move_to_position(pos_to_move_to, complete_move)
 						action_menu.update_all()
 						center_camera_on_position(pos_to_move_to)
@@ -122,6 +123,7 @@ func start_turn(agent_to_select: Agent):
 	game_round.update_visible_enemies_to_player()
 
 func complete_move():
+	action_menu.can_go_to_next_turn = true
 	highlight_overlay.should_update_pos = true
 	game_round.update_visible_enemies_to_player()
 	action_menu.update_all()
@@ -137,6 +139,7 @@ func complete_turn():
 		game_round.continue_bomb_defuse(selected_agent)
 	elif selected_agent.is_planting:
 		game_round.continue_bomb_plant(selected_agent)
+	selected_agent.update_visible_tiles()
 	on_complete_turn.emit()
 
 func select_agent(agent: Agent):
@@ -159,6 +162,7 @@ func start_battle():
 		game_round.battle_preview_menu.hide()		
 		var weapon_to_attack_with = selected_agent.primary_weapon if curr_action_state == ActionState.PRIMARY_ATTACK else selected_agent.sidearm_weapon
 		selected_agent.weapon_to_attack_with = weapon_to_attack_with
+		action_menu.can_go_to_next_turn = false
 		selected_agent.attack_enemy_agent(enemy_to_attack, true, on_battle_complete)
 		action_menu.update_all()
 
@@ -166,6 +170,7 @@ func on_battle_complete():
 	game_round.set_top_view_state(cached_top_view_state)
 	if selected_agent.is_dead():
 		complete_turn()
+	action_menu.can_go_to_next_turn = true
 
 func update_action_menu():
 	action_menu.update_all()

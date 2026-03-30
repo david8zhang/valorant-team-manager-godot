@@ -29,6 +29,7 @@ var agent_controller: AgentController
 var ap_rect_cost_style
 var ap_rect_unused_style
 var ap_rect_used_style
+var can_go_to_next_turn := true
 
 signal on_action(action_state)
 
@@ -189,7 +190,7 @@ func update_all():
 	update_ability_menu()
 
 func end_curr_turn():
-	if game_round.curr_turn_side == GameRound.Side.PLAYER:
+	if game_round.curr_turn_side == GameRound.Side.PLAYER and can_go_to_next_turn:
 		hide()
 		agent_controller.complete_turn()
 

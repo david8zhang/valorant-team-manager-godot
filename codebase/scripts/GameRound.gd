@@ -384,4 +384,4 @@ func is_round_underway():
 
 func can_move_to_pos(world_pos: Vector2):
 	var tile_pos = map.get_tile_pos_from_world_pos(world_pos)
-	return map.is_tile_pos_in_bounds(tile_pos) and !map.is_tile_pos_obstructed(tile_pos)
+	return map.is_tile_pos_in_bounds(tile_pos) and !map.is_tile_pos_obstructed(tile_pos) and !is_position_occupied(tile_pos)
