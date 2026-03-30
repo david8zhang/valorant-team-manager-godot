@@ -22,7 +22,7 @@ AbilityCreator="*res://scripts/abilities/AbilityCreator.gd"
 
 [display]
 
-window/size/viewport_width=1200
+window/size/viewport_width=1400
 window/size/viewport_height=900
 window/size/initial_position_type=0
 window/stretch/mode="canvas_items"

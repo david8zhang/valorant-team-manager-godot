@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bxqir2xgtiyhh"]
 
-[ext_resource type="Texture2D" uid="uid://doyiqs3ra7cy1" path="res://assets/placeholder/pistol.png" id="1_3ub3c"]
 [ext_resource type="StyleBox" uid="uid://i60bo6vogxxm" path="res://prefabs/BuyMenuWeapon.tres" id="1_y22a2"]
 [ext_resource type="Script" uid="uid://crhkbeik66irf" path="res://scripts/GunBuyMenuOption.gd" id="2_ul52r"]
+[ext_resource type="Texture2D" uid="uid://du3rd3qpvunhh" path="res://assets/weapons/vandal/vandal-icon.png" id="3_ul52r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ul52r"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -45,9 +45,9 @@ alignment = 1
 custom_minimum_size = Vector2(100, 80)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("1_3ub3c")
+texture = ExtResource("3_ul52r")
 expand_mode = 3
-stretch_mode = 5
+stretch_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

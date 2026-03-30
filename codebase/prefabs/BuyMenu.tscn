@@ -48,6 +48,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 2
+alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -93,14 +94,14 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-columns = 3
+columns = 4
 
 [node name="Sidearms" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer"]
 layout_mode = 2
 mouse_filter = 2
 
 [node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Sidearms"]
-custom_minimum_size = Vector2(200, 40)
+custom_minimum_size = Vector2(150, 40)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_4kfsn")
 
@@ -140,157 +141,203 @@ layout_mode = 2
 size_flags_vertical = 3
 weapon_stats = ExtResource("8_dpjfq")
 
-[node name="Col2Weapons" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer"]
+[node name="SMGsAndShotguns" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 5
 
-[node name="SMGs" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons"]
+[node name="SMGs" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs"]
+[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/SMGs"]
 custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_4kfsn")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/HeaderPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/SMGs/HeaderPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/HeaderPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/SMGs/HeaderPanel/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="GunTypeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs/HeaderPanel/MarginContainer/HBoxContainer"]
+[node name="GunTypeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/SMGs/HeaderPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "SMGS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Stinger" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs" instance=ExtResource("6_3ejf4")]
+[node name="Stinger" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/SMGs" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 weapon_stats = ExtResource("9_rm2ea")
 
-[node name="Spectre" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/SMGs" instance=ExtResource("6_3ejf4")]
+[node name="Spectre" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/SMGs" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 weapon_stats = ExtResource("10_8h8xm")
 
-[node name="Rifles" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons"]
+[node name="Shotguns" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles"]
+[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/Shotguns"]
 custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_4kfsn")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/HeaderPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/Shotguns/HeaderPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/HeaderPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/Shotguns/HeaderPanel/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="GunTypeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles/HeaderPanel/MarginContainer/HBoxContainer"]
+[node name="GunTypeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/Shotguns/HeaderPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "SHOTGUNS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bucky" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/Shotguns" instance=ExtResource("6_3ejf4")]
+layout_mode = 2
+
+[node name="Judge" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/Shotguns" instance=ExtResource("6_3ejf4")]
+layout_mode = 2
+
+[node name="Rifles" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+
+[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Rifles"]
+custom_minimum_size = Vector2(250, 40)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_4kfsn")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Rifles/HeaderPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Rifles/HeaderPanel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GunTypeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Rifles/HeaderPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "RIFLES"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Vandal" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles" instance=ExtResource("6_3ejf4")]
+[node name="Bulldog" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Rifles" instance=ExtResource("6_3ejf4")]
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
-weapon_stats = ExtResource("10_d1hj2")
+size_flags_vertical = 3
 
-[node name="Guardian" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons/Rifles" instance=ExtResource("6_3ejf4")]
+[node name="Guardian" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Rifles" instance=ExtResource("6_3ejf4")]
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
+size_flags_vertical = 3
 weapon_stats = ExtResource("12_yd5dk")
 
-[node name="Col2Weapons2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer"]
+[node name="Vandal" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Rifles" instance=ExtResource("6_3ejf4")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 2
+size_flags_vertical = 3
+weapon_stats = ExtResource("10_d1hj2")
+
+[node name="Phantom" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Rifles" instance=ExtResource("6_3ejf4")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SnipersAndMGs" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 5
 
-[node name="SniperRifles" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2"]
+[node name="SniperRifles" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles"]
+[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs/SniperRifles"]
 custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_4kfsn")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles/HeaderPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs/SniperRifles/HeaderPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles/HeaderPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs/SniperRifles/HeaderPanel/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="GunTypeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles/HeaderPanel/MarginContainer/HBoxContainer"]
+[node name="GunTypeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs/SniperRifles/HeaderPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "SNIPER RIFLES"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Marshall" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles" instance=ExtResource("6_3ejf4")]
+[node name="Marshall" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs/SniperRifles" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 weapon_stats = ExtResource("13_8ko7j")
 
-[node name="Operator" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/SniperRifles" instance=ExtResource("6_3ejf4")]
+[node name="Operator" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs/SniperRifles" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 weapon_stats = ExtResource("14_pld1j")
 
-[node name="MachineGuns" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2"]
+[node name="MachineGuns" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns"]
+[node name="HeaderPanel" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs/MachineGuns"]
 custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_4kfsn")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns/HeaderPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs/MachineGuns/HeaderPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_right = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns/HeaderPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs/MachineGuns/HeaderPanel/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="GunTypeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns/HeaderPanel/MarginContainer/HBoxContainer"]
+[node name="GunTypeLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs/MachineGuns/HeaderPanel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "MACHINE GUNS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Ares" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns" instance=ExtResource("6_3ejf4")]
+[node name="Ares" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs/MachineGuns" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 weapon_stats = ExtResource("15_74u30")
 
-[node name="Odin" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Col2Weapons2/MachineGuns" instance=ExtResource("6_3ejf4")]
+[node name="Odin" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs/MachineGuns" instance=ExtResource("6_3ejf4")]
 layout_mode = 2
 weapon_stats = ExtResource("16_08k7w")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(896, 0)
 layout_mode = 2
-size_flags_horizontal = 8
 alignment = 2
 
 [node name="Abilities" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]

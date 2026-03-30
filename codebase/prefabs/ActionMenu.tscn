@@ -34,7 +34,7 @@ bg_color = Color(0.760784, 0.760784, 0.760784, 1)
 border_color = Color(1, 1, 0, 1)
 
 [node name="ActionMenu" type="PanelContainer"]
-custom_minimum_size = Vector2(600, 150)
+custom_minimum_size = Vector2(700, 150)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -228,6 +228,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="PrimaryWeapon" parent="VBoxContainer/CombatAbilities" instance=ExtResource("9_86jlx")]
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 
 [node name="SidearmWeapon" parent="VBoxContainer/CombatAbilities" instance=ExtResource("9_86jlx")]

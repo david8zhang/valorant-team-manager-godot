@@ -8,7 +8,7 @@
 [ext_resource type="StyleBox" uid="uid://cy5g0kjs21b00" path="res://prefabs/ShieldFill.tres" id="4_tpx7d"]
 [ext_resource type="Texture2D" uid="uid://7pdwea6dt72o" path="res://assets/placeholder/bomb-solid-full.svg" id="5_d1d8l"]
 [ext_resource type="StyleBox" uid="uid://catg2lupwuxlc" path="res://prefabs/AgentStatusPanelBG.tres" id="6_y7sud"]
-[ext_resource type="Texture2D" uid="uid://dccydnoa5oegn" path="res://assets/weapons/vandal/vandal-ingame.png" id="9_3pplx"]
+[ext_resource type="Texture2D" uid="uid://5ts07vy4kn7o" path="res://assets/weapons/operator/operator-ingame-single.png" id="9_3pplx"]
 [ext_resource type="Texture2D" uid="uid://vqn7b5cqbwtq" path="res://assets/icons/kills.png" id="10_3pplx"]
 [ext_resource type="Texture2D" uid="uid://dyp2qmtnhr1fv" path="res://assets/icons/deaths.png" id="11_bgwlc"]
 [ext_resource type="Texture2D" uid="uid://bxub1o8hrkamg" path="res://assets/icons/assists.png" id="12_t8we2"]
@@ -17,7 +17,7 @@
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="AgentStatus" type="PanelContainer"]
-custom_minimum_size = Vector2(250, 100)
+custom_minimum_size = Vector2(275, 100)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -115,11 +115,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="WeaponTexture" type="TextureRect" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(100, 50)
+custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
 texture = ExtResource("9_3pplx")
 expand_mode = 3
-stretch_mode = 3
+stretch_mode = 5
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
