@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=5 format=3 uid="uid://c46wcqluario5"]
+
+[ext_resource type="SpriteFrames" uid="uid://j2tstgf0ctt4" path="res://assets/weapons/bucky/bucky.tres" id="1_3t4y2"]
+[ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_6r4an"]
+[ext_resource type="Texture2D" uid="uid://ctxysj7t5swv" path="res://assets/weapons/bucky/bucky-ingame-single.png" id="2_errbs"]
+[ext_resource type="Texture2D" uid="uid://cw1g6mfblsoej" path="res://assets/weapons/bucky/bucky.png" id="3_ttvwo"]
+
+[resource]
+script = ExtResource("1_6r4an")
+body_damage = 20
+headshot_damage = 40
+max_ammo = 10
+cost = 850
+in_game_texture = ExtResource("2_errbs")
+in_menu_texture = ExtResource("3_ttvwo")
+weapon_type = 0
+weapon_name = 13
+weapon_fire_rate = 0
+animations = ExtResource("1_3t4y2")
+barrel_x_pos = 53
+barrel_y_pos = 11
+barrel_y_pos_flip = 10
+scale = 1.0
+metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

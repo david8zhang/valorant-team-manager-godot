@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://j2tstgf0ctt4"]
+
+[ext_resource type="Texture2D" uid="uid://b2vsmdt3102gh" path="res://assets/weapons/bucky/bucky-ingame-anims.png" id="1_h0ejy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clkd4"]
+atlas = ExtResource("1_h0ejy")
+region = Rect2(0, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmgl2"]
+atlas = ExtResource("1_h0ejy")
+region = Rect2(68, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60n57"]
+atlas = ExtResource("1_h0ejy")
+region = Rect2(136, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ws74o"]
+atlas = ExtResource("1_h0ejy")
+region = Rect2(204, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxe38"]
+atlas = ExtResource("1_h0ejy")
+region = Rect2(272, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfbql"]
+atlas = ExtResource("1_h0ejy")
+region = Rect2(340, 0, 68, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clkd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmgl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60n57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ws74o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxe38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfbql")
+}],
+"loop": false,
+"name": &"firing",
+"speed": 10.0
+}]

@@ -7,19 +7,23 @@ enum WeaponType {
 }
 
 enum WeaponNames {
-    NO_WEAPON,
-    CLASSIC,
-		FRENZY,
-		GHOST,
-    SHERIFF,
-		GUARDIAN,
-    VANDAL,
-		STINGER,
-    SPECTRE,
-		MARSHALL,
-    OPERATOR,
-		ARES,
-    ODIN
+	NO_WEAPON,
+	CLASSIC,
+	FRENZY,
+	GHOST,
+	SHERIFF,
+	GUARDIAN,
+	VANDAL,
+	STINGER,
+	SPECTRE,
+	MARSHALL,
+	OPERATOR,
+	ARES,
+	ODIN,
+	BUCKY,
+	JUDGE,
+	PHANTOM,
+	BULLDOG
 }
 
 enum WeaponFireRate {

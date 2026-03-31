@@ -6,7 +6,7 @@ class AgentGameStats:
 	var death_count := 0
 	var assist_count := 0
 	var credits := 0
-	var primary_weapon_name := WeaponStats.WeaponNames.NO_WEAPON
+	var primary_weapon_name := WeaponStats.WeaponNames.BUCKY
 	var sidearm_weapon_name := WeaponStats.WeaponNames.CLASSIC
 	var ability_1_charges := 0
 	var ability_2_charges := 0
