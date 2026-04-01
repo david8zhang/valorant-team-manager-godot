@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=5 format=3 uid="uid://d2l465kjluabk"]
+
+[ext_resource type="SpriteFrames" uid="uid://dw2bpim5bwfxt" path="res://assets/weapons/bulldog/bulldog.tres" id="1_38tmp"]
+[ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_t7x22"]
+[ext_resource type="Texture2D" uid="uid://eaw17g08nb3d" path="res://assets/weapons/bulldog/bulldog-ingame-single.png" id="2_x8wdr"]
+[ext_resource type="Texture2D" uid="uid://ddc7pmj8xst1g" path="res://assets/weapons/bulldog/bulldog.png" id="3_b1rr4"]
+
+[resource]
+script = ExtResource("1_t7x22")
+body_damage = 35
+headshot_damage = 115
+max_ammo = 72
+cost = 2050
+in_game_texture = ExtResource("2_x8wdr")
+in_menu_texture = ExtResource("3_b1rr4")
+weapon_type = 0
+weapon_name = 16
+weapon_fire_rate = 1
+animations = ExtResource("1_38tmp")
+barrel_x_pos = 49
+barrel_y_pos = 13
+barrel_y_pos_flip = 5
+scale = 1.0
+metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

@@ -1,12 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvx36hs7tqwdl"]
+[gd_scene load_steps=20 format=3 uid="uid://bvx36hs7tqwdl"]
 
 [ext_resource type="Script" uid="uid://d1dtew5skc77s" path="res://scripts/debug/WeaponDebugScene.gd" id="1_jokck"]
-[ext_resource type="Resource" uid="uid://c46wcqluario5" path="res://resources/weapons/Bucky.tres" id="2_x4kdc"]
+[ext_resource type="Resource" uid="uid://cvd85vu5fmkt0" path="res://resources/weapons/Phantom.tres" id="2_6j71w"]
 [ext_resource type="SpriteFrames" uid="uid://dfte4nf86qrun" path="res://assets/weapons/frenzy/frenzy.tres" id="3_x4kdc"]
+[ext_resource type="Texture2D" uid="uid://c7248o7y1afr2" path="res://assets/weapons/frenzy/frenzy-ingame-single.png" id="4_m7kut"]
+[ext_resource type="Texture2D" uid="uid://cgs3mqe5240pq" path="res://assets/weapons/classic/classic-ingame-single.png" id="5_6j71w"]
+[ext_resource type="Texture2D" uid="uid://eaw17g08nb3d" path="res://assets/weapons/bulldog/bulldog-ingame-single.png" id="6_vxfgr"]
+[ext_resource type="Texture2D" uid="uid://ctxysj7t5swv" path="res://assets/weapons/bucky/bucky-ingame-single.png" id="7_uoqsu"]
+[ext_resource type="Texture2D" uid="uid://d0k8pt14kt676" path="res://assets/weapons/ares/ares-ingame-single.png" id="8_ylro7"]
+[ext_resource type="Texture2D" uid="uid://ba5603fk8adyc" path="res://assets/weapons/ghost/ghost-ingame-single.png" id="9_5p5tr"]
+[ext_resource type="Texture2D" uid="uid://dwrkdnnk23apu" path="res://assets/weapons/guardian/guardian-ingame.png" id="10_qm6ej"]
+[ext_resource type="Texture2D" uid="uid://jdffqw3t4ab7" path="res://assets/weapons/judge/judge-ingame-single.png" id="11_abchy"]
+[ext_resource type="Texture2D" uid="uid://cymqv8ujmewhr" path="res://assets/weapons/marshall/marshall-ingame-single.png" id="12_c8li0"]
+[ext_resource type="Texture2D" uid="uid://dpiidmxqdabno" path="res://assets/weapons/odin/odin-ingame-single.png" id="13_xy5be"]
+[ext_resource type="Texture2D" uid="uid://5ts07vy4kn7o" path="res://assets/weapons/operator/operator-ingame-single.png" id="14_daimv"]
+[ext_resource type="Texture2D" uid="uid://x3tkcpvssldd" path="res://assets/weapons/sheriff/sheriff-ingame-single.png" id="15_o27hl"]
+[ext_resource type="Texture2D" uid="uid://wuexr4rm8jg6" path="res://assets/weapons/spectre/spectre-ingame-single.png" id="16_o18sj"]
+[ext_resource type="Texture2D" uid="uid://dccydnoa5oegn" path="res://assets/weapons/vandal/vandal-ingame.png" id="17_6alsk"]
+[ext_resource type="Texture2D" uid="uid://d5ewumcjywjg" path="res://assets/weapons/stinger/stinger-ingame-single.png" id="18_s8fuk"]
+[ext_resource type="Texture2D" uid="uid://b8qi1w5iiv1uv" path="res://assets/weapons/phantom/phantom-ingame-single.png" id="19_6j71w"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_jokck")
-weapon_stats = ExtResource("2_x4kdc")
+weapon_stats = ExtResource("2_6j71w")
 
 [node name="Weapon" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("3_x4kdc")
@@ -16,3 +32,67 @@ offset = Vector2(0, -8)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+
+[node name="Frenzy-ingame-single" type="Sprite2D" parent="."]
+position = Vector2(163, 111)
+texture = ExtResource("4_m7kut")
+
+[node name="Classic-ingame-single" type="Sprite2D" parent="."]
+position = Vector2(196, 108)
+texture = ExtResource("5_6j71w")
+
+[node name="Bulldog-ingame-single" type="Sprite2D" parent="."]
+position = Vector2(249, 106)
+texture = ExtResource("6_vxfgr")
+
+[node name="Bucky-ingame-single" type="Sprite2D" parent="."]
+position = Vector2(160, 144)
+texture = ExtResource("7_uoqsu")
+
+[node name="Ares-ingame-single" type="Sprite2D" parent="."]
+position = Vector2(243, 144)
+texture = ExtResource("8_ylro7")
+
+[node name="Ghost-ingame-single" type="Sprite2D" parent="."]
+position = Vector2(119, 108)
+texture = ExtResource("9_5p5tr")
+
+[node name="Guardian-ingame" type="Sprite2D" parent="."]
+position = Vector2(158, 174)
+texture = ExtResource("10_qm6ej")
+
+[node name="Judge-ingame-single" type="Sprite2D" parent="."]
+position = Vector2(227, 176)
+texture = ExtResource("11_abchy")
+
+[node name="Marshall-ingame-single" type="Sprite2D" parent="."]
+position = Vector2(162, 198)
+texture = ExtResource("12_c8li0")
+
+[node name="Odin-ingame-single" type="Sprite2D" parent="."]
+position = Vector2(245, 73)
+texture = ExtResource("13_xy5be")
+
+[node name="Operator-ingame-single" type="Sprite2D" parent="."]
+position = Vector2(137, 80)
+texture = ExtResource("14_daimv")
+
+[node name="Sheriff-ingame-single" type="Sprite2D" parent="."]
+position = Vector2(101, 135)
+texture = ExtResource("15_o27hl")
+
+[node name="Spectre-ingame-single" type="Sprite2D" parent="."]
+position = Vector2(297, 173)
+texture = ExtResource("16_o18sj")
+
+[node name="Vandal-ingame" type="Sprite2D" parent="."]
+position = Vector2(311, 109)
+texture = ExtResource("17_6alsk")
+
+[node name="Stinger-ingame-single" type="Sprite2D" parent="."]
+position = Vector2(319, 144)
+texture = ExtResource("18_s8fuk")
+
+[node name="Phantom-ingame-single" type="Sprite2D" parent="."]
+position = Vector2(311, 87)
+texture = ExtResource("19_6j71w")

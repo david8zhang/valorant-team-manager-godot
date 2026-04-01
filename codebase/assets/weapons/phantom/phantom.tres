@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://bq1lasofpneh6"]
+
+[ext_resource type="Texture2D" uid="uid://dqrujkj125e8i" path="res://assets/weapons/phantom/phantom-ingame-anims.png" id="1_ovqy0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tb8qv"]
+atlas = ExtResource("1_ovqy0")
+region = Rect2(0, 0, 72, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u58lo"]
+atlas = ExtResource("1_ovqy0")
+region = Rect2(72, 0, 72, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvl8j"]
+atlas = ExtResource("1_ovqy0")
+region = Rect2(144, 0, 72, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2m3n"]
+atlas = ExtResource("1_ovqy0")
+region = Rect2(216, 0, 72, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tb8qv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u58lo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvl8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2m3n")
+}],
+"loop": false,
+"name": &"firing",
+"speed": 10.0
+}]

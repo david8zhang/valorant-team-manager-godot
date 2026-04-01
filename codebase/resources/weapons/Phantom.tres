@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=5 format=3 uid="uid://cvd85vu5fmkt0"]
+
+[ext_resource type="SpriteFrames" uid="uid://bq1lasofpneh6" path="res://assets/weapons/phantom/phantom.tres" id="1_1mw2b"]
+[ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_4uqtc"]
+[ext_resource type="Texture2D" uid="uid://b8qi1w5iiv1uv" path="res://assets/weapons/phantom/phantom-ingame-single.png" id="2_fyrao"]
+[ext_resource type="Texture2D" uid="uid://2vvluy7ohf2q" path="res://assets/weapons/phantom/phantom-icon.png" id="2_q5mm5"]
+
+[resource]
+script = ExtResource("1_4uqtc")
+body_damage = 39
+headshot_damage = 156
+max_ammo = 60
+cost = 2900
+in_game_texture = ExtResource("2_fyrao")
+in_menu_texture = ExtResource("2_q5mm5")
+weapon_type = 0
+weapon_name = 15
+weapon_fire_rate = 1
+animations = ExtResource("1_1mw2b")
+barrel_x_pos = 61
+barrel_y_pos = 11
+barrel_y_pos_flip = 10
+scale = 1.0
+metadata/_custom_type_script = "uid://c72xoo8v4uyhs"

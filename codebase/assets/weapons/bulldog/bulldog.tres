@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://dw2bpim5bwfxt"]
+
+[ext_resource type="Texture2D" uid="uid://le7pb5wojlf3" path="res://assets/weapons/bulldog/bulldog-ingame-anims.png" id="1_d2lft"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2lft"]
+atlas = ExtResource("1_d2lft")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drvcb"]
+atlas = ExtResource("1_d2lft")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6mdg"]
+atlas = ExtResource("1_d2lft")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bituc"]
+atlas = ExtResource("1_d2lft")
+region = Rect2(192, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxs6f"]
+atlas = ExtResource("1_d2lft")
+region = Rect2(256, 0, 64, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2lft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drvcb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6mdg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bituc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxs6f")
+}],
+"loop": false,
+"name": &"firing",
+"speed": 10.0
+}]

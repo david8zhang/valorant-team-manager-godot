@@ -14,8 +14,11 @@ extends Control
 @onready var stinger_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/SMGs/Stinger as GunBuyMenuOption
 @onready var spectre_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/SMGs/Spectre as GunBuyMenuOption
 @onready var bucky_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/Shotguns/Bucky as GunBuyMenuOption
+@onready var judge_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SMGsAndShotguns/Shotguns/Judge as GunBuyMenuOption
 @onready var vandal_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Rifles/Vandal as GunBuyMenuOption
+@onready var phantom_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Rifles/Phantom as GunBuyMenuOption
 @onready var guardian_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Rifles/Guardian as GunBuyMenuOption
+@onready var bulldog_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/Rifles/Bulldog as GunBuyMenuOption
 @onready var marshall_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs/SniperRifles/Marshall as GunBuyMenuOption
 @onready var operator_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs/SniperRifles/Operator as GunBuyMenuOption
 @onready var ares_buy_option = $PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer/SnipersAndMGs/MachineGuns/Ares as GunBuyMenuOption
@@ -46,7 +49,10 @@ func _ready() -> void:
 		stinger_buy_option,
 		spectre_buy_option,
 		bucky_buy_option,
+		bulldog_buy_option,
+		judge_buy_option,
 		vandal_buy_option,
+		phantom_buy_option,
 		guardian_buy_option,
 		marshall_buy_option,
 		operator_buy_option,

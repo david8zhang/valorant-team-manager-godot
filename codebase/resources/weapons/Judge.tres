@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=5 format=3 uid="uid://tsxd42divy1l"]
+
+[ext_resource type="SpriteFrames" uid="uid://bx56xijpds4tb" path="res://assets/weapons/judge/judge.tres" id="1_bcear"]
+[ext_resource type="Texture2D" uid="uid://jdffqw3t4ab7" path="res://assets/weapons/judge/judge-ingame-single.png" id="1_dckns"]
+[ext_resource type="Script" uid="uid://c72xoo8v4uyhs" path="res://scripts/WeaponStats.gd" id="1_wwtd5"]
+[ext_resource type="Texture2D" uid="uid://1kcn05lo64ds" path="res://assets/weapons/judge/judge.png" id="2_bcear"]
+
+[resource]
+script = ExtResource("1_wwtd5")
+body_damage = 17
+headshot_damage = 34
+max_ammo = 15
+cost = 1850
+in_game_texture = ExtResource("1_dckns")
+in_menu_texture = ExtResource("2_bcear")
+weapon_type = 0
+weapon_name = 14
+weapon_fire_rate = 0
+animations = ExtResource("1_bcear")
+barrel_x_pos = 46
+barrel_y_pos = 15
+barrel_y_pos_flip = 5
+scale = 1.0
+metadata/_custom_type_script = "uid://c72xoo8v4uyhs"
