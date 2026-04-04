@@ -80,5 +80,4 @@ func purchase_ability_charge(agent_name, ability_index):
 		agent_game_stats.ability_2_charges += 1
 		
 func load_random_agent_stat():
-	# return AGENT_STAT_RESOURCES.pick_random()
-	return AGENT_STAT_RESOURCES[0]
+	return AGENT_STAT_RESOURCES[1]

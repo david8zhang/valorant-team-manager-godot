@@ -173,7 +173,8 @@ func on_battle_complete():
 	action_menu.can_go_to_next_turn = true
 
 func update_action_menu():
-	action_menu.update_all()
+	if selected_agent != null:
+		action_menu.update_all()
 
 func has_vision_on_enemy(curr_agent, target):
 	var visible_tiles = curr_agent.visible_tiles

@@ -103,6 +103,8 @@ script = ExtResource("2_twj6c")
 visible = false
 map = NodePath("../Map")
 
+[node name="UtilBelowPlayer" type="Node2D" parent="."]
+
 [node name="PlayerTeam" type="Node2D" parent="." node_paths=PackedStringArray("team_status", "map")]
 script = ExtResource("5_dbxdc")
 team_status = NodePath("../CanvasLayer/Control/PlayerTeamStatus")
@@ -131,3 +133,5 @@ name_prefix = "CPU"
 
 [node name="CPUAgentController" type="Node2D" parent="CPUTeam"]
 script = ExtResource("8_twj6c")
+
+[node name="UtilAbovePlayer" type="Node2D" parent="."]

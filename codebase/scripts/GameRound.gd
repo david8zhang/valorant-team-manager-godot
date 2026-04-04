@@ -28,6 +28,8 @@ enum TopViewState {
 @onready var buy_menu = $CanvasLayer/Control/BuyMenu as BuyMenu
 @onready var player_team_status = $CanvasLayer/Control/PlayerTeamStatus as TeamStatus
 @onready var cpu_team_status = $CanvasLayer/Control/CPUTeamStatus as TeamStatus
+@onready var util_below_player = $UtilBelowPlayer as Node2D
+@onready var util_above_player = $UtilAbovePlayer as Node2D
 
 @export var bomb_scene: PackedScene
 
@@ -44,6 +46,7 @@ var is_showing_scoreboard := true
 var top_view_state := TopViewState.SCOREBOARD
 var bomb: Bomb
 var smokes_on_field := []
+var molly_on_field := []
 var is_round_over := false
 
 func _ready():
@@ -385,3 +388,9 @@ func is_round_underway():
 func can_move_to_pos(world_pos: Vector2):
 	var tile_pos = map.get_tile_pos_from_world_pos(world_pos)
 	return map.is_tile_pos_in_bounds(tile_pos) and !map.is_tile_pos_obstructed(tile_pos) and !is_position_occupied(tile_pos)
+
+func add_util_above_player(util: Sprite2D):
+	util_above_player.add_child(util)
+
+func add_util_below_player(util: Sprite2D):
+	util_below_player.add_child(util)

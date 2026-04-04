@@ -16,14 +16,11 @@ class InGameSmoke:
 	func _init(_sprite, _center_position, _circle_tiles) -> void:
 		sprite = _sprite
 		center_position = _center_position
-		circle_tiles = _circle_tiles
+		circle_tiles = _circle_tiles.map(func (tile): return str(tile.x) + "," + str(tile.y))
 
 	func is_position_smoked(pos: Vector2i):
-		for t in circle_tiles:
-			var tile = t as Vector2i
-			if tile.x == pos.x and tile.y == pos.y:
-				return true
-		return false
+		var pos_key = str(pos.x) + "," + str(pos.y)
+		return circle_tiles.has(pos_key)
 
 	func dissipate():
 		var tween = sprite.create_tween()
@@ -71,7 +68,7 @@ func handle_click(x_pos: int, y_pos: int):
 	var smoke_texture = load("res://assets/abilities/in-game/smoke.png") as Texture
 	var smoke_sprite = Sprite2D.new()
 	smoke_sprite.texture = smoke_texture
-	game_round.add_child(smoke_sprite)
+	game_round.add_util_above_player(smoke_sprite)
 	var world_pos = game_round.map.get_world_pos_from_tile_pos(Vector2(x_pos, y_pos))
 	smoke_sprite.global_position = Vector2(world_pos.x + 8, world_pos.y)
 	smoke_sprite.modulate.a = 0.75
