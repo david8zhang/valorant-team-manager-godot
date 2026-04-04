@@ -2,6 +2,7 @@ class_name DebugMenu
 extends Control
 
 @onready var game_round = get_node("/root/GameRound") as GameRound
+@onready var toggle_show_all_agents_button = $VBoxContainer/ShowAllAgents as Button
 @onready var show_cpu_vision_button = $VBoxContainer/ShowCPUVision as Button
 @onready var show_player_vision_button = $VBoxContainer/ShowPlayerVision as Button
 @onready var force_player_win_elim_button = $VBoxContainer/ForcePlayerElimWin as Button
@@ -11,12 +12,14 @@ extends Control
 @onready var kill_curr_agent_button = $VBoxContainer/KillCurrAgent as Button
 
 var vision_side_to_show := GameRound.Side.PLAYER
+var show_all_agents := false
 
 func _ready() -> void:
 	show_cpu_vision_button.pressed.connect(show_cpu_vision)
 	show_player_vision_button.pressed.connect(show_player_vision)
 	force_player_win_elim_button.pressed.connect(force_player_win_elim)
 	kill_curr_agent_button.pressed.connect(kill_curr_agent)
+	toggle_show_all_agents_button.pressed.connect(toggle_show_all_agents)
 	await game_round.ready
 	game_round.cpu_agent_controller.on_complete_move.connect(update_cpu_vision_after_move)
 
@@ -63,3 +66,8 @@ func kill_curr_agent():
 	var agent_controller = game_round.agent_controller
 	var selected_agent = agent_controller.selected_agent
 	selected_agent.take_damage(1000)
+
+func toggle_show_all_agents():
+	show_all_agents = !show_all_agents
+	game_round.update_visible_enemies_to_player()
+	toggle_show_all_agents_button.text = "Hide Enemy Agents" if show_all_agents else "Show All Agents"

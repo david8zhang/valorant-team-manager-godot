@@ -30,6 +30,8 @@ enum TopViewState {
 @onready var cpu_team_status = $CanvasLayer/Control/CPUTeamStatus as TeamStatus
 @onready var util_below_player = $UtilBelowPlayer as Node2D
 @onready var util_above_player = $UtilAbovePlayer as Node2D
+@onready var pathfinding = $Pathfinding as Pathfinding
+@onready var debug_menu = $CanvasLayer/Control/DebugMenu as DebugMenu
 
 @export var bomb_scene: PackedScene
 
@@ -170,15 +172,18 @@ func update_visible_enemies_to_player():
 		var enemy_agents = cpu_team.agents as Array[Agent]
 
 		for agent in enemy_agents:
-			if !agent.is_dead():
-				var tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
-				if visible_tiles_for_selected_agent.has(tile_pos):
-					agent.show_fully()
-				else:
-					if other_visible_tiles.has(tile_pos):
-						agent.hide_in_fog_of_war()
+			if debug_menu.show_all_agents:
+				agent.show_fully()
+			else:
+				if !agent.is_dead():
+					var tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
+					if visible_tiles_for_selected_agent.has(tile_pos):
+						agent.show_fully()
 					else:
-						agent.hide_fully()
+						if other_visible_tiles.has(tile_pos):
+							agent.hide_in_fog_of_war()
+						else:
+							agent.hide_fully()
 
 func update_specific_visible_enemies(visible_tiles, enemy_agents):
 	for agent in enemy_agents:
@@ -201,8 +206,8 @@ func is_position_occupied(tile_pos: Vector2):
 func get_ap_cost_for_movement(start: Vector2, end: Vector2):
 	var start_tile_pos = map.get_tile_pos_from_world_pos(start)
 	var end_tile_pos = map.get_tile_pos_from_world_pos(end)
-	var manhattan_dist = abs(start_tile_pos.x - end_tile_pos.x) + abs(start_tile_pos.y - end_tile_pos.y)
-	return max(1, round(manhattan_dist * AP_COST_MOVE_PER_SQUARE))
+	var path = pathfinding.get_shortest_path(start_tile_pos, end_tile_pos)
+	return max(1, round(path.size() * AP_COST_MOVE_PER_SQUARE))
 	
 func get_ap_cost_for_primary_attack():
 	return AP_COST_PRIMARY_ATTACK

@@ -183,5 +183,4 @@ func has_vision_on_enemy(curr_agent, target):
 
 func show_visible_tiles_for_selected_agent():
 	selected_agent.update_visible_tiles()
-	game_round.map.vision_layer.clear()
 	game_round.map.show_specific_visible_tiles(selected_agent.visible_tiles)

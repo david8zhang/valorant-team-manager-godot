@@ -9,7 +9,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 script = ExtResource("1_8as82")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -33,6 +32,10 @@ offset_right = 77.0
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ShowAllAgents" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Show All Agents"
 
 [node name="ShowCPUVision" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(400, 0)

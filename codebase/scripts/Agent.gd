@@ -17,6 +17,7 @@ static var DEFAULT_SCALE = 1.5
 static var TOTAL_ACTION_POINTS = 5
 static var MAX_HEALTH = 100
 static var MAX_SHIELDS = 50
+static var WALK_SPEED_PER_TILE = 5
 
 var agent_stats: AgentStats
 var ability_1_charges := 0
@@ -71,20 +72,36 @@ func init_from_game_stats(agent_game_stats: GameRoundVariables.AgentGameStats):
 func agent_click():
 	on_agent_click.emit(self)
 
-func move_to_position(new_pos: Vector2, callback: Callable):
+func move_to_position(new_world_pos: Vector2, callback: Callable):
+	var prev_world_pos = Vector2(global_position.x, global_position.y)
+	var curr_tile_pos = map.get_tile_pos_from_world_pos(prev_world_pos)
+	var new_tile_pos = map.get_tile_pos_from_world_pos(new_world_pos)
+	var path = game_round.pathfinding.get_shortest_path(curr_tile_pos, new_tile_pos)
 	sprite.play("walk")
-	var prev_pos = Vector2(global_position.x, global_position.y)
-	var tween = create_tween()
-	tween.tween_property(self, "global_position", new_pos, 0.5)
-	var on_complete = func _on_complete():
+	var on_path_walk_complete = func _on_path_walk_complete():
 		sprite.play("idle")
-		if game_round.attack_side == curr_side:
-			acquire_bomb_if_possible(new_pos)
-		update_visible_tiles()
 		callback.call()
-	tween.finished.connect(on_complete)
-	var ap_cost = game_round.get_ap_cost_for_movement(prev_pos, new_pos)
+	_move_to_next_node_in_path(0, path, on_path_walk_complete)
+	var ap_cost = game_round.get_ap_cost_for_movement(prev_world_pos, new_world_pos)
 	rem_action_points -= ap_cost
+
+func _move_to_next_node_in_path(curr_node_idx, path, on_finished_cb):
+	if curr_node_idx == path.size():
+		on_finished_cb.call()
+		return
+	var next_node = path[curr_node_idx]
+	var next_node_world_pos = map.get_world_pos_from_tile_pos(next_node)
+	var tween = create_tween()
+	vision_direction = (next_node_world_pos - global_position).normalized()
+	tween.tween_property(self, "global_position", next_node_world_pos, 0.05)
+	var on_complete = func _on_complete():
+		if game_round.attack_side == curr_side:
+			acquire_bomb_if_possible(next_node_world_pos)
+		update_visible_tiles()
+		if curr_side == GameRound.Side.PLAYER:
+			map.show_specific_visible_tiles(visible_tiles)
+		_move_to_next_node_in_path(curr_node_idx + 1, path, on_finished_cb)
+	tween.finished.connect(on_complete)
 
 func acquire_bomb_if_possible(new_pos: Vector2):
 	if new_pos == game_round.bomb.global_position && game_round.bomb.curr_bomb_state == Bomb.BombState.DROPPED:

@@ -3,12 +3,16 @@ extends Node2D
 
 @onready var game_round = get_node("/root/GameRound") as GameRound
 @onready var ground_layer := $GroundLayer as TileMapLayer
+@onready var spawn_layer := $SpawnLayer as TileMapLayer
 @onready var site_layer := $SiteLayer as TileMapLayer
 @onready var walls_layer := $WallsLayer as TileMapLayer
 @onready var vision_layer := $VisionLayer as TileMapLayer
 
-func move_node_to_pos(node: Node2D, x: int, y: int):
-	var world_pos = ground_layer.map_to_local(Vector2(x, y))
+func _ready() -> void:
+	spawn_layer.hide()
+
+func move_node_to_pos(node: Node2D, tile_x: int, tile_y: int):
+	var world_pos = ground_layer.map_to_local(Vector2(tile_x, tile_y))
 	node.global_position = world_pos
 
 func get_tile_pos_from_world_pos(world_pos: Vector2):
@@ -23,10 +27,10 @@ func is_tile_pos_in_bounds(tile_pos: Vector2):
 
 func show_player_team_visible_tiles():
 	var all_visible_tiles = game_round.player_team.get_all_visible_tiles()
-	vision_layer.clear()
 	show_specific_visible_tiles(all_visible_tiles)
 
 func show_specific_visible_tiles(visible_tiles):
+	vision_layer.clear()
 	for t in visible_tiles:
 		var g_source_id = ground_layer.get_cell_source_id(t)
 		var g_atlas_coords = ground_layer.get_cell_atlas_coords(t)
