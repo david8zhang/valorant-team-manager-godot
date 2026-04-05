@@ -70,7 +70,6 @@ offset_bottom = 106.5
 [node name="DebugMenu" parent="CanvasLayer/Control" instance=ExtResource("5_d8md6")]
 visible = false
 layout_mode = 1
-mouse_filter = 0
 
 [node name="ToggleTopView" type="Button" parent="CanvasLayer/Control"]
 custom_minimum_size = Vector2(150, 0)
@@ -98,6 +97,7 @@ layout_mode = 1
 
 [node name="GameCamera" type="Camera2D" parent="."]
 script = ExtResource("2_twj6c")
+min_zoom = 0.25
 
 [node name="Map" parent="." instance=ExtResource("2_74q1x")]
 

@@ -3,6 +3,7 @@ extends PanelContainer
 
 @onready var game_round = get_node("/root/GameRound") as GameRound
 @onready var watch_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Watch as Button
+@onready var stop_watching_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/StopWatching as Button
 @onready var bomb_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Bomb as Button
 @onready var bomb_texture = $VBoxContainer/NonCombatAndStats/NonCombatActions/Bomb/TextureRect as TextureRect
 @onready var move_button = $VBoxContainer/NonCombatAndStats/NonCombatActions/Move as Button
@@ -38,6 +39,7 @@ func _ready() -> void:
 	bomb_button.pressed.connect(on_bomb_button_clicked)
 	defuse_button.pressed.connect(on_defuse_button_clicked)
 	watch_button.pressed.connect(func (): on_action_click(AgentController.ActionState.WATCH))
+	stop_watching_button.pressed.connect(func (): on_action_click(AgentController.ActionState.STOP_WATCH))
 	primary_weapon.pressed.connect(func (): on_action_click(AgentController.ActionState.PRIMARY_ATTACK))
 	sidearm_weapon.pressed.connect(func (): on_action_click(AgentController.ActionState.SECONDARY_ATTACK))
 	ability_1.pressed.connect(func (): on_action_click(AgentController.ActionState.ABILITY_ONE))
@@ -58,6 +60,8 @@ func set_button_highlight_from_state(curr_action_state: AgentController.ActionSt
 			highlight_single_button(move_button)
 		AgentController.ActionState.WATCH:
 			highlight_single_button(watch_button)
+		AgentController.ActionState.STOP_WATCH:
+			highlight_single_button(stop_watching_button)
 		AgentController.ActionState.DEFUSE, AgentController.ActionState.PLANT:
 			highlight_single_button(bomb_button)
 		AgentController.ActionState.PRIMARY_ATTACK:
@@ -70,6 +74,7 @@ func set_button_highlight_from_state(curr_action_state: AgentController.ActionSt
 			highlight_single_button(ability_2)
 
 func de_highlight_all_buttons():
+	dehighlight_single_button(stop_watching_button)
 	dehighlight_single_button(watch_button)
 	dehighlight_single_button(bomb_button)
 	dehighlight_single_button(move_button)
@@ -188,6 +193,11 @@ func update_all():
 	update_defuse_status()
 	update_bomb_status()
 	update_ability_menu()
+
+func show_for_agent(selected_agent: Agent):
+	show()
+	var should_show_stop_watching = selected_agent.pos_to_watch != Vector2.ZERO
+	stop_watching_button.visible = should_show_stop_watching
 
 func end_curr_turn():
 	if game_round.curr_turn_side == GameRound.Side.PLAYER and can_go_to_next_turn:

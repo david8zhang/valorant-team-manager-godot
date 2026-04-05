@@ -40,7 +40,7 @@ var curr_turn_index = 0
 
 static var AP_COST_MOVE_PER_SQUARE = 0.1
 static var AP_COST_PRIMARY_ATTACK = 1
-static var BOMB_SPAWN_TILE_COORD = Vector2(60, 70)
+static var BOMB_TILE_ATLAS_COORDS = Vector2(0, 11)
 
 var curr_turn_side = Side.PLAYER
 var attack_side = Side.PLAYER
@@ -86,7 +86,11 @@ func place_bomb():
 	if bomb == null:
 		bomb = bomb_scene.instantiate() as Bomb
 		add_child(bomb)
-	bomb.global_position = map.get_world_pos_from_tile_pos(BOMB_SPAWN_TILE_COORD)
+	var non_empty_tiles = map.spawn_layer.get_used_cells()
+	for c in non_empty_tiles:
+		var atlas_coords = map.spawn_layer.get_cell_atlas_coords(c)
+		if atlas_coords.x == BOMB_TILE_ATLAS_COORDS.x and atlas_coords.y == BOMB_TILE_ATLAS_COORDS.y:
+			bomb.global_position = map.get_world_pos_from_tile_pos(c)
 
 func setup_game_round_variables():
 	if GameRoundVariables.agent_game_stat_mapping.is_empty():
@@ -107,7 +111,7 @@ func start_turn_for_next_agent():
 	if next_agent_in_turn_queue != null:
 		curr_turn_side = next_agent_in_turn_queue.curr_side
 		if next_agent_in_turn_queue.curr_side == Side.PLAYER:
-			action_menu.show()
+			action_menu.show_for_agent(next_agent_in_turn_queue)
 			agent_controller.start_turn(next_agent_in_turn_queue)
 		else:
 			action_menu.hide()
@@ -163,27 +167,28 @@ func handle_win_condition(win_condition):
 			winning_side = Side.PLAYER if attack_side == Side.CPU else Side.PLAYER
 	round_result.show_winning_side(winning_side, win_condition)
 
-func update_visible_enemies_to_player():
+func update_visible_enemies_to_specific_agent(specific_agent: Agent):
 	# Only show visible enemies for selected agent, otherwise, just show them as gray blobs
-	var selected_agent = agent_controller.selected_agent as Agent
-	if selected_agent != null:
-		var visible_tiles_for_selected_agent = selected_agent.visible_tiles
-		var other_visible_tiles = player_team.get_all_visible_tiles().filter(func (p): return !visible_tiles_for_selected_agent.has(p))
-		var enemy_agents = cpu_team.agents as Array[Agent]
-
-		for agent in enemy_agents:
-			if debug_menu.show_all_agents:
-				agent.show_fully()
-			else:
-				if !agent.is_dead():
-					var tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
-					if visible_tiles_for_selected_agent.has(tile_pos):
-						agent.show_fully()
+	var visible_tiles_for_selected_agent = specific_agent.visible_tiles
+	var other_visible_tiles = player_team.get_all_visible_tiles().filter(func (p): return !visible_tiles_for_selected_agent.has(p))
+	var enemy_agents = cpu_team.agents as Array[Agent]
+	for agent in enemy_agents:
+		if debug_menu.show_all_agents:
+			agent.show_fully()
+		else:
+			if !agent.is_dead():
+				var tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
+				if visible_tiles_for_selected_agent.has(tile_pos):
+					agent.show_fully()
+				else:
+					if other_visible_tiles.has(tile_pos):
+						agent.hide_in_fog_of_war()
 					else:
-						if other_visible_tiles.has(tile_pos):
-							agent.hide_in_fog_of_war()
-						else:
-							agent.hide_fully()
+						agent.hide_fully()
+
+func update_visible_enemies_to_player():
+	if agent_controller.selected_agent != null:
+		update_visible_enemies_to_specific_agent(agent_controller.selected_agent)
 
 func update_specific_visible_enemies(visible_tiles, enemy_agents):
 	for agent in enemy_agents:
@@ -394,8 +399,19 @@ func can_move_to_pos(world_pos: Vector2):
 	var tile_pos = map.get_tile_pos_from_world_pos(world_pos)
 	return map.is_tile_pos_in_bounds(tile_pos) and !map.is_tile_pos_obstructed(tile_pos) and !is_position_occupied(tile_pos)
 
-func add_util_above_player(util: Sprite2D):
+func add_util_above_player(util: Node):
 	util_above_player.add_child(util)
 
-func add_util_below_player(util: Sprite2D):
+func add_util_below_player(util: Node):
 	util_below_player.add_child(util)
+
+func get_enemy_holding_agent(agent: Agent, world_pos: Vector2):
+	var tile_pos = map.get_tile_pos_from_world_pos(world_pos)
+	var enemy_agents = cpu_team.get_all_living_agents() if agent.curr_side == Side.PLAYER else player_team.get_all_living_agents()
+	for a in enemy_agents:
+		var enemy_agent = a as Agent
+		for ht in enemy_agent.holding_tiles:
+			var ht_tile_pos = map.get_tile_pos_from_world_pos(ht.global_position)
+			if ht_tile_pos.x == tile_pos.x and ht_tile_pos.y == tile_pos.y:
+				return enemy_agent
+	return null

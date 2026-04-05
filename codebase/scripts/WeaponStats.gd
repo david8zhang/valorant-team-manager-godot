@@ -29,7 +29,8 @@ enum WeaponNames {
 enum WeaponFireRate {
     LOW,
     MED,
-    HIGH
+    HIGH,
+		VERY_HIGH
 }
 
 @export var body_damage := 0

@@ -8,6 +8,7 @@ extends Node2D
 enum ActionState {
 	NONE,
 	WATCH,
+	STOP_WATCH,
 	DEFUSE,
 	PLANT,
 	MOVE,
@@ -81,7 +82,10 @@ func handle_new_action_state(new_action_state):
 			ability_to_process.deselect()
 	# Handle new action state
 	match new_action_state:
-		ActionState.MOVE:
+		ActionState.STOP_WATCH:
+			action_menu.stop_watching_button.hide()
+			selected_agent.stop_watching_position()
+		ActionState.MOVE, ActionState.WATCH:
 			highlight_overlay.show()
 	curr_action_state = new_action_state
 
@@ -116,18 +120,25 @@ func _process(_delta):
 						selected_agent.rem_action_points -= ap_cost_for_ability
 						action_menu.update_all()
 						ability_to_process.handle_click(hovered_tile_pos.x, hovered_tile_pos.y)
+			ActionState.WATCH:
+				highlight_overlay.is_pos_valid = true
+				if Input.is_action_just_pressed("mouse_left"):
+					var pos_to_watch = game_round.map.get_world_pos_from_tile_pos(highlight_overlay.hovered_tile_pos)
+					selected_agent.watch_position(pos_to_watch)
+					action_menu.stop_watching_button.show()
 
 func start_turn(agent_to_select: Agent):
 	agent_to_select.rem_action_points = Agent.TOTAL_ACTION_POINTS
 	select_agent(agent_to_select)
 	game_round.update_visible_enemies_to_player()
+	selected_agent.show_holding_tiles()
 
 func complete_move():
 	action_menu.can_go_to_next_turn = true
 	highlight_overlay.should_update_pos = true
-	game_round.update_visible_enemies_to_player()
 	action_menu.update_all()
 	show_visible_tiles_for_selected_agent()
+	game_round.update_visible_enemies_to_player()
 
 func complete_turn():
 	selected_agent.ability_1.deselect()
@@ -140,6 +151,7 @@ func complete_turn():
 	elif selected_agent.is_planting:
 		game_round.continue_bomb_plant(selected_agent)
 	selected_agent.update_visible_tiles()
+	selected_agent.hide_holding_tiles()
 	on_complete_turn.emit()
 
 func select_agent(agent: Agent):

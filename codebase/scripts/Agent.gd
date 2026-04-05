@@ -45,6 +45,9 @@ var ability_2: Ability
 var confidence_level # Dictates turn queue ordering (higher is better)
 var is_defusing := false
 var is_planting := false
+var is_holding := false
+var holding_tiles := []
+var pos_to_watch := Vector2.ZERO
 
 signal on_agent_click(agent)
 signal on_update_action_menu()
@@ -73,6 +76,8 @@ func agent_click():
 	on_agent_click.emit(self)
 
 func move_to_position(new_world_pos: Vector2, callback: Callable):
+	# Stop holding the angle when in movement
+	stop_holding()
 	var prev_world_pos = Vector2(global_position.x, global_position.y)
 	var curr_tile_pos = map.get_tile_pos_from_world_pos(prev_world_pos)
 	var new_tile_pos = map.get_tile_pos_from_world_pos(new_world_pos)
@@ -81,26 +86,36 @@ func move_to_position(new_world_pos: Vector2, callback: Callable):
 	var on_path_walk_complete = func _on_path_walk_complete():
 		sprite.play("idle")
 		callback.call()
-	_move_to_next_node_in_path(0, path, on_path_walk_complete)
+	_move_to_next_node_in_path(1, path, on_path_walk_complete)
 	var ap_cost = game_round.get_ap_cost_for_movement(prev_world_pos, new_world_pos)
 	rem_action_points -= ap_cost
 
 func _move_to_next_node_in_path(curr_node_idx, path, on_finished_cb):
-	if curr_node_idx == path.size():
+	if curr_node_idx == path.size() or is_dead():
 		on_finished_cb.call()
 		return
 	var next_node = path[curr_node_idx]
 	var next_node_world_pos = map.get_world_pos_from_tile_pos(next_node)
 	var tween = create_tween()
-	vision_direction = (next_node_world_pos - global_position).normalized()
+	# Only look towards the next position if we're not already holding an angle
+	if pos_to_watch == Vector2.ZERO:
+		look_at_position(next_node_world_pos)
 	tween.tween_property(self, "global_position", next_node_world_pos, 0.05)
 	var on_complete = func _on_complete():
 		if game_round.attack_side == curr_side:
 			acquire_bomb_if_possible(next_node_world_pos)
 		update_visible_tiles()
+		# Update visible tiles after each tile movement if this is the player's currently selected agent
 		if curr_side == GameRound.Side.PLAYER:
 			map.show_specific_visible_tiles(visible_tiles)
-		_move_to_next_node_in_path(curr_node_idx + 1, path, on_finished_cb)
+			game_round.update_visible_enemies_to_player()
+		# Handle if agent wandered into vision cone of enemy holding an angle
+		var enemy_hold_agent = game_round.get_enemy_holding_agent(self, next_node_world_pos) as Agent
+		if enemy_hold_agent != null:
+			# Stop moving in path
+			enemy_hold_agent.attack_enemy_agent(self, true, on_finished_cb)
+		else:
+			_move_to_next_node_in_path(curr_node_idx + 1, path, on_finished_cb)
 	tween.finished.connect(on_complete)
 
 func acquire_bomb_if_possible(new_pos: Vector2):
@@ -116,38 +131,80 @@ func update_visible_tiles():
 	visible_tiles = get_visible_tiles()
 
 func get_visible_tiles() -> Array:
+	# If we're holding a specific angle, adjust vision direction accordingly
+	if pos_to_watch != Vector2.ZERO:
+		vision_direction = (pos_to_watch - global_position).normalized()
 	var px = map.ground_layer.local_to_map(global_position)
 	var forward: Vector2 = vision_direction.rotated(rotation).normalized()
-
 	var half_angle_rad = deg_to_rad(vision_angle_degrees / 2.0)
 	var tile_size: Vector2 = map.ground_layer.tile_set.tile_size
 	var max_dist_world = vision_distance * tile_size.x
-
 	var res := []
 	for dx in range(-vision_distance, vision_distance + 1):
 		for dy in range(-vision_distance, vision_distance + 1):
 			var tile = px + Vector2i(dx, dy)
-
 			# --- Tile center in WORLD coordinates ---
 			var top_left_local = map.ground_layer.map_to_local(tile)
 			var top_left_world = map.ground_layer.to_global(top_left_local)
 			var tile_center_world = top_left_world + tile_size * 0.5
-
 			# --- Distance check ---
 			if global_position.distance_to(tile_center_world) > max_dist_world:
 				continue
-
 			# --- Angle check ---
 			var to_tile = (tile_center_world - global_position).normalized()
 			var dot = forward.dot(to_tile)
-
 			if dot < cos(half_angle_rad):    # avoids slow acos()
 				continue
-
 			# --- Line of Sight ---
 			if not is_tile_blocked(px, tile):
 				res.append(tile)
 	return res
+
+func look_at_position(world_pos_to_look_at: Vector2):
+	vision_direction = (world_pos_to_look_at - global_position).normalized()
+	update_visible_tiles()
+
+func watch_position(pos: Vector2):
+	# Stop holding previous tiles if we were holding before
+	stop_holding()
+	pos_to_watch = pos
+	look_at_position(pos_to_watch)
+	map.show_specific_visible_tiles(visible_tiles)
+	game_round.update_visible_enemies_to_player()
+	# Hold the angle, meaning any enemies that walk into vision cone will be automatically attacked
+	hold_visible_tiles()
+
+func stop_watching_position():
+	pos_to_watch = Vector2.ZERO
+
+func hold_visible_tiles():
+	is_holding = true
+	for tile in visible_tiles:
+		var color_rect = ColorRect.new()
+		var tile_size = map.ground_layer.tile_set.tile_size
+		color_rect.custom_minimum_size.x = tile_size.x
+		color_rect.custom_minimum_size.y = tile_size.y
+		color_rect.color = Color.RED
+		color_rect.color.a = 0.2
+		game_round.add_util_below_player(color_rect)
+		var tile_world_pos =  map.get_world_pos_from_tile_pos(tile)
+		color_rect.global_position = Vector2(tile_world_pos.x - tile_size.x / 2, tile_world_pos.y - tile_size.y / 2)
+		holding_tiles.append(color_rect)
+
+func stop_holding():
+	is_holding = false
+	for rect in holding_tiles:
+		rect.queue_free()
+	holding_tiles = []
+
+
+func hide_holding_tiles():
+	for tile in holding_tiles:
+		tile.hide()
+
+func show_holding_tiles():
+	for tile in holding_tiles:
+		tile.show()
 
 func is_tile_blocked(start: Vector2i, target: Vector2i) -> bool:
 	var points := bresenham_line(start.x, start.y, target.x, target.y)
@@ -167,10 +224,8 @@ func bresenham_line(x0, y0, x1, y1) -> Array[Vector2i]:
 	var sx = 1 if x0 < x1 else -1
 	var sy = 1 if y0 < y1 else -1
 	var err = dx + dy
-
 	var x = x0
 	var y = y0
-
 	while true:
 		line.append(Vector2i(x, y))
 		if x == x1 and y == y1:
@@ -185,17 +240,18 @@ func bresenham_line(x0, y0, x1, y1) -> Array[Vector2i]:
 	return line
 
 func attack_enemy_agent(enemy_to_attack: Agent, should_retaliate: bool, on_complete: Callable):
+	if weapon_to_attack_with == null:
+		weapon_to_attack_with = primary_weapon if primary_weapon != null else sidearm_weapon
 	var ap_cost = game_round.get_ap_cost_for_primary_attack()
 	rem_action_points -= ap_cost
-
+	# Pan and zoom camera to battle
 	var game_camera = game_round.game_camera
+	var midpoint_pos = Vector2((global_position.x + enemy_to_attack.global_position.x) / 2, (global_position.y + enemy_to_attack.global_position.y) / 2)
+	game_round.game_camera.target_position = midpoint_pos	
 	game_camera.target_zoom = Vector2(1.5, 1.5)
-	assert(weapon_to_attack_with != null, "Weapon to attack with is null!")
-
 	# Add a 1-second delay
 	var t = wait_delay(0.5)
 	await t.timeout
-
 	# Shoot bullet from gun
 	weapon_to_attack_with.fire_at_enemy(weapon_sprite, self, enemy_to_attack, func (): on_attack_finished(enemy_to_attack, should_retaliate, on_complete))
 
@@ -219,7 +275,6 @@ func take_damage(damage):
 	health_bar.value -= dmg_to_hp
 	on_update_action_menu.emit()
 	on_take_damage.emit()
-
 	# Handle agent death
 	if health_bar.value == 0:
 		die()
@@ -295,3 +350,19 @@ func set_outline(outline_color):
 func reload_shader():
 	sprite.material = ShaderMaterial.new()
 	sprite.material.shader = load("res://shaders/solid_color.gdshader")
+
+func reset():
+	set_curr_health(Agent.MAX_HEALTH)
+	vision_direction = Vector2.UP
+	rem_action_points = Agent.TOTAL_ACTION_POINTS
+	has_completed_turn = false
+	is_planting = false
+	is_defusing = false
+	pos_to_watch = Vector2.ZERO
+	stop_holding()
+	did_defuse_this_round = false
+	did_plant_this_round = false
+	kills_this_round = 0
+	sprite.play("idle")
+	var outline_color = GameRoundVariables.PLAYER_OUTLINE_COLOR if curr_side == GameRound.Side.PLAYER else GameRoundVariables.CPU_OUTLINE_COLOR
+	set_outline(outline_color)

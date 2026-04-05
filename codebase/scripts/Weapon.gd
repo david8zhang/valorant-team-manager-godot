@@ -6,6 +6,7 @@ var weapon_stats: WeaponStats
 var curr_ammo := 0
 var max_ammo := 0
 
+static var NUM_SHOTS_VHFR = 8
 static var NUM_SHOTS_HFR = 5
 static var NUM_SHOTS_MFR = 3
 static var NUM_SHOTS_LFR = 1
@@ -32,6 +33,8 @@ func fire_at_enemy(weapon_sprite: AnimatedSprite2D, selected_agent: Agent, enemy
 
 func get_num_shots_for_fire_rate(fire_rate: WeaponStats.WeaponFireRate):
 	match fire_rate:
+		WeaponStats.WeaponFireRate.VERY_HIGH:
+			return NUM_SHOTS_VHFR
 		WeaponStats.WeaponFireRate.HIGH:
 			return NUM_SHOTS_HFR
 		WeaponStats.WeaponFireRate.MED:
@@ -40,6 +43,11 @@ func get_num_shots_for_fire_rate(fire_rate: WeaponStats.WeaponFireRate):
 			return NUM_SHOTS_LFR
 
 func fire_shots(weapon_sprite: AnimatedSprite2D, selected_agent: Agent, enemy_to_attack: Agent, cb: Callable):
+	enemy_to_attack.look_at_position(selected_agent.global_position)
+	if enemy_to_attack.curr_side == GameRound.Side.PLAYER:
+		game_round.update_visible_enemies_to_specific_agent(enemy_to_attack)
+	elif selected_agent.curr_side == GameRound.Side.PLAYER:
+		game_round.update_visible_enemies_to_specific_agent(selected_agent)
 	if shots_rem == 0:
 		cb.call()
 		return

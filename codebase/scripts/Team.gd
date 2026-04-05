@@ -21,27 +21,33 @@ var num_credits := 4000
 var agents := []
 
 func _ready() -> void:
+	var spawn_positions = get_all_spawn_positions()
+	var i = 0
+	for cell in spawn_positions:
+		var new_agent = agent_scene.instantiate() as Agent
+		new_agent.map = map
+		new_agent.agent_name = name_prefix + "_" + str(i)
+		new_agent.curr_side = side
+		new_agent.agent_stats = GameRoundVariables.load_random_agent_stat()
+		add_child(new_agent)
+		var outline_color = GameRoundVariables.PLAYER_OUTLINE_COLOR if side == GameRound.Side.PLAYER else GameRoundVariables.CPU_OUTLINE_COLOR
+		new_agent.set_outline(outline_color)
+		agents.append(new_agent)
+		map.move_node_to_pos(new_agent, cell.x, cell.y)
+		i += 1
+	await game_round.ready
+	team_status.update_from_team(agents)
+
+func get_all_spawn_positions():
 	var spawn_layer = map.spawn_layer
 	var used_cells = spawn_layer.get_used_cells()
-	var i = 0
+	var spawn_positions = []
 	for cell in used_cells:
 		var atlas_coords = spawn_layer.get_cell_atlas_coords(cell)
 		var spawn_atlas_for_side = PLAYER_SPAWN_ATLAS if side == GameRound.Side.PLAYER else CPU_SPAWN_ATLAS
 		if atlas_coords.x == spawn_atlas_for_side.x and atlas_coords.y == spawn_atlas_for_side.y:
-			var new_agent = agent_scene.instantiate() as Agent
-			new_agent.map = map
-			new_agent.agent_name = name_prefix + "_" + str(i)
-			new_agent.curr_side = side
-			new_agent.agent_stats = GameRoundVariables.load_random_agent_stat()
-			add_child(new_agent)
-			var outline_color = GameRoundVariables.PLAYER_OUTLINE_COLOR if side == GameRound.Side.PLAYER else GameRoundVariables.CPU_OUTLINE_COLOR
-			new_agent.set_outline(outline_color)
-			agents.append(new_agent)
-			map.move_node_to_pos(new_agent, cell.x, cell.y)
-			i += 1
-	
-	await game_round.ready
-	team_status.update_from_team(agents)
+			spawn_positions.append(cell)
+	return spawn_positions
 
 func get_all_visible_tiles():
 	var all_visible_tiles := []
@@ -51,20 +57,12 @@ func get_all_visible_tiles():
 	return all_visible_tiles
 
 func reset_agents():
-	var x_pos = start_x
-	var y_pos = start_y
-	for a in agents:
-		var agent = a as Agent
-		agent.set_curr_health(Agent.MAX_HEALTH)
-		agent.rem_action_points = Agent.TOTAL_ACTION_POINTS
-		agent.has_completed_turn = false
-		agent.is_planting = false
-		agent.is_defusing = false
-		agent.did_defuse_this_round = false
-		agent.did_plant_this_round = false
-		agent.kills_this_round = 0
-		agent.sprite.play("idle")
-		var outline_color = GameRoundVariables.PLAYER_OUTLINE_COLOR if side == GameRound.Side.PLAYER else GameRoundVariables.CPU_OUTLINE_COLOR
-		agent.set_outline(outline_color)
-		map.move_node_to_pos(agent, x_pos, y_pos)
-		x_pos += space_btwn_agents
+	var spawn_positions = get_all_spawn_positions()
+	for i in range(0, spawn_positions.size()):
+		var spawn_pos = spawn_positions[i]
+		var agent = agents[i] as Agent
+		agent.reset()
+		map.move_node_to_pos(agent, spawn_pos.x, spawn_pos.y)
+
+func get_all_living_agents():
+	return agents.filter(func (a): return !a.is_dead())

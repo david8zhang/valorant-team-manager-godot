@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://bvx36hs7tqwdl"]
 
 [ext_resource type="Script" uid="uid://d1dtew5skc77s" path="res://scripts/debug/WeaponDebugScene.gd" id="1_jokck"]
-[ext_resource type="Resource" uid="uid://cvd85vu5fmkt0" path="res://resources/weapons/Phantom.tres" id="2_6j71w"]
+[ext_resource type="Resource" uid="uid://bh8ciosfkbui1" path="res://resources/weapons/Stinger.tres" id="2_6j71w"]
 [ext_resource type="SpriteFrames" uid="uid://dfte4nf86qrun" path="res://assets/weapons/frenzy/frenzy.tres" id="3_x4kdc"]
 [ext_resource type="Texture2D" uid="uid://c7248o7y1afr2" path="res://assets/weapons/frenzy/frenzy-ingame-single.png" id="4_m7kut"]
 [ext_resource type="Texture2D" uid="uid://cgs3mqe5240pq" path="res://assets/weapons/classic/classic-ingame-single.png" id="5_6j71w"]
