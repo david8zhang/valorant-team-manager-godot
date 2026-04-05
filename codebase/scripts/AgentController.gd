@@ -153,6 +153,7 @@ func complete_turn():
 	selected_agent.update_visible_tiles()
 	selected_agent.hide_holding_tiles()
 	on_complete_turn.emit()
+	curr_action_state = ActionState.NONE
 
 func select_agent(agent: Agent):
 	selected_agent = agent

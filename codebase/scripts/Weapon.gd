@@ -43,12 +43,15 @@ func get_num_shots_for_fire_rate(fire_rate: WeaponStats.WeaponFireRate):
 			return NUM_SHOTS_LFR
 
 func fire_shots(weapon_sprite: AnimatedSprite2D, selected_agent: Agent, enemy_to_attack: Agent, cb: Callable):
-	enemy_to_attack.look_at_position(selected_agent.global_position)
 	if enemy_to_attack.curr_side == GameRound.Side.PLAYER:
 		game_round.update_visible_enemies_to_specific_agent(enemy_to_attack)
 	elif selected_agent.curr_side == GameRound.Side.PLAYER:
 		game_round.update_visible_enemies_to_specific_agent(selected_agent)
 	if shots_rem == 0:
+		# Random chance after last shot that the target will manage to find and look at attacker
+		var will_look_at_enemy = randi_range(0, 1) == 0
+		if will_look_at_enemy:
+			enemy_to_attack.look_at_position(selected_agent.global_position)
 		cb.call()
 		return
 	shots_rem -= 1
