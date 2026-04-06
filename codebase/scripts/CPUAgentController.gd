@@ -67,6 +67,6 @@ func get_positions_to_move_to():
 			var curr_agent_tile_pos = game_round.map.get_tile_pos_from_world_pos(selected_agent.global_position)
 			var pos = Vector2(curr_agent_tile_pos.x + x_diff, curr_agent_tile_pos.y + y_diff)
 			var world_pos = game_round.map.get_world_pos_from_tile_pos(pos)
-			if game_round.can_move_to_pos(world_pos):
+			if game_round.can_move_to_pos(selected_agent.global_position, world_pos):
 				pos_to_move_to.append(pos)
 	return pos_to_move_to

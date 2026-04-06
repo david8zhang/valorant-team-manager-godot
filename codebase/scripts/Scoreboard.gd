@@ -18,6 +18,7 @@ enum Phase {
 @onready var defuse_container = $HBoxContainer/VBoxContainer/DefuseContainer as HBoxContainer
 @onready var plant_container = $HBoxContainer/VBoxContainer/PlantContainer as HBoxContainer
 
+static var SETUP_PHASE_TURN_LIMIT = 2
 static var PRE_PLANT_TURN_LIMIT = 10
 static var POST_PLANT_TURN_LIMIT = 5
 static var PLANT_REQ_TURNS = 2
@@ -27,15 +28,14 @@ var turns_remaining = PRE_PLANT_TURN_LIMIT
 var round_num := 1
 var player_score := 0
 var cpu_score := 0
-var curr_phase := Phase.PRE_PLANT
+var curr_phase := Phase.SETUP
 var plant_turns_remaining = 0
 
 var defuse_progress := 0
 var plant_progress := 0
 
 func _ready() -> void:
-	turns_remaining_label.text = str(turns_remaining)
-	round_number_label.text = "Round " + str(round_num)
+	switch_to_phase(Phase.SETUP)
 	player_score_label.text = str(player_score)
 	cpu_score_label.text = str(cpu_score)
 
@@ -63,6 +63,14 @@ func incr_round():
 
 func switch_to_phase(phase: Scoreboard.Phase):
 	match phase:
+		Phase.SETUP:
+			turns_remaining = SETUP_PHASE_TURN_LIMIT
+			turns_remaining_label.text = str(turns_remaining)
+			round_number_label.text = "SETUP"
+			round_number_label.add_theme_color_override("font_color", Color.BLACK)
+			turns_remaining_label.add_theme_color_override("font_color", Color.BLACK)
+			turns_remaining_bottom_label.add_theme_color_override("font_color", Color.BLACK)
+			round_info_container.add_theme_stylebox_override("panel", load("res://prefabs/RoundTurnRem.tres"))			
 		Phase.PRE_PLANT:
 			turns_remaining = PRE_PLANT_TURN_LIMIT
 			turns_remaining_label.text = str(turns_remaining)

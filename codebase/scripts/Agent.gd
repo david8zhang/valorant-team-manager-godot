@@ -175,6 +175,7 @@ func watch_position(pos: Vector2):
 	hold_visible_tiles()
 
 func stop_watching_position():
+	stop_holding()
 	pos_to_watch = Vector2.ZERO
 
 func hold_visible_tiles():

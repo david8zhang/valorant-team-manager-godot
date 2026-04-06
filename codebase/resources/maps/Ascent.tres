@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MultiTileMapData" load_steps=2 format=3 uid="uid://brdt0qoqo7ss4"]
+[gd_resource type="Resource" script_class="MultiTileMapData" load_steps=2 format=3 uid="uid://dpxswmv4wbaws"]
 
 [ext_resource type="Script" uid="uid://d2dlvmkqiyrvg" path="res://resources/maps/MultiTileMapData.gd" id="1_ybp23"]
 
@@ -38408,6 +38408,322 @@ layers_content = {
 "coords": Vector2i(61, 133),
 "source_id": 0
 }]),
+&"TempBarrierLayer": Array[Dictionary]([{
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 10),
+"coords": Vector2i(93, 95),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 10),
+"coords": Vector2i(93, 96),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 10),
+"coords": Vector2i(93, 97),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 10),
+"coords": Vector2i(93, 98),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 10),
+"coords": Vector2i(93, 99),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 10),
+"coords": Vector2i(93, 100),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 10),
+"coords": Vector2i(93, 101),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 10),
+"coords": Vector2i(93, 102),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 10),
+"coords": Vector2i(93, 103),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(17, 12),
+"coords": Vector2i(102, 84),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(103, 84),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(104, 84),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(105, 84),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(106, 84),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(107, 84),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(108, 84),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(109, 84),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(110, 84),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(111, 84),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(112, 84),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 12),
+"coords": Vector2i(113, 84),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(17, 8),
+"coords": Vector2i(122, 66),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(123, 66),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(124, 66),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(125, 66),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(126, 66),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(127, 66),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(128, 66),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 8),
+"coords": Vector2i(129, 66),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 8),
+"coords": Vector2i(99, 66),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(98, 66),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(97, 66),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(96, 66),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(17, 8),
+"coords": Vector2i(95, 66),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(17, 8),
+"coords": Vector2i(69, 54),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(70, 54),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(71, 54),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(72, 54),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(73, 54),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(74, 54),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(75, 54),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 8),
+"coords": Vector2i(76, 54),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(17, 12),
+"coords": Vector2i(28, 71),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(29, 71),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(30, 71),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(31, 71),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(32, 71),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(33, 71),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 11),
+"coords": Vector2i(34, 71),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 12),
+"coords": Vector2i(35, 71),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(17, 8),
+"coords": Vector2i(43, 54),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(44, 54),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(45, 54),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(46, 54),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(47, 54),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(16, 7),
+"coords": Vector2i(48, 54),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 8),
+"coords": Vector2i(49, 54),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 10),
+"coords": Vector2i(51, 74),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 10),
+"coords": Vector2i(51, 75),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 10),
+"coords": Vector2i(51, 76),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 10),
+"coords": Vector2i(51, 77),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 10),
+"coords": Vector2i(51, 78),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 10),
+"coords": Vector2i(51, 79),
+"source_id": 0
+}]),
 &"VisionLayer": Array[Dictionary]([]),
 &"WallsLayer": Array[Dictionary]([{
 "alternative_tile": 0,
@@ -41888,11 +42204,6 @@ layers_content = {
 "alternative_tile": 0,
 "atlas_coords": Vector2i(15, 1),
 "coords": Vector2i(142, 69),
-"source_id": 0
-}, {
-"alternative_tile": 0,
-"atlas_coords": Vector2i(15, 2),
-"coords": Vector2i(130, 66),
 "source_id": 0
 }, {
 "alternative_tile": 0,
@@ -114098,6 +114409,11 @@ layers_content = {
 "alternative_tile": 0,
 "atlas_coords": Vector2i(16, 1),
 "coords": Vector2i(69, 28),
+"source_id": 0
+}, {
+"alternative_tile": 0,
+"atlas_coords": Vector2i(15, 2),
+"coords": Vector2i(130, 66),
 "source_id": 0
 }])
 }

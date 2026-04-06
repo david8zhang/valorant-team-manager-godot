@@ -140,19 +140,31 @@ func have_all_agents_completed_turn():
 
 func go_to_next_turn_cycle():
 	scoreboard.decrement_turn()
-	handle_smoke_timers()
-	var win_condition = get_win_condition()
-	if win_condition != -1:
-		handle_win_condition(win_condition)
-		is_round_over = true
+	if scoreboard.curr_phase == Scoreboard.Phase.SETUP:
+		# Handle setup phase end
+		if scoreboard.turns_remaining == 0:
+			scoreboard.switch_to_phase(Scoreboard.Phase.PRE_PLANT)
+			map.temp_barrier_layer.hide()
+			pathfinding.setup_solid_tiles()
+		else:
+			reset_all_agents_for_turn()			
 	else:
-		var all_agents = player_team.agents + cpu_team.agents
-		for a in all_agents:
-			var agent = a as Agent
-			agent.has_completed_turn = false
-		for a in player_team.agents:
-			var agent = a as Agent
-			agent.sprite.self_modulate = Color(1, 1, 1)
+		handle_smoke_timers()
+		var win_condition = get_win_condition()
+		if win_condition != -1:
+			handle_win_condition(win_condition)
+			is_round_over = true
+		else:
+			reset_all_agents_for_turn()
+
+func reset_all_agents_for_turn():
+	var all_agents = player_team.agents + cpu_team.agents
+	for a in all_agents:
+		var agent = a as Agent
+		agent.has_completed_turn = false
+	for a in player_team.agents:
+		var agent = a as Agent
+		agent.sprite.self_modulate = Color(1, 1, 1)
 
 func handle_win_condition(win_condition):
 	var winning_side: GameRound.Side
@@ -364,7 +376,9 @@ func on_buy_finished():
 	is_round_over = false
 	player_team.reset_agents()
 	cpu_team.reset_agents()
-	scoreboard.switch_to_phase(Scoreboard.Phase.PRE_PLANT)
+	map.temp_barrier_layer.show()
+	pathfinding.setup_solid_tiles()	
+	scoreboard.switch_to_phase(Scoreboard.Phase.SETUP)
 	buy_menu.hide()
 	player_team_status.update_from_team(player_team.agents)
 	cpu_team_status.update_from_team(cpu_team.agents)
@@ -393,11 +407,14 @@ func handle_smoke_timers():
 
 func is_round_underway():
 	var curr_phase = scoreboard.curr_phase
-	return curr_phase == Scoreboard.Phase.PRE_PLANT or curr_phase == Scoreboard.Phase.POST_PLANT
+	var valid_phases = [Scoreboard.Phase.PRE_PLANT, Scoreboard.Phase.POST_PLANT, Scoreboard.Phase.SETUP]
+	return valid_phases.has(curr_phase)
 
-func can_move_to_pos(world_pos: Vector2):
-	var tile_pos = map.get_tile_pos_from_world_pos(world_pos)
-	return map.is_tile_pos_in_bounds(tile_pos) and !map.is_tile_pos_obstructed(tile_pos) and !is_position_occupied(tile_pos)
+func can_move_to_pos(curr_world_pos, new_world_pos: Vector2):
+	var new_tile_pos = map.get_tile_pos_from_world_pos(new_world_pos)
+	var curr_tile_pos = map.get_tile_pos_from_world_pos(curr_world_pos)
+	var has_path_to_pos = pathfinding.get_shortest_path(curr_tile_pos, new_tile_pos).size() > 0
+	return has_path_to_pos and map.is_tile_pos_in_bounds(new_tile_pos) and !map.is_tile_pos_obstructed(new_tile_pos) and !is_position_occupied(new_tile_pos)
 
 func add_util_above_player(util: Node):
 	util_above_player.add_child(util)

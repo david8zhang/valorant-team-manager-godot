@@ -26,9 +26,11 @@ func setup_solid_tiles():
 			var cell = Vector2(x, y)
 			if is_blocked(cell):
 				astar_grid.set_point_solid(cell, true)
+			else:
+				astar_grid.set_point_solid(cell, false)
 
 func is_blocked(cell: Vector2) -> bool:
-	return map.walls_layer.get_cell_source_id(cell) != -1
+	return map.walls_layer.get_cell_source_id(cell) != -1 or (map.temp_barrier_layer.visible and map.temp_barrier_layer.get_cell_source_id(cell) != -1)
 
 func get_shortest_path(start_tile: Vector2, end_tile: Vector2) -> Array[Vector2i]:
 	return astar_grid.get_id_path(start_tile, end_tile)

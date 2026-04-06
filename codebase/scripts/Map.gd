@@ -1,18 +1,22 @@
 class_name Map
 extends Node2D
 
+## You MUST drag your .tres TileSet resource here for tiles to appear
+@export var base_tileset: TileSet
+
 @onready var game_round = get_node("/root/GameRound") as GameRound
 @onready var ground_layer := $GroundLayer as TileMapLayer
 @onready var spawn_layer := $SpawnLayer as TileMapLayer
 @onready var site_layer := $SiteLayer as TileMapLayer
 @onready var walls_layer := $WallsLayer as TileMapLayer
+@onready var temp_barrier_layer := $TempBarrierLayer as TileMapLayer
 @onready var vision_layer := $VisionLayer as TileMapLayer
 
 var last_visible_tiles = {}
 
 func _ready() -> void:
 	spawn_layer.hide()
-	load_all_layers(self, "res://resources/maps/TestCombat.tres")
+	load_all_layers(self, "res://resources/maps/Ascent.tres")
 
 func move_node_to_pos(node: Node2D, tile_x: int, tile_y: int):
 	var world_pos = ground_layer.map_to_local(Vector2(tile_x, tile_y))
@@ -31,7 +35,6 @@ func is_tile_pos_in_bounds(tile_pos: Vector2):
 func show_player_team_visible_tiles():
 	var all_visible_tiles = game_round.player_team.get_all_visible_tiles()
 	show_specific_visible_tiles(all_visible_tiles)
-
 
 func show_specific_visible_tiles(visible_tiles_array):
 	var current_visible_tiles = {}
@@ -66,28 +69,6 @@ func highlight_tile_at_tile_pos(x_pos, y_pos, color):
 func is_tile_pos_obstructed(tile_pos):
 	return walls_layer.get_cell_source_id(tile_pos) != -1
 
-func save_all_layers(parent_node: Node, file_path: String) -> void:
-	var multi_data = MultiTileMapData.new()
-
-	for child in parent_node.get_children():
-		if child is TileMapLayer:
-			var layer_tiles: Array[Dictionary] = []
-			var cells = child.get_used_cells()
-			
-			for coords in cells:
-				layer_tiles.append({
-					"coords": coords,
-					"source_id": child.get_cell_source_id(coords),
-					"atlas_coords": child.get_cell_atlas_coords(coords),
-					"alternative_tile": child.get_cell_alternative_tile(coords)
-				})
-			
-			multi_data.layers_content[child.name] = layer_tiles
-	
-	var result = ResourceSaver.save(multi_data, file_path)
-	if result == OK:
-		print("All layers saved successfully.")
-
 func load_all_layers(parent_node: Node, file_path: String) -> void:
 	if not FileAccess.file_exists(file_path):
 		return
@@ -110,4 +91,4 @@ func load_all_layers(parent_node: Node, file_path: String) -> void:
 					cell["alternative_tile"]
 				)
 
-	print("All layers loaded successfully.")		
+	print("All layers loaded successfully.")

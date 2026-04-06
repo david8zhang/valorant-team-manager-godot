@@ -96,7 +96,7 @@ func _process(_delta):
 			ActionState.MOVE:
 				var pos_to_move_to = game_round.map.get_world_pos_from_tile_pos(highlight_overlay.hovered_tile_pos)
 				var ap_cost_for_move = game_round.get_ap_cost_for_movement(selected_agent.global_position, pos_to_move_to)
-				highlight_overlay.is_pos_valid = ap_cost_for_move <= selected_agent.rem_action_points and !is_defusing_or_planting and game_round.can_move_to_pos(pos_to_move_to)
+				highlight_overlay.is_pos_valid = ap_cost_for_move <= selected_agent.rem_action_points and !is_defusing_or_planting and game_round.can_move_to_pos(selected_agent.global_position, pos_to_move_to)
 				action_menu.preview_ap_cost(ap_cost_for_move)
 				if Input.is_action_just_pressed("mouse_left"):
 					if highlight_overlay.is_pos_valid:
@@ -154,6 +154,8 @@ func complete_turn():
 	selected_agent.hide_holding_tiles()
 	on_complete_turn.emit()
 	curr_action_state = ActionState.NONE
+	highlight_overlay.hide()
+	action_menu.de_highlight_all_buttons()
 
 func select_agent(agent: Agent):
 	selected_agent = agent
