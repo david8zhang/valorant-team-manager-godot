@@ -30,7 +30,10 @@ extends Control
 @export var agent_buy_menu_scene: PackedScene
 
 var agent_to_buy_for: AgentBuyMenu
-var selected_buy_option: GunBuyMenuOption
+var primary_weapon_option: GunBuyMenuOption
+var sidearm_weapon_option: GunBuyMenuOption
+var original_primary_weapon_option: GunBuyMenuOption
+var original_sidearm_weapon_option: GunBuyMenuOption
 
 var all_buy_options = []
 
@@ -66,7 +69,8 @@ func _ready() -> void:
 	]
 	for o in all_buy_options:
 		var option = o as GunBuyMenuOption
-		option.on_click.connect(select_option_to_buy)
+		option.on_click.connect(buy_option_if_possible)
+		option.on_undo.connect(undo_if_possible)
 	if game_round != null:
 		continue_button.pressed.connect(game_round.on_buy_finished)
 
@@ -87,21 +91,49 @@ func select_agent_to_buy_for(agent_buy_menu: AgentBuyMenu):
 		dehighlight_all_gun_buy_menu_options()
 	agent_to_buy_for = agent_buy_menu
 	agent_buy_menu.highlight()
+	# Show weapons the agent currently owns
 	var agent_game_stats = agent_to_buy_for.agent_game_stats
 	if agent_game_stats.primary_weapon_name != WeaponStats.WeaponNames.NO_WEAPON:
-		var primary_option = get_gun_buy_menu_option_for_name(agent_game_stats.primary_weapon_name) as GunBuyMenuOption
-		if primary_option != null:
-			primary_option.highlight()
+		primary_weapon_option = get_gun_buy_menu_option_for_name(agent_game_stats.primary_weapon_name) as GunBuyMenuOption
+		if primary_weapon_option != null:
+			original_primary_weapon_option = primary_weapon_option
+			primary_weapon_option.highlight()
 	if agent_game_stats.sidearm_weapon_name != WeaponStats.WeaponNames.NO_WEAPON:
-		var sidearm_option = get_gun_buy_menu_option_for_name(agent_game_stats.sidearm_weapon_name) as GunBuyMenuOption
-		if sidearm_option != null:
-			sidearm_option.highlight()
+		sidearm_weapon_option = get_gun_buy_menu_option_for_name(agent_game_stats.sidearm_weapon_name) as GunBuyMenuOption
+		if sidearm_weapon_option != null:
+			original_sidearm_weapon_option = sidearm_weapon_option
+			sidearm_weapon_option.highlight()
 
-func select_option_to_buy(gun_buy_menu_option: GunBuyMenuOption):
-	if selected_buy_option != null:
-		selected_buy_option.de_highlight()
-	selected_buy_option = gun_buy_menu_option
-	gun_buy_menu_option.highlight()
+func undo_if_possible(gun_buy_menu_option: GunBuyMenuOption):
+	var clicked_stats = gun_buy_menu_option.weapon_stats
+	var curr_primary_stats = primary_weapon_option.weapon_stats
+	var curr_sidearm_stats = sidearm_weapon_option.weapon_stats
+	if clicked_stats.weapon_name == curr_primary_stats.weapon_name:
+		var orig_primary_stats = original_primary_weapon_option.weapon_stats
+		if curr_primary_stats.weapon_name != orig_primary_stats.weapon_name:
+			primary_weapon_option.de_highlight()
+			primary_weapon_option = original_primary_weapon_option
+			primary_weapon_option.highlight()
+	elif clicked_stats.weapon_name == curr_sidearm_stats.weapon_name:
+		var orig_sidearm_stats = original_sidearm_weapon_option.weapon_stats
+		if curr_sidearm_stats.weapon_name != orig_sidearm_stats.weapon_name:
+			sidearm_weapon_option.de_highlight()
+			sidearm_weapon_option = original_sidearm_weapon_option
+			sidearm_weapon_option.highlight()
+
+func buy_option_if_possible(gun_buy_menu_option: GunBuyMenuOption):
+	var weapon_stats = gun_buy_menu_option.weapon_stats
+	if weapon_stats.weapon_type == WeaponStats.WeaponType.PRIMARY:
+		if primary_weapon_option != null:
+			primary_weapon_option.de_highlight()
+		# Buy the weapon
+		primary_weapon_option = gun_buy_menu_option
+		primary_weapon_option.highlight()
+	elif weapon_stats.weapon_type == WeaponStats.WeaponType.SIDEARM:
+		if sidearm_weapon_option != null:
+			sidearm_weapon_option.de_highlight()
+		sidearm_weapon_option = gun_buy_menu_option
+		sidearm_weapon_option.highlight()
 
 func setup_credits(agents, winning_side: GameRound.Side):
 	for a in agents:

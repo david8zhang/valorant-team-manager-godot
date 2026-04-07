@@ -6,8 +6,17 @@ class AgentGameStats:
 	var death_count := 0
 	var assist_count := 0
 	var credits := 0
-	var primary_weapon_name := GameRoundVariables.get_random_weapon([WeaponStats.WeaponNames.VANDAL, WeaponStats.WeaponNames.PHANTOM, WeaponStats.WeaponNames.SPECTRE, WeaponStats.WeaponNames.OPERATOR])
-	var sidearm_weapon_name := GameRoundVariables.get_random_weapon([WeaponStats.WeaponNames.CLASSIC, WeaponStats.WeaponNames.GHOST, WeaponStats.WeaponNames.FRENZY])
+	var primary_weapon_name := GameRoundVariables.get_random_weapon([
+		WeaponStats.WeaponNames.VANDAL,
+		WeaponStats.WeaponNames.PHANTOM,
+		WeaponStats.WeaponNames.SPECTRE,
+		WeaponStats.WeaponNames.OPERATOR
+	])
+	var sidearm_weapon_name := GameRoundVariables.get_random_weapon([
+		WeaponStats.WeaponNames.CLASSIC,
+		WeaponStats.WeaponNames.GHOST,
+		WeaponStats.WeaponNames.FRENZY
+	])
 	var ability_1_charges := 0
 	var ability_2_charges := 0
 

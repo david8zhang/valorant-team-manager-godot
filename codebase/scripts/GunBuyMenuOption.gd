@@ -9,16 +9,21 @@ extends PanelContainer
 @export var weapon_stats: WeaponStats
 
 signal on_click(gun_buy_menu_option)
+signal on_undo(gun_buy_menu_option)
 
 func _ready() -> void:
 	if weapon_stats != null:
 		name_label.text = GameRoundVariables.get_weapon_name_str(weapon_stats.weapon_name).to_pascal_case()
 		price_label.text = "Free" if weapon_stats.cost == 0 else str(weapon_stats.cost)
 		texture_rect.texture = weapon_stats.in_menu_texture
-		button.pressed.connect(click)
+		button.gui_input.connect(on_gui_input)
 
-func click():
-	on_click.emit(self)
+func on_gui_input(event: InputEvent):
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			on_click.emit(self)
+		elif event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+			on_undo.emit(self)
 
 func highlight():
 	var selected_stylebox = load("res://prefabs/BuyMenu_Selected.tres") as StyleBoxFlat
