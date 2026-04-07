@@ -11,6 +11,7 @@ extends Control
 @onready var agent_sprite = $PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/PlayerAvatar as TextureRect
 @onready var button = $Button as Button
 
+var agent_game_stats: GameRoundVariables.AgentGameStats
 signal on_click(agent_buy_menu)
 
 func _ready() -> void:
@@ -23,11 +24,10 @@ func init_from_agent(agent: Agent):
 	# Populate agent stats
 	agent_sprite.texture = agent.agent_stats.texture
 	agent_name_label.text = agent.agent_name
-	var agent_stats = GameRoundVariables.get_or_create_agent_game_stat(agent.agent_name) as GameRoundVariables.AgentGameStats
-	kill_count_label.text = str(agent_stats.kill_count)
-	death_count_label.text = str(agent_stats.death_count)
-	assist_count_label.text = str(agent_stats.assist_count)
-
+	agent_game_stats = GameRoundVariables.get_or_create_agent_game_stat(agent.agent_name) as GameRoundVariables.AgentGameStats
+	kill_count_label.text = str(agent_game_stats.kill_count)
+	death_count_label.text = str(agent_game_stats.death_count)
+	assist_count_label.text = str(agent_game_stats.assist_count)
 	# Populate weapon sprite
 	var weapon_stats: WeaponStats
 	if agent.primary_weapon != null:
@@ -36,7 +36,6 @@ func init_from_agent(agent: Agent):
 		weapon_stats = agent.sidearm_weapon.weapon_stats
 	if weapon_stats != null:
 		weapon_sprite.texture = weapon_stats.in_game_texture
-
 	# Show if agent has shields or not
 	var alpha = 1 if agent.shield_bar.value == Agent.MAX_SHIELDS else 0
 	shield_icon.modulate.a = alpha

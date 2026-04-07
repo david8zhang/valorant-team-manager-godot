@@ -32,6 +32,8 @@ extends Control
 var agent_to_buy_for: AgentBuyMenu
 var selected_buy_option: GunBuyMenuOption
 
+var all_buy_options = []
+
 static var CREDITS_WIN = 3000
 static var CREDITS_SURVIVE_LOSS = 1000
 static var CREDITS_ONE_LOSS = 1900
@@ -41,7 +43,7 @@ static var CREDITS_SPIKE_PLANT = 300
 static var CREDITS_KILL = 200
 
 func _ready() -> void:
-	var all_buy_options = [
+	all_buy_options = [
 		classic_buy_option,
 		frenzy_buy_option,
 		ghost_buy_option,
@@ -82,8 +84,18 @@ func init_agent_info(agents):
 func select_agent_to_buy_for(agent_buy_menu: AgentBuyMenu):
 	if agent_to_buy_for != null:
 		agent_to_buy_for.de_highlight()
+		dehighlight_all_gun_buy_menu_options()
 	agent_to_buy_for = agent_buy_menu
 	agent_buy_menu.highlight()
+	var agent_game_stats = agent_to_buy_for.agent_game_stats
+	if agent_game_stats.primary_weapon_name != WeaponStats.WeaponNames.NO_WEAPON:
+		var primary_option = get_gun_buy_menu_option_for_name(agent_game_stats.primary_weapon_name) as GunBuyMenuOption
+		if primary_option != null:
+			primary_option.highlight()
+	if agent_game_stats.sidearm_weapon_name != WeaponStats.WeaponNames.NO_WEAPON:
+		var sidearm_option = get_gun_buy_menu_option_for_name(agent_game_stats.sidearm_weapon_name) as GunBuyMenuOption
+		if sidearm_option != null:
+			sidearm_option.highlight()
 
 func select_option_to_buy(gun_buy_menu_option: GunBuyMenuOption):
 	if selected_buy_option != null:
@@ -123,3 +135,15 @@ func setup_credits(agents, winning_side: GameRound.Side):
 			total_credits_earned += CREDITS_SPIKE_PLANT
 		GameRoundVariables.credits += total_credits_earned
 	credits_amount_label.text = str(GameRoundVariables.credits)
+
+func dehighlight_all_gun_buy_menu_options():
+	for o in all_buy_options:
+		var option = o as GunBuyMenuOption
+		option.de_highlight()
+
+func get_gun_buy_menu_option_for_name(gun_name: WeaponStats.WeaponNames):
+	for o in all_buy_options:
+		var option = o as GunBuyMenuOption
+		if option.weapon_stats.weapon_name == gun_name:
+			return option
+	return null
