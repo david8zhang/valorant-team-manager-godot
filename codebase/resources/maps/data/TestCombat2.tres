@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="MultiTileMapData" load_steps=2 format=3 uid="uid://bg6yau2rdrixe"]
+[gd_resource type="Resource" script_class="MultiTileMapData" load_steps=3 format=3 uid="uid://bg6yau2rdrixe"]
 
 [ext_resource type="Script" uid="uid://d2dlvmkqiyrvg" path="res://resources/maps/MultiTileMapData.gd" id="1_gxfbm"]
+[ext_resource type="Script" uid="uid://1n6hxhqgvq3s" path="res://resources/maps/TileMapWaypoint.gd" id="2_iov3o"]
 
 [resource]
 script = ExtResource("1_gxfbm")
@@ -115671,3 +115672,4 @@ layers_content = {
 "source_id": 0
 }])
 }
+waypoints = Array[ExtResource("2_iov3o")]([])

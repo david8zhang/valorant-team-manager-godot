@@ -1,6 +1,35 @@
-[gd_resource type="Resource" script_class="MultiTileMapData" load_steps=2 format=3 uid="uid://dpxswmv4wbaws"]
+[gd_resource type="Resource" script_class="MultiTileMapData" load_steps=7 format=3 uid="uid://dpxswmv4wbaws"]
 
 [ext_resource type="Script" uid="uid://d2dlvmkqiyrvg" path="res://resources/maps/MultiTileMapData.gd" id="1_ybp23"]
+[ext_resource type="Script" uid="uid://1n6hxhqgvq3s" path="res://resources/maps/TileMapWaypoint.gd" id="2_p2855"]
+
+[sub_resource type="Resource" id="Resource_v4pi8"]
+script = ExtResource("2_p2855")
+waypoint_name = "DEFENDER_SPAWN"
+waypoint_tile_pos = Vector2(81, 11)
+map_side = 1
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_vh3w1"]
+script = ExtResource("2_p2855")
+waypoint_name = "A_WINDOW"
+waypoint_tile_pos = Vector2(106, 31)
+map_side = 1
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_i5w0v"]
+script = ExtResource("2_p2855")
+waypoint_name = "A_RAFTERS"
+waypoint_tile_pos = Vector2(130, 36)
+map_side = 1
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_kspdc"]
+script = ExtResource("2_p2855")
+waypoint_name = "A_SITE"
+waypoint_tile_pos = Vector2(126, 48)
+map_side = 1
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
 
 [resource]
 script = ExtResource("1_ybp23")
@@ -114417,3 +114446,4 @@ layers_content = {
 "source_id": 0
 }])
 }
+waypoints = Array[ExtResource("2_p2855")]([SubResource("Resource_v4pi8"), SubResource("Resource_vh3w1"), SubResource("Resource_i5w0v"), SubResource("Resource_kspdc")])

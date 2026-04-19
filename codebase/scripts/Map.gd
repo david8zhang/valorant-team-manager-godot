@@ -16,7 +16,7 @@ var last_visible_tiles = {}
 
 func _ready() -> void:
 	spawn_layer.hide()
-	load_all_layers(self, "res://resources/maps/Ascent.tres")
+	load_map_data(self, "res://resources/maps/data/Ascent.tres")
 
 func move_node_to_pos(node: Node2D, tile_x: int, tile_y: int):
 	var world_pos = ground_layer.map_to_local(Vector2(tile_x, tile_y))
@@ -69,20 +69,21 @@ func highlight_tile_at_tile_pos(x_pos, y_pos, color):
 func is_tile_pos_obstructed(tile_pos):
 	return walls_layer.get_cell_source_id(tile_pos) != -1
 
-func load_all_layers(parent_node: Node, file_path: String) -> void:
+func load_map_data(parent_node: Node, file_path: String):
 	if not FileAccess.file_exists(file_path):
 		return
 	var multi_data = load(file_path) as MultiTileMapData
+	load_all_layers(parent_node, multi_data)
+
+func load_all_layers(parent_node: Node, multi_data: MultiTileMapData) -> void:
 	if not multi_data:
 		return
-
 	for layer_name in multi_data.layers_content.keys():
 		var layer = parent_node.get_node_or_null(NodePath(layer_name)) as TileMapLayer
 		# If the layer exists in the scene, reconstruct it
 		if layer:
 			layer.clear()
 			var tile_list = multi_data.layers_content[layer_name]
-
 			for cell in tile_list:
 				layer.set_cell(
 					cell["coords"],
@@ -90,5 +91,4 @@ func load_all_layers(parent_node: Node, file_path: String) -> void:
 					cell["atlas_coords"],
 					cell["alternative_tile"]
 				)
-
 	print("All layers loaded successfully.")
