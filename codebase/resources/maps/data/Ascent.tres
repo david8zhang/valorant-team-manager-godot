@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MultiTileMapData" load_steps=7 format=3 uid="uid://dpxswmv4wbaws"]
+[gd_resource type="Resource" script_class="MultiTileMapData" load_steps=26 format=3 uid="uid://dpxswmv4wbaws"]
 
 [ext_resource type="Script" uid="uid://d2dlvmkqiyrvg" path="res://resources/maps/MultiTileMapData.gd" id="1_ybp23"]
 [ext_resource type="Script" uid="uid://1n6hxhqgvq3s" path="res://resources/maps/TileMapWaypoint.gd" id="2_p2855"]
@@ -27,8 +27,141 @@ metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
 [sub_resource type="Resource" id="Resource_kspdc"]
 script = ExtResource("2_p2855")
 waypoint_name = "A_SITE"
-waypoint_tile_pos = Vector2(126, 48)
+waypoint_tile_pos = Vector2(125, 48)
 map_side = 1
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_p2855"]
+script = ExtResource("2_p2855")
+waypoint_name = "A_CLOSE_RIGHT"
+waypoint_tile_pos = Vector2(131, 62)
+map_side = 1
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_xaso4"]
+script = ExtResource("2_p2855")
+waypoint_name = "A_CLOSE_LEFT"
+waypoint_tile_pos = Vector2(120, 62)
+map_side = 1
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_vm4ye"]
+script = ExtResource("2_p2855")
+waypoint_name = "A_TREE"
+waypoint_tile_pos = Vector2(105, 60)
+map_side = 1
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_dw5v6"]
+script = ExtResource("2_p2855")
+waypoint_name = "MID_CUBBY"
+waypoint_tile_pos = Vector2(92, 70)
+map_side = 2
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_b2aj1"]
+script = ExtResource("2_p2855")
+waypoint_name = "MID_CATWALK"
+waypoint_tile_pos = Vector2(85, 85)
+map_side = 2
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_klcju"]
+script = ExtResource("2_p2855")
+waypoint_name = "MID_TOP"
+waypoint_tile_pos = Vector2(85, 100)
+map_side = 2
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_6n2se"]
+script = ExtResource("2_p2855")
+waypoint_name = "MID_COURTYARD"
+waypoint_tile_pos = Vector2(70, 76)
+map_side = 1
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_6mwjs"]
+script = ExtResource("2_p2855")
+waypoint_name = "MID_BOTTOM"
+waypoint_tile_pos = Vector2(72, 62)
+map_side = 2
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_q4o7x"]
+script = ExtResource("2_p2855")
+waypoint_name = "MID_LINK"
+waypoint_tile_pos = Vector2(58, 78)
+map_side = 2
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_u55yk"]
+script = ExtResource("2_p2855")
+waypoint_name = "B_LOBBY"
+waypoint_tile_pos = Vector2(39, 82)
+map_side = 0
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_7px3d"]
+script = ExtResource("2_p2855")
+waypoint_name = "ATTACKER_SPAWN"
+waypoint_tile_pos = Vector2(61, 130)
+map_side = 0
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_v63h8"]
+script = ExtResource("2_p2855")
+waypoint_name = "A_LOBBY"
+waypoint_tile_pos = Vector2(108, 94)
+map_side = 0
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_trrwn"]
+script = ExtResource("2_p2855")
+waypoint_name = "A_MAIN"
+waypoint_tile_pos = Vector2(120, 71)
+map_side = 2
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_ivilt"]
+script = ExtResource("2_p2855")
+waypoint_name = "A_WINE"
+waypoint_tile_pos = Vector2(138, 72)
+map_side = 2
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_6l2n3"]
+script = ExtResource("2_p2855")
+waypoint_name = "B_MAIN"
+waypoint_tile_pos = Vector2(40, 60)
+map_side = 2
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_xnikj"]
+script = ExtResource("2_p2855")
+waypoint_name = "B_BOAT_HOUSE"
+waypoint_tile_pos = Vector2(10, 40)
+map_side = 1
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_qw5hj"]
+script = ExtResource("2_p2855")
+waypoint_name = "B_SITE"
+waypoint_tile_pos = Vector2(26, 40)
+map_side = 1
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_1im6t"]
+script = ExtResource("2_p2855")
+waypoint_name = "MID_MARKET"
+waypoint_tile_pos = Vector2(42, 40)
+map_side = 0
+metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
+
+[sub_resource type="Resource" id="Resource_yyy7h"]
+script = ExtResource("2_p2855")
+waypoint_name = "MID_PLAZA"
+waypoint_tile_pos = Vector2(58, 44)
+map_side = 0
 metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
 
 [resource]
@@ -114446,4 +114579,4 @@ layers_content = {
 "source_id": 0
 }])
 }
-waypoints = Array[ExtResource("2_p2855")]([SubResource("Resource_v4pi8"), SubResource("Resource_vh3w1"), SubResource("Resource_i5w0v"), SubResource("Resource_kspdc")])
+waypoints = Array[ExtResource("2_p2855")]([SubResource("Resource_v4pi8"), SubResource("Resource_vh3w1"), SubResource("Resource_i5w0v"), SubResource("Resource_kspdc"), SubResource("Resource_p2855"), SubResource("Resource_xaso4"), SubResource("Resource_vm4ye"), SubResource("Resource_dw5v6"), SubResource("Resource_b2aj1"), SubResource("Resource_klcju"), SubResource("Resource_6n2se"), SubResource("Resource_6mwjs"), SubResource("Resource_q4o7x"), SubResource("Resource_u55yk"), SubResource("Resource_7px3d"), SubResource("Resource_v63h8"), SubResource("Resource_trrwn"), SubResource("Resource_ivilt"), SubResource("Resource_6l2n3"), SubResource("Resource_xnikj"), SubResource("Resource_qw5hj"), SubResource("Resource_1im6t"), SubResource("Resource_yyy7h")])

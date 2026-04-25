@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dle3ma7ge5t1o" path="res://prefabs/Map.tscn" id="2_74q1x"]
 [ext_resource type="PackedScene" uid="uid://do06qong074fn" path="res://prefabs/Scoreboard.tscn" id="2_d43p7"]
 [ext_resource type="PackedScene" uid="uid://y4eeluvjf47n" path="res://prefabs/TeamStatus.tscn" id="2_ngxvu"]
-[ext_resource type="Script" uid="uid://dl0x03lnvo0xy" path="res://scripts/GameCamera.gd" id="2_twj6c"]
 [ext_resource type="PackedScene" uid="uid://cg5uegvis8jsw" path="res://prefabs/TurnOrder.tscn" id="2_w36hm"]
 [ext_resource type="PackedScene" uid="uid://dgma3qa7i4xrv" path="res://prefabs/Agent.tscn" id="3_74q1x"]
 [ext_resource type="PackedScene" uid="uid://kcdgbmwfjvyx" path="res://prefabs/HighlightOverlay.tscn" id="4_cw3wy"]
@@ -17,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://c0xqijdur3pcu" path="res://prefabs/BattlePreview.tscn" id="9_1ryu6"]
 [ext_resource type="PackedScene" uid="uid://b7whhr7p0we7h" path="res://prefabs/RoundResult.tscn" id="9_yiupv"]
 [ext_resource type="PackedScene" uid="uid://bj7jqevcv2wem" path="res://prefabs/BuyMenu.tscn" id="10_khead"]
+[ext_resource type="PackedScene" uid="uid://dr8gc35lx0emx" path="res://prefabs/GameCamera.tscn" id="11_seaxr"]
 [ext_resource type="PackedScene" uid="uid://b0rmxjlrftvm0" path="res://prefabs/Pathfinding.tscn" id="18_seaxr"]
 
 [node name="GameRound" type="Node2D"]
@@ -95,9 +95,7 @@ layout_mode = 1
 [node name="Scoreboard" parent="CanvasLayer/Control" instance=ExtResource("2_d43p7")]
 layout_mode = 1
 
-[node name="GameCamera" type="Camera2D" parent="."]
-script = ExtResource("2_twj6c")
-min_zoom = 0.25
+[node name="GameCamera" parent="." instance=ExtResource("11_seaxr")]
 
 [node name="Map" parent="." instance=ExtResource("2_74q1x")]
 

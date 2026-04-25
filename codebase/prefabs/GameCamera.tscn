@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr8gc35lx0emx"]
+
+[ext_resource type="Script" uid="uid://dl0x03lnvo0xy" path="res://scripts/GameCamera.gd" id="1_ane1d"]
+
+[node name="GameCamera" type="Camera2D"]
+script = ExtResource("1_ane1d")
+min_zoom = 0.25

@@ -13,6 +13,7 @@ extends Node2D
 @onready var vision_layer := $VisionLayer as TileMapLayer
 
 var last_visible_tiles = {}
+var map_data: MultiTileMapData
 
 func _ready() -> void:
 	spawn_layer.hide()
@@ -72,8 +73,8 @@ func is_tile_pos_obstructed(tile_pos):
 func load_map_data(parent_node: Node, file_path: String):
 	if not FileAccess.file_exists(file_path):
 		return
-	var multi_data = load(file_path) as MultiTileMapData
-	load_all_layers(parent_node, multi_data)
+	map_data = load(file_path) as MultiTileMapData
+	load_all_layers(parent_node, map_data)
 
 func load_all_layers(parent_node: Node, multi_data: MultiTileMapData) -> void:
 	if not multi_data:

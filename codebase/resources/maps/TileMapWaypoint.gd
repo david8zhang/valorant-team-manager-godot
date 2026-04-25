@@ -3,7 +3,8 @@ extends Resource
 
 enum MapSide {
 	ATTACKER,
-	DEFENDER
+	DEFENDER,
+	NEUTRAL
 }
 
 @export var waypoint_name: String
