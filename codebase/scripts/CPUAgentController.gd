@@ -2,6 +2,7 @@ class_name CPUAgentController
 extends Node2D
 
 @onready var game_round = get_node("/root/GameRound") as GameRound
+
 signal on_complete_turn
 signal on_complete_move
 var selected_agent: Agent

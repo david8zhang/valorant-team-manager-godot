@@ -1,0 +1,5 @@
+class_name SingleAgentActionFactory
+extends Node
+
+func get_actions_for_single_cpu_agent_controller(controller: SingleCPUAgentController):
+	pass

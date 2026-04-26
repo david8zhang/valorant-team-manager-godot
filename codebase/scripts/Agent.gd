@@ -49,6 +49,9 @@ var is_holding := false
 var holding_tiles := []
 var pos_to_watch := Vector2.ZERO
 
+# For CPU-controlled individual agent AI
+var single_agent_controller
+
 signal on_agent_click(agent)
 signal on_update_action_menu()
 signal on_take_damage()
