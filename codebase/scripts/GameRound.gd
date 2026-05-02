@@ -140,6 +140,7 @@ func have_all_agents_completed_turn():
 
 func go_to_next_turn_cycle():
 	scoreboard.decrement_turn()
+	cpu_agent_controller.select_round_strategy()
 	if scoreboard.curr_phase == Scoreboard.Phase.SETUP:
 		# Handle setup phase end
 		if scoreboard.turns_remaining == 0:

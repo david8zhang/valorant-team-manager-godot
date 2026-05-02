@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SplitSiteHold" load_steps=2 format=3 uid="uid://bu2y6rp5j2vjm"]
+
+[ext_resource type="Script" uid="uid://b51t4a00im1wc" path="res://scripts/ai/team_strategy/SplitSiteHold.gd" id="1_7xh5e"]
+
+[resource]
+script = ExtResource("1_7xh5e")
+strategy_type = 4
+strategy_side = 0
+aggression_multiplier = 1.0
+fallback_threshold = 0.3
+metadata/_custom_type_script = "uid://b51t4a00im1wc"

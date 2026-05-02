@@ -44,6 +44,9 @@ var agent_game_stat_mapping = {}
 var credits := 0
 var round_result_record_list = []
 
+# World State used for determining CPU AI decision making
+var cpu_world_state := WorldState.new()
+
 func update_kill_count_for_agent(agent_name):
 	var agent_game_stats = get_or_create_agent_game_stat(agent_name)
 	agent_game_stats.kill_count += 1

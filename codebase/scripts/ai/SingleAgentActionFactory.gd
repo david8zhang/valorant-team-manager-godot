@@ -1,5 +1,7 @@
 class_name SingleAgentActionFactory
 extends Node
 
-func get_actions_for_single_cpu_agent_controller(controller: SingleCPUAgentController):
-	pass
+@export var base_actions: Array[SingleAgentAction] = []
+
+func get_actions_for_agent(agent: Agent):
+	return base_actions

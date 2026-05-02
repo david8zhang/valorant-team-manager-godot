@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cui8rqxwjorad"]
+[gd_scene load_steps=24 format=3 uid="uid://cui8rqxwjorad"]
 
 [ext_resource type="Script" uid="uid://ctv4akl0kybty" path="res://scripts/GameRound.gd" id="1_dq0hy"]
 [ext_resource type="PackedScene" uid="uid://bwxh0x0hbhhs0" path="res://prefabs/Bomb.tscn" id="2_0iflm"]
@@ -17,7 +17,12 @@
 [ext_resource type="PackedScene" uid="uid://b7whhr7p0we7h" path="res://prefabs/RoundResult.tscn" id="9_yiupv"]
 [ext_resource type="PackedScene" uid="uid://bj7jqevcv2wem" path="res://prefabs/BuyMenu.tscn" id="10_khead"]
 [ext_resource type="PackedScene" uid="uid://dr8gc35lx0emx" path="res://prefabs/GameCamera.tscn" id="11_seaxr"]
+[ext_resource type="Script" uid="uid://b2bujlrqa1byp" path="res://scripts/ai/SingleAgentActionFactory.gd" id="18_p04vp"]
 [ext_resource type="PackedScene" uid="uid://b0rmxjlrftvm0" path="res://prefabs/Pathfinding.tscn" id="18_seaxr"]
+[ext_resource type="Script" uid="uid://dvlkro7n6rymw" path="res://scripts/ai/TeamStrategy.gd" id="18_sxs7q"]
+[ext_resource type="Script" uid="uid://c57n8m22r613n" path="res://scripts/ai/SingleAgentAction.gd" id="19_1wo57"]
+[ext_resource type="Resource" uid="uid://bu2y6rp5j2vjm" path="res://resources/ai/team_strategy/SplitSiteHold.tres" id="19_wxsh1"]
+[ext_resource type="Resource" uid="uid://dllyod16a71ao" path="res://resources/ai/single_actions/Move.tres" id="20_5kxgk"]
 
 [node name="GameRound" type="Node2D"]
 script = ExtResource("1_dq0hy")
@@ -133,6 +138,11 @@ name_prefix = "CPU"
 
 [node name="CPUAgentController" type="Node2D" parent="CPUTeam"]
 script = ExtResource("8_twj6c")
+strategy_playbook = Array[ExtResource("18_sxs7q")]([ExtResource("19_wxsh1")])
+
+[node name="SingleAgentActionFactory" type="Node" parent="CPUTeam/CPUAgentController"]
+script = ExtResource("18_p04vp")
+base_actions = Array[ExtResource("19_1wo57")]([ExtResource("20_5kxgk")])
 
 [node name="UtilAbovePlayer" type="Node2D" parent="."]
 

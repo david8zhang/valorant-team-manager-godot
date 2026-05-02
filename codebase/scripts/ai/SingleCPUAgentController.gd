@@ -8,6 +8,7 @@ var cpu_agent_controller: CPUAgentController
 func _init(_agent: Agent, _cpu_agent_controller: CPUAgentController):
 	agent = _agent
 	cpu_agent_controller = _cpu_agent_controller
+	actions = cpu_agent_controller.single_agent_action_factory.get_actions_for_agent(agent)
 
 func start_turn():
 	pass
