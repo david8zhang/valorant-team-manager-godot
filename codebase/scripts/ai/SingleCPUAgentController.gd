@@ -10,14 +10,21 @@ func _init(_agent: Agent, _cpu_agent_controller: CPUAgentController):
 	cpu_agent_controller = _cpu_agent_controller
 	actions = cpu_agent_controller.single_agent_action_factory.get_actions_for_agent(agent)
 
-func start_turn():
-	pass
+func select_and_do_action():
+	print(agent.agent_name + " thinking...")
+	await agent.get_tree().create_timer(1.0).timeout
+	var best_action = _get_best_action()
+	if best_action != null and agent.rem_action_points > 0:
+		best_action.execute(agent, GameRoundVariables.cpu_world_state, select_and_do_action)
+	else:
+		cpu_agent_controller.complete_turn()
 
-func _get_best_action(_world_state) -> SingleAgentAction:
+func _get_best_action() -> SingleAgentAction:
 	var curr_highest_score := -1.0
 	var selected_action = null
 	for action in actions:
-		var util_score = action.get_utility(agent, {})
+		var util_score = action.get_utility(agent, GameRoundVariables.cpu_world_state)
 		if util_score > curr_highest_score:
+			curr_highest_score = util_score
 			selected_action = action
 	return selected_action if curr_highest_score > 0.2 else null

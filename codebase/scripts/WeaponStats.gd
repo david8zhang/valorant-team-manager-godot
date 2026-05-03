@@ -33,6 +33,14 @@ enum WeaponFireRate {
 		VERY_HIGH
 }
 
+enum WeaponRange {
+	CLOSE,
+	MEDIUM_CLOSE,
+	MEDIUM,
+	MEDIUM_LONG,
+	LONG
+}
+
 @export var body_damage := 0
 @export var headshot_damage := 0
 @export var max_ammo := 0
@@ -42,6 +50,7 @@ enum WeaponFireRate {
 @export var weapon_type: WeaponType
 @export var weapon_name: WeaponNames
 @export var weapon_fire_rate: WeaponFireRate
+@export var weapon_range: WeaponRange
 @export var animations: SpriteFrames
 @export var barrel_x_pos := 0
 @export var barrel_y_pos := 0

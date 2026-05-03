@@ -34,3 +34,6 @@ func is_blocked(cell: Vector2) -> bool:
 
 func get_shortest_path(start_tile: Vector2, end_tile: Vector2) -> Array[Vector2i]:
 	return astar_grid.get_id_path(start_tile, end_tile)
+
+func can_find_path(start_tile: Vector2, end_tile: Vector2):
+	return !get_shortest_path(start_tile, end_tile).is_empty()

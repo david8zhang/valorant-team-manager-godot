@@ -71,6 +71,7 @@ func _ready():
 	create_turn_queue(all_agents)
 	toggle_top_view_button.pressed.connect(toggle_top_view)
 	setup_game_round_variables()
+	cpu_agent_controller.select_round_strategy()
 	start_turn_for_next_agent()
 	set_top_view_state(top_view_state)
 
@@ -225,6 +226,7 @@ func get_ap_cost_for_movement(start: Vector2, end: Vector2):
 	var start_tile_pos = map.get_tile_pos_from_world_pos(start)
 	var end_tile_pos = map.get_tile_pos_from_world_pos(end)
 	var path = pathfinding.get_shortest_path(start_tile_pos, end_tile_pos)
+	print(path.size())
 	return max(1, round(path.size() * AP_COST_MOVE_PER_SQUARE))
 	
 func get_ap_cost_for_primary_attack():
