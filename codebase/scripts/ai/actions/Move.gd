@@ -6,9 +6,11 @@ static var DANGER_DIST_THRESHOLD = 10
 
 var move_target: Vector2
 
-func get_utility(agent: Agent, world_state) -> float:
+func get_utility(agent: Agent, world_state: WorldState) -> float:
 	# 1. Fetch all tiles in the moveable range (max 3AP cost)
 	# 2. Calculate score of tile based on
+	#   - If it's in a dangerous area
+	#   - If we're low health and it's in a safe area
 	# 	- Proximity to enemy agents last known positions
 	#   - Proximity to assigned objective
 	var map = agent.game_round.map as Map
@@ -19,14 +21,27 @@ func get_utility(agent: Agent, world_state) -> float:
 	var best_tile: Vector2 = agent_tile_pos
 	for tile in tiles_to_consider:
 		var score = 0.5
-		# Check distance to closest enemy agent
-		var closest_enemy = world_state.get_closest_known_enemy(tile) as Agent
-		if closest_enemy != null:
-			var closest_enemy_pos = map.get_tile_pos_from_world_pos(closest_enemy.global_position)
-			var distance_to_enemy = closest_enemy_pos.distance_to(tile)
-			if distance_to_enemy <= DANGER_DIST_THRESHOLD:
-				var team_strategy = world_state.get_team_strategy()
-				score *= team_strategy.aggression_multiplier
+		var nearest_waypoint = world_state.get_nearest_waypoint(tile, 10)
+		var dist_to_nearest_wp = 0 if nearest_waypoint == null else nearest_waypoint.waypoint_tile_pos.distance_to(tile)
+		var is_low_health = agent.get_curr_health() <= Agent.MAX_HEALTH * 0.2
+
+		# Check if tile is in dangerous area
+		if nearest_waypoint != null and world_state.is_waypoint_dangerous(nearest_waypoint):
+			score -= (1 / dist_to_nearest_wp)
+
+		# If is low health, look for safe tile to retreat to
+		if is_low_health:
+			if nearest_waypoint != null and world_state.is_waypoint_safe(nearest_waypoint):
+				score += (1 / dist_to_nearest_wp)
+		else:
+			# If not low health, make aggressive plays depending on aggression multiplier
+			var closest_enemy = world_state.get_closest_known_enemy(tile) as Agent
+			if closest_enemy != null:
+				var closest_enemy_pos = map.get_tile_pos_from_world_pos(closest_enemy.global_position)
+				var distance_to_enemy = closest_enemy_pos.distance_to(tile)
+				if distance_to_enemy <= DANGER_DIST_THRESHOLD:
+					var team_strategy = world_state.get_team_strategy()
+					score *= team_strategy.aggression_multiplier
 
 		# Check distance to assigned objective
 		if world_state.agent_assignments.has(agent.agent_name):

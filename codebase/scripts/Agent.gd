@@ -107,7 +107,7 @@ func _move_to_next_node_in_path(curr_node_idx, path, on_finished_cb):
 	var on_complete = func _on_complete():
 		if game_round.attack_side == curr_side:
 			acquire_bomb_if_possible(next_node_world_pos)
-		update_visible_tiles()
+		update_tiles_in_view()
 		# Update visible tiles after each tile movement if this is the player's currently selected agent
 		if curr_side == GameRound.Side.PLAYER:
 			map.show_specific_visible_tiles(visible_tiles)
@@ -130,10 +130,10 @@ func drop_bomb():
 	game_round.bomb.global_position = Vector2(global_position.x, global_position.y)
 	game_round.bomb.set_bomb_state(Bomb.BombState.DROPPED)
 
-func update_visible_tiles():
-	visible_tiles = get_visible_tiles()
+func update_tiles_in_view():
+	visible_tiles = get_tiles_in_view()
 
-func get_visible_tiles() -> Array:
+func get_tiles_in_view() -> Array:
 	# If we're holding a specific angle, adjust vision direction accordingly
 	if pos_to_watch != Vector2.ZERO:
 		vision_direction = (pos_to_watch - global_position).normalized()
@@ -165,7 +165,7 @@ func get_visible_tiles() -> Array:
 
 func look_at_position(world_pos_to_look_at: Vector2):
 	vision_direction = (world_pos_to_look_at - global_position).normalized()
-	update_visible_tiles()
+	update_tiles_in_view()
 
 func watch_position(pos: Vector2):
 	# Stop holding previous tiles if we were holding before
@@ -322,7 +322,7 @@ func set_curr_health(amt):
 	health_bar.value = amt
 
 func has_vision_of_agent(other_agent: Agent):
-	update_visible_tiles()
+	update_tiles_in_view()
 	var other_agent_tile_pos = game_round.map.get_tile_pos_from_world_pos(other_agent.global_position)
 	for t in visible_tiles:
 		if t.x == other_agent_tile_pos.x and t.y == other_agent_tile_pos.y:

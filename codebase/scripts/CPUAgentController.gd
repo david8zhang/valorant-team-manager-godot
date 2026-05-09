@@ -22,13 +22,12 @@ func _ready() -> void:
 		else:
 			defense_strategies.append(strategy)
 	GameRoundVariables.cpu_world_state.initialize(self)
-
 	await game_round.ready
 	selected_agent = game_round.cpu_team.agents[0]
 	for a in game_round.cpu_team.agents:
 		var agent = a as Agent
 		agent.vision_direction = Vector2.DOWN
-		agent.update_visible_tiles()
+		agent.update_tiles_in_view()
 
 func select_round_strategy():
 	var playbook_to_use = attack_strategies if game_round.attack_side == GameRound.Side.CPU else defense_strategies

@@ -150,7 +150,7 @@ func complete_turn():
 		game_round.continue_bomb_defuse(selected_agent)
 	elif selected_agent.is_planting:
 		game_round.continue_bomb_plant(selected_agent)
-	selected_agent.update_visible_tiles()
+	selected_agent.update_tiles_in_view()
 	selected_agent.hide_holding_tiles()
 	on_complete_turn.emit()
 	curr_action_state = ActionState.NONE
@@ -197,5 +197,5 @@ func has_vision_on_enemy(curr_agent, target):
 	return visible_tiles.has(enemy_tile_pos)
 
 func show_visible_tiles_for_selected_agent():
-	selected_agent.update_visible_tiles()
+	selected_agent.update_tiles_in_view()
 	game_round.map.show_specific_visible_tiles(selected_agent.visible_tiles)

@@ -58,7 +58,8 @@ func _ready():
 	agent_controller.on_complete_turn.connect(go_to_next_turn)
 	cpu_agent_controller.on_complete_turn.connect(go_to_next_turn)
 	for a in player_team.agents:
-		a.update_visible_tiles()
+		var agent = a as Agent
+		agent.update_tiles_in_view()
 
 	var all_agents = player_team.agents + cpu_team.agents
 	for a in all_agents:
@@ -359,8 +360,9 @@ func incr_score_and_go_to_buy_phase(last_winning_side: GameRound.Side):
 	curr_turn_index = 0
 	scoreboard.reset()
 	for a in player_team.agents:
-		a.update_visible_tiles()
-		a.show()
+		var agent = a as Agent
+		agent.update_tiles_in_view()
+		agent.show()
 	place_bomb()
 	bomb.set_bomb_state(Bomb.BombState.DROPPED)
 	scoreboard.switch_to_phase(Scoreboard.Phase.BUY)
@@ -406,7 +408,8 @@ func handle_smoke_timers():
 			smoke.dissipate()
 	smokes_on_field = smokes_on_field.filter(func (smoke): return smoke.turns_to_live > 0)
 	for a in player_team.agents:
-		a.update_visible_tiles()
+		var agent = a as Agent
+		agent.update_tiles_in_view()
 
 func is_round_underway():
 	var curr_phase = scoreboard.curr_phase
