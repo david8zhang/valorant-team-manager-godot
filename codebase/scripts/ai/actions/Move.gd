@@ -17,18 +17,16 @@ func get_utility(agent: Agent, world_state: WorldState) -> float:
 	var agent_tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
 	var walk_range = min(15, agent.rem_action_points / GameRound.AP_COST_MOVE_PER_SQUARE)
 	var tiles_to_consider = get_tiles_within_radius(agent_tile_pos, walk_range, agent.game_round)
-	var highest_tile_score = 0.5
+	var highest_tile_score = 0
 	var best_tile: Vector2 = agent_tile_pos
 	for tile in tiles_to_consider:
-		var score = 0.5
+		var score = 0.25
 		var nearest_waypoint = world_state.get_nearest_waypoint(tile, 10)
 		var dist_to_nearest_wp = 0 if nearest_waypoint == null else nearest_waypoint.waypoint_tile_pos.distance_to(tile)
 		var is_low_health = agent.get_curr_health() <= Agent.MAX_HEALTH * 0.2
-
 		# Check if tile is in dangerous area
 		if nearest_waypoint != null and world_state.is_waypoint_dangerous(nearest_waypoint):
 			score -= (1 / dist_to_nearest_wp)
-
 		# If is low health, look for safe tile to retreat to
 		if is_low_health:
 			if nearest_waypoint != null and world_state.is_waypoint_safe(nearest_waypoint):
@@ -42,14 +40,16 @@ func get_utility(agent: Agent, world_state: WorldState) -> float:
 				if distance_to_enemy <= DANGER_DIST_THRESHOLD:
 					var team_strategy = world_state.get_team_strategy()
 					score *= team_strategy.aggression_multiplier
-
 		# Check distance to assigned objective
 		if world_state.agent_assignments.has(agent.agent_name):
 			var assigned_pos = world_state.agent_assignments[agent.agent_name] as Vector2
 			var curr_distance = agent_tile_pos.distance_to(assigned_pos)
 			var new_distance = tile.distance_to(assigned_pos)
-			var progress_bonus = (curr_distance - new_distance) / 100.0
+			var progress_bonus = (curr_distance - new_distance) / 75.0
 			score += progress_bonus
+		# Subtract penalty if we're already holding an angle, moving causes us to get off the angle
+		if agent.is_holding:
+			score -= 0.2
 		if score >= highest_tile_score:
 			highest_tile_score = score
 			best_tile = tile
@@ -62,6 +62,7 @@ func execute(agent: Agent, _world_state: WorldState, on_complete: Callable) -> v
 	var agent_tile_pos = game_round.map.get_tile_pos_from_world_pos(agent.global_position)
 	var shortest_path = game_round.pathfinding.get_shortest_path(agent_tile_pos, move_target)
 	ap_cost = round(shortest_path.size() * GameRound.AP_COST_MOVE_PER_SQUARE)	
+	agent.is_holding = false
 	agent.move_to_position(game_round.map.get_world_pos_from_tile_pos(move_target), on_complete)
 	agent.rem_action_points -= ap_cost
 

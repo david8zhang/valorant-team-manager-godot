@@ -19,6 +19,7 @@ enum ActionState {
 }
 
 signal on_complete_turn
+signal on_complete_move
 
 var selected_agent: Agent
 var curr_action_state: ActionState = ActionState.NONE
@@ -139,6 +140,7 @@ func complete_move():
 	action_menu.update_all()
 	show_visible_tiles_for_selected_agent()
 	game_round.update_visible_enemies_to_player()
+	on_complete_move.emit()
 
 func complete_turn():
 	selected_agent.ability_1.deselect()

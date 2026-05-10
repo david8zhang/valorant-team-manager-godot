@@ -28,18 +28,22 @@ func _ready() -> void:
 		var agent = a as Agent
 		agent.vision_direction = Vector2.DOWN
 		agent.update_tiles_in_view()
+	game_round.agent_controller.on_complete_move.connect(GameRoundVariables.cpu_world_state.update_cpu_vision)
 
 func select_round_strategy():
 	var playbook_to_use = attack_strategies if game_round.attack_side == GameRound.Side.CPU else defense_strategies
 	var max_suitability_score := -1.0
+	if team_strategy != null:
+		max_suitability_score = team_strategy.get_suitability(GameRoundVariables.cpu_world_state)	
 	var best_strategy: TeamStrategy
 	for s in playbook_to_use:
 		var strategy = s as TeamStrategy
 		var suitability_score = strategy.get_suitability(GameRoundVariables.cpu_world_state)
 		if suitability_score > max_suitability_score:
 			best_strategy = strategy
-	team_strategy = best_strategy
-	team_strategy.assign_roles(game_round.cpu_team.get_all_living_agents(), GameRoundVariables.cpu_world_state)
+	if best_strategy != null:
+		team_strategy = best_strategy
+		team_strategy.assign_roles(game_round.cpu_team.get_all_living_agents(), GameRoundVariables.cpu_world_state)
 
 func start_turn(agent_to_select: Agent):
 	selected_agent = agent_to_select

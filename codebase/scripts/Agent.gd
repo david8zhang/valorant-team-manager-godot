@@ -137,8 +137,11 @@ func get_tiles_in_view() -> Array:
 	# If we're holding a specific angle, adjust vision direction accordingly
 	if pos_to_watch != Vector2.ZERO:
 		vision_direction = (pos_to_watch - global_position).normalized()
+	return get_tiles_in_view_for_direction(vision_direction)
+
+func get_tiles_in_view_for_direction(direction: Vector2):
 	var px = map.ground_layer.local_to_map(global_position)
-	var forward: Vector2 = vision_direction.rotated(rotation).normalized()
+	var forward: Vector2 = direction.rotated(rotation).normalized()
 	var half_angle_rad = deg_to_rad(vision_angle_degrees / 2.0)
 	var tile_size: Vector2 = map.ground_layer.tile_set.tile_size
 	var max_dist_world = vision_distance * tile_size.x
@@ -200,7 +203,6 @@ func stop_holding():
 	for rect in holding_tiles:
 		rect.queue_free()
 	holding_tiles = []
-
 
 func hide_holding_tiles():
 	for tile in holding_tiles:

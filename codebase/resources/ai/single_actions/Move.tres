@@ -1,8 +1,9 @@
 [gd_resource type="Resource" script_class="Move" load_steps=2 format=3 uid="uid://dllyod16a71ao"]
 
-[ext_resource type="Script" uid="uid://b87d7maqdik0" path="res://scripts/ai/actions/Move.gd" id="1_cy4xh"]
+[ext_resource type="Script" uid="uid://b87d7maqdik0" path="res://scripts/ai/actions/Move.gd" id="1_p2b2g"]
 
 [resource]
-script = ExtResource("1_cy4xh")
+script = ExtResource("1_p2b2g")
 ap_cost = 0
+action_name = "Move"
 metadata/_custom_type_script = "uid://b87d7maqdik0"

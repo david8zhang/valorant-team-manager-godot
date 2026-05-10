@@ -227,7 +227,6 @@ func get_ap_cost_for_movement(start: Vector2, end: Vector2):
 	var start_tile_pos = map.get_tile_pos_from_world_pos(start)
 	var end_tile_pos = map.get_tile_pos_from_world_pos(end)
 	var path = pathfinding.get_shortest_path(start_tile_pos, end_tile_pos)
-	print(path.size())
 	return max(1, round(path.size() * AP_COST_MOVE_PER_SQUARE))
 	
 func get_ap_cost_for_primary_attack():

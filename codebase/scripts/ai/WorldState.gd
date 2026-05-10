@@ -39,6 +39,22 @@ func get_closest_known_enemy(curr_tile_pos: Vector2):
 			closest_enemy_name = k
 	return game_round.get_agent_for_name(closest_enemy_name)
 
+func update_cpu_vision():
+	print("Updating CPU vision...")
+	var cpu_agents = game_round.cpu_team.agents
+	var player_agent_position_map = {}
+	var map = game_round.map
+	for a in game_round.player_team.agents:
+		var agent = a as Agent
+		player_agent_position_map[map.get_tile_pos_from_world_pos(agent.global_position)] = agent
+	for a in cpu_agents:
+		var agent = a as Agent
+		var tiles_in_view = agent.get_tiles_in_view()
+		for tile in tiles_in_view:
+			if tile in player_agent_position_map:
+				var seen_agent = player_agent_position_map[tile] as Agent
+				report_enemy_agent(seen_agent.agent_name, tile)
+
 func update_map_control_view():
 	var map_data = game_round.map.map_data as MultiTileMapData
 	var cpu_agent_positions = get_cpu_agent_tile_positions()
@@ -51,12 +67,15 @@ func update_map_control_view():
 			map_control_view[waypoint.waypoint_name] = WaypointControlData.new()
 		var waypoint_control_data = map_control_view[waypoint.waypoint_name] as WaypointControlData
 		waypoint_control_data.num_cpu_agents = num_cpu_agents
-		# If no info on player positions yet, assume their spawn is controlled by them
+		# If no info on player positions yet, assume attack/defense starting locations are controlled by them accordingly
 		if player_agent_positions.is_empty():
-			var opp_side_prefix = "DEFENDER" if game_round.attack_side == GameRound.Side.CPU else "ATTACKER"
-			if waypoint.waypoint_name.begins_with(opp_side_prefix):
+			var attack_side = game_round.attack_side
+			var opp_side_prefix = "DEFENDER" if attack_side == GameRound.Side.CPU else "ATTACKER"
+			var opp_map_side = TileMapWaypoint.MapSide.DEFENDER if attack_side == GameRound.Side.CPU else TileMapWaypoint.MapSide.ATTACKER
+			if waypoint.waypoint_name.begins_with(opp_side_prefix) or waypoint.map_side == opp_map_side:
 				waypoint_control_data.control_state = MapControlState.PLAYER
-				waypoint_control_data.num_player_agents = 5
+				# Set number of players to a high number since these areas are definitely dangerous
+				waypoint_control_data.num_player_agents = INF
 		else:
 			waypoint_control_data.num_player_agents = num_player_agents
 		# Update waypoint control depending on number of agents nearby
@@ -71,7 +90,8 @@ func update_map_control_view():
 				waypoint_control_data.control_state = MapControlState.CONTESTED
 
 func update_tiles_being_held():
-	var cpu_agents = game_round.cpu_team
+	var cpu_agents = game_round.cpu_team.agents
+	tiles_being_held = []
 	for a in cpu_agents:
 		var agent = a as Agent
 		if agent.is_holding:
@@ -116,6 +136,21 @@ func is_waypoint_safe(waypoint: TileMapWaypoint):
 	var waypoint_control_data = map_control_view[waypoint_name] as WaypointControlData
 	return waypoint_control_data.num_player_agents < waypoint_control_data.num_cpu_agents or tiles_being_held.has(waypoint.waypoint_tile_pos)
 
+func get_dangerous_waypoints():
+	var map_data = game_round.map.map_data as MultiTileMapData
+	var dangerous_wp = map_data.waypoints.filter(func(wp): return is_waypoint_dangerous(wp))
+	return dangerous_wp
+
+func get_all_site_waypoints():
+	var map_data = game_round.map.map_data as MultiTileMapData
+	var is_site_waypoint = func(wp):
+		var waypoint = wp as TileMapWaypoint
+		return waypoint.waypoint_name.begins_with("A_") or waypoint.waypoint_name.begins_with("B_") or waypoint.waypoint_name.begins_with("C_")
+	return map_data.waypoints.filter(is_site_waypoint)
+
+func is_tile_in_proximity(tile_pos: Vector2, target_pos: Vector2, threshold: int):
+	return tile_pos.distance_to(target_pos) <= threshold	
+
 func get_team_strategy():
 	return cpu_agent_controller.team_strategy
 
@@ -132,6 +167,6 @@ func get_site_positions(site: TeamStrategy.Site):
 	var waypoints = game_round.map.map_data.waypoints
 	for wp in waypoints:
 		var waypoint = wp as TileMapWaypoint
-		if waypoint.waypoint_name.begins_with(prefix_matcher):
+		if waypoint.waypoint_name.begins_with(prefix_matcher) and waypoint.map_side == TileMapWaypoint.MapSide.DEFENDER:
 			positions.append(wp)
 	return positions

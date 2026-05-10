@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
 [sub_resource type="Resource" id="Resource_vh3w1"]
 script = ExtResource("2_p2855")
 waypoint_name = "A_WINDOW"
-waypoint_tile_pos = Vector2(106, 31)
+waypoint_tile_pos = Vector2(106, 35)
 map_side = 1
 metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
 
@@ -154,14 +154,14 @@ metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
 script = ExtResource("2_p2855")
 waypoint_name = "MID_MARKET"
 waypoint_tile_pos = Vector2(42, 40)
-map_side = 0
+map_side = 1
 metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
 
 [sub_resource type="Resource" id="Resource_yyy7h"]
 script = ExtResource("2_p2855")
 waypoint_name = "MID_PLAZA"
 waypoint_tile_pos = Vector2(58, 44)
-map_side = 0
+map_side = 1
 metadata/_custom_type_script = "uid://1n6hxhqgvq3s"
 
 [resource]
