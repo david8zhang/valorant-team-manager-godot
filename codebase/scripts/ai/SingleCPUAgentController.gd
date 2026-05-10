@@ -15,7 +15,7 @@ func select_and_do_action():
 	GameRoundVariables.cpu_world_state.update_map_control_view()
 	GameRoundVariables.cpu_world_state.update_cpu_vision()
 	print(agent.agent_name + " thinking...")
-	await agent.get_tree().create_timer(1.0).timeout
+	await agent.get_tree().create_timer(0.5).timeout
 	var best_action = _get_best_action()
 	if best_action != null and agent.rem_action_points > 0:
 		best_action.execute(agent, GameRoundVariables.cpu_world_state, select_and_do_action)
