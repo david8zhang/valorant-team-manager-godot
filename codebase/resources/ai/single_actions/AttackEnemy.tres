@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AttackEnemy" load_steps=2 format=3 uid="uid://clvflni418iqc"]
+
+[ext_resource type="Script" uid="uid://1txm0ud2yelw" path="res://scripts/ai/actions/AttackEnemy.gd" id="1_rfbss"]
+
+[resource]
+script = ExtResource("1_rfbss")
+action_name = ""
+metadata/_custom_type_script = "uid://1txm0ud2yelw"

@@ -40,8 +40,10 @@ func select_round_strategy():
 		var strategy = s as TeamStrategy
 		var suitability_score = strategy.get_suitability(GameRoundVariables.cpu_world_state)
 		if suitability_score > max_suitability_score:
+			max_suitability_score = suitability_score
 			best_strategy = strategy
 	if best_strategy != null:
+		print("Adopting strategy: " + best_strategy.get_strategy_name())
 		team_strategy = best_strategy
 		team_strategy.assign_roles(game_round.cpu_team.get_all_living_agents(), GameRoundVariables.cpu_world_state)
 

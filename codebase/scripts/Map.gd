@@ -93,3 +93,9 @@ func load_all_layers(parent_node: Node, multi_data: MultiTileMapData) -> void:
 					cell["alternative_tile"]
 				)
 	print("All layers loaded successfully.")
+
+func clear_vision_layer():
+	last_visible_tiles = {}
+	var cells = vision_layer.get_used_cells()
+	for coord in cells:
+		vision_layer.set_cell(coord, -1)

@@ -27,7 +27,6 @@ func _get_best_action() -> SingleAgentAction:
 	var selected_action = null
 	for action in actions:
 		var util_score = action.get_utility(agent, GameRoundVariables.cpu_world_state)
-		print("Utility score for " + action.action_name + ": " + str(util_score))
 		if util_score > curr_highest_score:
 			curr_highest_score = util_score
 			selected_action = action

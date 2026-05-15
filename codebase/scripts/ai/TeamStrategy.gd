@@ -32,3 +32,6 @@ func get_suitability(_state: WorldState) -> float:
 
 func assign_roles(_agents: Array, _state: WorldState) -> void:
 	return
+
+func get_strategy_name():
+	return ""

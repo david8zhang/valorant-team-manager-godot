@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Retake" load_steps=2 format=3 uid="uid://bxf8krjelx2ob"]
+
+[ext_resource type="Script" uid="uid://ddi5d36lxdyor" path="res://scripts/ai/team_strategy/Retake.gd" id="1_6rte6"]
+
+[resource]
+script = ExtResource("1_6rte6")
+strategy_type = 3
+strategy_side = 0
+aggression_multiplier = 1.5
+fallback_threshold = 0.3
+metadata/_custom_type_script = "uid://ddi5d36lxdyor"

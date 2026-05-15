@@ -378,6 +378,8 @@ func setup_player_buy_menu(last_winning_side: GameRound.Side):
 
 func on_buy_finished():
 	is_round_over = false
+	toggle_top_view_button.show()
+	map.clear_vision_layer()
 	player_team.reset_agents()
 	cpu_team.reset_agents()
 	map.temp_barrier_layer.show()
@@ -437,3 +439,18 @@ func get_enemy_holding_agent(agent: Agent, world_pos: Vector2):
 			if ht_tile_pos.x == tile_pos.x and ht_tile_pos.y == tile_pos.y:
 				return enemy_agent
 	return null
+
+func get_agent_positions_map(side: GameRound.Side):
+	var agents = player_team.agents if side == GameRound.Side.PLAYER else cpu_team.agent
+	var positions_map = {}
+	for a in agents:
+		var agent = a as Agent
+		var tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
+		var serialized_tile_pos_key = serialize_tile_pos_key(tile_pos)
+		positions_map[serialized_tile_pos_key] = agent
+	return positions_map
+
+static func serialize_tile_pos_key(tile_pos: Vector2):
+	var x_pos = int(tile_pos.x)
+	var y_pos = int(tile_pos.y)
+	return str(x_pos) + "," + str(y_pos)

@@ -57,7 +57,6 @@ func get_utility(agent: Agent, world_state: WorldState) -> float:
 	return highest_tile_score
 
 func execute(agent: Agent, _world_state: WorldState, on_complete: Callable) -> void:
-	print("Moving to tile: " + str(move_target))
 	var game_round = agent.game_round as GameRound
 	var agent_tile_pos = game_round.map.get_tile_pos_from_world_pos(agent.global_position)
 	var shortest_path = game_round.pathfinding.get_shortest_path(agent_tile_pos, move_target)

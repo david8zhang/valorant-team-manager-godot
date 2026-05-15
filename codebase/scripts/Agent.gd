@@ -331,6 +331,18 @@ func has_vision_of_agent(other_agent: Agent):
 			return true
 	return false
 
+func get_enemies_in_view():
+	update_tiles_in_view()
+	var opp_side = GameRound.Side.PLAYER if curr_side == GameRound.Side.CPU else GameRound.Side.CPU
+	var enemy_agent_position_map = game_round.get_agent_positions_map(opp_side)
+	var tiles_in_view = get_tiles_in_view()
+	var agents_in_view := []
+	for tile in tiles_in_view:
+		var serialized_tile_pos_key = GameRound.serialize_tile_pos_key(tile)
+		if serialized_tile_pos_key in enemy_agent_position_map:
+			agents_in_view.append(enemy_agent_position_map[serialized_tile_pos_key])
+	return agents_in_view
+
 func hide_in_fog_of_war():
 	var shader = sprite.material as ShaderMaterial
 	shader.set_shader_parameter("solid_color", Color("#555555"))
@@ -372,3 +384,6 @@ func reset():
 	sprite.play("idle")
 	var outline_color = GameRoundVariables.PLAYER_OUTLINE_COLOR if curr_side == GameRound.Side.PLAYER else GameRoundVariables.CPU_OUTLINE_COLOR
 	set_outline(outline_color)
+	var agent_game_stats = GameRoundVariables.get_or_create_agent_game_stat(agent_name)
+	primary_weapon = GameRoundVariables.load_weapon_from_name(agent_game_stats.primary_weapon_name, game_round)
+	sidearm_weapon = GameRoundVariables.load_weapon_from_name(agent_game_stats.sidearm_weapon_name, game_round)

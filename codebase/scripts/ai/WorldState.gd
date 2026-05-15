@@ -14,7 +14,7 @@ class WaypointControlData:
 	var num_player_agents := -1
 	var num_cpu_agents := 0
 
-var last_known_player_agent_pos_map := {}
+var last_known_enemy_pos_map := {}
 var agent_assignments := {}
 var game_round: GameRound
 var cpu_agent_controller: CPUAgentController
@@ -26,13 +26,13 @@ func initialize(_cpu_agent_controller: CPUAgentController):
 	game_round = cpu_agent_controller.game_round
 
 func report_enemy_agent(agent_name: String, tile_pos: Vector2):
-	last_known_player_agent_pos_map[agent_name] = tile_pos
+	last_known_enemy_pos_map[agent_name] = tile_pos
 
 func get_closest_known_enemy(curr_tile_pos: Vector2):
 	var min_dist = INF
 	var closest_enemy_name := ""
-	for k in last_known_player_agent_pos_map.keys():
-		var position = last_known_player_agent_pos_map[k] as Vector2
+	for k in last_known_enemy_pos_map.keys():
+		var position = last_known_enemy_pos_map[k] as Vector2
 		var distance = position.distance_to(curr_tile_pos)
 		if distance <= min_dist:
 			distance = min_dist
@@ -40,7 +40,6 @@ func get_closest_known_enemy(curr_tile_pos: Vector2):
 	return game_round.get_agent_for_name(closest_enemy_name)
 
 func update_cpu_vision():
-	print("Updating CPU vision...")
 	var cpu_agents = game_round.cpu_team.agents
 	var player_agent_position_map = {}
 	var map = game_round.map
@@ -58,7 +57,7 @@ func update_cpu_vision():
 func update_map_control_view():
 	var map_data = game_round.map.map_data as MultiTileMapData
 	var cpu_agent_positions = get_cpu_agent_tile_positions()
-	var player_agent_positions = last_known_player_agent_pos_map.values()
+	var player_agent_positions = last_known_enemy_pos_map.values()
 	for wp in map_data.waypoints:
 		var waypoint = wp as TileMapWaypoint
 		var num_cpu_agents = get_num_agents_in_proximity(waypoint.waypoint_tile_pos, cpu_agent_positions, 10)
@@ -110,7 +109,7 @@ func get_num_agents_in_proximity(waypoint_center_tile_pos: Vector2, agent_tile_p
 			count += 1
 	return count
 
-func get_nearest_waypoint(tile_pos: Vector2, dist_threshold: int):
+func get_nearest_waypoint(tile_pos: Vector2, dist_threshold: int) -> TileMapWaypoint:
 	var map_data = game_round.map.map_data as MultiTileMapData
 	var nearest_waypoint: TileMapWaypoint = null
 	var closest_dist := dist_threshold

@@ -2,8 +2,7 @@ class_name SplitSiteHold
 extends TeamStrategy
 
 func get_suitability(_state: WorldState) -> float:
-	print("Getting suitability for Split Site Hold")
-	return 0.0
+	return 0.25
 
 func assign_roles(agents: Array, state: WorldState) -> void:
 	var a_site_locations = state.get_site_positions(TeamStrategy.Site.A)
@@ -21,3 +20,6 @@ func assign_roles(agents: Array, state: WorldState) -> void:
 			var rand_b_site_pos = b_site_locations.pop_front() as TileMapWaypoint
 			assert(rand_b_site_pos != null, "No B site positions to assign!")
 			state.agent_assignments[agent.agent_name] = rand_b_site_pos.waypoint_tile_pos
+
+func get_strategy_name():
+	return "Split Site Hold"

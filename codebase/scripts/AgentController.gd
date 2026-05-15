@@ -132,6 +132,7 @@ func start_turn(agent_to_select: Agent):
 	agent_to_select.rem_action_points = Agent.TOTAL_ACTION_POINTS
 	select_agent(agent_to_select)
 	game_round.update_visible_enemies_to_player()
+	show_visible_tiles_for_selected_agent()
 	selected_agent.show_holding_tiles()
 
 func complete_move():
@@ -161,7 +162,7 @@ func complete_turn():
 
 func select_agent(agent: Agent):
 	selected_agent = agent
-	# center_camera_on_agent(agent)
+	center_camera_on_agent(agent)
 	action_menu.update_all()
 	action_menu.show()
 	show_visible_tiles_for_selected_agent()
