@@ -51,6 +51,5 @@ func execute(agent: Agent, _world_state: WorldState, on_complete: Callable) -> v
 	var target_tile_pos_to_watch = angle_to_hold + Vector2(map.get_tile_pos_from_world_pos(agent.global_position))
 	var target_world_pos = map.get_world_pos_from_tile_pos(target_tile_pos_to_watch)
 	agent.look_at_position(target_world_pos)
-	agent.is_holding = true
 	agent.pos_to_watch = target_world_pos
 	on_complete.call()

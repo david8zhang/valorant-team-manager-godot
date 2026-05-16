@@ -132,8 +132,6 @@ func start_turn(agent_to_select: Agent):
 	agent_to_select.rem_action_points = Agent.TOTAL_ACTION_POINTS
 	select_agent(agent_to_select)
 	game_round.update_visible_enemies_to_player()
-	show_visible_tiles_for_selected_agent()
-	selected_agent.show_holding_tiles()
 
 func complete_move():
 	action_menu.can_go_to_next_turn = true
@@ -154,7 +152,6 @@ func complete_turn():
 	elif selected_agent.is_planting:
 		game_round.continue_bomb_plant(selected_agent)
 	selected_agent.update_tiles_in_view()
-	selected_agent.hide_holding_tiles()
 	on_complete_turn.emit()
 	curr_action_state = ActionState.NONE
 	highlight_overlay.hide()

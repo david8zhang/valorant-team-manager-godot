@@ -41,17 +41,14 @@ func get_closest_known_enemy(curr_tile_pos: Vector2):
 
 func update_cpu_vision():
 	var cpu_agents = game_round.cpu_team.agents
-	var player_agent_position_map = {}
-	var map = game_round.map
-	for a in game_round.player_team.agents:
-		var agent = a as Agent
-		player_agent_position_map[map.get_tile_pos_from_world_pos(agent.global_position)] = agent
+	var player_agent_position_map = game_round.get_agent_positions_map(GameRound.Side.PLAYER)
 	for a in cpu_agents:
 		var agent = a as Agent
 		var tiles_in_view = agent.get_tiles_in_view()
 		for tile in tiles_in_view:
-			if tile in player_agent_position_map:
-				var seen_agent = player_agent_position_map[tile] as Agent
+			var serialized_tile_key = GameRound.serialize_tile_pos_key(tile)
+			if serialized_tile_key in player_agent_position_map:
+				var seen_agent = player_agent_position_map[serialized_tile_key] as Agent
 				report_enemy_agent(seen_agent.agent_name, tile)
 
 func update_map_control_view():
@@ -87,15 +84,6 @@ func update_map_control_view():
 				waypoint_control_data.control_state = MapControlState.NEUTRAL
 			else:
 				waypoint_control_data.control_state = MapControlState.CONTESTED
-
-func update_tiles_being_held():
-	var cpu_agents = game_round.cpu_team.agents
-	tiles_being_held = []
-	for a in cpu_agents:
-		var agent = a as Agent
-		if agent.is_holding:
-			var tiles = agent.get_tiles_in_view()
-			tiles_being_held.append_array(tiles)
 
 func get_cpu_agent_tile_positions():
 	var map = game_round.map

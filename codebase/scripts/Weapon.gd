@@ -48,15 +48,15 @@ func fire_shots(weapon_sprite: AnimatedSprite2D, selected_agent: Agent, enemy_to
 	elif selected_agent.curr_side == GameRound.Side.PLAYER:
 		game_round.update_visible_enemies_to_specific_agent(selected_agent)
 	if shots_rem == 0:
-		# Random chance after last shot that the target will manage to find and look at attacker
-		var will_look_at_enemy = randi_range(0, 1) == 0
-		if will_look_at_enemy:
-			enemy_to_attack.look_at_position(selected_agent.global_position)
 		cb.call()
 		return
 	shots_rem -= 1
 	weapon_sprite.play("firing")
 	handle_enemy_damage(weapon_sprite, selected_agent, enemy_to_attack)
+	# Random chance after each shot that the target will manage to find and look at attacker
+	var will_look_at_enemy = randi_range(0, 1) == 0
+	if will_look_at_enemy:
+		enemy_to_attack.look_at_position(selected_agent.global_position)	
 	if !enemy_to_attack.is_dead():
 		weapon_sprite.animation_finished.connect(fire_shots.bind(weapon_sprite, selected_agent, enemy_to_attack, cb), CONNECT_ONE_SHOT)
 	else:

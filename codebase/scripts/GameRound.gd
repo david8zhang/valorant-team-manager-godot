@@ -429,17 +429,6 @@ func add_util_above_player(util: Node):
 func add_util_below_player(util: Node):
 	util_below_player.add_child(util)
 
-func get_enemy_holding_agent(agent: Agent, world_pos: Vector2):
-	var tile_pos = map.get_tile_pos_from_world_pos(world_pos)
-	var enemy_agents = cpu_team.get_all_living_agents() if agent.curr_side == Side.PLAYER else player_team.get_all_living_agents()
-	for a in enemy_agents:
-		var enemy_agent = a as Agent
-		for ht in enemy_agent.holding_tiles:
-			var ht_tile_pos = map.get_tile_pos_from_world_pos(ht.global_position)
-			if ht_tile_pos.x == tile_pos.x and ht_tile_pos.y == tile_pos.y:
-				return enemy_agent
-	return null
-
 func get_agent_positions_map(side: GameRound.Side):
 	var agents = player_team.agents if side == GameRound.Side.PLAYER else cpu_team.agent
 	var positions_map = {}

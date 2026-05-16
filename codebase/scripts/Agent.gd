@@ -45,7 +45,6 @@ var ability_2: Ability
 var confidence_level # Dictates turn queue ordering (higher is better)
 var is_defusing := false
 var is_planting := false
-var is_holding := false
 var holding_tiles := []
 var pos_to_watch := Vector2.ZERO
 
@@ -80,7 +79,6 @@ func agent_click():
 
 func move_to_position(new_world_pos: Vector2, callback: Callable):
 	# Stop holding the angle when in movement
-	stop_holding()
 	var prev_world_pos = Vector2(global_position.x, global_position.y)
 	var curr_tile_pos = map.get_tile_pos_from_world_pos(prev_world_pos)
 	var new_tile_pos = map.get_tile_pos_from_world_pos(new_world_pos)
@@ -112,13 +110,7 @@ func _move_to_next_node_in_path(curr_node_idx, path, on_finished_cb):
 		if curr_side == GameRound.Side.PLAYER:
 			map.show_specific_visible_tiles(visible_tiles)
 			game_round.update_visible_enemies_to_player()
-		# Handle if agent wandered into vision cone of enemy holding an angle
-		var enemy_hold_agent = game_round.get_enemy_holding_agent(self, next_node_world_pos) as Agent
-		if enemy_hold_agent != null:
-			# Stop moving in path
-			enemy_hold_agent.attack_enemy_agent(self, true, on_finished_cb)
-		else:
-			_move_to_next_node_in_path(curr_node_idx + 1, path, on_finished_cb)
+		_move_to_next_node_in_path(curr_node_idx + 1, path, on_finished_cb)
 	tween.finished.connect(on_complete)
 
 func acquire_bomb_if_possible(new_pos: Vector2):
@@ -132,6 +124,8 @@ func drop_bomb():
 
 func update_tiles_in_view():
 	visible_tiles = get_tiles_in_view()
+	if curr_side == GameRound.Side.CPU:
+		GameRoundVariables.cpu_world_state.update_cpu_vision()	
 
 func get_tiles_in_view() -> Array:
 	# If we're holding a specific angle, adjust vision direction accordingly
@@ -172,45 +166,13 @@ func look_at_position(world_pos_to_look_at: Vector2):
 
 func watch_position(pos: Vector2):
 	# Stop holding previous tiles if we were holding before
-	stop_holding()
 	pos_to_watch = pos
 	look_at_position(pos_to_watch)
 	map.show_specific_visible_tiles(visible_tiles)
 	game_round.update_visible_enemies_to_player()
-	# Hold the angle, meaning any enemies that walk into vision cone will be automatically attacked
-	hold_visible_tiles()
 
 func stop_watching_position():
-	stop_holding()
 	pos_to_watch = Vector2.ZERO
-
-func hold_visible_tiles():
-	is_holding = true
-	for tile in visible_tiles:
-		var color_rect = ColorRect.new()
-		var tile_size = map.ground_layer.tile_set.tile_size
-		color_rect.custom_minimum_size.x = tile_size.x
-		color_rect.custom_minimum_size.y = tile_size.y
-		color_rect.color = Color.RED
-		color_rect.color.a = 0.2
-		game_round.add_util_below_player(color_rect)
-		var tile_world_pos =  map.get_world_pos_from_tile_pos(tile)
-		color_rect.global_position = Vector2(tile_world_pos.x - tile_size.x / 2, tile_world_pos.y - tile_size.y / 2)
-		holding_tiles.append(color_rect)
-
-func stop_holding():
-	is_holding = false
-	for rect in holding_tiles:
-		rect.queue_free()
-	holding_tiles = []
-
-func hide_holding_tiles():
-	for tile in holding_tiles:
-		tile.hide()
-
-func show_holding_tiles():
-	for tile in holding_tiles:
-		tile.show()
 
 func is_tile_blocked(start: Vector2i, target: Vector2i) -> bool:
 	var points := bresenham_line(start.x, start.y, target.x, target.y)
@@ -377,7 +339,6 @@ func reset():
 	is_planting = false
 	is_defusing = false
 	pos_to_watch = Vector2.ZERO
-	stop_holding()
 	did_defuse_this_round = false
 	did_plant_this_round = false
 	kills_this_round = 0
