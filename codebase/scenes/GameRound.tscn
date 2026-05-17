@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cui8rqxwjorad"]
+[gd_scene load_steps=28 format=3 uid="uid://cui8rqxwjorad"]
 
 [ext_resource type="Script" uid="uid://ctv4akl0kybty" path="res://scripts/GameRound.gd" id="1_dq0hy"]
 [ext_resource type="PackedScene" uid="uid://bwxh0x0hbhhs0" path="res://prefabs/Bomb.tscn" id="2_0iflm"]
@@ -25,6 +25,7 @@
 [ext_resource type="Resource" uid="uid://dllyod16a71ao" path="res://resources/ai/single_actions/Move.tres" id="20_5kxgk"]
 [ext_resource type="Script" uid="uid://ddi5d36lxdyor" path="res://scripts/ai/team_strategy/Retake.gd" id="20_nl24k"]
 [ext_resource type="Resource" uid="uid://clvflni418iqc" path="res://resources/ai/single_actions/AttackEnemy.tres" id="23_wxsh1"]
+[ext_resource type="Resource" uid="uid://b3ke5rhm5cxyy" path="res://resources/ai/single_actions/WatchAngle.tres" id="25_k762y"]
 
 [sub_resource type="Resource" id="Resource_k762y"]
 script = ExtResource("20_nl24k")
@@ -152,7 +153,7 @@ strategy_playbook = Array[ExtResource("18_sxs7q")]([ExtResource("19_wxsh1"), Sub
 
 [node name="SingleAgentActionFactory" type="Node" parent="CPUTeam/CPUAgentController"]
 script = ExtResource("18_p04vp")
-base_actions = Array[ExtResource("19_1wo57")]([ExtResource("20_5kxgk"), ExtResource("23_wxsh1")])
+base_actions = Array[ExtResource("19_1wo57")]([ExtResource("20_5kxgk"), ExtResource("23_wxsh1"), ExtResource("25_k762y")])
 
 [node name="UtilAbovePlayer" type="Node2D" parent="."]
 

@@ -6,9 +6,12 @@ var enemy_to_attack: Agent
 func get_utility(agent: Agent, _world_state: WorldState) -> float:
 	var enemy_agents_in_view = agent.get_enemies_in_view()
 	var max_score := 0.0
+	enemy_to_attack = null
 	for e in enemy_agents_in_view:
 		var base_score = 0.25
 		var enemy = e as Agent
+		if enemy.is_dead():
+			continue
 		# Add bonus to fight utility score if:
 		# 1. Enemy agent health is lower than ours
 		if enemy.get_curr_health() < agent.get_curr_health():
@@ -25,8 +28,9 @@ func get_utility(agent: Agent, _world_state: WorldState) -> float:
 		if ally_has_sight(agent, enemy):
 			base_score += 0.2
 		if base_score > max_score:
-			base_score = max_score
+			max_score = base_score
 			enemy_to_attack = enemy
+	ap_cost = 1
 	return max_score
 
 func ally_has_sight(agent: Agent, enemy: Agent):
@@ -40,6 +44,6 @@ func ally_has_sight(agent: Agent, enemy: Agent):
 
 func execute(agent: Agent, _world_state: WorldState, on_complete: Callable) -> void:
 	if enemy_to_attack != null:
-		print(agent.agent_name + " attacking " + enemy_to_attack.agent_name)
+		print("[" + agent.agent_name + "]" + " attacking " + enemy_to_attack.agent_name)
 		var should_retaliate = enemy_to_attack.has_vision_of_agent(agent)
 		agent.attack_enemy_agent(enemy_to_attack, should_retaliate, on_complete)

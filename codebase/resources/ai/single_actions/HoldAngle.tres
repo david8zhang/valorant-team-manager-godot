@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="HoldAngle" load_steps=2 format=3 uid="uid://bhgx1qcoc45fb"]
-
-[ext_resource type="Script" uid="uid://cgso1kqwa3qvx" path="res://scripts/ai/actions/HoldAngle.gd" id="1_01vof"]
-
-[resource]
-script = ExtResource("1_01vof")
-ap_cost = 0
-action_name = "HoldAngle"
-metadata/_custom_type_script = "uid://cgso1kqwa3qvx"

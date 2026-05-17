@@ -9,7 +9,6 @@ func get_suitability(state: WorldState) -> float:
 		TeamStrategy.Site.C: 0
 	}
 	var last_known_enemy_positions = state.last_known_enemy_pos_map
-	print(last_known_enemy_positions)
 	for pos in last_known_enemy_positions.values():
 		var nearest_waypoint = state.get_nearest_waypoint(pos, 10) as TileMapWaypoint
 		if nearest_waypoint != null:

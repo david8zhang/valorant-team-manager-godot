@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_rfbss")
-action_name = ""
+action_name = "Attack Enemy"
 metadata/_custom_type_script = "uid://1txm0ud2yelw"

@@ -28,6 +28,11 @@ func get_utility(agent: Agent, world_state: WorldState) -> float:
 			highest_tile_score = score
 			best_tile = tile
 	if best_tile != Vector2.ZERO:
+		var cost = agent.game_round.get_ap_cost_for_movement_tiles(agent_tile_pos, best_tile)
+		print("[" + agent.agent_name + "]" + " Cost to move: " + str(cost))
+		print("[" + agent.agent_name + "]" + " Rem AP:" + str(agent.rem_action_points))
+		if cost > agent.rem_action_points:
+			return -1.0
 		move_target = best_tile
 		return highest_tile_score
 	else:
@@ -66,13 +71,9 @@ func score_tile(agent: Agent, tile: Vector2, world_state: WorldState):
 	return score
 
 func execute(agent: Agent, _world_state: WorldState, on_complete: Callable) -> void:
-	print(agent.agent_name + " moving to " + str(move_target))
+	print("[" + agent.agent_name + "]" + " Moving to " + str(move_target))
 	var game_round = agent.game_round as GameRound
-	var agent_tile_pos = game_round.map.get_tile_pos_from_world_pos(agent.global_position)
-	var shortest_path = game_round.pathfinding.get_shortest_path(agent_tile_pos, move_target)
-	ap_cost = round(shortest_path.size() * GameRound.AP_COST_MOVE_PER_SQUARE)	
 	agent.move_to_position(game_round.map.get_world_pos_from_tile_pos(move_target), on_complete)
-	agent.rem_action_points -= ap_cost
 
 func get_tiles_within_radius(center_pos: Vector2, radius: int, game_round: GameRound) -> Array[Vector2i]:
 	var map = game_round.map as Map

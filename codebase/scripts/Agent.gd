@@ -164,6 +164,10 @@ func look_at_position(world_pos_to_look_at: Vector2):
 	vision_direction = (world_pos_to_look_at - global_position).normalized()
 	update_tiles_in_view()
 
+func set_vision_direction(new_direction: Vector2):
+	vision_direction = new_direction
+	update_tiles_in_view()
+
 func watch_position(pos: Vector2):
 	# Stop holding previous tiles if we were holding before
 	pos_to_watch = pos
