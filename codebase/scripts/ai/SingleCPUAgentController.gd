@@ -22,6 +22,8 @@ func select_and_do_action():
 		cpu_agent_controller.complete_turn()
 
 func _get_best_action() -> SingleAgentAction:
+	if agent.is_dead():
+		return null
 	var curr_highest_score := -1.0
 	var selected_action = null
 	for action in actions:

@@ -91,7 +91,7 @@ func handle_new_action_state(new_action_state):
 	curr_action_state = new_action_state
 
 func _process(_delta):
-	if game_round.curr_turn_side == GameRound.Side.PLAYER and !is_hovering_action_menu and game_round.is_round_underway():
+	if !game_round.debug_menu.visible and game_round.curr_turn_side == GameRound.Side.PLAYER and !is_hovering_action_menu and game_round.is_round_underway():
 		var is_defusing_or_planting = selected_agent.is_defusing or selected_agent.is_planting
 		match curr_action_state:
 			ActionState.MOVE:

@@ -122,7 +122,9 @@ func acquire_bomb_if_possible(new_pos: Vector2):
 		has_bomb = true
 
 func drop_bomb():
-	game_round.bomb.global_position = Vector2(global_position.x, global_position.y)
+	var curr_tile_pos = game_round.map.get_tile_pos_from_world_pos(global_position)
+	var curr_world_pos = game_round.map.get_world_pos_from_tile_pos(curr_tile_pos)
+	game_round.bomb.global_position = Vector2(curr_world_pos.x, curr_world_pos.y)
 	game_round.bomb.set_bomb_state(Bomb.BombState.DROPPED)
 
 func update_tiles_in_view():
@@ -268,7 +270,7 @@ func die():
 			hide()
 			# Clear all animation finished connections (so we don't get duplicate callback invocations)
 			for conn in sprite.animation_finished.get_connections():
-					sprite.animation_finished.disconnect(conn.callable)
+				sprite.animation_finished.disconnect(conn.callable)
 		var tween = create_tween()
 		tween.tween_property(sprite, "modulate:a", 0, 0.5)
 		tween.finished.connect(on_fade)

@@ -219,7 +219,7 @@ func is_position_occupied(tile_pos: Vector2):
 	for agent in all_agents:
 		# Get agent position in tilemap coordinates
 		var curr_agent_pos = map.get_tile_pos_from_world_pos(agent.global_position)
-		if curr_agent_pos.x == tile_pos.x and curr_agent_pos.y == tile_pos.y:
+		if !agent.is_dead() and curr_agent_pos.x == tile_pos.x and curr_agent_pos.y == tile_pos.y:
 			return true
 	return false
 
@@ -460,3 +460,6 @@ static func is_position_within_tiles(tiles_to_check: Array, tile_pos: Vector2):
 		if tile_pos_v2i == tile_v2i:
 			return true
 	return false
+
+func get_current_phase():
+	return scoreboard.curr_phase

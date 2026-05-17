@@ -32,8 +32,6 @@ func _ready() -> void:
 func select_round_strategy():
 	var playbook_to_use = attack_strategies if game_round.attack_side == GameRound.Side.CPU else defense_strategies
 	var max_suitability_score := -1.0
-	if team_strategy != null:
-		max_suitability_score = team_strategy.get_suitability(GameRoundVariables.cpu_world_state)	
 	var best_strategy: TeamStrategy
 	for s in playbook_to_use:
 		var strategy = s as TeamStrategy
@@ -41,6 +39,11 @@ func select_round_strategy():
 		if suitability_score > max_suitability_score:
 			max_suitability_score = suitability_score
 			best_strategy = strategy
+		if suitability_score == max_suitability_score:
+			# If we find a strategy that's as good, randomly select it or not
+			var should_replace = randi_range(0, 1) == 0
+			if should_replace:
+				best_strategy = strategy
 	if best_strategy != null:
 		print("Adopting strategy: " + best_strategy.get_strategy_name())
 		team_strategy = best_strategy

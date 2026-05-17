@@ -36,7 +36,7 @@ func score_angle_direction(agent: Agent, direction: Vector2) -> float:
 		var serialized_tile_key = GameRound.serialize_tile_pos_key(tile)
 		# If this angle detects enemies, it's a good angle to look towards
 		if serialized_tile_key in enemy_agent_position_map:
-			base_score += 0.25
+			base_score += 0.3
 	# Angles that reveal more area also are better
 	base_score += tiles.size() * 0.001
 	return base_score

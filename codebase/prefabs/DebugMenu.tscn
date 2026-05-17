@@ -32,6 +32,7 @@ offset_right = 77.0
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 
 [node name="ShowAllAgents" type="Button" parent="VBoxContainer"]
 layout_mode = 2

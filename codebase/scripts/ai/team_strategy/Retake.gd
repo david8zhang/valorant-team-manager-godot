@@ -31,10 +31,12 @@ func get_suitability(state: WorldState) -> float:
 	return 0.0
 
 func assign_roles(agents: Array, state: WorldState) -> void:
+	print("Assigning roles for retake")
 	# Assign an agent to each enemy in a round-robin fashion
 	var last_known_enemy_positions = state.last_known_enemy_pos_map
 	var i = 0
-	for pos in last_known_enemy_positions.values():
+	for agent_name in last_known_enemy_positions.keys():
+		var pos = last_known_enemy_positions[agent_name]
 		var agent = agents[i] as Agent
 		state.agent_assignments[agent.agent_name] = pos
 		i = (i + 1) % agents.size()

@@ -27,6 +27,9 @@ func get_utility(agent: Agent, _world_state: WorldState) -> float:
 		# 4. Ally has enemy in their sight also
 		if ally_has_sight(agent, enemy):
 			base_score += 0.2
+		# 5. Enemy is currently planting or defusing
+		if enemy.is_planting or enemy.is_defusing:
+			base_score += 0.3
 		if base_score > max_score:
 			max_score = base_score
 			enemy_to_attack = enemy
