@@ -65,7 +65,9 @@ func set_button_highlight_from_state(curr_action_state: AgentController.ActionSt
 		AgentController.ActionState.DEFUSE, AgentController.ActionState.PLANT:
 			highlight_single_button(bomb_button)
 		AgentController.ActionState.PRIMARY_ATTACK:
-			highlight_single_button(primary_weapon)
+			var selected_agent = agent_controller.selected_agent
+			if selected_agent != null and selected_agent.primary_weapon != null:
+				highlight_single_button(primary_weapon)
 		AgentController.ActionState.SECONDARY_ATTACK:
 			highlight_single_button(sidearm_weapon)
 		AgentController.ActionState.ABILITY_ONE:
@@ -127,8 +129,9 @@ func update_weapon_info():
 func update_defuse_status():
 	var selected_agent = agent_controller.selected_agent as Agent
 	if game_round.attack_side != selected_agent.curr_side:
-		var is_at_bomb_pos = selected_agent.global_position == game_round.bomb.global_position
-		if is_at_bomb_pos:
+		# Within range of bomb
+		var agent_tile_pos = game_round.map.get_tile_pos_from_world_pos(selected_agent.global_position)
+		if game_round.is_within_bomb_defusal_range(agent_tile_pos):
 			defuse_button.show()
 		else:
 			defuse_button.hide()

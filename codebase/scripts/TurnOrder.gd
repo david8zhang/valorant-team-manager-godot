@@ -26,3 +26,6 @@ func update_turn_order_list(agents_list, next_agent):
 			turn_order_card.highlight_curr_card()
 		else:
 			turn_order_card.dehighlight_curr_card()
+
+func reset_turn_order():
+	pass

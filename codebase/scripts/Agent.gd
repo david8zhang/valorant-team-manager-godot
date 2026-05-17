@@ -56,6 +56,7 @@ signal on_update_action_menu()
 signal on_take_damage()
 signal on_death()
 signal on_kill()
+signal on_path_node_move()
 
 func _ready() -> void:
 	reload_shader()
@@ -110,6 +111,8 @@ func _move_to_next_node_in_path(curr_node_idx, path, on_finished_cb):
 		if curr_side == GameRound.Side.PLAYER:
 			map.show_specific_visible_tiles(visible_tiles)
 			game_round.update_visible_enemies_to_player()
+		# Emit custom signal for any logic that gets run whenever agent moves
+		on_path_node_move.emit()			
 		_move_to_next_node_in_path(curr_node_idx + 1, path, on_finished_cb)
 	tween.finished.connect(on_complete)
 

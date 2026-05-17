@@ -6,7 +6,6 @@ extends Node2D
 @export var strategy_playbook: Array[TeamStrategy] = []
 
 signal on_complete_turn
-signal on_complete_move
 var selected_agent: Agent
 var cached_top_view_state
 var team_strategy: TeamStrategy

@@ -447,3 +447,16 @@ static func serialize_tile_pos_key(tile_pos: Vector2):
 	var x_pos = int(tile_pos.x)
 	var y_pos = int(tile_pos.y)
 	return str(x_pos) + "," + str(y_pos)
+
+func is_within_bomb_defusal_range(tile_pos: Vector2):
+	var bomb_tile_pos = map.get_tile_pos_from_world_pos(bomb.global_position)
+	var distance = tile_pos.distance_to(bomb_tile_pos)
+	return distance <= Bomb.DEFUSAL_RANGE
+
+static func is_position_within_tiles(tiles_to_check: Array, tile_pos: Vector2):
+	var tile_pos_v2i = Vector2i(tile_pos)
+	for tile in tiles_to_check:
+		var tile_v2i = Vector2i(tile)
+		if tile_pos_v2i == tile_v2i:
+			return true
+	return false

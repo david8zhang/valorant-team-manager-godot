@@ -30,7 +30,6 @@ func get_suitability(state: WorldState) -> float:
 		return 1.0
 	return 0.0
 
-
 func assign_roles(agents: Array, state: WorldState) -> void:
 	# Assign an agent to each enemy in a round-robin fashion
 	var last_known_enemy_positions = state.last_known_enemy_pos_map

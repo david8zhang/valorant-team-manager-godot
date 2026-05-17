@@ -1,0 +1,2 @@
+class_name PushDefuse
+extends TeamStrategy
