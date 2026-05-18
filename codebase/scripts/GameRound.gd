@@ -38,6 +38,7 @@ enum TopViewState {
 var turn_queue = []
 var curr_turn_index = 0
 
+static var DEFUSE_COST = 5
 static var AP_COST_MOVE_PER_SQUARE = 0.1
 static var AP_COST_PRIMARY_ATTACK = 1
 static var BOMB_TILE_ATLAS_COORDS = Vector2(0, 11)
@@ -335,17 +336,15 @@ func stop_plant_bomb(planter: Agent):
 	scoreboard.reset_plant_container()
 
 func start_defuse_bomb(defuser: Agent):
-	defuser.rem_action_points = 0
+	defuser.rem_action_points -= GameRound.DEFUSE_COST
 	action_menu.update_all()
 	bomb.set_bomb_state(Bomb.BombState.DEFUSING)
-	if defuser.curr_side == Side.PLAYER:
-		agent_controller.complete_turn()
 	scoreboard.defuse_container.show()
 	scoreboard.incr_defuse_container()
 	defuser.is_defusing = true
 
 func continue_bomb_defuse(defuser: Agent):
-	defuser.rem_action_points = 0
+	defuser.rem_action_points -= GameRound.DEFUSE_COST
 	action_menu.update_all()
 	scoreboard.incr_defuse_container()
 	if scoreboard.defuse_progress == Scoreboard.DEFUSE_REQ_TURNS:
@@ -463,3 +462,13 @@ static func is_position_within_tiles(tiles_to_check: Array, tile_pos: Vector2):
 
 func get_current_phase():
 	return scoreboard.curr_phase
+
+func get_agents_in_vicinity(target_tile_pos: Vector2, agent_side: GameRound.Side, dist_threshold: int):
+	var agents = player_team.get_all_living_agents() if agent_side == GameRound.Side.PLAYER else cpu_team.get_all_living_agents()
+	var agents_in_vicinity = []
+	for a in agents:
+		var agent = a as Agent
+		var agent_tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
+		if agent_tile_pos.distance_to(target_tile_pos) <= dist_threshold:
+			agents_in_vicinity.append(agent)
+	return agents_in_vicinity

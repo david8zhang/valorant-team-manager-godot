@@ -152,7 +152,7 @@ func can_plant_bomb(selected_agent: Agent):
 	return game_round.map.is_at_bomb_site(agent_tile_pos) and selected_agent.has_bomb and selected_agent.rem_action_points == 5
 
 func can_defuse_bomb(selected_agent: Agent):
-	return selected_agent.rem_action_points == 5
+	return selected_agent.rem_action_points == GameRound.DEFUSE_COST
 
 func on_bomb_button_clicked():
 	var selected_agent = agent_controller.selected_agent as Agent

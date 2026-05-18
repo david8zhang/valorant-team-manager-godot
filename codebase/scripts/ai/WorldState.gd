@@ -141,7 +141,7 @@ func is_tile_in_proximity(tile_pos: Vector2, target_pos: Vector2, threshold: int
 func get_team_strategy():
 	return cpu_agent_controller.team_strategy
 
-func get_site_positions(site: TeamStrategy.Site):
+func get_site_waypoints(site: TeamStrategy.Site):
 	var prefix_matcher := ""
 	match site:
 		TeamStrategy.Site.A:

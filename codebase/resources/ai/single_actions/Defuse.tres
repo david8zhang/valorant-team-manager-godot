@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Defuse" load_steps=2 format=3 uid="uid://b4u3gwy1wifwm"]
+
+[ext_resource type="Script" uid="uid://clvhpode0ujan" path="res://scripts/ai/actions/Defuse.gd" id="1_kxnxn"]
+
+[resource]
+script = ExtResource("1_kxnxn")
+action_name = "Defuse"
+metadata/_custom_type_script = "uid://clvhpode0ujan"

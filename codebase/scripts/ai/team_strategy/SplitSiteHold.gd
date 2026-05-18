@@ -10,8 +10,8 @@ func get_suitability(state: WorldState) -> float:
 func assign_roles(agents: Array, state: WorldState) -> void:
 	if !has_assigned_positions:
 		has_assigned_positions = true
-		var a_site_locations = state.get_site_positions(TeamStrategy.Site.A)
-		var b_site_locations = state.get_site_positions(TeamStrategy.Site.B)
+		var a_site_locations = state.get_site_waypoints(TeamStrategy.Site.A)
+		var b_site_locations = state.get_site_waypoints(TeamStrategy.Site.B)
 		a_site_locations.shuffle()
 		b_site_locations.shuffle()
 		print("Assigning roles!")

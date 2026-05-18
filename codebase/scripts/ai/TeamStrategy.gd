@@ -7,7 +7,8 @@ enum StrategyType {
 	EXECUTE,
 	RETAKE,
 	SPLIT_SITE_HOLD,
-	SITE_STACK
+	SITE_STACK,
+	ASSIGN_DEFUSER
 }
 
 enum Site {

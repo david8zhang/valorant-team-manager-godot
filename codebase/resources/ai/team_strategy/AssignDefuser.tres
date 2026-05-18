@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AssignDefuser" load_steps=2 format=3 uid="uid://b35hacpg7k8o2"]
+
+[ext_resource type="Script" uid="uid://dhk4lrh4kggvs" path="res://scripts/ai/team_strategy/AssignDefuser.gd" id="1_1he8d"]
+
+[resource]
+script = ExtResource("1_1he8d")
+strategy_type = 0
+strategy_side = 0
+aggression_multiplier = 1.0
+fallback_threshold = 0.3
+metadata/_custom_type_script = "uid://dhk4lrh4kggvs"
