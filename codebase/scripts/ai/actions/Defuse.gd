@@ -17,9 +17,10 @@ func get_utility(agent: Agent, _world_state: WorldState) -> float:
 		if player_agent.has_vision_of_agent(agent):
 			base_score -= 0.1
 	# Add bonus or penalty depending on if allies outnumber enemies or vice versa
-	var num_allies = game_round.get_agents_in_vicinity(agent_tile_pos, GameRound.Side.CPU, 15)
-	var num_enemies = game_round.get_agents_in_vicinity(agent_tile_pos, GameRound.Side.PLAYER, 15)
+	var num_allies = game_round.get_agents_in_vicinity(agent_tile_pos, GameRound.Side.CPU, 15).size()
+	var num_enemies = game_round.get_agents_in_vicinity(agent_tile_pos, GameRound.Side.PLAYER, 15).size()
 	base_score -= (num_enemies - num_allies) * 0.15
+	print("Base score for defuse: " + str(base_score))
 	return base_score
 
 func execute(agent: Agent, world_state: WorldState, on_complete: Callable) -> void:

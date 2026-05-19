@@ -33,7 +33,9 @@ func is_blocked(cell: Vector2) -> bool:
 	return map.walls_layer.get_cell_source_id(cell) != -1 or (map.temp_barrier_layer.visible and map.temp_barrier_layer.get_cell_source_id(cell) != -1)
 
 func get_shortest_path(start_tile: Vector2, end_tile: Vector2) -> Array[Vector2i]:
-	return astar_grid.get_id_path(start_tile, end_tile)
+	if astar_grid.is_in_bounds(int(start_tile.x), int(start_tile.y)) and astar_grid.is_in_bounds(int(end_tile.x), int(end_tile.y)):
+		return astar_grid.get_id_path(start_tile, end_tile)
+	return []
 
 func can_find_path(start_tile: Vector2, end_tile: Vector2):
 	return !get_shortest_path(start_tile, end_tile).is_empty()

@@ -2,12 +2,21 @@ class_name Retake
 extends TeamStrategy
 
 var has_assigned_positions := false
+var prev_stacked_site = null
 var stacked_site = null
 
 func get_suitability(state: WorldState) -> float:
+	stacked_site = get_stacked_site(state)
+	if stacked_site != null:
+		return 1.0
+	return 0.0
+
+func get_stacked_site(state: WorldState):
 	var game_round = state.game_round
+	var curr_stacked_site
 	if game_round.bomb.curr_bomb_state == Bomb.BombState.PLANTED:
-		stacked_site = get_bomb_plant_site(state)
+		curr_stacked_site = get_bomb_plant_site(state)
+		print("Bomb plant site: " + str(curr_stacked_site))
 	else:
 		# If enemy agents are all stacked towards one site, this strategy becomes more suitable
 		var enemy_to_site_map = {
@@ -30,11 +39,9 @@ func get_suitability(state: WorldState) -> float:
 		var max_enemy_at_site = 3
 		for site in enemy_to_site_map.keys():
 			if enemy_to_site_map[site] >= max_enemy_at_site:
-				stacked_site = site
+				curr_stacked_site = site
 				max_enemy_at_site = enemy_to_site_map[site]
-	if stacked_site != null:
-		return 1.0
-	return 0.0
+	return curr_stacked_site
 
 func get_bomb_plant_site(state: WorldState):
 	var game_round = state.game_round as GameRound
@@ -48,12 +55,15 @@ func get_bomb_plant_site(state: WorldState):
 		return TeamStrategy.Site.C
 
 func assign_roles(agents: Array, state: WorldState) -> void:
-	var site_waypoints = state.get_site_waypoints(stacked_site)
-	site_waypoints.shuffle()
-	for i in range(0, agents.size()):
-		var agent = agents[i] as Agent
-		var waypoint = site_waypoints[i] as TileMapWaypoint
-		state.agent_assignments[agent.agent_name] = waypoint.waypoint_tile_pos
+	if stacked_site != prev_stacked_site:
+		prev_stacked_site = stacked_site
+		var target_positions = state.get_site_waypoints(stacked_site).map(func (wp: TileMapWaypoint): return wp.waypoint_tile_pos)
+		for i in range(0, agents.size()):
+			var agent = agents[i] as Agent
+			if state.bomb_defuser != agent:
+				var target_tile_pos = target_positions[i % target_positions.size()]
+				state.agent_assignments[agent.agent_name] = target_tile_pos
+		print("Assigning roles for retake: " + str(state.agent_assignments))
 
 func get_strategy_name():
 	return "Retake"

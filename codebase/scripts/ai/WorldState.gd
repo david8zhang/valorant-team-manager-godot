@@ -20,6 +20,7 @@ var game_round: GameRound
 var cpu_agent_controller: CPUAgentController
 var map_control_view := {}
 var tiles_being_held := []
+var bomb_defuser: Agent = null
 
 func initialize(_cpu_agent_controller: CPUAgentController):
 	cpu_agent_controller = _cpu_agent_controller
