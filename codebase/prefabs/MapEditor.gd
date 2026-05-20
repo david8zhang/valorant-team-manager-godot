@@ -1,6 +1,7 @@
 @tool
 extends Node2D
 
+var waypoints: Array[TileMapWaypoint]
 @export var base_tileset: TileSet
 @export var data_to_load: MultiTileMapData:
 	set(val):
@@ -9,15 +10,15 @@ extends Node2D
 			load_into_editor()
 
 func _ready():
-	save_all_layers(self, "res://resources/maps/TestCombat2.tres")
+	save_all_layers(self, "res://resources/maps/data/TestCombat2.tres")
 
 func save_all_layers(parent_node: Node, file_path: String) -> void:
+	waypoints = data_to_load.waypoints
 	var multi_data = MultiTileMapData.new()
 	for child in parent_node.get_children():
 		if child is TileMapLayer:
 			var layer_tiles: Array[Dictionary] = []
 			var cells = child.get_used_cells()
-			
 			for coords in cells:
 				layer_tiles.append({
 					"coords": coords,
@@ -26,6 +27,7 @@ func save_all_layers(parent_node: Node, file_path: String) -> void:
 					"alternative_tile": child.get_cell_alternative_tile(coords)
 				})
 			multi_data.layers_content[child.name] = layer_tiles
+	multi_data.waypoints = waypoints
 	var result = ResourceSaver.save(multi_data, file_path)
 	if result == OK:
 		print("All layers saved successfully.")
@@ -70,5 +72,4 @@ func load_into_editor() -> void:
 				cell["atlas_coords"],
 				cell["alternative_tile"]
 			)
-			
 	print("Layers loaded successfully. You may need to click them to refresh the viewport.")

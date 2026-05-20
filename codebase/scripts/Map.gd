@@ -17,7 +17,7 @@ var map_data: MultiTileMapData
 
 func _ready() -> void:
 	spawn_layer.hide()
-	load_map_data(self, "res://resources/maps/data/Ascent.tres")
+	load_map_data(self, "res://resources/maps/data/TestCombat2.tres")
 
 func move_node_to_pos(node: Node2D, tile_x: int, tile_y: int):
 	var world_pos = ground_layer.map_to_local(Vector2(tile_x, tile_y))
