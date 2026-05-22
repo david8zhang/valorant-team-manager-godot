@@ -55,12 +55,12 @@ func get_bomb_plant_site(state: WorldState):
 		return TeamStrategy.Site.C
 
 func assign_roles(agents: Array, state: WorldState) -> void:
-	if stacked_site != prev_stacked_site:
+	if stacked_site != prev_stacked_site and stacked_site != null:
 		prev_stacked_site = stacked_site
 		var target_positions = state.get_site_waypoints(stacked_site).map(func (wp: TileMapWaypoint): return wp.waypoint_tile_pos)
 		for i in range(0, agents.size()):
 			var agent = agents[i] as Agent
-			if state.bomb_defuser != agent:
+			if state.bomb_defuser != null and state.bomb_defuser.agent_name != agent.agent_name:
 				var target_tile_pos = target_positions[i % target_positions.size()]
 				state.agent_assignments[agent.agent_name] = target_tile_pos
 		print("Assigning roles for retake: " + str(state.agent_assignments))

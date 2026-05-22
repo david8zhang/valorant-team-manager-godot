@@ -7,33 +7,28 @@ func get_utility(agent: Agent, _world_state: WorldState) -> float:
 	var enemy_agents_in_view = agent.get_enemies_in_view()
 	var max_score := 0.0
 	enemy_to_attack = null
+	
 	for e in enemy_agents_in_view:
-		var base_score = 0.25
-		var enemy = e as Agent
-		if enemy.is_dead():
-			continue
-		# Add bonus to fight utility score if:
-		# 1. Enemy agent health is lower than ours
-		if enemy.get_curr_health() < agent.get_curr_health():
-			base_score += 0.25
-		# 2. Enemy agent is looking away			
-		if !enemy.has_vision_of_agent(agent):
-			base_score += 0.3
-		# 3. Enemy has worse guns
-		var enemy_gun: Weapon = enemy.primary_weapon if enemy.primary_weapon != null else enemy.sidearm_weapon
-		var this_agent_gun: Weapon = agent.primary_weapon if agent.primary_weapon != null else agent.sidearm_weapon
-		if enemy_gun.weapon_stats.cost < this_agent_gun.weapon_stats.cost:
-			base_score += 0.3
-		# 4. Ally has enemy in their sight also
-		if ally_has_sight(agent, enemy):
-			base_score += 0.2
-		# 5. Enemy is currently planting or defusing
-		if enemy.is_planting or enemy.is_defusing:
-			base_score += 0.3
-		if base_score > max_score:
-			max_score = base_score
-			enemy_to_attack = enemy
-	ap_cost = 1
+		var e_agent = e as Agent
+		if e_agent.is_dead(): continue
+		
+		# Start with a base value of 0.3 for any visible threat
+		var score = 0.3 
+		
+		# Add bonuses for tactical advantages to prioritize "easy" or "important" kills
+		if e_agent.get_curr_health() < agent.get_curr_health(): score += 0.2
+		if !e_agent.has_vision_of_agent(agent): score += 0.2
+		if ally_has_sight(agent, e_agent): score += 0.1
+		if e_agent.is_planting or e_agent.is_defusing: score += 0.2
+		
+		# Clamp to ensure it never exceeds 1.0, keeping utility consistent
+		score = clamp(score, 0.0, 1.0)
+		
+		# Keep track of the highest scoring enemy to attack
+		if score > max_score:
+			max_score = score
+			enemy_to_attack = e_agent
+			
 	return max_score
 
 func ally_has_sight(agent: Agent, enemy: Agent):
