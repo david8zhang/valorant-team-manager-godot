@@ -39,6 +39,7 @@ var turn_queue = []
 var curr_turn_index = 0
 
 static var DEFUSE_COST = 5
+static var PLANT_COST = 5
 static var AP_COST_MOVE_PER_SQUARE = 0.1
 static var AP_COST_PRIMARY_ATTACK = 1
 static var BOMB_TILE_ATLAS_COORDS = Vector2(0, 11)
@@ -307,7 +308,7 @@ func get_turn_queue_agents():
 	return turn_queue.map(func (agent_name): return get_agent_for_name(agent_name))
 
 func start_plant_bomb(planter: Agent):
-	planter.rem_action_points = 0
+	planter.rem_action_points -= GameRound.PLANT_COST
 	action_menu.update_all()
 	if planter.curr_side == Side.PLAYER:
 		agent_controller.complete_turn()
@@ -316,7 +317,7 @@ func start_plant_bomb(planter: Agent):
 	planter.is_planting = true
 
 func continue_bomb_plant(planter: Agent):
-	planter.rem_action_points = 0
+	planter.rem_action_points -= GameRound.PLANT_COST
 	action_menu.update_all()
 	scoreboard.incr_plant_container()
 	if scoreboard.plant_progress == Scoreboard.PLANT_REQ_TURNS:
@@ -472,3 +473,7 @@ func get_agents_in_vicinity(target_tile_pos: Vector2, agent_side: GameRound.Side
 		if agent_tile_pos.distance_to(target_tile_pos) <= dist_threshold:
 			agents_in_vicinity.append(agent)
 	return agents_in_vicinity
+
+func can_plant_bomb(agent: Agent):
+	var agent_tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
+	return map.is_at_bomb_site(agent_tile_pos) and agent.has_bomb and agent.rem_action_points == PLANT_COST

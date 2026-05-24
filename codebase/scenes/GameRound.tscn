@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cui8rqxwjorad"]
+[gd_scene load_steps=32 format=3 uid="uid://cui8rqxwjorad"]
 
 [ext_resource type="Script" uid="uid://ctv4akl0kybty" path="res://scripts/GameRound.gd" id="1_dq0hy"]
 [ext_resource type="PackedScene" uid="uid://bwxh0x0hbhhs0" path="res://prefabs/Bomb.tscn" id="2_0iflm"]
@@ -28,6 +28,7 @@
 [ext_resource type="Resource" uid="uid://blfa1ljh53cx3" path="res://resources/ai/team_strategy/RushSite.tres" id="22_tjx3m"]
 [ext_resource type="Resource" uid="uid://fiwx83q6cr24" path="res://resources/ai/team_strategy/DefaultAttack.tres" id="23_2c3ke"]
 [ext_resource type="Resource" uid="uid://clvflni418iqc" path="res://resources/ai/single_actions/AttackEnemy.tres" id="23_wxsh1"]
+[ext_resource type="Resource" uid="uid://cbnjsfjbd7773" path="res://resources/ai/team_strategy/AssignPlanter.tres" id="24_2c3ke"]
 [ext_resource type="Resource" uid="uid://b3ke5rhm5cxyy" path="res://resources/ai/single_actions/WatchAngle.tres" id="25_k762y"]
 [ext_resource type="Resource" uid="uid://b4u3gwy1wifwm" path="res://resources/ai/single_actions/Defuse.tres" id="26_6o63j"]
 
@@ -145,7 +146,7 @@ name_prefix = "CPU"
 
 [node name="CPUAgentController" type="Node2D" parent="CPUTeam"]
 script = ExtResource("8_twj6c")
-strategy_playbook = Array[ExtResource("18_sxs7q")]([ExtResource("19_wxsh1"), ExtResource("20_nl24k"), ExtResource("21_iaeh6"), ExtResource("22_tjx3m"), ExtResource("23_2c3ke")])
+strategy_playbook = Array[ExtResource("18_sxs7q")]([ExtResource("19_wxsh1"), ExtResource("20_nl24k"), ExtResource("21_iaeh6"), ExtResource("22_tjx3m"), ExtResource("23_2c3ke"), ExtResource("24_2c3ke")])
 
 [node name="SingleAgentActionFactory" type="Node" parent="CPUTeam/CPUAgentController"]
 script = ExtResource("18_p04vp")

@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_1he8d")
-strategy_type = 6
+strategy_type = 2
 strategy_side = 0
 aggression_multiplier = 1.0
 fallback_threshold = 0.3

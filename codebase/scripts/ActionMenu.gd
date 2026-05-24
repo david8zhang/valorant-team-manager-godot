@@ -140,23 +140,19 @@ func update_bomb_status():
 	var selected_agent = agent_controller.selected_agent as Agent
 	if selected_agent.has_bomb:
 		bomb_button.show()
-		if can_plant_bomb(selected_agent):
+		if game_round.can_plant_bomb(selected_agent):
 			bomb_button.disabled = false
 		else:
 			bomb_button.disabled = true
 	else:
 		bomb_button.hide()
 
-func can_plant_bomb(selected_agent: Agent):
-	var agent_tile_pos = game_round.map.get_tile_pos_from_world_pos(selected_agent.global_position)
-	return game_round.map.is_at_bomb_site(agent_tile_pos) and selected_agent.has_bomb and selected_agent.rem_action_points == 5
-
 func can_defuse_bomb(selected_agent: Agent):
 	return selected_agent.rem_action_points == GameRound.DEFUSE_COST
 
 func on_bomb_button_clicked():
 	var selected_agent = agent_controller.selected_agent as Agent
-	if can_plant_bomb(selected_agent):
+	if game_round.can_plant_bomb(selected_agent):
 		if !selected_agent.is_planting:
 			bomb_texture.texture = load("res://assets/placeholder/ban-solid-full.svg")
 			game_round.start_plant_bomb(selected_agent)
