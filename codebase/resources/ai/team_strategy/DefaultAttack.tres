@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DefaultAttack" load_steps=2 format=3 uid="uid://fiwx83q6cr24"]
+
+[ext_resource type="Script" uid="uid://ccm43x0751ive" path="res://scripts/ai/team_strategy/DefaultAttack.gd" id="1_fdnrr"]
+
+[resource]
+script = ExtResource("1_fdnrr")
+strategy_type = 3
+strategy_side = 1
+aggression_multiplier = 0.5
+fallback_threshold = 0.3
+metadata/_custom_type_script = "uid://ccm43x0751ive"

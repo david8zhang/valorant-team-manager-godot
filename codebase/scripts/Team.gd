@@ -13,8 +13,8 @@ extends Node2D
 @export var space_btwn_agents = 2
 @export var name_prefix := ""
 
-static var PLAYER_SPAWN_ATLAS = Vector2(14, 2)
-static var CPU_SPAWN_ATLAS = Vector2(13, 2)
+static var ATTACKER_SPAWN_ATLAS = Vector2(14, 2)
+static var DEFENDER_SPAWN_ATLAS = Vector2(13, 2)
 
 # Start with 800 credits per agent (800 x 5)
 var num_credits := 4000
@@ -22,6 +22,7 @@ var agents := []
 
 func _ready() -> void:
 	var spawn_positions = get_all_spawn_positions()
+	var is_attacking = side == game_round.attack_side
 	var i = 0
 	for cell in spawn_positions:
 		var new_agent = agent_scene.instantiate() as Agent
@@ -29,6 +30,7 @@ func _ready() -> void:
 		new_agent.agent_name = name_prefix + "_" + str(i)
 		new_agent.curr_side = side
 		new_agent.agent_stats = GameRoundVariables.load_random_agent_stat()
+		new_agent.vision_direction = Vector2.UP if is_attacking else Vector2.DOWN
 		add_child(new_agent)
 		var outline_color = GameRoundVariables.PLAYER_OUTLINE_COLOR if side == GameRound.Side.PLAYER else GameRoundVariables.CPU_OUTLINE_COLOR
 		new_agent.set_outline(outline_color)
@@ -42,9 +44,9 @@ func get_all_spawn_positions():
 	var spawn_layer = map.spawn_layer
 	var used_cells = spawn_layer.get_used_cells()
 	var spawn_positions = []
+	var spawn_atlas_for_side = ATTACKER_SPAWN_ATLAS if side == game_round.attack_side else DEFENDER_SPAWN_ATLAS
 	for cell in used_cells:
 		var atlas_coords = spawn_layer.get_cell_atlas_coords(cell)
-		var spawn_atlas_for_side = PLAYER_SPAWN_ATLAS if side == GameRound.Side.PLAYER else CPU_SPAWN_ATLAS
 		if atlas_coords.x == spawn_atlas_for_side.x and atlas_coords.y == spawn_atlas_for_side.y:
 			spawn_positions.append(cell)
 	return spawn_positions

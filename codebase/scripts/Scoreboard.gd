@@ -20,7 +20,7 @@ enum Phase {
 
 static var SETUP_PHASE_TURN_LIMIT = 2
 static var PRE_PLANT_TURN_LIMIT = 10
-static var POST_PLANT_TURN_LIMIT = 5
+static var POST_PLANT_TURN_LIMIT = 6
 static var PLANT_REQ_TURNS = 2
 static var DEFUSE_REQ_TURNS = 3
 

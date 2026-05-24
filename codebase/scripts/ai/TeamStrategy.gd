@@ -2,13 +2,12 @@ class_name TeamStrategy
 extends Resource
 
 enum StrategyType {
-	DEFAULT,
-	RUSH,
-	EXECUTE,
 	RETAKE,
 	SPLIT_SITE_HOLD,
-	SITE_STACK,
-	ASSIGN_DEFUSER
+	ASSIGN_DEFUSER,
+	ASSIGN_PLANTER,
+	DEFAULT_ATTACK,
+	RUSH_SITE
 }
 
 enum Site {

@@ -44,7 +44,7 @@ static var AP_COST_PRIMARY_ATTACK = 1
 static var BOMB_TILE_ATLAS_COORDS = Vector2(0, 11)
 
 var curr_turn_side = Side.PLAYER
-var attack_side = Side.PLAYER
+var attack_side = Side.CPU
 var is_showing_scoreboard := true
 var top_view_state := TopViewState.SCOREBOARD
 var bomb: Bomb

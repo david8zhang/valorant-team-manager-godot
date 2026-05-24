@@ -36,6 +36,7 @@ func select_round_strategy():
 	for s in playbook_to_use:
 		var strategy = s as TeamStrategy
 		var suitability_score = strategy.get_suitability(GameRoundVariables.cpu_world_state)
+		suitability_score = clamp(suitability_score, 0.0, 1.0)
 		if suitability_score > max_suitability_score:
 			max_suitability_score = suitability_score
 			best_strategy = strategy

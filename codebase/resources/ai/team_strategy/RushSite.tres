@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RushSite" load_steps=2 format=3 uid="uid://blfa1ljh53cx3"]
+
+[ext_resource type="Script" uid="uid://cxicmwp5r4hrp" path="res://scripts/ai/team_strategy/RushSite.gd" id="1_fcy5c"]
+
+[resource]
+script = ExtResource("1_fcy5c")
+strategy_type = 4
+strategy_side = 1
+aggression_multiplier = 1.5
+fallback_threshold = 0.3
+metadata/_custom_type_script = "uid://cxicmwp5r4hrp"

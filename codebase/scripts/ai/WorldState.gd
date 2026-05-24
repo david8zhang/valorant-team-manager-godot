@@ -14,11 +14,12 @@ class WaypointControlData:
 	var num_player_agents := -1
 	var num_cpu_agents := 0
 
-var last_known_enemy_pos_map := {}
-var agent_assignments := {}
+# TODO: Should also figure out how to represent "staleness" of intel
+var last_known_enemy_pos_map: Dictionary[String, Vector2] = {}
+var agent_assignments: Dictionary[String, Vector2] = {}
 var game_round: GameRound
 var cpu_agent_controller: CPUAgentController
-var map_control_view := {}
+var map_control_view: Dictionary[String, WaypointControlData] = {}
 var tiles_being_held := []
 var bomb_defuser: Agent = null
 
@@ -133,7 +134,7 @@ func get_all_site_waypoints():
 	var map_data = game_round.map.map_data as MultiTileMapData
 	var is_site_waypoint = func(wp):
 		var waypoint = wp as TileMapWaypoint
-		return waypoint.waypoint_name.begins_with("A_") or waypoint.waypoint_name.begins_with("B_") or waypoint.waypoint_name.begins_with("C_")
+		return waypoint.waypoint_name.begins_with("A") or waypoint.waypoint_name.begins_with("B") or waypoint.waypoint_name.begins_with("C")
 	return map_data.waypoints.filter(is_site_waypoint)
 
 func is_tile_in_proximity(tile_pos: Vector2, target_pos: Vector2, threshold: int):
@@ -158,3 +159,24 @@ func get_site_waypoints(site: TeamStrategy.Site):
 		if waypoint.waypoint_name.begins_with(prefix_matcher) and waypoint.map_side == TileMapWaypoint.MapSide.DEFENDER:
 			positions.append(wp)
 	return positions
+
+func get_nearest_site_to_waypoint(waypoint: TileMapWaypoint):
+	if waypoint.waypoint_name.begins_with("A"):
+		return TeamStrategy.Site.A
+	elif waypoint.waypoint_name.begins_with("B"):
+		return TeamStrategy.Site.B
+	elif waypoint.waypoint_name.begins_with("C"):
+		return TeamStrategy.Site.C
+
+func get_all_sites() -> Array:
+	var all_sites = []
+	var map_data = game_round.map.map_data as MultiTileMapData
+	for wp in map_data.waypoints:
+		var waypoint = wp as TileMapWaypoint
+		if waypoint.waypoint_name.begins_with("A"):
+			all_sites.append(TeamStrategy.Site.A)
+		elif waypoint.waypoint_name.begins_with("B"):
+			all_sites.append(TeamStrategy.Site.B)
+		elif waypoint.waypoint_name.begins_with("C"):
+			all_sites.append(TeamStrategy.Site.C)
+	return all_sites
