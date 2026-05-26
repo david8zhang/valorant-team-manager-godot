@@ -13,7 +13,7 @@ func assign_roles(agents: Array, state: WorldState):
 		var map = state.game_round.map as Map
 		var living_agents = agents.filter(func (agent: Agent): return !agent.is_dead())
 		planter = living_agents.pick_random() as Agent
-		state.agent_assignments[planter.agent_name] = map.get_tile_pos_from_world_pos(bomb.global_position)
+		state.set_agent_assignment(planter.agent_name, map.get_tile_pos_from_world_pos(bomb.global_position))
 
 func get_strategy_name():
 	return "Assign Planter"

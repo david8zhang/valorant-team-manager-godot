@@ -62,7 +62,7 @@ func assign_roles(agents: Array, state: WorldState) -> void:
 			var agent = agents[i] as Agent
 			if state.bomb_defuser != null and state.bomb_defuser.agent_name != agent.agent_name:
 				var target_tile_pos = target_positions[i % target_positions.size()]
-				state.agent_assignments[agent.agent_name] = target_tile_pos
+				state.set_agent_assignment(agent.agent_name, target_tile_pos)
 		print("Assigning roles for retake: " + str(state.agent_assignments))
 
 func get_strategy_name():

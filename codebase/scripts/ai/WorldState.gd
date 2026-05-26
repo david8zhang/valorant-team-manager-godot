@@ -180,3 +180,6 @@ func get_all_sites() -> Array:
 		elif waypoint.waypoint_name.begins_with("C"):
 			all_sites.append(TeamStrategy.Site.C)
 	return all_sites
+
+func set_agent_assignment(agent_name: String, tile_pos):
+	agent_assignments[agent_name] = Vector2(tile_pos)

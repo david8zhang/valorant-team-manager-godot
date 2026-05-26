@@ -16,7 +16,7 @@ func assign_roles(agents: Array, state: WorldState) -> void:
 		defuser = rand_agent
 		var bomb_tile_pos = game_round.map.get_tile_pos_from_world_pos(game_round.bomb.global_position)
 		print("Assigning defuser: " + defuser.agent_name + " to move to " + str(bomb_tile_pos))
-		state.agent_assignments[defuser.agent_name] = bomb_tile_pos
+		state.set_agent_assignment(defuser.agent_name, bomb_tile_pos)
 		state.bomb_defuser = defuser
 
 func get_strategy_name():

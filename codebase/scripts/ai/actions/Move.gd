@@ -43,7 +43,7 @@ func score_tile(agent: Agent, tile: Vector2, world_state: WorldState) -> float:
 	var agent_tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
 	
 	# Start with a fixed, positive baseline score
-	var score: float = 0.5
+	var score: float = 0.25
 	
 	# --- 1. STRATEGIC CONTEXT (BOMB CHECK) ---
 	var bomb_priority_multiplier: float = 1.0

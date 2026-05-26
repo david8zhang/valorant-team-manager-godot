@@ -159,7 +159,7 @@ func complete_turn():
 
 func select_agent(agent: Agent):
 	selected_agent = agent
-	center_camera_on_agent(agent)
+	# center_camera_on_agent(agent)
 	action_menu.update_all()
 	action_menu.show()
 	show_visible_tiles_for_selected_agent()

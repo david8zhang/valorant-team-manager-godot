@@ -7,24 +7,28 @@ func get_suitability(state: WorldState) -> float:
 	var game_round = state.game_round as GameRound
 	return 0.25 if game_round.get_current_phase() == Scoreboard.Phase.SETUP else 0.0
 
-func assign_roles(agents: Array, state: WorldState) -> void:
+func assign_roles(agents: Array, state: WorldState):
 	if !has_assigned_positions:
 		has_assigned_positions = true
-		var a_site_locations = state.get_site_waypoints(TeamStrategy.Site.A)
-		var b_site_locations = state.get_site_waypoints(TeamStrategy.Site.B)
-		a_site_locations.shuffle()
-		b_site_locations.shuffle()
-		print("Assigning roles!")
+		# Basically the equivalent of a Split Site Hold on defense - gather intel and eventually pivot to a rush site strategy
+		var positions_by_site = get_positions_by_site(state)
 		for i in range(0, agents.size()):
 			var agent = agents[i] as Agent
-			if i % 2 == 0:
-				var rand_a_site_pos = a_site_locations.pop_front() as TileMapWaypoint
-				assert(rand_a_site_pos != null, "No A site positions to assign!")
-				state.agent_assignments[agent.agent_name] = rand_a_site_pos.waypoint_tile_pos
-			else:
-				var rand_b_site_pos = b_site_locations.pop_front() as TileMapWaypoint
-				assert(rand_b_site_pos != null, "No B site positions to assign!")
-				state.agent_assignments[agent.agent_name] = rand_b_site_pos.waypoint_tile_pos
+			var site_bucket_index = i % positions_by_site.keys().size()
+			var site_to_assign_to = positions_by_site.keys()[site_bucket_index]
+			var shuffled_positions = positions_by_site[site_to_assign_to] as Array
+			var pos_to_assign = shuffled_positions.pop_front()
+			assert(pos_to_assign != null, "No site position to assign for split site hold!")
+			state.set_agent_assignment(agent.agent_name, pos_to_assign)
+
+func get_positions_by_site(state: WorldState):
+	var positions_by_site: Dictionary[TeamStrategy.Site, Array] = {}
+	var all_sites = state.get_all_sites()
+	for site in all_sites:
+		var site_positions = state.get_site_waypoints(site).map(func(s: TileMapWaypoint): return s.waypoint_tile_pos)
+		site_positions.shuffle()
+		positions_by_site[site] = site_positions
+	return positions_by_site
 
 func get_strategy_name():
 	return "Split Site Hold"

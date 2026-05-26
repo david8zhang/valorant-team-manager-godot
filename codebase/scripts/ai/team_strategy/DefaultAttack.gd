@@ -11,16 +11,18 @@ func get_suitability(state: WorldState):
 	return 0.25 if is_setup_phase and has_not_chosen_team_strat else 0.0
 
 func assign_roles(agents: Array, state: WorldState):
-	# Basically the equivalent of a Split Site Hold on defense - gather intel and eventually pivot to a rush site strategy
-	var positions_by_site = get_positions_by_site(state)
-	for i in range(0, agents.size()):
-		var agent = agents[i] as Agent
-		var site_bucket_index = i % positions_by_site.keys().size()
-		var site_to_assign_to = positions_by_site.keys()[site_bucket_index]
-		var shuffled_positions = positions_by_site[site_to_assign_to] as Array
-		var pos_to_assign = shuffled_positions.pop_front()
-		assert(pos_to_assign != null, "No site position to assign for default attack!")
-		state.agent_assignments[agent.agent_name] = pos_to_assign
+	if !has_assigned_positions:
+		has_assigned_positions = true
+		# Basically the equivalent of a Split Site Hold on defense - gather intel and eventually pivot to a rush site strategy
+		var positions_by_site = get_positions_by_site(state)
+		for i in range(0, agents.size()):
+			var agent = agents[i] as Agent
+			var site_bucket_index = i % positions_by_site.keys().size()
+			var site_to_assign_to = positions_by_site.keys()[site_bucket_index]
+			var shuffled_positions = positions_by_site[site_to_assign_to] as Array
+			var pos_to_assign = shuffled_positions.pop_front()
+			assert(pos_to_assign != null, "No site position to assign for default attack!")
+			state.set_agent_assignment(agent.agent_name, pos_to_assign)
 
 func get_positions_by_site(state: WorldState):
 	var positions_by_site: Dictionary[TeamStrategy.Site, Array] = {}

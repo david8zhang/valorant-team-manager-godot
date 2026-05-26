@@ -44,13 +44,14 @@ func identify_weak_site(state: WorldState):
 
 func assign_roles(agents: Array, state: WorldState):
 	if site_to_rush == null:
-		site_to_rush = state.get_all_sites().pick_random()
+		var weak_site = identify_weak_site(state)
+		site_to_rush = state.get_all_sites().pick_random() if weak_site == null else weak_site
 		# TODO: Need to ensure that each site has >= 5 waypoints, otherwise agents will overlap
 		var waypoints_for_site = state.get_site_waypoints(site_to_rush)
 		for i in range(0, agents.size()):
-			var waypoint = waypoints_for_site[i] as TileMapWaypoint
+			var waypoint = waypoints_for_site[i % waypoints_for_site.size()] as TileMapWaypoint
 			var agent = agents[i] as Agent
-			state.agent_assignments[agent.agent_name] = waypoint.waypoint_tile_pos
+			state.set_agent_assignment(agent.agent_name, waypoint.waypoint_tile_pos)
 
 func get_strategy_name():
 	return "Rush Site"

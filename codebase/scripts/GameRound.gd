@@ -477,3 +477,26 @@ func get_agents_in_vicinity(target_tile_pos: Vector2, agent_side: GameRound.Side
 func can_plant_bomb(agent: Agent):
 	var agent_tile_pos = map.get_tile_pos_from_world_pos(agent.global_position)
 	return map.is_at_bomb_site(agent_tile_pos) and agent.has_bomb and agent.rem_action_points == PLANT_COST
+
+func get_movable_tiles_within_radius(center_pos: Vector2, radius: int, available_ap: int) -> Array[Vector2i]:
+	var tiles_to_consider: Array[Vector2i] = []
+	var min_x = center_pos.x - radius
+	var max_x = center_pos.x + radius
+	var min_y = center_pos.y - radius
+	var max_y = center_pos.y + radius
+	for x in range(min_x, max_x + 1):
+		for y in range(min_y, max_y + 1):
+			var tile_pos = Vector2i(x, y)
+			if !map.is_tile_pos_in_bounds(tile_pos):
+				continue
+			if map.is_tile_pos_obstructed(tile_pos):
+				continue
+			if !pathfinding.can_find_path(center_pos, tile_pos):
+				continue
+			var ap_cost = get_ap_cost_for_movement_tiles(center_pos, Vector2(tile_pos))
+			if ap_cost > available_ap:
+				continue
+			var dist_squared = (tile_pos - Vector2i(center_pos)).length_squared()
+			if dist_squared <= radius * radius:
+				tiles_to_consider.append(tile_pos)
+	return tiles_to_consider
